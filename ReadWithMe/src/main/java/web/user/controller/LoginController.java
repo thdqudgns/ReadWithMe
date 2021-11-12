@@ -21,9 +21,10 @@ public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
-		return "/member/login";
+		return "user/member/login";
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginProc(Member member, HttpSession session) {
 		
 		loginService.login(member);
