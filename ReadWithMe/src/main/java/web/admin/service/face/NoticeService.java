@@ -37,5 +37,19 @@ public interface NoticeService {
 	 * @param notice - 새로 등록할 공지사항 객체
 	 */
 	public void write(Notice notice);
+	
+	/**
+	 * 공지사항 수정
+	 * 
+	 * @param notice - 수정된 공지사항 객체
+	 */
+	public void update(Notice notice);
+
+	/**
+	 * 공지사항 삭제
+	 * 
+	 * @param notice - 삭제될 공지사항 객체
+	 */
+	public void delete(Notice notice);
 
 }
