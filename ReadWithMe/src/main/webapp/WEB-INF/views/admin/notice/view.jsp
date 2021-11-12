@@ -45,7 +45,7 @@
 	<td class="info" colspan="4">본문</td>
 </tr>
 <tr>
-	<td colspan="4">${viewNotice.board_title }</td>
+	<td colspan="4">${viewNotice.board_content }</td>
 </tr>
 </table>
 

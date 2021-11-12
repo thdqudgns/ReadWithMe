@@ -24,13 +24,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
-		$(location).attr("href", "/board/write");
+		$(location).attr("href", "/admin/notice/write");
 // 		location.href = "/board/write";
 	})
 	
 	//검색 버튼 클릭
 	$("#btnSearch").click(function() {
-		location.href="/board/list?search="+$("#search").val();
+		location.href="/admin/notice?search="+$("#search").val();
 	});
 })
 </script>

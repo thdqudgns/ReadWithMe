@@ -31,4 +31,11 @@ public interface NoticeService {
 	 */
 	public Notice view(Notice viewNotice);
 
+	/**
+	 * 공지사항 글쓰기
+	 * 
+	 * @param notice - 새로 등록할 공지사항 객체
+	 */
+	public void write(Notice notice);
+
 }
