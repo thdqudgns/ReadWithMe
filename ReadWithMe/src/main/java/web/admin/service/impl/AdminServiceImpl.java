@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import web.admin.dao.face.AdminDao;
 import web.admin.service.face.AdminService;
 import web.user.dto.Member;
 import web.util.Paging;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired AdminDao adminDao;
