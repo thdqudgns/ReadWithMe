@@ -52,8 +52,8 @@
 <div class="text-center">
 	<a href="/admin/notice"><button class="btn btn-default">목록</button></a>
 	<c:if test="${id eq viewBoard.writerId }">
-		<a href="/board/update?boardNo=${viewBoard.boardNo }"><button class="btn btn-primary">수정</button></a>
-		<a href="/board/delete?boardNo=${viewBoard.boardNo }"><button class="btn btn-danger">삭제</button></a>
+		<a href="/admin/notice/update?board_no=${viewNotice.board_no }"><button class="btn btn-primary">수정</button></a>
+		<a href="/admin/notice/delete?board_no=${viewNotice.board_no }"><button class="btn btn-danger">삭제</button></a>
 	</c:if>
 </div>
 

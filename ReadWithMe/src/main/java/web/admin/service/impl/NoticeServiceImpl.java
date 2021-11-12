@@ -54,5 +54,37 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDao.insertNotice(notice);
 		
 	}
+
+	@Override
+	public void update(Notice notice) {
+		
+		if("".equals(notice.getBoard_title())) {
+			notice.setBoard_title("(제목없음)");
+		}
+		
+		noticeDao.update(notice);	
+	}
 	
+	@Override
+	public void delete(Notice notice) {
+		
+		noticeDao.delete(notice);
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
