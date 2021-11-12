@@ -31,22 +31,6 @@ public class LoginController {
 		return null;
 	}
 	
-	public void logout(HttpSession session) {}
-	
-	public void join() {}
-	
-	public void joinProc(Member member) {
-		
-		loginService.join(member);
-	}
-	
-	public void findId(Member member) {
-		loginService.findId(member);
-	}
-	
-	public void findPw(Member member) {
-		loginService.findPw(member);
-	}
 	
 	public void socialLogin() {}
 	
@@ -58,5 +42,46 @@ public class LoginController {
 		return null;
 	}
 	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		return null;		
+	}
+	
+	
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String join() {
+		return "user/member/join";		
+	}
+	
+	@RequestMapping(value="/join/idntf", method=RequestMethod.GET)
+	public String joinIdntf() {
+		return "user/member/joinIdntf";		
+	}
+	
+	@RequestMapping(value="/join/email", method=RequestMethod.GET)
+	public String joinEmail() {
+		return "user/member/joinEmail";		
+	}
+	
+	@RequestMapping(value="/join/social", method=RequestMethod.GET)
+	public String socialJoin() {
+		return "user/member/join";		
+	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public void joinProc(Member member) {
+		
+		logger.info("member {}", member);
+		
+		loginService.join(member);
+	}
+	
+	public void findId(Member member) {
+		loginService.findId(member);
+	}
+	
+	public void findPw(Member member) {
+		loginService.findPw(member);
+	}
 
 }
