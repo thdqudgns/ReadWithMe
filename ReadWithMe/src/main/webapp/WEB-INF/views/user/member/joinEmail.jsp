@@ -5,6 +5,131 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- 부트스트랩3 -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+
+<style type="text/css">
+.gender-pick, .interest-pick {
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 3px;
+}
+
+.gender-pick:hover, .interest-pick:hover {
+    background-color: #F6F6F6;
+}
+
+.gender-pick.active, .interest-pick.active {
+    background-color: #9F8170;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  display:inline-block; /* or block */
+  line-height:normal;
+  cursor:pointer;
+  padding: 3px 14px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  border: 1px solid #D0D0D0;
+  margin: 40px 100px 10px 40px; /* however you please */
+}
+
+input[type="checkbox"] + label:hover {
+  background-color: #F6F6F6;
+}
+
+input[type="checkbox"]:checked + label {
+  border-color: #000;
+  background-color: #9F8170;
+  color: #fff;
+}
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+// 	성별선택
+	const GENDER_MALE = 0;
+	const GENDER_FEMALE = 1;
+	const GENDER_NO_SELECTED = 2;
+	
+	const genderButtons = document.querySelectorAll('.gender-pick');
+	let currentGender = GENDER_NO_SELECTED;
+	
+	for (let i = 0; i < genderButtons.length; i++) {
+	    genderButtons[i].addEventListener('click', () => pickGender(i));
+	}
+
+	function pickGender(genderNum) {
+	    if (currentGender === genderNum) return;
+
+	    genderButtons[currentGender].classList.remove('active');
+	    genderButtons[genderNum].classList.add('active');
+	    currentGender = genderNum;
+	    
+	    $("#gender").val(genderButtons[currentGender].getAttribute('data-gender'));
+	}
+	
+	
+	const INTEREST_CULTURE = 0;
+	const INTEREST_SELF_IMPROVEMENT = 1;
+	const INTEREST_MUSIC = 2;
+	const INTEREST_IT = 3;
+	const INTEREST_SPORT = 4;
+	const INTEREST_BOOK = 5;
+	const INTEREST_LANGUAGE = 6;
+	const INTEREST_TRAVEL = 7;
+	
+	const interestButtons = document.querySelectorAll('.interest-pick');
+	let currentInterest = INTEREST_CULTURE;
+	
+	for (let i = 0; i < interestButtons.length; i++) {
+		interestButtons[i].addEventListener('click', () => pickInterest(i));
+	}
+	
+	function pickInterest(interestNum) {
+	    if (currentInterest === interestNum) return;
+
+	    genderButtons[currentInterest].classList.remove('active');
+	    genderButtons[interestNum].classList.add('active');
+	    currentInterest = interestNum;
+	    
+	    $("#gender").val(genderButtons[currentInterest].getAttribute('data-interest'));
+	}
+	
+	
+})
+</script>
+
+<script>
+
+function CountChecked(obj) {
+    var total = 0;
+    var oColl = obj.form.elements;
+    for (var i=0; i < oColl.length; i++) {
+        if (oColl[i].checked==1) total ++;
+        if (total >= 4){
+            alert('최대 3개까지 선택 가능합니다');
+            obj.checked = 0;
+            break;
+        }
+    }
+}
+
+</script>
 
 </head>
 <body>
@@ -19,12 +144,14 @@
 <label>닉네임 <br> <input type="text" name="nick" placeholder="자유롭게 사용하실 닉네임을 입력해주세요!"></label><br>
 <label>이메일 주소 <br> <input type="text" name="email" placeholder="사용하시는 이메일 주소를 입력해주세요."></label><br>
 <hr>
-<label>생년월일 <br> <input type="date" name="nick"></label><br>
-<div>성별</div>
-<div>
+<label>생년월일 <br> <input type="date" name="birth"></label><br>
+
+<div class="input__title">성별</div>
+<div class="input-horizontal__content gender">
 	<div class="gender-pick" data-gender="M">남자</div>
 	<div class="gender-pick" data-gender="F">여자</div>
 	<div class="gender-pick active" data-gender="A">선택안함</div>
+	<input type="hidden" name="gender" id="gender"/>
 </div>
 
 <div>
@@ -47,18 +174,39 @@
 </select>
 </div>
 <hr>
-관심분야<br>
+
+
+<div class="input__title">관심분야</div>
 최대 3개까지 선택 가능합니다
 <div>
-	<div data-interest="M">문화생활</div>
-	<div data-interest="F">자기계발</div>
-	<div data-interest="A">음악</div>
-	<div data-interest="A">IT</div>
-	<div data-interest="A">스포츠</div>
-	<div data-interest="A">책(독서)</div>
-	<div data-interest="A">언어</div>
-	<div data-interest="A">여행</div>
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="culture" id="culture" />
+	<label for="culture">문화생활</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="selfImprovement" id="selfImprovement"/>
+	<label for="selfImprovement">자기계발</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="music" id="music" />
+	<label for="music">음악</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="it" id="it" />
+	<label for="it">IT</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="sport" id="sport" />
+	<label for="sport">스포츠</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="book" id="book" />
+	<label for="book">책(독서)</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="language" id="language" />
+	<label for="language">언어</label>
+
+	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="travel" id="travel" />
+	<label for="travel">여행</label>
+
+	
 </div>
+					
+	
 
 개인정보 처리 방침 동의<br>
 서비스 이용약관 동의<br>
