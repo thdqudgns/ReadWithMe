@@ -30,5 +30,26 @@ public interface NoticeDao {
 	 * @return - 해당 게시글 번호 공지사항 상세정보
 	 */
 	public Notice selectNoticeByBoardno(Notice viewNotice);
+	
+	/**
+	 * 새로 등록할 공지사항 데이터베이스에 저장
+	 * 
+	 * @param notice - 새로 등록할 공지사항 객체
+	 */
+	public void insertNotice(Notice notice);
+
+	/**
+	 * 수정된 공지사항 데이터베이스에 저장
+	 * 
+	 * @param notice - 공지사항 객체
+	 */
+	public void update(Notice notice);
+
+	/**
+	 * 삭제될 공지사항 데이터베이스에서 삭제
+	 * 
+	 * @param notice - 삭제될 공지사항 객체
+	 */
+	public void delete(Notice notice);
 
 }
