@@ -38,4 +38,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return paging;
 	}
 	
+	@Override
+	public Notice view(Notice viewNotice) {
+		
+		return noticeDao.selectNoticeByBoardno(viewNotice);
+	}
+	
 }

@@ -2,6 +2,8 @@ package web.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +40,42 @@ public class NoticeController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
-
-		
 		return "admin/notice";
 	}
 	
+	@RequestMapping(value="/admin/notice/view")
+	public String Noticeview(Notice viewNotice, Model model, HttpSession sessino) {
+		
+		if( viewNotice.getBoard_no() < 1 ) {
+			return "redirect:/admin/notice";
+		}
+		
+		viewNotice = noticeService.view(viewNotice);
+		
+		model.addAttribute("viewNotice", viewNotice);
+		
+		return "admin/view";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

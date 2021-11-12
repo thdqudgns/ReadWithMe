@@ -12,10 +12,14 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- 부트스트랩 ver5 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -67,7 +71,6 @@ table, th {
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
-		<th>내용</th>
 		<th>작성일</th>
 	</tr>
 </thead>
@@ -75,8 +78,7 @@ table, th {
 <c:forEach items="${list }" var="notice">
 	<tr>
 		<td>${notice.board_no }</td>
-		<td>${notice.board_title }</td>
-		<td>${notice.board_content }</td>
+		<td><a href="/admin/notice/view?board_no=${notice.board_no }">${notice.board_title }</a></td>
 		<td><fmt:formatDate value="${notice.board_date }" pattern="yy-MM-dd HH:mm:ss" /></td>
 	</tr>
 </c:forEach>
@@ -84,9 +86,16 @@ table, th {
 </table>
 
 
-<button id="btnWrite" class="btn btn-primary btn-sm">글쓰기</button>
-<span>total : ${paging.totalCount }</span>
+<button id="btnWrite" class="btn btn-primary pull-left">글쓰기</button>
+<span class="pull-right">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
+
+<div class="form-inline text-center">
+	<input class="form-control" type="text" id="search" value="${param.search }" />
+	<button id="btnSearch" class="btn">검색</button>
+</div>
+
+
 
 <c:if test="${not empty param.search }">
 	<c:set var="searchParam" value="&search=${param.search }" />

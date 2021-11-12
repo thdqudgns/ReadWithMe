@@ -23,4 +23,12 @@ public interface NoticeService {
 	 */
 	public Paging getPaging(Paging paramData);
 
+	/**
+	 * 공지사항 상페보기 조회
+	 * 
+	 * @param viewNotice - 공지사항 객체
+	 * @return
+	 */
+	public Notice view(Notice viewNotice);
+
 }

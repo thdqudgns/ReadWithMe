@@ -23,4 +23,12 @@ public interface NoticeDao {
 	 */
 	public int selectCntAll(Paging paramData);
 
+	/**
+	 * 게시글 번호로 공지사항 상세보기 조회
+	 * 
+	 * @param viewNotice - 공지사항 객체
+	 * @return - 해당 게시글 번호 공지사항 상세정보
+	 */
+	public Notice selectNoticeByBoardno(Notice viewNotice);
+
 }

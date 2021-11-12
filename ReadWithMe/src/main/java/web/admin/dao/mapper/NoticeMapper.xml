@@ -36,4 +36,36 @@
  		)
  	</select>
  
+ 	<select id="selectNoticeByBoardno" resultType="web.user.dto.Notice" parameterType="web.user.dto.Notice">
+ 		SELECT * FROM notice
+ 		WHERE board_no = #{board_no }
+ 	</select>
+ 
  </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
