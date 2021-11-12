@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import web.admin.service.face.NoticeService;
 import web.user.dto.Notice;
@@ -40,7 +41,7 @@ public class NoticeController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
-		return "admin/notice";
+		return "admin/notice/notice";
 	}
 	
 	@RequestMapping(value="/admin/notice/view")
@@ -54,7 +55,20 @@ public class NoticeController {
 		
 		model.addAttribute("viewNotice", viewNotice);
 		
-		return "admin/view";
+		return "admin/notice/view";
+	}
+	
+	@RequestMapping(value="/admin/notice/write", method=RequestMethod.GET)
+	public void NoticeWrite() {}
+	
+	@RequestMapping(value="/admin/notice/write", method=RequestMethod.POST)
+	public String NoticeWriteProc(Notice notice) {
+		logger.info("{}" , notice);
+		
+		noticeService.write(notice);
+		
+		return "redirect:/admin/notice";
+		
 	}
 }
 
