@@ -123,8 +123,8 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(9) {width:42px;}
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:black;}
-.btn-brown {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
+.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
 
 .center {text-align:center;vertical-align: middle;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
@@ -200,7 +200,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		
 			<!-- 로그인 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button style="width:48px;" class="btn-brown">로그인</button></a>
+				<a href="<%=request.getContextPath() %>"><button class="btn-brown">로그인</button></a>
 			</div>
 		</c:if>
 	
