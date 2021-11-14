@@ -19,4 +19,11 @@ public interface LoginDao {
 
 	public void selectPwById(Member member);
 
+	/**
+	 * id가 존재하는 값인지 확인한다
+	 * @param id - 조회하려는 회원의 id
+	 * @return 
+	 */
+	public int selectCntById(String id);
+
 }

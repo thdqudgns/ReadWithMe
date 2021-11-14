@@ -2,6 +2,8 @@ package web.user.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Member {
 	private int user_no;
 	private String user_lv;
@@ -12,6 +14,7 @@ public class Member {
 	private String nick;
 	private String email;
 	private String phone;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
 	private String location;
 	private String gender;

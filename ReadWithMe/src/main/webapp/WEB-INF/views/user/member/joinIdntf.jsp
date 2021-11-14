@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
 <h1>본인확인</h1>
 고객님의 본인확인을 진행해주세요!
@@ -26,5 +22,4 @@
 </div>
 
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/user/layout/footer.jsp" />ㄴ

@@ -5,6 +5,10 @@
     
 <mapper namespace="web.user.dao.face.LoginDao">
 
+	<select id="selectCntById" resultType="int" parameterType="String">
+		SELECT count(*) FROM member
+		WHERE id = #{id }
+	</select>
 
 
 

@@ -1,0 +1,45 @@
+.gender-pick, .interest-pick {
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 3px;
+}
+
+.gender-pick:hover, .interest-pick:hover {
+    background-color: #F6F6F6;
+}
+
+.gender-pick.active, .interest-pick.active {
+    background-color: #9F8170;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  display:inline-block;
+  line-height:normal;
+  cursor:pointer;
+  padding: 3px 14px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  border: 1px solid #D0D0D0;
+  margin: 40px 100px 10px 40px;
+}
+
+input[type="checkbox"] + label:hover {
+  background-color: #F6F6F6;
+}
+
+input[type="checkbox"]:checked + label {
+  border-color: #000;
+  background-color: #9F8170;
+  color: #fff;
+}
+
+</style>
