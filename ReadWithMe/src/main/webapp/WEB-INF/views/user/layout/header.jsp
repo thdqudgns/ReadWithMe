@@ -10,7 +10,6 @@
 
 <!-- jquery, se2 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/resources/se2/js/service/httpRequest.js"></script>
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
