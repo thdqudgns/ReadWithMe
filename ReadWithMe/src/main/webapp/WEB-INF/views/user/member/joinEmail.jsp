@@ -3,26 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<link href="/resources/css/join.css" rel="stylesheet">
-<script src="/resources/js/join_script.js"></script>
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
+<link href="/resources/css/join.css" rel="stylesheet">
+<script src="/resources/js/join_script.js"></script>
 
 <h1>이메일로 회원가입</h1>
 <form action="/join" method="post">
 <label>아이디(*) <br> <input type="text" name="id" id="id" placeholder="4~20자 사이의 영문, 숫자로 입력해주세요"></label><br>
 <div id="id_check"></div>
-<label>비밀번호(*) <br> <input type="password" name="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."></label><br>
+<label>비밀번호(*) <br> <input type="password" name="password" id="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."></label><br>
 <div id="pw_check"></div>
-<label>비밀번호 확인(*) <br> <input type="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."></label><br>
+<label>비밀번호 확인(*) <br> <input type="password" id="password2" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."></label><br>
 <div id="pw2_check"></div>
-<label>이름(*) <br> <input type="text" name="name" placeholder="성함을 입력해주세요."></label><br>
+<label>이름(*) <br> <input type="text" name="name" id="name" placeholder="성함을 입력해주세요."></label><br>
 <div id="name_check"></div>
 <hr>
-<label>닉네임 <br> <input type="text" name="nick" placeholder="자유롭게 사용하실 닉네임을 입력해주세요!"></label><br>
+<label>닉네임(*) <br> <input type="text" name="nick" id="nick" placeholder="자유롭게 사용하실 닉네임을 입력해주세요!"></label><br>
 <div id="nick_check"></div>
-<label>이메일 주소 <br> <input type="text" name="email" placeholder="사용하시는 이메일 주소를 입력해주세요."></label><br>
+<label>이메일 주소(*) <br> <input type="text" name="email" id="email" placeholder="사용하시는 이메일 주소를 입력해주세요."></label><br>
 <div id="email_check"></div>
 <hr>
 <label>생년월일 <br> <input type="date" name="birth"></label><br>
@@ -96,7 +96,7 @@
 서비스 이용약관 동의<br>
 
 <a href="/join"><button type="button">취소</button></a>
-<button>가입</button>
+<button id="reg_submit">가입</button>
 </form>
 
 

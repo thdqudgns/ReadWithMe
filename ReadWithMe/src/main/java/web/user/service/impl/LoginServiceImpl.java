@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import web.user.dao.face.LoginDao;
 import web.user.dto.Interest;
-import web.user.dto.Member;
+import web.user.dto.UserTb;
 import web.user.dto.Social_account;
 import web.user.service.face.LoginService;
 @Service
@@ -26,15 +26,21 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.selectCntById(id);
 	}
 	
+	@Override
+	public int userNickCheck(String nick) {
+		return loginDao.selectCntByNick(nick);
+		
+	}
+	
 @Override
-	public boolean join(Member member, HttpServletRequest req) {
-		logger.info("join() 호출 {} : ", member);
+	public boolean join(UserTb user, HttpServletRequest req) {
+		logger.info("join() 호출 {} : ", user);
 		
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
 		
 		Interest interest = new Interest();
-		if( interests[0] !=null ) {
+		if( interests[0] != null ) {
 			interest.setInterest(interests[0]);
 		} else if ( interests[1] !=null ) {
 			interest.setInterest2(interests[1]);
@@ -43,7 +49,7 @@ public class LoginServiceImpl implements LoginService {
 		} 
 		
 		//회원가입(삽입)
-//		loginDao.insertMember(member);
+		loginDao.insertMember(user);
 		
 //		//회원가입 결과 확인
 //		if( loginDao.selectCntById(member) > 0) {
@@ -54,8 +60,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public void login(Member member) {
-		loginDao.login(member);
+	public void login(UserTb user) {
+		loginDao.login(user);
 		
 	}
 
@@ -80,14 +86,14 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void findId(Member member) {
-		loginDao.selectIdByEmail(member);
+	public void findId(UserTb user) {
+		loginDao.selectIdByEmail(user);
 		
 	}
 
 	@Override
-	public void findPw(Member member) {
-		loginDao.selectPwById(member);
+	public void findPw(UserTb user) {
+		loginDao.selectPwById(user);
 		
 	}
 	

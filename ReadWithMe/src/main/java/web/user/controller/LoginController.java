@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.user.dto.Interest;
-import web.user.dto.Member;
+import web.user.dto.UserTb;
 import web.user.dto.Social_account;
 import web.user.service.face.LoginService;
 
@@ -32,9 +32,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc(Member member, HttpSession session) {
+	public String loginProc(UserTb user, HttpSession session) {
 		
-		loginService.login(member);
+		loginService.login(user);
 		return null;
 	}
 	
@@ -85,24 +85,39 @@ public class LoginController {
 	
 	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
 	public int loginCheck(@RequestParam("id") String id) {
-		return loginService.userIdCheck(id);
+		logger.info(id);
+		int res = loginService.userIdCheck(id);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/nickCheck", method=RequestMethod.GET)
+	public int nickCheck(@RequestParam("nick") String nick) {
+		logger.info(nick);
+		int res = loginService.userNickCheck(nick);
+		
+		logger.info("res {}", res);
+		
+		return res;
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public void joinProc(Member member, HttpServletRequest req) {
+	public void joinProc(UserTb user, HttpServletRequest req) {
 		
-		logger.info("member {}", member);
+		logger.info("user {}", user);
 		
-		boolean res = loginService.join(member, req);
+		boolean res = loginService.join(user, req);
 
 	}
 	
-	public void findId(Member member) {
-		loginService.findId(member);
+	public void findId(UserTb user) {
+		loginService.findId(user);
 	}
 	
-	public void findPw(Member member) {
-		loginService.findPw(member);
+	public void findPw(UserTb user) {
+		loginService.findPw(user);
 	}
 
 }

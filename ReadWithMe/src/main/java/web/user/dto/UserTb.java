@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Member {
+public class UserTb {
 	private int user_no;
 	private String user_lv;
 	private String id;
