@@ -14,9 +14,9 @@
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- JavaScript -->
 <script type="text/javascript">
@@ -125,7 +125,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(2) {width:40px;}
 .menuBar:nth-child(3) {width:250px;}
 .menuBar:nth-child(7) {width:120px;}
-.menuBar:nth-child(9) {width:42px;}
+.menuBar:nth-child(9) {width:43px;}
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .center {text-align:center;vertical-align: middle;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
