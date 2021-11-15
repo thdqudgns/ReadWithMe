@@ -57,7 +57,7 @@ $(document).ready(function() {
 						console.log("중복!");
 						$("#id_check").text("사용중인 아이디입니다");
 						$("#id_check").css("color", "#9F8170");
-						$("#reg_submit").attr("disabled", false);
+						$("#reg_submit").attr("disabled", true);
 					} else {
 						console.log("중복 아님!" + user_id);
 						if(user_id.length < 4){

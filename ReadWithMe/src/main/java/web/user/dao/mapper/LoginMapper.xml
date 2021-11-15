@@ -32,6 +32,11 @@
 		VALUES( #{user_no }, #{interest }, #{interest2 }, #{interest3 })
 	</insert>
 	
+	<select id="gerUserPw" resultType="string"  parameterType="web.user.dto.UserTb">
+		SELECT password FROM UserTb
+		WHERE id = #{id }
+	</select>
+	
 	<select id="selectCnt" resultType="int" parameterType="web.user.dto.UserTb">
 		SELECT count(*) FROM UserTb
 		WHERE id = #{id }

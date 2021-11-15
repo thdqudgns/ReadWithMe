@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import web.user.dao.face.LoginDao;
@@ -20,6 +21,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 	@Autowired LoginDao loginDao;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@Override
 	public int userIdCheck(String id) {
@@ -39,6 +41,9 @@ public class LoginServiceImpl implements LoginService {
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
 		
+		String encPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encPassword);
+		logger.info("암호화된 비밀번호 : "+user.getPassword());
 		
 		//회원가입(삽입)
 		loginDao.insertMember(user);
@@ -68,6 +73,24 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public boolean login(UserTb user) {
+		
+		
+		String pw = loginDao.gerUserPw(user);
+		
+		logger.info("암호화 비밀번호"+pw);
+		
+		String rawPw = user.getPassword();
+		
+		logger.info("비밀번호"+rawPw);
+		
+			if(passwordEncoder.matches(rawPw, pw)) {
+				logger.info("비밀번호 일치");
+				user.setPassword(pw);
+			}else {
+				logger.info("비밀번호 불일치");
+			}  
+		  
+		  
 		if( loginDao.selectCnt(user) >=1 ) {
 			return true;
 		} else {

@@ -61,4 +61,11 @@ public interface LoginDao {
 	 */
 	public String selectNickByUser(UserTb user);
 
+	/**
+	 * DB에 저장된 암호화 비밀번호 확인
+	 * @param user
+	 * @return
+	 */
+	public String gerUserPw(UserTb user);
+
 }
