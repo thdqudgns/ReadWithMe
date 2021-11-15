@@ -82,8 +82,8 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;}
-ul.menuList > div.menuMain > a > div {color:#000;text-decoration:none;margin-top:6px;font-size:20px;font-family:'Dangdanghae';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;margin-bottom:4px;}
+ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;margin-top:3px;font-size:20px;font-family:'notoBold';display:inline-block;}
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
@@ -143,7 +143,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 이미지, 이름 -->
 		<div class="menuMain">
 			<a href="<%=request.getContextPath() %>">
-			<img alt="menuBarLogo" src="https://i.imgur.com/IBaUS0j.png">
+			<img alt="menuBarLogo" src="https://i.imgur.com/KN7zwhf.png">&nbsp;
 			<div>Read With Me</div>
 			</a>
 		</div>
@@ -167,7 +167,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 검색 -->
 		<div class="menuBar">
 			<form id="search" action="#" method="get" style="width:250px;">
-            	<input  type="text" name="search" style="width:180px;"><button type="submit" style="width:26px;height:23px;"><img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/BtRjKQq.png"></button>
+            	<input  type="text" name="search" style="width:180px;border: 3px solid #9f8170;"><button type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; "><img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
             </form>
 		</div>
 
@@ -199,7 +199,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		
 			<!-- 로그인 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button class="btn-brown">로그인</button></a>
+				<a href="<%=request.getContextPath() %>"><button class="btn-white">로그인</button></a>
 			</div>
 		</c:if>
 	

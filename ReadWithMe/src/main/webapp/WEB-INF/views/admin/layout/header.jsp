@@ -83,11 +83,11 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > div {color:#000;text-decoration:none;margin-top:6px;font-size:20px;font-family:'Dangdanghae';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;margin-bottom:7px;}
+ul.menuList > div.menuMain > a > div {color:#FFF;text-decoration:none;margin-top:6px;font-size:20px;font-family:'notoBold';display:inline-block;}
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-ul.menuList > div.menuBar > li.all {margin-top:5px;}
 ul.menuList > div.menuBar > li.all > span {color:#FFF;text-decoration:none;font-size:15px;}
 ul.menuList > div.menuBar > li.all > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
 ul.menuList > div.menuBar > li.all > ul > li {background:#754d17;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
@@ -98,8 +98,8 @@ ul.menuList > div.menuBar > li.all > ul > li > a:hover {color:#11ee6f;background
 /* #menubar { z-index:9999;} */
 
 /* 기본 메뉴바 - 검색, 모임, 후기, 명언, 안내&문의 */
-ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
-ul.menuList > div.menuBar > a {text-decoration:none;margin-bottom:10px;}
+ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;text-align: center;align-items: center;}
+ul.menuList > div.menuBar > a {text-decoration:none;}
 ul.menuList > div.menuBar > a > span {color:#FFF;text-decoration:none;font-size:15px;}
 ul.menuList > div.menuBar > a > span:hover {color:#11ee6f;text-decoration:none;}
 
@@ -117,7 +117,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 .btn-black {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:#FFF;}
 
 .center {text-align:center;vertical-align: middle;}
-.mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
+hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 
 </head>
@@ -134,6 +134,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 		<!-- 이름 -->
 		<div class="menuMain">
 			<a href="<%=request.getContextPath() %>">
+			<img alt="menuBarLogo" src="https://i.imgur.com/XzJbPF7.png">&nbsp;
 			<div>RWM Admin</div>
 			</a>
 		</div>

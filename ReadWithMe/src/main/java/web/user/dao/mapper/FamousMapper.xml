@@ -6,4 +6,59 @@
   
   <mapper namespace="web.user.dao.face.FamousDao">
   
+  	<sql id="selectFamous">
+		SELECT
+			famous_no, famous_content
+			, famous_date , famous_rcmnd
+		FROM famous
+	</sql>
+
+	<sql id="whereTitleSearch">
+		WHERE famous_content LIKE '%' || #{search} || '%'
+	</sql>
+  
+  
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT COUNT(*) FROM (
+			<include refid="selectFamous"/>
+			<include refid="whereTitleSearch"/>
+		)
+	</select>
+	
+	<select id="selectList" resultType="web.user.dto.Famous" parameterType="web.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, F.* FROM (
+				<include refid="selectFamous"/>
+				<include refid="whereTitleSearch"/>
+				ORDER BY famous_no DESC
+			) F
+		) R
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
   </mapper>
