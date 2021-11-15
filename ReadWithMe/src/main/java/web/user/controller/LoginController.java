@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -151,6 +152,22 @@ public class LoginController {
 	@RequestMapping(value="/join/idntf", method=RequestMethod.GET)
 	public String joinIdntf() {
 		return "user/member/joinIdntf";		
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String Register() {
+		//ajax ㅎ해보기
+		
+		return "user/member/joinIdntf";	
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String RegisterProc(UserTb user, Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session) throws Exception {
+		logger.info("/register [POST]");
+		logger.info(user.toString());
+		loginService.create(user);
+		rttr.addFlashAttribute("authmsg" , "입력한 이메일로 인증해주세요");
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/join/email", method=RequestMethod.GET)

@@ -1,27 +1,35 @@
 package web.user.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import web.user.dao.face.LoginDao;
 import web.user.dto.Interest;
-import web.user.dto.UserTb;
 import web.user.dto.Social_account;
+import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
+import web.util.MailHandler;
+import web.util.TempKey;
 @Service
 public class LoginServiceImpl implements LoginService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 	@Autowired LoginDao loginDao;
 	@Autowired PasswordEncoder passwordEncoder;
+	@Inject
+	private JavaMailSender mailSender;
 	
 	@Override
 	public int userIdCheck(String id) {
@@ -155,6 +163,24 @@ public class LoginServiceImpl implements LoginService {
 		return false;
 	}
 	
+
+	@Override
+	public void create(UserTb user) {
+
+	String key = new TempKey().getKey(50, false); // 인증키 생성
+
+	try {
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject("[이메일 본인 인증]");
+		sendMail.setText(
+				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost/user/emailConfirm?user_email=").append(user.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		sendMail.setFrom("pol_fo@naver.com", "Read With Me");
+		sendMail.setTo(user.getEmail());
+		sendMail.send();
+	} catch (MessagingException | UnsupportedEncodingException e) {
+		e.printStackTrace();
+	}
+	}
 	
 	
 	

@@ -74,6 +74,12 @@ public interface LoginService {
 	 */
 	public boolean KakaoJoin(UserTb snsUser, HttpServletRequest req);
 
+	/**
+	 * 메일 전송
+	 * @param user - 입력받은 이메일
+	 */
+	public void create(UserTb user);
+
 
 
 }

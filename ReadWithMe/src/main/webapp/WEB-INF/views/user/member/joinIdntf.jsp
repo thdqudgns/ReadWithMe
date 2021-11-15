@@ -18,7 +18,7 @@
 <div>
 	이메일 인증 <br>
 	고객님의 이메일로 인증
-	<a href="/join/email"><button>인증하기</button></a>
+	<a href="/register"><button>인증하기</button></a>
 </div>
 
 
