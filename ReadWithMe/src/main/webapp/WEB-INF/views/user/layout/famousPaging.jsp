@@ -3,21 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style type="text/css">
-div.text-center{margin: 0 auto;text-align: center;align-items:center;}
-
 ul.pagination {
 	list-style:none;
-	float:left;
-	display:inline;
+/* 	float:left; */
+	display:table-cell;
 }
 ul.pagination li {
-	float:left;
+/* 	float:left; */
+	display:table-cell;
 }
 ul.pagination li a {
-	float:left;
-	padding:4px;
+/* 	float:left; */
+	padding:6px;
 	margin-right:3px;
-	width:25px;
+	width:20px;
 	color:#000;
 	font:bold 12px tahoma;
 	border:1px solid #eee;
@@ -36,7 +35,7 @@ ul.pagination li a:hover, ul.pagination li a:focus {
 	<c:set var="searchParam" value="&search=${param.search }" />
 </c:if>
 
-<div class="text-center">
+<div class="text-center" style="text-align: center;display:table;margin: 0 auto;">
 	<ul class="pagination pagination-sm">
 
 	<%-- 첫 페이지로 이동 --%>
@@ -65,10 +64,10 @@ ul.pagination li a:hover, ul.pagination li a:focus {
 	<%-- 페이징 리스트 --%>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 	<c:if test="${paging.curPage eq i }">
-		<li class="active"><a href="/user/famous/list?curPage=${i }${searchParam }">${i }</a></li>
+		<li class="active"><a href="/user/famous/list?curPage=${i }${searchParam }"> ${i } </a></li>
 	</c:if>
 	<c:if test="${paging.curPage ne i }">
-		<li><a href="/user/famous/list?curPage=${i }${searchParam }">${i }</a></li>
+		<li><a href="/user/famous/list?curPage=${i }${searchParam }"> ${i } </a></li>
 	</c:if>
 	</c:forEach>
 	

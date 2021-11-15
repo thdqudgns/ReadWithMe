@@ -71,7 +71,7 @@
 
 /* 기본 틀 - 전체, 로고, 메뉴 */
 .menu {display:table;width:100%;table-layout:fixed;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}	
-.menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuMain {display:table-cell;width:180px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar span {display: table-cell;}
 
@@ -82,8 +82,8 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;margin-bottom:4px;}
-ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;margin-top:3px;font-size:20px;font-family:'notoBold';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:28px;}
+ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;font-size:20px;font-family:'notoBold';display:inline-block;}
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
@@ -125,7 +125,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
 .btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
 
-.center {text-align:center;vertical-align: middle;}
+.center {text-align:center;vertical-align: middle;margin: 0 auto;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 
@@ -142,8 +142,8 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 	
 		<!-- 이미지, 이름 -->
 		<div class="menuMain">
-			<a href="<%=request.getContextPath() %>">
-			<img alt="menuBarLogo" src="https://i.imgur.com/KN7zwhf.png">&nbsp;
+			<a href="/">
+			<img alt="menuBarLogo" src="https://i.imgur.com/KN7zwhf.png">
 			<div>Read With Me</div>
 			</a>
 		</div>
@@ -157,7 +157,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
 					<li><a href="<%=request.getContextPath() %>">후기</a></li>
-					<li><a href="<%=request.getContextPath() %>">명언</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/famous/list">명언</a></li>
 					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
 					<li><a href="<%=request.getContextPath() %>">1:1문의</a></li>
 				</ul>
@@ -167,7 +167,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 검색 -->
 		<div class="menuBar">
 			<form id="search" action="#" method="get" style="width:250px;">
-            	<input  type="text" name="search" style="width:180px;border: 3px solid #9f8170;"><button type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; "><img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
+            	<input  type="text" name="search" style="width:180px;border: 3px solid #9f8170;"><button type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; "><img style="margin-top:1px;object-fit:full;width:16px;height:14px;" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
             </form>
 		</div>
 
@@ -183,7 +183,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><span>명언</span></a>
+			<a href="<%=request.getContextPath() %>/user/famous/list"><span>명언</span></a>
 		</div>
 
 		<!-- 메뉴명 -->
@@ -224,7 +224,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 				<img alt="" src="https://i.imgur.com/t4UvTix.png">
 				<span>닉네임</span>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">관리자페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin">관리자페이지</a></li>
 					<li><a href="<%=request.getContextPath() %>">로그아웃</a></li>
 				</ul>
 			</li>
