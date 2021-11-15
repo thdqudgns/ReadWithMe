@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import web.admin.dao.face.AdminDao;
 import web.admin.service.face.AdminService;
-import web.user.dto.Member;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired AdminDao adminDao;
@@ -25,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Member> list(Paging paging) {
+	public List<UserTb> list(Paging paging) {
 		return adminDao.selectAll(paging);
 	}
 	

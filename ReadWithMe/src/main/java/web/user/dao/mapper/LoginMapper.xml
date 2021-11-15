@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="web.user.dao.face.LoginDao">
+
+	<select id="selectCntById" resultType="int" parameterType="String">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+	</select>
+
+	<select id="selectCntByNick" resultType="int" parameterType="String">
+		SELECT count(*) FROM UserTb
+		WHERE nick = #{nick }
+	</select>
+	
+	<insert id="insertMember" parameterType="web.user.dto.UserTb">
+	
+		<selectKey order="BEFORE" resultType="int" keyProperty="user_no">
+			SELECT member_seq.nextval FROM dual
+		</selectKey>
+		 
+		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, birth, location, gender )
+		VALUES ( #{user_no }, 5, #{id }, #{password }, 0, #{name }, #{nick }, #{email }
+			,  #{birth }, #{location }, #{gender })
+
+	</insert>
+
+
+</mapper>

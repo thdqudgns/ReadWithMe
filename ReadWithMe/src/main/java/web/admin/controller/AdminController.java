@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import web.admin.service.face.AdminService;
-import web.user.dto.Member;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 @Controller
@@ -18,10 +18,10 @@ public class AdminController {
 	
 	@Autowired AdminService adminService;
 
-	public void memberList(Member member, Paging paramData, Model model) {
+	public void memberList(UserTb member, Paging paramData, Model model) {
 		
 		Paging paging = adminService.getPaging(paramData);		
-		List<Member> list = adminService.list(paging);
+		List<UserTb> list = adminService.list(paging);
 	}
 	
 	public void givePrmsn(HttpServletRequest req, HttpSession session) {
