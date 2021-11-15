@@ -39,7 +39,14 @@ public class LoginServiceImpl implements LoginService {
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
 		
+		
+		//회원가입(삽입)
+		loginDao.insertMember(user);
+		
 		Interest interest = new Interest();
+		
+		interest.setUser_no( user.getUser_no() );
+		
 		if( interests[0] != null ) {
 			interest.setInterest(interests[0]);
 		} else if ( interests[1] !=null ) {
@@ -48,21 +55,29 @@ public class LoginServiceImpl implements LoginService {
 			interest.setInterest3(interests[2]);
 		} 
 		
-		//회원가입(삽입)
-		loginDao.insertMember(user);
+		//관심분야(삽입)
+		loginDao.insertInterest(interest);
 		
-//		//회원가입 결과 확인
-//		if( loginDao.selectCntById(member) > 0) {
-//			return true;
-//		}	
+		//회원가입 결과 확인
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
 		return false;
 	
 	}
 	
 	@Override
-	public void login(UserTb user) {
-		loginDao.login(user);
-		
+	public boolean login(UserTb user) {
+		if( loginDao.selectCnt(user) >=1 ) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
+	@Override
+	public String getNick(UserTb user) {
+		return loginDao.selectNickByUser(user);
 	}
 
 	@Override

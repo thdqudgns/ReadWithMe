@@ -1,10 +1,10 @@
 package web.user.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,10 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import web.user.dto.Interest;
-import web.user.dto.UserTb;
 import web.user.dto.Social_account;
+import web.user.dto.UserSessionTb;
+import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 
 @Controller
@@ -32,10 +33,40 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc(UserTb user, HttpSession session) {
+	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp) {
 		
-		loginService.login(user);
-		return null;
+		logger.info("user {}", user);
+		boolean isLogin = loginService.login(user);
+		
+		logger.info("isLogin : {}", isLogin);
+		
+		if( isLogin ) {
+			session.setAttribute("login", isLogin);
+			session.setAttribute("user_no", user.getUser_no());
+			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_nick", loginService.getNick(user));
+			
+//			if( user.getRemember() > 0) {
+//				logger.info("remember {}", user.getRemember());
+//				Cookie loginCookie = new Cookie("loginCookie", session.getId());
+//				loginCookie.setPath("/");
+//				int amount = 60*60*24*7;
+//				loginCookie.setMaxAge(amount);
+//				
+//				resp.addCookie(loginCookie);
+//				
+//				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
+//				loginService.KeepLogin(login.)
+//			}
+			
+			
+			
+			return "redirect:/";
+			
+		} else {
+			session.invalidate();
+			return "/user/member/loginFail";
+		}
 	}
 	
 	
@@ -51,7 +82,8 @@ public class LoginController {
 	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
-		return null;		
+		session.invalidate();		
+		return "redirect:/";	
 	}
 	
 	
@@ -75,15 +107,10 @@ public class LoginController {
 	public String socialJoin() {
 		return "user/member/join";		
 	}
-	
-//	@InitBinder
-//	public void dataBinding(WebDataBinder binder) {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		dateFormat.setLenient(false);
-//		binder.registerCustomEditor(LocalDateTime.class, "startDateTime", new CustomDateEditor(dateFormat, true));
-//	}
+
 	
 	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
+	@ResponseBody
 	public int loginCheck(@RequestParam("id") String id) {
 		logger.info(id);
 		int res = loginService.userIdCheck(id);
@@ -94,6 +121,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/nickCheck", method=RequestMethod.GET)
+	@ResponseBody
 	public int nickCheck(@RequestParam("nick") String nick) {
 		logger.info(nick);
 		int res = loginService.userNickCheck(nick);
@@ -104,11 +132,19 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public void joinProc(UserTb user, HttpServletRequest req) {
+	public String joinProc(UserTb user, HttpServletRequest req) {
 		
 		logger.info("user {}", user);
 		
 		boolean res = loginService.join(user, req);
+		
+		if(res) {
+			logger.info("회원가입 성공");
+			return "/user/member/joinEnd";
+		} else {
+			logger.info("회원가입 실패");
+			return "/user/member/joinFail";
+		}
 
 	}
 	

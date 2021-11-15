@@ -20,29 +20,31 @@ $(document).ready(function() {
 	    genderButtons[genderNum].classList.add('active');
 	    currentGender = genderNum;
 	    
-	    $("#gender").val(genderButtons[currentGender].getAttribute('data-gender'));
 	}
+	$("#gender").val(genderButtons[currentGender].getAttribute('data-gender'));
 	
 	//정규식
 	
 	//모든 공백 체크 정규식
-	var empJ = /\s/g;
+	const empJ = /\s/g;
 	//아이디 정규식
-	var idJ = /^[a-z0-9]{4,20}$/;
+	const idJ = /^[a-z0-9]{4,20}$/;
 	// 비밀번호 정규식
-	var pwJ = /^(?=.*[a-zA-Z0-9$`~!@$!%*#^?&])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&]).{8,16}$/;
+	const pwJ = /^(?=.*[a-zA-Z0-9$`~!@$!%*#^?&])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&]).{8,16}$/;
 	// 이름 정규식
-	var nameJ = /^[가-힣]{2,6}$/;
+	const nameJ = /^[가-힣]{2,6}$/;
 	// 닉네임 정규식
-	var nickJ = /^[a-zA-Z0-9가-힣]{2,12}$/;
+	const nickJ = /^[a-zA-Z0-9가-힣]{2,12}$/;
 	// 이메일 검사 정규식
-	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	const mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
 	
 	
 	
 	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 	$("#id").blur(function() {
-		var user_id = $('#id').val();
+		const user_id = $('#id').val();
+		
 		$.ajax({
 			type : 'get'
 			, url : '/idCheck'
@@ -51,28 +53,27 @@ $(document).ready(function() {
 			, success : function(data) {
 				console.log("1 = 중복o / 0 = 중복x : "+ data);							
 				
-				if (data == 1) {
-						// 1 : 아이디가 중복되는 문구
+				if (data >= 1) {
+						console.log("중복!");
 						$("#id_check").text("사용중인 아이디입니다");
 						$("#id_check").css("color", "#9F8170");
-						$("#reg_submit").attr("disabled", true);
+						$("#reg_submit").attr("disabled", false);
 					} else {
-						
-						if(idJ.test(id)){
+						console.log("중복 아님!" + user_id);
+						if(user_id.length < 4){
 							// 0 : 아이디 길이 / 문자열 검사
-							$("#id_check").text("좋은 아이디네요!");
-							$("#reg_submit").attr("disabled", false);
+							$("#id_check").text("4글자 이상 입력하세요");
+							$("#reg_submit").attr("disabled", true);
 				
-						} else if(id == ""){
-							
-							$('#id_check').text('아이디를 입력해주세요 :)');
+						} else if(!idJ.test(user_id)){
+							$('#id_check').text('아이디는 소문자와 숫자 4~20자리만 가능합니다');
 							$('#id_check').css('color', '#9F8170');
 							$("#reg_submit").attr("disabled", true);				
 							
 						} else {
-							$('#id_check').text("아이디는 소문자와 숫자 4~20자리만 가능합니다 :)");
+							$('#id_check').text("좋은 아이디에요! :)");
 							$('#id_check').css('color', '#9F8170');
-							$("#reg_submit").attr("disabled", true);
+							$("#reg_submit").attr("disabled", false);
 						}
 						
 					}
@@ -81,28 +82,6 @@ $(document).ready(function() {
 				}
 			});
 		});
-	
-	
-	$("input[name='nick']").on("change", function() {
-		var nick = $('#nick').val();
-		console.log("nick :" + nick);
-		
-		$.ajax({
-			data: {
-				'nick' : nick
-			},
-			url : "/nickCheck" ,
-			success : function(data) {
-				console.log("성공");
-			},
-			error : function() {
-				console.log("에러");
-			}
-			
-		})
-		
-	})
-	
 	
 	$('#password').blur(function() {
 		if (pwJ.test($('#password').val())) {
@@ -125,6 +104,8 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	
 	$("#name").blur(function() {
 		if (nameJ.test($(this).val())) {
 				console.log(nameJ.test($(this).val()));
@@ -134,6 +115,49 @@ $(document).ready(function() {
 			$('#name_check').css('color', '#9F8170');
 		}
 	});
+	
+	
+	
+	$("#nick").blur(function() {
+		const nick = $('#nick').val();
+		$.ajax({
+			type : 'get'
+				, url : '/nickCheck'
+				, data: {'nick': nick}
+				, dataType: 'json'
+				, success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data >= 1) {
+					$("#nick_check").text("사용중인 닉네임입니다");
+					$("#nick_check").css("color", "#9F8170");
+					$("#reg_submit").attr("disabled", true);
+				} else {
+					
+					if(nick.length < 2){
+						// 0 : 아이디 길이 / 문자열 검사
+						$("#nick_check").text("2글자 이상 입력하세요");
+						$("#reg_submit").attr("disabled", true);
+			
+					} else if(!nickJ.test(nick)){
+						$('#nick_check').text('닉네임은 2~12자리 가능합니다! 특수문자는 사용 불가해요 :(');
+						$('#nick_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", true);				
+						
+					} else {
+						$('#nick_check').text("좋은 닉네임이에요! :)");
+						$('#nick_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", false);
+					}
+					
+				}
+			}, error : function() {
+				console.log("실패");
+			}
+		});
+	});
+
+	
 	
 	var inval_Arr = new Array(5).fill(false);
 	$('#reg_submit').click(function(){
@@ -174,7 +198,7 @@ $(document).ready(function() {
 			/* return false; */
 		} else{
 			alert('입력한 정보들을 다시 한번 확인해주세요 :)')
-			/* return false; */
+			return false;
 		}
 	});
 	 

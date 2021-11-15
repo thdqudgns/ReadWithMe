@@ -7,7 +7,12 @@ import web.user.dto.Social_account;
 
 public interface LoginService {
 
-	public void login(UserTb member);
+	/**
+	 * id pw가 맞는지 비교한다
+	 * @param user - id pw가 담긴 DTO
+	 * @return 일치하면 true 아니면 false
+	 */
+	public boolean login(UserTb member);
 
 	public void naverLogin(Social_account social);
 
@@ -40,5 +45,13 @@ public interface LoginService {
 	 * @return
 	 */
 	public int userNickCheck(String nick);
+
+	/**
+	 * 회원의 닉네임 조회
+	 * 
+	 * @param user - 닉네임을 조회하려는 사용자 정보
+	 * @return 사용자의 닉네임
+	 */
+	public String getNick(UserTb user);
 
 }
