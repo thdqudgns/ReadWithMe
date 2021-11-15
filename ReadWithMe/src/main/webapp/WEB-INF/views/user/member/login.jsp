@@ -26,7 +26,7 @@
 <div>
 	<button>구글 로그인</button>
 	<button>네이버 로그인</button>
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id={340845721c27a182bf54bae03bc43340}&redirect_uri={http://localhost:8888/login/kakao}&response_type=code">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=340845721c27a182bf54bae03bc43340&redirect_uri=http://localhost:8888/login/kakao&response_type=code">
 	<img src="/resources/img/kakao_login_medium_wide.png">
 	</a>
 </div>

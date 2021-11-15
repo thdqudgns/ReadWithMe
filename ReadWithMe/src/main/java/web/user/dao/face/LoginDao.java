@@ -59,7 +59,7 @@ public interface LoginDao {
 	 * @param user - 조회하려는 회원의 id를 가진 DTO객체
 	 * @return 조회된 nick
 	 */
-	public String selectNickByUser(UserTb user);
+	public String selectNickByUser(String user);
 
 	/**
 	 * DB에 저장된 암호화 비밀번호 확인
@@ -67,5 +67,11 @@ public interface LoginDao {
 	 * @return
 	 */
 	public String gerUserPw(UserTb user);
+
+	/**
+	 * 소셜 회원 가입
+	 * @param user
+	 */
+	public void insertKakaoMember(UserTb user);
 
 }

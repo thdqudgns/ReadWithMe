@@ -1,8 +1,5 @@
 package web.user.controller;
 
-import java.util.Date;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,22 +7,39 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import web.user.dto.OauthToken;
 import web.user.dto.Social_account;
 import web.user.dto.UserSessionTb;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
+import web.util.KakaoLogin;
 
 @Controller
 public class LoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired LoginService loginService;
+	
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
@@ -44,7 +58,7 @@ public class LoginController {
 			session.setAttribute("login", isLogin);
 			session.setAttribute("user_no", user.getUser_no());
 			session.setAttribute("user_lv", user.getUser_lv());
-			session.setAttribute("user_nick", loginService.getNick(user));
+			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
 //			if( user.getRemember() > 0) {
 //				logger.info("remember {}", user.getRemember());
@@ -69,14 +83,56 @@ public class LoginController {
 		}
 	}
 	
+
+	@RequestMapping(value = "/login/kakao" , produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
+	public String kakaoLogin(@RequestParam("code") String code , HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {	
+		
+		JsonNode token = KakaoLogin.getAccessToken(code);
+
+		JsonNode profile = KakaoLogin.getKakaoUserInfo(token.path("access_token").toString());
+		System.out.println("profile : " + profile);
+		UserTb user = KakaoLogin.changeData(profile);
+		user.setId("k"+user.getId());
+		
+		boolean isKakaoLogin = loginService.getKakaoId(user);
+		logger.info("isKakaoLogin : {}", isKakaoLogin);
+		logger.info("user : {}", user);
+		
+		if( isKakaoLogin ) {
+			session.setAttribute("login", isKakaoLogin);
+			session.setAttribute("user_no", user.getUser_no());
+			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			return "redirect:/";
+		} else {
+			model.addAttribute("user", user);
+			return "user/member/kakaoLogin";
+		}
+		
+		
+	}
 	
-	public void socialLogin() {}
+	@RequestMapping(value="/join/kakao", method=RequestMethod.POST)
+	public String kakaoLoginProc(UserTb snsUser, HttpServletRequest req) {
+		logger.info("/join/kakao [POST]");
+		
+		logger.info("snsUser {}:", snsUser);
+		
+		boolean res = loginService.KakaoJoin(snsUser, req);
+		
+		if(res) {
+			logger.info("회원가입 성공");
+			return "/user/member/joinEnd";
+		} else {
+			logger.info("회원가입 실패");
+			return "/user/member/joinFail";
+		}
+	}
 	
 	public String socialLoginProc(Social_account social, HttpSession session) {
 		
 		loginService.naverLogin(social);
 		loginService.googleLogin(social);
-		loginService.kakaoLogin(social);
 		return null;
 	}
 	

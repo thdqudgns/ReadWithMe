@@ -99,9 +99,70 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public String getNick(UserTb user) {
+	public String getNick(String user) {
 		return loginDao.selectNickByUser(user);
 	}
+	
+	@Override
+	public boolean getKakaoId(UserTb user) {
+		
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
+	
+	
+	@Override
+	public boolean kakaoLogin(UserTb user) {
+		
+//		if ( loginDao.selectKakaoCnt(user) >= 1 ) {
+//			
+//		}
+		
+		
+		return false;
+	}
+	
+	
+	@Override
+	public boolean KakaoJoin(UserTb user, HttpServletRequest req) {
+		String[] interests = req.getParameterValues("interest");
+		logger.info("interests {}", Arrays.toString(interests));
+				
+		//회원가입(삽입)
+		loginDao.insertKakaoMember(user);
+		
+		Interest interest = new Interest();
+		
+		interest.setUser_no( user.getUser_no() );
+		
+		if( interests[0] != null ) {
+			interest.setInterest(interests[0]);
+		} else if ( interests[1] !=null ) {
+			interest.setInterest2(interests[1]);
+		} else if ( interests[2] !=null ) {
+			interest.setInterest3(interests[2]);
+		} 
+		
+		//관심분야(삽입)
+		loginDao.insertInterest(interest);
+		
+		//회원가입 결과 확인
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public void naverLogin(Social_account social) {
@@ -116,12 +177,6 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 
-	@Override
-	public void kakaoLogin(Social_account social) {
-		// TODO Auto-generated method stub
-		loginDao.kakaoLogin(social);
-		
-	}
 
 	@Override
 	public void findId(UserTb user) {
