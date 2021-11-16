@@ -2,7 +2,9 @@ package web.user.dto;
 
 import java.util.Date;
 
-public class Member {
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class UserTb {
 	private int user_no;
 	private String user_lv;
 	private String id;
@@ -12,15 +14,19 @@ public class Member {
 	private String nick;
 	private String email;
 	private String phone;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
 	private String location;
 	private String gender;
 	private String profile;
+	private int remember;
+	private String certification;
 	@Override
 	public String toString() {
-		return "Member [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
+		return "UserTb [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
 				+ ", type=" + type + ", name=" + name + ", nick=" + nick + ", email=" + email + ", phone=" + phone
-				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile + "]";
+				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile
+				+ ", remember=" + remember + ", certification=" + certification + "]";
 	}
 	public int getUser_no() {
 		return user_no;
@@ -100,7 +106,19 @@ public class Member {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	public int getRemember() {
+		return remember;
+	}
+	public void setRemember(int remember) {
+		this.remember = remember;
+	}
+	public String getCertification() {
+		return certification;
+	}
+	public void setCertification(String certification) {
+		this.certification = certification;
+	}
 	
-
-
+	
+	
 }
