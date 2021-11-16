@@ -36,7 +36,20 @@
 		WHERE rnum BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
+	<insert id="insertFamous" parameterType="web.user.dto.Famous">
+		INSERT INTO famous (famous_no, user_no, famous_content)
+		VALUES ( famous_seq.nextval, #{user_no}, #{famous_content} )
+	</insert>
 	
+	<delete id="deleteFamous" parameterType="web.user.dto.Famous">
+		DELETE famous
+		WHERE famous_no = #{famous_no}
+	</delete>
+	
+	<select id="countFamous" resultType="int" parameterType="web.user.dto.Famous">
+		SELECT COUNT(*) FROM famous 
+		WHERE famous_no = #{famous_no}
+	</select>
 	
 	
 	

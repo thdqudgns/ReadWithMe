@@ -14,13 +14,13 @@ ul.pagination li {
 }
 ul.pagination li a {
 /* 	float:left; */
-	padding:6px;
+	padding:8px;
 	margin-right:3px;
 	width:20px;
 	color:#000;
 	font:bold 12px tahoma;
 	border:1px solid #eee;
-	border-radius:50%;
+	border-radius:30%;
 	text-align:center;
 	text-decoration:none;
 }

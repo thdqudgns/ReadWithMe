@@ -36,4 +36,32 @@ public class FamousServiceImpl implements FamousService {
 		return famousDao.selectList(paging);
 	}
 
+	@Override
+	public void insertFamous(Famous famous) {
+		famousDao.insertFamous(famous);
+	}
+
+	@Override
+	public boolean deleteFamous(Famous famous) {
+		famousDao.deleteFamous(famous);
+		
+		if(famousDao.countFamous(famous)  > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

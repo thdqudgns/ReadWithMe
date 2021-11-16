@@ -8,10 +8,8 @@
 <meta charset="UTF-8">
 <title> : : : RWM Admin : : : </title>
 
-<!-- jquery, se2 -->
+<!-- jquery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/resources/se2/js/service/httpRequest.js"></script>
-<!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -111,9 +109,12 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:black;}
-.btn-brown {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
-.btn-black {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:#FFF;}
+.btn-white {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:active {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:active {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-black {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-black:active {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:tomato;}
 
 .center {text-align:center;vertical-align: middle;}
 hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    

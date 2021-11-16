@@ -24,4 +24,24 @@ public interface FamousDao {
 	 */
 	public List<Famous> selectList(Paging paging);
 
+	/**
+	 * 신규 글 삽입
+	 * @param famous - 삽입하려는 글 정보
+	 */
+	public void insertFamous(Famous famous);
+
+	/**
+	 * 글 삭제
+	 * @param famous - 삭제하려는 글 정보
+	 */
+	public void deleteFamous(Famous famous);
+
+	/**
+	 * 글 수 구하기
+	 * 
+	 * @param famous - 작성된 글 번호
+	 * @return 글 개수
+	 */
+	public int countFamous(Famous famous);
+
 }

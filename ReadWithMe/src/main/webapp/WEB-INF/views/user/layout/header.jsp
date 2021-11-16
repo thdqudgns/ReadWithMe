@@ -8,9 +8,8 @@
 <meta charset="UTF-8">
 <title> : : : ReadWithMe : : : </title>
 
-<!-- jquery, se2 -->
+<!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
@@ -82,8 +81,8 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:28px;}
-ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;font-size:20px;font-family:'notoBold';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:200px; height:45px;margin-top:6px;}
+/* ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;font-size:20px;font-family:'notoBold';display:inline-block;} */
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
@@ -122,8 +121,12 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(9) {width:42px;}
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
-.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:active {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-gray {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
+.btn-gray:active {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:active {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
 
 .center {text-align:center;vertical-align: middle;margin: 0 auto;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
@@ -143,8 +146,8 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 이미지, 이름 -->
 		<div class="menuMain">
 			<a href="/">
-			<img alt="menuBarLogo" src="https://i.imgur.com/KN7zwhf.png">
-			<div>Read With Me</div>
+			<img alt="menuBarLogo" src="https://i.imgur.com/BH7NGuy.png">
+<!-- 			<div>Read With Me</div> -->
 			</a>
 		</div>
 	

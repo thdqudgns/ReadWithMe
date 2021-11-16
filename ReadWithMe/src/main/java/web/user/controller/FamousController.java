@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import web.user.dto.Famous;
+import web.user.dto.Famous_rec;
 import web.user.service.face.FamousService;
 import web.util.Paging;
 
@@ -47,26 +50,60 @@ public class FamousController {
 		
 	} // 끝 목록 메소드
 	
-//	@RequestMapping(value="/insert")
-//	public String insert(Famous famous, Model model, HttpSession session) {
-//
-//		famous.setUser_no( (Integer) session.getAttribute("userNo") ); //로그인 할 때 Session영역에 회원번호 저장 필요
-//		famousService.insertComment(famous);
+	
+	@RequestMapping(value="/insert")
+	public String insert(Famous famous, Model model, HttpSession session) {
+
+		famous.setUser_no( (Integer) session.getAttribute("user_no") ); //로그인 할 때 Session영역에 회원번호 저장 필요
+		famousService.insertFamous(famous);
+		
+		return "redirect:/user/famous/list";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updateProcess(Famous famous, MultipartFile file, HttpSession session) {
+		logger.debug("글수정 : {}", file);
+		
+		//작성자 ID, NICK 추가 - 세션
+//		board.setWriterId((String) session.getAttribute("id"));
+//		board.setWriterNick((String) session.getAttribute("nick"));
 //		
-//		return "redirect:/board/view?boardNo="+famous.getBoardNo();
-//	}
-//	
-//	@RequestMapping(value="/delete")
-//	public void delete(Famous famous, Writer writer, Model model) {
+//		logger.info("글수정 : {}", famous);
 //		
-//		boolean success = famousService.deleteComment(famous);
+//		famousService.update(famous, file);
+		
+		return "redirect:/user/famous/list";
+	}
+	
+	@RequestMapping(value="/delete")
+	public void delete(Famous famous, Writer writer, Model model) {
+		
+		boolean success = famousService.deleteFamous(famous);
+		
+		try {
+			writer.append("{\"success\":"+success+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@RequestMapping(value = "/recommend")
+	public ModelAndView recommend(Famous_rec recommend, ModelAndView mav, HttpSession session) {
+		
+		//추천 정보 토글
+//		recommend.setUser_nick((String) session.getAttribute("user_nick"));
+//		boolean result = famousService.recommend(recommend);
 //		
-//		try {
-//			writer.append("{\"success\":"+success+"}");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+//		//추천 수 조회
+//		int cnt = famousService.getTotalCntRecommend(recommend);
 //		
-//	}
+//		mav.addObject("result", result);
+//		mav.addObject("cnt", cnt);
+//		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
 
 }

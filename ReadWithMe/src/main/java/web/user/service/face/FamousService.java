@@ -27,6 +27,19 @@ public interface FamousService {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Famous> getFamousList(Paging paging);
+
+	/**
+	 * 새로운 글을 삽입한다
+	 * @param famous - 입력된 글 정보
+	 */
+	public void insertFamous(Famous famous);
+
+	/**
+	 * 글을 삭제한다
+	 * @param famous - 삭제하려는 글의 정보
+	 * @return 삭제 성공 여부
+	 */
+	public boolean deleteFamous(Famous famous);
 	
 
 }
