@@ -2,8 +2,16 @@
 <%--     pageEncoding="UTF-8"%> --%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 
+<<<<<<< HEAD
 <%-- <c:import url="/WEB-INF/views/layout/header.jsp" /> --%>
 
 
 
 <%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
+=======
+<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+
+
+
+<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+>>>>>>> acffd3c3dde255e9538baff391cf7451ea09ce36
