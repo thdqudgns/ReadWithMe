@@ -3,6 +3,7 @@ package web.user.dao.face;
 import web.user.dto.UserTb;
 import web.user.dto.Interest;
 import web.user.dto.Social_account;
+import web.user.dto.UserAuth;
 
 public interface LoginDao {
 
@@ -62,6 +63,22 @@ public interface LoginDao {
 	public String selectNickByUser(String user);
 
 	/**
+	 * id를 이용하여 userno을 조회한다
+	 * 
+	 * @param user - 조회하려는 회원의 id를 가진 DTO객체
+	 * @return 조회된 userno
+	 */
+	public String selectUserNoByUser(String user);
+
+	/**
+	 * id를 이용하여 userLv을 조회한다
+	 * 
+	 * @param user - 조회하려는 회원의 id를 가진 DTO객체
+	 * @return 조회된 userLv
+	 */
+	public String selectUserLvByUser(String user);
+	
+	/**
 	 * DB에 저장된 암호화 비밀번호 확인
 	 * @param user
 	 * @return
@@ -73,5 +90,13 @@ public interface LoginDao {
 	 * @param user
 	 */
 	public void insertKakaoMember(UserTb user);
+
+	/**
+	 * 이메일인증위한 고객이메일/인증키값
+	 * @param user
+	 */
+	public void createAuthKey(UserAuth user);
+
+
 
 }

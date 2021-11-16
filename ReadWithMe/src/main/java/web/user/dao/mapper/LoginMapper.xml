@@ -47,6 +47,16 @@
 		SELECT nick FROM member
 		WHERE id = #{id }
 	</select>
+	
+	<select id="selectUserNoByUser" resultType="string" parameterType="String">
+		SELECT user_no FROM member
+		WHERE id = #{id }
+	</select>
+	
+	<select id="selectUserLvByUser" resultType="string" parameterType="String">
+		SELECT user_lv FROM member
+		WHERE id = #{id }
+	</select>
 
 	<insert id="insertKakaoMember" parameterType="web.user.dto.UserTb">
 	
@@ -60,5 +70,16 @@
 
 	</insert>
 	
+	<insert id="createAuthKey" parameterType="web.user.dto.UserAuth">
+		insert into userAuth values(#{email}, #{authKey})
+	</insert>
+	
+<!-- 	<update id="userAuth"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		update user  -->
+<!-- 		set certification = 1  -->
+<!-- 		where (select count(*) from userAuth  -->
+<!-- 		where userEmail = #{userEmail}) > 0]]> -->
+<!-- 	</update> -->
 	
 </mapper>
