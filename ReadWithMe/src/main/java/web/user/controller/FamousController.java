@@ -43,10 +43,12 @@ public class FamousController {
 		for(Famous f : list) {
 			logger.info("{}", f);
 		}
-				
+		
+		//닉네임 작업 하자
+		
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
-		model.addAttribute("nick", session.getAttribute("nick"));
+		model.addAttribute("user_nick", session.getAttribute("user_nick"));
 		
 	} // 끝 목록 메소드
 	
@@ -54,7 +56,7 @@ public class FamousController {
 	@RequestMapping(value="/insert")
 	public String insert(Famous famous, Model model, HttpSession session) {
 
-		famous.setUser_no( (Integer) session.getAttribute("user_no") ); //로그인 할 때 Session영역에 회원번호 저장 필요
+		famous.setUser_no( (Integer) session.getAttribute("user_no") );
 		famousService.insertFamous(famous);
 		
 		return "redirect:/user/famous/list";
@@ -92,15 +94,15 @@ public class FamousController {
 	public ModelAndView recommend(Famous_rec recommend, ModelAndView mav, HttpSession session) {
 		
 		//추천 정보 토글
-//		recommend.setUser_nick((String) session.getAttribute("user_nick"));
-//		boolean result = famousService.recommend(recommend);
-//		
-//		//추천 수 조회
-//		int cnt = famousService.getTotalCntRecommend(recommend);
-//		
-//		mav.addObject("result", result);
-//		mav.addObject("cnt", cnt);
-//		mav.setViewName("jsonView");
+		recommend.setUser_nick((String) session.getAttribute("user_nick"));
+		boolean result = famousService.recommend(recommend);
+		
+		//추천 수 조회
+		int cnt = famousService.getTotalCntRecommend(recommend);
+		
+		mav.addObject("result", result);
+		mav.addObject("cnt", cnt);
+		mav.setViewName("jsonView");
 		
 		return mav;
 	}

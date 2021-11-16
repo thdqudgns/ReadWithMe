@@ -8,7 +8,7 @@
   
   	<sql id="selectFamous">
 		SELECT
-			famous_no, user_no, famous_content
+			famous_no, user_no, nick, famous_content
 			, famous_date , famous_rcmnd
 		FROM famous
 	</sql>
@@ -37,8 +37,8 @@
 	</select>
 	
 	<insert id="insertFamous" parameterType="web.user.dto.Famous">
-		INSERT INTO famous (famous_no, user_no, famous_content)
-		VALUES ( famous_seq.nextval, #{user_no}, #{famous_content} )
+		INSERT INTO famous (famous_no, user_no, famous_content, nick)
+		VALUES ( famous_seq.nextval, #{user_no}, #{famous_content}, #{nick} )
 	</insert>
 	
 	<delete id="deleteFamous" parameterType="web.user.dto.Famous">

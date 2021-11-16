@@ -75,9 +75,9 @@ $(document).ready(function() {
 		$form.submit();
 		
 	}); //$("#btnInsert").click() end
-})
+});
 
-//글 수정 도와주세용~!!
+//글 수정 
 function updateFamous(famous_no) {
 	$.ajax({
 		type: "post"
@@ -139,7 +139,7 @@ table {margin: 0 auto;}
 .famousHr {width:700px;margin: 0 auto;}
 .td a {text-decoration: none;color:gray;font-size:12px;}
 .td a:active {text-decoration: none;color:tomato;}
-.btn-rec-origin {border:none;background-color:#FFF;color:black;font-size:12px;}
+.btn-rec-origin {border:1px solid black;background-color:#FFF;color:black;font-size:12px;}
 .btn-rec-primary {border:none;background-color:blue;color:#FFF;}
 .btn-rec-warning {border:none;background-color:red;color:#FFF;}
 </style>
@@ -154,8 +154,8 @@ table {margin: 0 auto;}
 	<!-- 비로그인상태 -->
 	<c:if test="${not login }">
 	<strong>글 작성을 위해선 로그인이 필요합니다</strong><br>
-	<button onclick='location.href="/user/member/join";' class="btn-white">회원가입</button>
-	<button onclick='location.href="/user/member/login";' class="btn-white">로그인</button>
+	<button onclick='location.href="/join";' class="btn-white">회원가입</button>
+	<button onclick='location.href="/login";' class="btn-white">로그인</button>
 	<br><br>
 	<hr class="famousHr">
 	</c:if>
@@ -165,7 +165,7 @@ table {margin: 0 auto;}
 	<!-- 글 입력 -->
 	<div class="center insert">
 		<strong>글 작성</strong><br>
-		<input type="text" size="15" class="form-control" id="famousWriter" style="margin-bottom:5px;" value="${nick }" readonly="readonly"/><br>
+		<input type="text" size="15" class="form-control" id="famousWriter" style="margin-bottom:5px;" name="nick" value="${user_nick }" readonly="readonly"/><br>
 		<textarea rows="2" cols="86" class="form-control" id="famous_content"></textarea><br>
 		<div style="display: inline-block;text-align: right;width:620px;"><button id="btnInsert" class="btn-brown">입력</button></div>
 		<br><br>
@@ -183,9 +183,7 @@ table {margin: 0 auto;}
 		
 		  <tr>
 		    <th class="td"><img style="width:20px;height:20px;" alt="profile" src="https://i.imgur.com/G5gV56A.png"></th>
-		<%-- <c:forEach items="${nick }" var="nick"> --%>
-			<th class="td" style="text-align:left;">${user_nick } <span style="color:gray;font-size:10px;">(<fmt:formatDate value="${famous.famous_date }" pattern="yyyy.MM.dd HH:mm"/>)</span></th>
-		<%-- </c:forEach> --%>
+			<th class="td" style="text-align:left;">${famous.nick } <span style="color:gray;font-size:10px;">(<fmt:formatDate value="${famous.famous_date }" pattern="yyyy.MM.dd HH:mm"/>)</span></th>
 		    <th class="td-rec" colspan="2"><button id="btnRecommend" class='btn-rec-origin'>추천</button> &Iota; ${famous.famous_rcmnd}</th>
 		  </tr>
 		  <tr>
@@ -196,9 +194,10 @@ table {margin: 0 auto;}
 				<button class="btn-gray" onclick="updateFamous(${famous.famous_no });">수정</button>
 				<button class="btn-gray" onclick="deleteFamous(${famous.famous_no });">삭제</button>
 				</c:if>
-		    
 		    </td>
+		    <c:if test="${user_no ne famous.user_no }">
 		    <td class="td"><a href="#">신고</a></td>
+			</c:if>
 		  </tr>
 		  <tr>
 		  	<td colspan="4"></td>

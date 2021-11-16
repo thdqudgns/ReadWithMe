@@ -3,6 +3,7 @@ package web.user.service.face;
 import java.util.List;
 
 import web.user.dto.Famous;
+import web.user.dto.Famous_rec;
 import web.util.Paging;
 
 public interface FamousService {
@@ -40,6 +41,32 @@ public interface FamousService {
 	 * @return 삭제 성공 여부
 	 */
 	public boolean deleteFamous(Famous famous);
+
+	/**
+	 * 추천 상태확인
+	 * 
+	 * @param recommend - 추천 상태를 확인할 게시글과 정보 
+	 * @return true - 추천한 상태, false - 추천하지 않은 상태
+	 */
+	public boolean isRecommend(Famous_rec recommend);
+	
+	/**
+	 * 추천 상태를 확인하고 추천을 토글(넣고빼기) 작업
+	 * 
+	 * @param recommend - 추천 대상 정보
+	 * @return true - 추천함, false - 추천 취소함
+	 */
+	public boolean recommend(Famous_rec recommend);
+
+	/**
+	 * 총 추천 수를 구한다
+	 * 
+	 * @param recommend - 추천수를 파악할 게시글 정보
+	 * @return 총 추천 수
+	 */
+	public int getTotalCntRecommend(Famous_rec recommend);
+
+
 	
 
 }

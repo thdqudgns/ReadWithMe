@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.user.dao.face.FamousDao;
+import web.user.dao.face.Famous_recDao;
 import web.user.dto.Famous;
+import web.user.dto.Famous_rec;
 import web.user.service.face.FamousService;
 import web.util.Paging;
 
@@ -16,7 +18,9 @@ import web.util.Paging;
 public class FamousServiceImpl implements FamousService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FamousService.class);
+	
 	@Autowired private FamousDao famousDao;
+	@Autowired private Famous_recDao famous_recDao;
 	
 	@Override
 	public Paging getPaging(Paging paramData) {
@@ -51,6 +55,38 @@ public class FamousServiceImpl implements FamousService {
 			return true;
 		}
 		
+	}
+
+	@Override
+	public boolean isRecommend(Famous_rec recommend) {
+		int cnt = famous_recDao.selectCntRecommend(recommend);
+		
+		if(cnt > 0) { //추천했음
+			return true;
+			
+		} else { //추천하지 않았음
+			return false;
+			
+		}
+	}
+	
+	@Override
+	public boolean recommend(Famous_rec recommend) {
+		if( isRecommend(recommend) ) { //추천한 상태
+			famous_recDao.deleteRecommend(recommend);
+			
+			return false;
+			
+		} else { //추천하지 않은 상태
+			famous_recDao.insertRecommend(recommend);
+			
+			return true;
+		}
+	}
+
+	@Override
+	public int getTotalCntRecommend(Famous_rec recommend) {
+		return famous_recDao.selectTotalCntRecommend(recommend);
 	}
 
 	
