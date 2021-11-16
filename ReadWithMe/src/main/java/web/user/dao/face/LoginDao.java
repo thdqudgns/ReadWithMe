@@ -2,8 +2,9 @@ package web.user.dao.face;
 
 import web.user.dto.UserTb;
 import web.user.dto.Interest;
+import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
-import web.user.dto.UserAuth;
+import web.user.dto.EmailAuth;
 
 public interface LoginDao {
 
@@ -92,10 +93,37 @@ public interface LoginDao {
 	public void insertKakaoMember(UserTb user);
 
 	/**
+	 * 이미 존재하는 이메일인지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmail(EmailAuth user);
+
+	/**
 	 * 이메일인증위한 고객이메일/인증키값
 	 * @param user
 	 */
-	public void createAuthKey(UserAuth user);
+	public void createAuthKey(EmailAuth user);
+
+	/**
+	 * 이메일 인증 확인
+	 * @param email
+	 */
+	public void userAuth(String email);
+
+	/**
+	 * 핸드폰번호와 인증번호 DB에 저장
+	 * @param phoneAuth
+	 */
+	public void insertPhone(PhoneAuth phoneAuth);
+
+	/**
+	 * 고객이 입력한 인증번호 확인
+	 * @param phoneAuth
+	 * @return
+	 */
+	public int selectCntByPhoneAuth(PhoneAuth phoneAuth);
+
 
 
 

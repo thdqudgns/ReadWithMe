@@ -20,13 +20,13 @@ public class UserTb {
 	private String gender;
 	private String profile;
 	private int remember;
-	private String certification;
+	private String userCertification;
 	@Override
 	public String toString() {
 		return "UserTb [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
 				+ ", type=" + type + ", name=" + name + ", nick=" + nick + ", email=" + email + ", phone=" + phone
 				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile
-				+ ", remember=" + remember + ", certification=" + certification + "]";
+				+ ", remember=" + remember + ", userCertification=" + userCertification + "]";
 	}
 	public int getUser_no() {
 		return user_no;
@@ -112,12 +112,14 @@ public class UserTb {
 	public void setRemember(int remember) {
 		this.remember = remember;
 	}
-	public String getCertification() {
-		return certification;
+	public String getUserCertification() {
+		return userCertification;
 	}
-	public void setCertification(String certification) {
-		this.certification = certification;
+	public void setUserCertification(String userCertification) {
+		this.userCertification = userCertification;
 	}
+	
+	
 	
 	
 	

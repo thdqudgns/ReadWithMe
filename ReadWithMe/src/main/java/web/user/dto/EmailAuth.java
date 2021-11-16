@@ -1,6 +1,6 @@
 package web.user.dto;
 
-public class UserAuth {
+public class EmailAuth {
 	private String email;
 	private String authKey;
 	@Override
