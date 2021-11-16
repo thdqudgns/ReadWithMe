@@ -55,13 +55,12 @@ public class LoginController {
 		boolean isLogin = loginService.login(user);
 		
 		logger.info("isLogin : {}", isLogin);
-		logger.info("user {}", user);
 
 		
 		if( isLogin ) {
 			session.setAttribute("login", isLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
 //			if( user.getRemember() > 0) {
@@ -76,9 +75,6 @@ public class LoginController {
 //				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 //				loginService.KeepLogin(login.)
 //			}
-			
-			logger.info("session {}", session);
-			
 			
 			
 			return "redirect:/";
