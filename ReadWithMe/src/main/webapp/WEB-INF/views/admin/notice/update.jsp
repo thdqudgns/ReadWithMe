@@ -22,6 +22,22 @@ $(document).ready(function() {
 })
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#delFile").click(function() {
+		#("#originFile").toggleClass("through")
+		$("#newFile").toggle();
+	})
+	
+	if(${empty noticefile}) {
+		$("#newFile").show();
+	} else {
+		$("#originFile").show();
+	}
+	
+})
+</script>
+
 </head>
 <body>
 
@@ -45,10 +61,25 @@ $(document).ready(function() {
 	<textarea rows="10" style="width: 100%;" id="content" name="board_content">${view.board_content }</textarea>
 </div>
 
+<div id="fileBox">
+<div id="originFile">
+	<a href="/admin/notice/download?file_no=${noticefile.file_no }">${noticefile.origin_name }</a>
+	<span id="delFile">X</sapn>
+</div>
+<br>
+
+<div id="newFile">
+	<label for="file">새로운 첨부파일</label>
+	<input type="file" name="file" id="file" /><br>
+	<small>**새로운 파일을 첨부하면 기존 파일이 삭제됩니다</small>
+</div>
+</div>
+
 <div class="text-center">
 	<button class="btn btn-primary" id="btnUpdate">수정</button>
 	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
 </div>
+
 </form>
 
 <script type="text/javascript">

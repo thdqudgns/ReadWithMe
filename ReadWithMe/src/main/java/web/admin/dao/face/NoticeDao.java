@@ -2,7 +2,9 @@ package web.admin.dao.face;
 
 import java.util.List;
 
+import web.user.dto.FileTb;
 import web.user.dto.Notice;
+import web.user.dto.Notice_file;
 import web.util.Paging;
 
 public interface NoticeDao {
@@ -51,5 +53,49 @@ public interface NoticeDao {
 	 * @param notice - 삭제될 공지사항 객체
 	 */
 	public void delete(Notice notice);
+
+	/**
+	 * 게시글 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 
+	 * @param viewNotice - 조회할 게시글 번호
+	 * @return 조회된 첨부파일 정보
+	 */
+	public FileTb selectNoticefileByNoticeno(Notice viewNotice);
+
+	/**
+	 * 첨부파일 정보를 삽입한다
+	 * 
+	 * @param notice_file - 삽입할 첨부파일 정보
+	 */
+	public void insertFileIntoNotice_file(Notice_file notice_file);
+
+	/**
+	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
+	 * 
+	 * @param file_no - 조회할 파일 번호
+	 * @return 조회된 첨부파일 정보
+	 */
+	public FileTb selectNoticefileByFileno(int file_no);
+
+	/**
+	 * 첨푸파일 정보를 삽입한다
+	 * 
+	 * @param fileTb - 삽입할 첨부파일 정보
+	 */
+	public void insertFileIntoFileTb(FileTb fileTb);
+
+	/**
+	 * 게시글의 첨부파일을 삭제한다
+	 * 
+	 * @param notice - 첨부파일을 삭제할 게시글 객체
+	 */
+	public void deleteFile(Notice notice);
+
+	/**
+	 * 게시글의 첨부파일을 삭제한다
+	 * 
+	 * @param notice - 첨부파일을 삭제할 게시글 객체
+	 */
+	public void deleteFileTb(Notice notice);
 
 }

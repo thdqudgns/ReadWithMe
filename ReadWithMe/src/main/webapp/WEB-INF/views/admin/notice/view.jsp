@@ -32,6 +32,8 @@
 </tr>
 </table>
 
+<a href="/admin/notice/download?file_no=${notice_file.file_no }">${notice_file.origin_name }</a>
+
 <div class="text-center">
 	<a href="/admin/notice"><button class="btn btn-default">목록</button></a>
 	<c:if test="${id eq viewBoard.writerId }">

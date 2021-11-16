@@ -62,6 +62,49 @@
  		WHERE board_no = #{board_no }
  	</delete>
  
+ 
+ 	<select id="selectNoticefileByNoticeno" resultType="web.user.dto.FileTb" parameterType="web.user.dto.Notice">
+ 		
+ 		SELECT
+ 			A.file_no, A.origin_name, A.thumbnail_url
+ 		FROM filetb A
+ 		JOIN notice_file B ON A.file_no = B.file_no
+ 		WHERE board_no = #{board_no}
+ 	</select>
+ 	
+ 	<insert id="insertFileIntoNotice_file" parameterType="web.user.dto.Notice_file">
+ 		INSERT INTO notice_file ( file_no, board_no )
+ 		VALUES ( notice_file_seq.nextval, #{board_no } )
+ 	</insert>
+ 	
+ 	<insert id="insertFileIntoFileTb" parameterType="web.user.dto.FileTb">
+ 		INSERT INTO FileTb ( file_no, thumbnail_url, origin_name)
+ 		VALUES ( filetb_seq.nextval, #{thumbnail_url }, #{origin_name })
+ 	</insert>
+ 	
+ 	<select id="selectNoticefileByFileno" resultType="web.user.dto.FileTb" parameterType="int">
+ 		SELECT
+ 			A.file_no, B.origin_name, B.thumbnail_url
+ 		FROM notice_file A
+ 		JOIN filetb B ON A.file_no = B.file_no
+			AND A.file_no = #{file_no}
+ 	</select>
+ 	
+ 	<delete id="deleteFile" parameterType="web.user.dto.Notice">
+ 		DELETE notice_file
+ 		WHERE board_no = #{board_no }
+ 	</delete>
+ 	
+ 	<delete id="deleteFileTb" parameterType="web.user.dto.Notice">
+		DELETE filetb A
+		WHERE EXISTS
+			(SELECT 1
+			FROM notice_file B
+			WHERE A.file_no = B.file_no
+			AND B.board_no = #{board_no }
+			) 
+ 	</delete>
+ 	
  </mapper>
  
  

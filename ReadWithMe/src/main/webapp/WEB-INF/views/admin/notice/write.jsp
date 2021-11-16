@@ -51,6 +51,11 @@ $(document).ready(function() {
 	<textarea rows="10" style="width: 100%;" id="content" name="board_content"></textarea>
 </div>
 
+<div class="form-group">
+	<label for="file">첨부파일</label>
+	<input type="file" id="file" name="file" />
+</div>
+
 <div class="text-center">
 	<button class="btn btn-primary" id="btnWrite">작성</button>
 	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
