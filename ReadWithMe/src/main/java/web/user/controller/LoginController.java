@@ -158,7 +158,7 @@ public class LoginController {
 	public String Register() {
 		//ajax ㅎ해보기
 		
-		return "user/member/joinIdntf";	
+		return "user/member/register";	
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)

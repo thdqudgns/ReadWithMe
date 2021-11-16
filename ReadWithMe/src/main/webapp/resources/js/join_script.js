@@ -155,6 +155,7 @@ $(document).ready(function() {
 				console.log("실패");
 			}
 		});
+		
 	});
 
 	
