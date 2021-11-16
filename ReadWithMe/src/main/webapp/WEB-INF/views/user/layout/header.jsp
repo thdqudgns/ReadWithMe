@@ -10,7 +10,6 @@
 
 <!-- jquery, se2 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/resources/se2/js/service/httpRequest.js"></script>
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
@@ -70,63 +69,66 @@
     
 /* ------------------------------------------------------- */
 
-/* 전체를 묶는 ul */
+/* 기본 틀 - 전체, 로고, 메뉴 */
+.menu {display:table;width:100%;table-layout:fixed;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}	
+.menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuBar span {display: table-cell;}
+
+/* 가로 메뉴바 전체를 묶는 ul */
 ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table;align-items:center;height:60px;}
 /* ul.menuList > div > li {border: 1px solid black;text-align:center;position:relative;display:table-cell;background:aqua;padding:0;line-height:20px;} */
 
+/* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
-ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;object-fit:cover;}
-ul.menuList > div.menuMain > a > span {color:#000;text-decoration:none;font-size:20px;font-family:'Dangdanghae';}
+ul.menuList > div.menuMain > a {vertical-align:middle;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;}
+ul.menuList > div.menuMain > a > div {color:#000;text-decoration:none;margin-top:6px;font-size:20px;font-family:'Dangdanghae';display:inline-block;}
 
+/* 전체메뉴 버튼 */
+.menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+ul.menuList > div.menuBar > li.all {margin-top:5px;}
+ul.menuList > div.menuBar > li.all > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
+ul.menuList > div.menuBar > li.all > ul > li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
+ul.menuList > div.menuBar > li:hover > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuBar > li.all > ul > li > a {background: #FFF;color:#000; text-decoration:none; width:80px;display:inline-block;text-align:center;}
+ul.menuList > div.menuBar > li.all > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
+/* #menubar { z-index:9999;} */
+
+/* 기본 메뉴바 - 검색, 모임, 후기, 명언, 안내&문의 */
 ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
 ul.menuList > div.menuBar > a {text-decoration:none;margin-bottom:10px;}
 ul.menuList > div.menuBar > a > span {color:#000;text-decoration:none;font-size:15px;}
-ul.menuList > div.menuBar > a > span:hover {color:tomato;text-decoration:none;vertical-align:middle;}
+ul.menuList > div.menuBar > a > span:hover {color:tomato;text-decoration:none;}
 
-ul.menuList > div.menuBar > li > a {color:black;text-decoration:none;font-size:15px;padding:0;}
-ul.menuList > div.menuBar > li > a:hover {color:tomato;text-decoration:none;}
 
-ul.menuList > div.menuBar > li > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
-ul.menuList > div.menuBar > li > ul > li {background:#FFF;height:0;font-size:0;}
-ul.menuList > div.menuBar > li:hover > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuBar > li.all > ul > li > a {background: #FFF;color:#000; text-decoration:none; width:80px;display:inline-block;text-align:center;}
-ul.menuList > div.menuBar > li > ul > li > a {background: #FFF;color:#fff;text-decoration:none;width:80px;display:inline-block;text-align:center;}
-ul.menuList > div.menuBar > li.all > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
-ul.menuList > div.menuBar > li > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
-/* #menubar { z-index:9999;} */
-
-ul.menuList > div.menuProfile > li > ul > li {background:#FFF;height:0;font-size:0;}
+/* 프로필 */
+ul.menuList > div.menuProfile > li > ul > li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
 ul.menuList > div.menuProfile > li:visited > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
 ul.menuList > div.menuProfile > li > ul > li > a {background: #FFF;color:#fff;text-decoration:none;width:80px;display:inline-block;text-align:center;}
 ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
 
-.menuBar span {display: table-cell;}
-/* .fixed {position: fixed;
-	border: 1px solid #213983;
-	bottom: 30px;
-	right: 50px;
-	font-size: 15px;
-	font-weight:bolder;
-	text-align: center;
-	color: black;} */
-.quickmenu {position:fixed;
-	text-decoration:none;
-	list-style-type: none;
-	bottom: 20px;
-	right: 10px;
-	text-align: center;
-	}
+
+/* TOP 버튼 */
+.quickmenu {position:fixed;text-decoration:none;list-style-type:none;bottom:20px;right:10px;text-align:center;}
 .quickmenu > ul > li {list-style-type: none;border-radius:5px;background-color:rgba(178, 190, 195, 0.5);}
 .quickmenu > ul > li > a{font-size: 15px;color:black;font-weight:bold;text-decoration:none;}
 .quickmenu > ul > li > a:hover {color: tomato;}
-.menu {display:table;width:100%;table-layout:fixed;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}	
-.menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-.menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+
+/* 메뉴 width 개별설정 - 이미지(2), 검색(3), 안내&문의(7), 로그인(9) */
 .menuBar:nth-child(2) {width:40px;}
 .menuBar:nth-child(3) {width:250px;}
 .menuBar:nth-child(7) {width:120px;}
-.menuBar:nth-child(9) {width:43px;}
-.menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+
+
+
+.menuBar:nth-child(9) {width:42px;}
+
+/* 버튼 설정 */
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
+.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
+
+
 .center {text-align:center;vertical-align: middle;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
@@ -146,7 +148,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<div class="menuMain">
 			<a href="<%=request.getContextPath() %>">
 			<img alt="menuBarLogo" src="https://i.imgur.com/IBaUS0j.png">
-			<span>Read With Me</span>
+			<div>Read With Me</div>
 			</a>
 		</div>
 	
@@ -169,7 +171,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 검색 -->
 		<div class="menuBar">
 			<form id="search" action="#" method="get" style="width:250px;">
-            	<input  type="text" name="search"> <input type="submit" value="검색" />
+            	<input  type="text" name="search" style="width:180px;"><button type="submit" style="width:26px;height:23px;"><img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/BtRjKQq.png"></button>
             </form>
 		</div>
 
@@ -196,12 +198,12 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<c:if test="${empty login or not login }">
 			<!-- 회원가입 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button>회원가입</button></a> 
+				<a href="<%=request.getContextPath() %>"><button class="btn-white">회원가입</button></a> 
 			</div>
 		
 			<!-- 로그인 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button>로그인</button></a>
+				<a href="<%=request.getContextPath() %>"><button class="btn-brown">로그인</button></a>
 			</div>
 		</c:if>
 	
