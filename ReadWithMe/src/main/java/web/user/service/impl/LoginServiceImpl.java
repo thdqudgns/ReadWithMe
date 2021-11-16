@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.user.dao.face.LoginDao;
 import web.user.dto.Interest;
 import web.user.dto.Social_account;
+import web.user.dto.UserAuth;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 import web.util.MailHandler;
@@ -112,6 +113,16 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
+	public String getUserNo(String user) {
+		return loginDao.selectUserNoByUser(user);
+	}
+	
+	@Override
+	public String getUserLv(String user) {
+		return loginDao.selectUserLvByUser(user);
+	}
+	
+	@Override
 	public boolean getKakaoId(UserTb user) {
 		
 		if( loginDao.selectCntById(user.getId()) > 0) {
@@ -165,15 +176,21 @@ public class LoginServiceImpl implements LoginService {
 	
 
 	@Override
-	public void create(UserTb user) {
+	public void create(UserAuth user) {
 
 	String key = new TempKey().getKey(50, false); // 인증키 생성
+	user.setAuthKey(key);
 
+	loginDao.createAuthKey(user); // 인증키 DB저장
+	
 	try {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[이메일 본인 인증]");
-		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost/user/emailConfirm?user_email=").append(user.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		sendMail.setText( // 메일내용
+				"<h1>메일인증</h1>" +
+				"<a href='/emailConfirm?userEmail=" + user.getEmail() +
+				"&key=" + key +
+				"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("pol_fo@naver.com", "Read With Me");
 		sendMail.setTo(user.getEmail());
 		sendMail.send();

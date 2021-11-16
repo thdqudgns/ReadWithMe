@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import web.user.dto.UserTb;
 import web.user.dto.Social_account;
+import web.user.dto.UserAuth;
 
 public interface LoginService {
 
@@ -53,6 +54,19 @@ public interface LoginService {
 	public String getNick(String user);
 
 	/**
+	 * 회원의 유저번호 조회
+	 * @param user - 유저번호를 조회하려는 사용자 정보
+	 * @return 사용자의 유저번호
+	 */
+	public String getUserNo(String user);
+
+	/**
+	 * 회원의 레벨 조회
+	 * @param user - 유저번호를 조회하려는 사용자 정보
+	 * @return 사용자의 레벨
+	 */
+	public String getUserLv(String user);
+	/**
 	 * kakao아이디가 존재하는지 확인
 	 * @param user - 고객의 아이디가 담긴 DTO객체
 	 * @return
@@ -78,7 +92,9 @@ public interface LoginService {
 	 * 메일 전송
 	 * @param user - 입력받은 이메일
 	 */
-	public void create(UserTb user);
+	public void create(UserAuth user);
+
+
 
 
 

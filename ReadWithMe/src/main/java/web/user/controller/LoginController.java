@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import web.user.dto.OauthToken;
 import web.user.dto.Social_account;
+import web.user.dto.UserAuth;
 import web.user.dto.UserSessionTb;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
@@ -54,11 +55,12 @@ public class LoginController {
 		boolean isLogin = loginService.login(user);
 		
 		logger.info("isLogin : {}", isLogin);
+
 		
 		if( isLogin ) {
 			session.setAttribute("login", isLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
 //			if( user.getRemember() > 0) {
@@ -73,7 +75,6 @@ public class LoginController {
 //				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 //				loginService.KeepLogin(login.)
 //			}
-			
 			
 			
 			return "redirect:/";
@@ -156,16 +157,17 @@ public class LoginController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String Register() {
-		//ajax ㅎ해보기
-		
+
 		return "user/member/register";	
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String RegisterProc(UserTb user, Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session) throws Exception {
+	public String RegisterProc(UserAuth user, Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session) throws Exception {
 		logger.info("/register [POST]");
 		logger.info(user.toString());
+		
 		loginService.create(user);
+		
 		rttr.addFlashAttribute("authmsg" , "입력한 이메일로 인증해주세요");
 		return "redirect:/";
 	}
