@@ -17,8 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import web.user.dao.face.LoginDao;
 import web.user.dto.Interest;
+import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
-import web.user.dto.UserAuth;
+import web.user.dto.EmailAuth;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 import web.util.MailHandler;
@@ -176,7 +177,7 @@ public class LoginServiceImpl implements LoginService {
 	
 
 	@Override
-	public boolean create(UserAuth user) {
+	public boolean create(EmailAuth user) {
 
 		if( loginDao.selectCntByEmail(user) > 0) {
 			return false;
@@ -192,7 +193,7 @@ public class LoginServiceImpl implements LoginService {
 			sendMail.setSubject("[이메일 본인 인증]");
 			sendMail.setText( // 메일내용
 					"<h1>메일인증</h1>" +
-					"<a href='http://localhost:8888/emailConfirm?email=" + user.getEmail() +
+					"<a href='http://localhost:8888/email/confirm?email=" + user.getEmail() +
 					"&key=" + key +
 					"' target='_blenk'>이메일 인증 확인</a>");
 			sendMail.setFrom("pol_fo@naver.com", "Read With Me");
@@ -210,6 +211,24 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void userAuth(String email) {
 		loginDao.userAuth(email);	
+	}
+	
+	@Override
+	public void savePhoneRegister(UserTb user, String random) {
+		PhoneAuth phoneAuth = new PhoneAuth();
+		phoneAuth.setPhone(user.getPhone());
+		phoneAuth.setAuthKey(random);
+		
+		loginDao.insertPhone(phoneAuth);
+	}
+	
+	@Override
+	public boolean phoneRegister(PhoneAuth phoneAuth) {
+		if( loginDao.selectCntByPhoneAuth(phoneAuth) > 0) {
+			return true;
+		} else {
+			return false;			
+		}
 	}
 	
 	

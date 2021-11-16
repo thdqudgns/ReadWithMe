@@ -5,11 +5,9 @@
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
 	<script type="text/javascript">
-		var userEmail = '${email }';
+		alert('인증 완료되었습니다. 이제 회원가입이 가능 합니다.');
 
-		alert(userEmail + '님 인증 완료되었습니다. 이제 회원가입이 가능 합니다.');
-
-		self.location = '/join/origin?email=${email }';
+		self.location = '/join/origin?phone=${phoneAuth.phone }';
 	</script>
 
 

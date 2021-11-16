@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import web.user.dto.UserTb;
 import web.user.dto.Social_account;
-import web.user.dto.UserAuth;
+import web.user.dto.EmailAuth;
+import web.user.dto.PhoneAuth;
 
 public interface LoginService {
 
@@ -93,13 +94,27 @@ public interface LoginService {
 	 * @param user - 입력받은 이메일
 	 * @return 
 	 */
-	public boolean create(UserAuth user);
+	public boolean create(EmailAuth user);
 
 	/**
 	 * 인증확인했을 때 요청확인
 	 * @param email
 	 */
 	public void userAuth(String email);
+
+	/**
+	 * 핸드폰 번호랑 인증번호랑 저장 
+	 * @param user
+	 * @param random
+	 */
+	public void savePhoneRegister(UserTb user, String random);
+
+	/**
+	 * 고객이 입력한 인증번호 맞는지확인 
+	 * @param phoneAuth - 번호와 인증번호 들어있음
+	 * @return
+	 */
+	public boolean phoneRegister(PhoneAuth phoneAuth);
 
 
 

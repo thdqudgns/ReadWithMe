@@ -29,12 +29,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import web.user.dto.OauthToken;
+import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
-import web.user.dto.UserAuth;
+import web.user.dto.EmailAuth;
 import web.user.dto.UserSessionTb;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 import web.util.KakaoLogin;
+import web.util.MessageService;
 
 @Controller
 public class LoginController {
@@ -86,6 +88,7 @@ public class LoginController {
 	}
 	
 
+	
 	@RequestMapping(value = "/login/kakao" , produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
 	public String kakaoLogin(@RequestParam("code") String code , HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {	
 		
@@ -145,9 +148,28 @@ public class LoginController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join() {
 		return "user/member/join";		
+	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String joinProc(UserTb user, HttpServletRequest req) {
+		
+		logger.info("user {}", user);
+		
+		boolean res = loginService.join(user, req);
+		loginService.userAuth(user.getEmail());
+		if(res) {
+			logger.info("회원가입 성공");
+			return "/user/member/joinEnd";
+		} else {
+			logger.info("회원가입 실패");
+			return "/user/member/joinFail";
+		}
+
 	}
 	
 	@RequestMapping(value="/join/idntf", method=RequestMethod.GET)
@@ -155,14 +177,18 @@ public class LoginController {
 		return "user/member/joinIdntf";		
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String Register() {
+	
+	
+	
+	
+	@RequestMapping(value = "/email/register", method = RequestMethod.GET)
+	public String EmailRegister() {
 
-		return "user/member/register";	
+		return "user/member/emailRegister";	
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String RegisterProc(UserAuth user, Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session) throws Exception {
+	@RequestMapping(value = "/email/register", method = RequestMethod.POST)
+	public String EmailRegisterProc(EmailAuth user, Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session) throws Exception {
 		logger.info("/register [POST]");
 		logger.info(user.toString());
 		
@@ -173,38 +199,58 @@ public class LoginController {
 		} else {			
 			return "/user/member/emailFail";	
 		}
-		
 	}
 	
-	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-	public String emailConfirm(String email, Model model) throws Exception { // 이메일인증
+	@RequestMapping(value = "/email/confirm", method = RequestMethod.GET)
+	public String emailConfirm(String email, Model model) throws Exception {
 		logger.info(email);
-//		loginService.userAuth(email);
 		model.addAttribute("email", email);
 
 		return "/user/member/emailConfirm";
 	}
 	
-	@RequestMapping(value="/join/email", method=RequestMethod.GET)
+	
+	
+	
+	@RequestMapping(value = "/phone/register", method = RequestMethod.GET)
+	public String PhoneRegister() {
+		return "user/member/phoneRegister";	
+	}	
+	@RequestMapping(value = "/phone/register", method = RequestMethod.POST)
+	public String PhoneRegisterProc(UserTb user, Model model) {
+		logger.info("user {}", user);
+		
+		String random = MessageService.makeRandom(6,1);
+		logger.info(random);
+		loginService.savePhoneRegister(user, random);
+//		MessageService.sendMessage(user.getPhone(), random);
+		model.addAttribute("user", user);
+		return "user/member/phoneWait";	
+	}
+	
+	@RequestMapping(value="/phone/confirm", method=RequestMethod.POST)
+	public String PhoneConfirmProc(PhoneAuth phoneAuth, Model model) {	
+		logger.info("phoneAuth {}", phoneAuth);
+		
+		if( loginService.phoneRegister(phoneAuth) ) {
+			return "/user/member/phoneConfirm";	
+		} else {			
+			return "/user/member/phoneFail";	
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/join/origin", method=RequestMethod.GET)
 	public String joinEmail() {
-		logger.info("/join/email [GET]");
-		return "user/member/joinEmail";		
+		logger.info("/join/origin [GET]");
+		return "user/member/joinOrigin";		
 	}
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value="/join/social", method=RequestMethod.GET)
-	public String socialJoin() {
-		return "user/member/join";		
-	}
-
-	
-	
-	
-	
 	
 	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
 	@ResponseBody
@@ -228,22 +274,7 @@ public class LoginController {
 		return res;
 	}
 	
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinProc(UserTb user, HttpServletRequest req) {
-		
-		logger.info("user {}", user);
-		
-		boolean res = loginService.join(user, req);
-		loginService.userAuth(user.getEmail());
-		if(res) {
-			logger.info("회원가입 성공");
-			return "/user/member/joinEnd";
-		} else {
-			logger.info("회원가입 실패");
-			return "/user/member/joinFail";
-		}
 
-	}
 	
 	
 	

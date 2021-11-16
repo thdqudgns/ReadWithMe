@@ -8,9 +8,10 @@
 <link href="/resources/css/join.css" rel="stylesheet">
 <script src="/resources/js/join_script.js"></script>
 
-<h1>이메일로 회원가입</h1>
+<h1>회원가입</h1>
 <form action="/join" method="post">
-<input type="hidden" name="type" value="email"/>
+<input type="hidden" name="type" value="origin"/>
+<input type="hidden" name="phone" value="${param.phone }"/>
 
 <label>아이디(*) <br> <input type="text" name="id" id="id" placeholder="4~20자 사이의 영문, 숫자로 입력해주세요"></label><br>
 <div id="id_check"></div>

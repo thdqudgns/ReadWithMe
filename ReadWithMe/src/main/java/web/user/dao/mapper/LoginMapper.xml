@@ -70,21 +70,31 @@
 
 	</insert>
 	
-	<select id="selectCntByEmail" resultType="int" parameterType="web.user.dto.UserAuth">
-		SELECT count(*) FROM userAuth
+	<select id="selectCntByEmail" resultType="int" parameterType="web.user.dto.EmailAuth">
+		SELECT count(*) FROM EmailAuth
 		WHERE email = #{email }
 	</select>
 	
-	<insert id="createAuthKey" parameterType="web.user.dto.UserAuth">
-		insert into userAuth values(#{email}, #{authKey})
+	<insert id="createAuthKey" parameterType="web.user.dto.EmailAuth">
+		insert into EmailAuth values(#{email}, #{authKey})
 	</insert>
 	
 	<update id="userAuth" parameterType="String">
 		update UserTb
 		set userCertification = 1 
 		where 
-        (select count(*) from userAuth 
+        (select count(*) from EmailAuth 
 		where email = #{email }) > 0
 	</update>
 	
+	<insert id="insertPhone" parameterType="web.user.dto.PhoneAuth">
+		insert into PhoneAuth(phone, authKey)
+		VALUES (#{phone }, #{authKey })
+	</insert>
+	
+	<select id="selectCntByPhoneAuth" resultType="int" parameterType="web.user.dto.PhoneAuth">
+		SELECT count(*) FROM PhoneAuth
+		WHERE phone = #{phone }
+		AND authKey = #{authKey }
+	</select>
 </mapper>
