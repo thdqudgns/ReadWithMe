@@ -14,7 +14,7 @@ public class MessageController {
 	public String messageMain() {
 		logger.info("/message/main");
 		
-		return "user/mypage/message";
+		return "user/mypage/message/message";
 	}
 	
 }

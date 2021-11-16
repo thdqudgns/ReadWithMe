@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
 <h1>마이페이지 메인</h1>
 
@@ -21,5 +16,4 @@
 <a href="/알아서/하삼"><button>To Do List</button></a>
 
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
