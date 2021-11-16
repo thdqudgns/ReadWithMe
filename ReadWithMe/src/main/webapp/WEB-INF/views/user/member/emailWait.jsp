@@ -9,13 +9,8 @@
 <hr>
 본인확인시 진행된 휴대폰 번호와 이메일 주소는 아이디/비밀번호 찾기에 사용됩니다
 
-
-
-<div id="emailWait">
-<form action="/register" method="POST">
-<label>이메일주소 <br> <input type="text" name="email" id="email" placeholder="인증메일을 받을 이메일주소를 입력해주세요"></label><br>
-<button>인증번호 받기</button> <br>
-</form>
+<div>
+이메일 발송이 완료되었습니다! 이메일을 확인해주세요!
 </div>
 
 

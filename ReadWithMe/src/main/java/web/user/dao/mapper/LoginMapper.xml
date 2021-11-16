@@ -70,16 +70,21 @@
 
 	</insert>
 	
+	<select id="selectCntByEmail" resultType="int" parameterType="web.user.dto.UserAuth">
+		SELECT count(*) FROM userAuth
+		WHERE email = #{email }
+	</select>
+	
 	<insert id="createAuthKey" parameterType="web.user.dto.UserAuth">
 		insert into userAuth values(#{email}, #{authKey})
 	</insert>
 	
-<!-- 	<update id="userAuth"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		update user  -->
-<!-- 		set certification = 1  -->
-<!-- 		where (select count(*) from userAuth  -->
-<!-- 		where userEmail = #{userEmail}) > 0]]> -->
-<!-- 	</update> -->
+	<update id="userAuth" parameterType="String">
+		update UserTb
+		set userCertification = 1 
+		where 
+        (select count(*) from userAuth 
+		where email = #{email }) > 0
+	</update>
 	
 </mapper>

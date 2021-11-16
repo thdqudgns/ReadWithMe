@@ -92,10 +92,24 @@ public interface LoginDao {
 	public void insertKakaoMember(UserTb user);
 
 	/**
+	 * 이미 존재하는 이메일인지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmail(UserAuth user);
+
+	/**
 	 * 이메일인증위한 고객이메일/인증키값
 	 * @param user
 	 */
 	public void createAuthKey(UserAuth user);
+
+	/**
+	 * 이메일 인증 확인
+	 * @param email
+	 */
+	public void userAuth(String email);
+
 
 
 

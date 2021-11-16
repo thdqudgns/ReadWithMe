@@ -91,8 +91,15 @@ public interface LoginService {
 	/**
 	 * 메일 전송
 	 * @param user - 입력받은 이메일
+	 * @return 
 	 */
-	public void create(UserAuth user);
+	public boolean create(UserAuth user);
+
+	/**
+	 * 인증확인했을 때 요청확인
+	 * @param email
+	 */
+	public void userAuth(String email);
 
 
 

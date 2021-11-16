@@ -166,10 +166,23 @@ public class LoginController {
 		logger.info("/register [POST]");
 		logger.info(user.toString());
 		
-		loginService.create(user);
-		
 		rttr.addFlashAttribute("authmsg" , "입력한 이메일로 인증해주세요");
-		return "redirect:/";
+		
+		if( loginService.create(user) ) {
+			return "/user/member/emailWait";	
+		} else {			
+			return "/user/member/emailFail";	
+		}
+		
+	}
+	
+	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
+	public String emailConfirm(String email, Model model) throws Exception { // 이메일인증
+		logger.info(email);
+//		loginService.userAuth(email);
+		model.addAttribute("email", email);
+
+		return "/user/member/emailConfirm";
 	}
 	
 	@RequestMapping(value="/join/email", method=RequestMethod.GET)
@@ -178,11 +191,20 @@ public class LoginController {
 		return "user/member/joinEmail";		
 	}
 	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/join/social", method=RequestMethod.GET)
 	public String socialJoin() {
 		return "user/member/join";		
 	}
 
+	
+	
+	
+	
 	
 	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
 	@ResponseBody
@@ -212,7 +234,7 @@ public class LoginController {
 		logger.info("user {}", user);
 		
 		boolean res = loginService.join(user, req);
-		
+		loginService.userAuth(user.getEmail());
 		if(res) {
 			logger.info("회원가입 성공");
 			return "/user/member/joinEnd";
@@ -222,6 +244,19 @@ public class LoginController {
 		}
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void findId(UserTb user) {
 		loginService.findId(user);

@@ -176,27 +176,40 @@ public class LoginServiceImpl implements LoginService {
 	
 
 	@Override
-	public void create(UserAuth user) {
+	public boolean create(UserAuth user) {
 
-	String key = new TempKey().getKey(50, false); // 인증키 생성
-	user.setAuthKey(key);
-
-	loginDao.createAuthKey(user); // 인증키 DB저장
+		if( loginDao.selectCntByEmail(user) > 0) {
+			return false;
+		} else {
+		
+		String key = new TempKey().getKey(50, false); // 인증키 생성
+		user.setAuthKey(key);
 	
-	try {
-		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[이메일 본인 인증]");
-		sendMail.setText( // 메일내용
-				"<h1>메일인증</h1>" +
-				"<a href='/emailConfirm?userEmail=" + user.getEmail() +
-				"&key=" + key +
-				"' target='_blenk'>이메일 인증 확인</a>");
-		sendMail.setFrom("pol_fo@naver.com", "Read With Me");
-		sendMail.setTo(user.getEmail());
-		sendMail.send();
-	} catch (MessagingException | UnsupportedEncodingException e) {
-		e.printStackTrace();
+		loginDao.createAuthKey(user); // 인증키 DB저장
+		
+		try {
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("[이메일 본인 인증]");
+			sendMail.setText( // 메일내용
+					"<h1>메일인증</h1>" +
+					"<a href='http://localhost:8888/emailConfirm?email=" + user.getEmail() +
+					"&key=" + key +
+					"' target='_blenk'>이메일 인증 확인</a>");
+			sendMail.setFrom("pol_fo@naver.com", "Read With Me");
+			sendMail.setTo(user.getEmail());
+			sendMail.send();
+		} catch (MessagingException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+		
+		}
 	}
+	
+	@Override
+	public void userAuth(String email) {
+		loginDao.userAuth(email);	
 	}
 	
 	
