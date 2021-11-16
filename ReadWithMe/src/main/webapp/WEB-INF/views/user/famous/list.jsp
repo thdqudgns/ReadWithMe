@@ -16,11 +16,11 @@ $(document).ready(function() {
 	//추천
 	if(${isRecommend}) {
 		$("#btnRecommend")
-			.addClass("btn-warning")
+			.addClass("btn-rec-warning")
 			.html('추천 취소');
 	} else {
 		$("#btnRecommend")
-			.addClass("btn-primary")
+			.addClass("btn-rec-primary")
 			.html('추천');
 	}
 	
@@ -36,14 +36,14 @@ $(document).ready(function() {
 	
 				if( data.result ) { //추천 성공
 					$("#btnRecommend")
-					.removeClass("btn-primary")
-					.addClass("btn-warning")
+					.removeClass("btn-rec-primary")
+					.addClass("btn-rec-warning")
 					.html('추천 취소');
 				
 				} else { //추천 취소 성공
 					$("#btnRecommend")
-					.removeClass("btn-warning")
-					.addClass("btn-primary")
+					.removeClass("btn-rec-warning")
+					.addClass("btn-rec-primary")
 					.html('추천');
 				
 				}
@@ -139,6 +139,9 @@ table {margin: 0 auto;}
 .famousHr {width:700px;margin: 0 auto;}
 .td a {text-decoration: none;color:gray;font-size:12px;}
 .td a:active {text-decoration: none;color:tomato;}
+.btn-rec-origin {border:none;background-color:#FFF;color:black;font-size:12px;}
+.btn-rec-primary {border:none;background-color:blue;color:#FFF;}
+.btn-rec-warning {border:none;background-color:red;color:#FFF;}
 </style>
 
 <div class="container">
@@ -181,15 +184,15 @@ table {margin: 0 auto;}
 		  <tr>
 		    <th class="td"><img style="width:20px;height:20px;" alt="profile" src="https://i.imgur.com/G5gV56A.png"></th>
 		<%-- <c:forEach items="${nick }" var="nick"> --%>
-			<th class="td" style="text-align:left;">AAA <span style="color:gray;font-size:10px;">(<fmt:formatDate value="${famous.famous_date }" pattern="yyyy.MM.dd HH:mm"/>)</span></th>
+			<th class="td" style="text-align:left;">${user_nick } <span style="color:gray;font-size:10px;">(<fmt:formatDate value="${famous.famous_date }" pattern="yyyy.MM.dd HH:mm"/>)</span></th>
 		<%-- </c:forEach> --%>
-		    <th class="td-rec" colspan="2"><button id="btnRecommend" style="border:none;background-color:#FFF;"><img alt="reco" src="https://i.imgur.com/5LmbVvS.png" width="16px;" height="16px;"></button> &Iota; ${famous.famous_rcmnd}</th>
+		    <th class="td-rec" colspan="2"><button id="btnRecommend" class='btn-rec-origin'>추천</button> &Iota; ${famous.famous_rcmnd}</th>
 		  </tr>
 		  <tr>
 		    <td class="td">${famous.famous_no }</td>
 		    <td class="td" style="text-align:left;">${famous.famous_content}</td>
 		    <td class="td">
-		    	<c:if test="${sessionScope.user_no eq famous.user_no }">
+		    	<c:if test="${user_no eq famous.user_no }">
 				<button class="btn-gray" onclick="updateFamous(${famous.famous_no });">수정</button>
 				<button class="btn-gray" onclick="deleteFamous(${famous.famous_no });">삭제</button>
 				</c:if>

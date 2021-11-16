@@ -8,7 +8,7 @@
   
   	<sql id="selectFamous">
 		SELECT
-			famous_no, famous_content
+			famous_no, user_no, famous_content
 			, famous_date , famous_rcmnd
 		FROM famous
 	</sql>
