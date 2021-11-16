@@ -18,14 +18,47 @@
 	<insert id="insertMember" parameterType="web.user.dto.UserTb">
 	
 		<selectKey order="BEFORE" resultType="int" keyProperty="user_no">
-			SELECT member_seq.nextval FROM dual
+			SELECT usertb_seq.nextval FROM dual
 		</selectKey>
 		 
 		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, birth, location, gender )
-		VALUES ( #{user_no }, 5, #{id }, #{password }, 0, #{name }, #{nick }, #{email }
+		VALUES ( #{user_no }, 1, #{id }, #{password }, #{type }, #{name }, #{nick }, #{email }
 			,  #{birth }, #{location }, #{gender })
 
 	</insert>
+	
+	<insert id="insertInterest" parameterType="web.user.dto.Interest">
+		INSERT INTO interest( user_no, interest, interest2, interest3 )
+		VALUES( #{user_no }, #{interest }, #{interest2 }, #{interest3 })
+	</insert>
+	
+	<select id="gerUserPw" resultType="string"  parameterType="web.user.dto.UserTb">
+		SELECT password FROM UserTb
+		WHERE id = #{id }
+	</select>
+	
+	<select id="selectCnt" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+			AND password = #{password }
+	</select>
 
+	<select id="selectNickByUser" resultType="string" parameterType="String">
+		SELECT nick FROM member
+		WHERE id = #{id }
+	</select>
 
+	<insert id="insertKakaoMember" parameterType="web.user.dto.UserTb">
+	
+		<selectKey order="BEFORE" resultType="int" keyProperty="user_no">
+			SELECT usertb_seq.nextval FROM dual
+		</selectKey>
+		 
+		INSERT INTO UserTb( user_no, user_lv, id, type, name, nick, email, birth, location, gender )
+		VALUES ( #{user_no }, 1, #{id }, #{type }, #{name }, #{nick }, #{email }
+			,  #{birth }, #{location }, #{gender })
+
+	</insert>
+	
+	
 </mapper>

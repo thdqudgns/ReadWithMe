@@ -19,11 +19,13 @@ public class UserTb {
 	private String location;
 	private String gender;
 	private String profile;
+	private int remember;
 	@Override
 	public String toString() {
-		return "Member [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
+		return "UserTb [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
 				+ ", type=" + type + ", name=" + name + ", nick=" + nick + ", email=" + email + ", phone=" + phone
-				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile + "]";
+				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile
+				+ ", remember=" + remember + "]";
 	}
 	public int getUser_no() {
 		return user_no;
@@ -103,7 +105,12 @@ public class UserTb {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	public int getRemember() {
+		return remember;
+	}
+	public void setRemember(int remember) {
+		this.remember = remember;
+	}
 	
-
-
+	
 }
