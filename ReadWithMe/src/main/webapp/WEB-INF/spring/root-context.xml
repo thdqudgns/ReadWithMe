@@ -33,7 +33,7 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="pol_fo@naver.com" />
+		<property name="username" value="anzu.only@gmail.con" />
 		<property name="password" value="dlwmdkswm1102." />
 
 	<!-- email 요청시는 SMTP -->
@@ -43,6 +43,7 @@
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
 			</props>
 		</property>
 	</bean>
