@@ -211,7 +211,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 			</div>
 		</c:if>
 	
-		<c:if test="${not empty login and login and user_lv ne 9 }">
+		<c:if test="${not empty login and login and user_lv ne 4 }">
 		<!-- 프로필, 닉네임, 마이페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
@@ -225,7 +225,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		</div>
 		</c:if>
 
-		<c:if test="${not empty login and login and user_lv eq 9 }">
+		<c:if test="${not empty login and login and user_lv eq 4 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
