@@ -232,6 +232,14 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	
+	@Override
+	public boolean getNaverId(UserTb user) {		
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
+	
 	
 	
 	

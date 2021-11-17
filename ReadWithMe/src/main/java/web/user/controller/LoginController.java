@@ -1,9 +1,13 @@
 package web.user.controller;
 
+import java.io.IOException;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import web.user.dto.OauthToken;
 import web.user.dto.PhoneAuth;
@@ -35,8 +41,10 @@ import web.user.dto.EmailAuth;
 import web.user.dto.UserSessionTb;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
+import web.util.JsonParser;
 import web.util.KakaoLogin;
 import web.util.MessageService;
+import web.util.NaverLogin;
 
 @Controller
 public class LoginController {
@@ -88,6 +96,7 @@ public class LoginController {
 	}
 	
 
+	//---------------------------------- 카카오 로그인(회원가입) ---------------------------------------
 	
 	@RequestMapping(value = "/login/kakao" , produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
 	public String kakaoLogin(@RequestParam("code") String code , HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {	
@@ -118,7 +127,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/join/kakao", method=RequestMethod.POST)
-	public String kakaoLoginProc(UserTb snsUser, HttpServletRequest req) {
+	public String kakaoJoin(UserTb snsUser, HttpServletRequest req) {
 		logger.info("/join/kakao [POST]");
 		
 		logger.info("snsUser {}:", snsUser);
@@ -134,12 +143,70 @@ public class LoginController {
 		}
 	}
 	
-	public String socialLoginProc(Social_account social, HttpSession session) {
-		
-		loginService.naverLogin(social);
-		loginService.googleLogin(social);
-		return null;
+	
+	//---------------------------------- 네이버 로그인(회원가입) ---------------------------------------
+	
+	@RequestMapping(value="/naver/login", method=RequestMethod.GET)
+	public ModelAndView naverLogin(HttpSession session) {
+		String naverAuthUrl = NaverLogin.getAuthorizationUrl(session);
+		logger.info("/naver/login [GET]");
+		return new ModelAndView("user/naverLogin", "url", naverAuthUrl);
 	}
+	
+	@RequestMapping(value="/callback",method = RequestMethod.GET)
+	public String naverLoginProc(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, UserTb user) throws IOException {
+		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
+		logger.info("/naverlogin callback");
+		JsonParser json = new JsonParser();
+
+		OAuth2AccessToken oauthToken = NaverLogin.getAccessToken(session, code, state);
+		String apiResult = NaverLogin.getUserProfile(oauthToken);
+		try {
+			user = json.changeJson(apiResult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+
+		boolean isNaverLogin = loginService.getNaverId(user);
+		
+		if ( isNaverLogin ) {
+			session.setAttribute("login", isNaverLogin);
+			session.setAttribute("user_no", user.getUser_no());
+			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			return "redirect:/";
+		} else {
+			model.addAttribute("user", user);
+			return "user/member/NaverLogin";
+		}
+
+	}
+	
+	@RequestMapping(value="/join/naver", method=RequestMethod.POST)
+	public String NaverJoin(UserTb snsUser, HttpServletRequest req) {
+		logger.info("/join/naver [POST]");
+		
+		logger.info("snsUser {}:", snsUser);
+		
+		boolean res = loginService.KakaoJoin(snsUser, req);
+		
+		if(res) {
+			logger.info("회원가입 성공");
+			return "/user/member/joinEnd";
+		} else {
+			logger.info("회원가입 실패");
+			return "/user/member/joinFail";
+		}
+	}
+	
+	
+	
+	//---------------------------------- 구글 로그인(회원가입) ---------------------------------------
+	
+	
+	
+	
+	//---------------------------------- 로그아웃 ---------------------------------------
 	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
@@ -148,7 +215,7 @@ public class LoginController {
 	}
 	
 	
-	
+	//---------------------------------- origin 회원가입 ---------------------------------------
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join() {
@@ -177,9 +244,36 @@ public class LoginController {
 		return "user/member/joinIdntf";		
 	}
 	
+	@RequestMapping(value="/join/origin", method=RequestMethod.GET)
+	public String joinEmail() {
+		logger.info("/join/origin [GET]");
+		return "user/member/joinOrigin";		
+	}
+	
+	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int loginCheck(@RequestParam("id") String id) {
+		logger.info(id);
+		int res = loginService.userIdCheck(id);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/nickCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int nickCheck(@RequestParam("nick") String nick) {
+		logger.info(nick);
+		int res = loginService.userNickCheck(nick);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
 	
 	
-	
+	//---------------------------------- 이메일 인증 ---------------------------------------
 	
 	@RequestMapping(value = "/email/register", method = RequestMethod.GET)
 	public String EmailRegister() {
@@ -211,6 +305,7 @@ public class LoginController {
 	
 	
 	
+	//---------------------------------- 핸드폰 인증 ---------------------------------------
 	
 	@RequestMapping(value = "/phone/register", method = RequestMethod.GET)
 	public String PhoneRegister() {
@@ -246,33 +341,6 @@ public class LoginController {
 	
 	
 	
-	@RequestMapping(value="/join/origin", method=RequestMethod.GET)
-	public String joinEmail() {
-		logger.info("/join/origin [GET]");
-		return "user/member/joinOrigin";		
-	}
-	
-	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
-	@ResponseBody
-	public int loginCheck(@RequestParam("id") String id) {
-		logger.info(id);
-		int res = loginService.userIdCheck(id);
-		
-		logger.info("res {}", res);
-		
-		return res;
-	}
-	
-	@RequestMapping(value="/nickCheck", method=RequestMethod.GET)
-	@ResponseBody
-	public int nickCheck(@RequestParam("nick") String nick) {
-		logger.info(nick);
-		int res = loginService.userNickCheck(nick);
-		
-		logger.info("res {}", res);
-		
-		return res;
-	}
 	
 
 	
