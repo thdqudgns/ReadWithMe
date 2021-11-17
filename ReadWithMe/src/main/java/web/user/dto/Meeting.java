@@ -8,7 +8,6 @@ public class Meeting {
 	private int meetingtype_no;
 	private int area_no;
 	private int book_class_no;
-	private int like_no;
 	private String meeting_title;
 	private String meeting_content;
 	private Date meeting_rcr_start;
@@ -22,10 +21,9 @@ public class Meeting {
 	@Override
 	public String toString() {
 		return "Meeting [meeting_no=" + meeting_no + ", user_no=" + user_no + ", meetingtype_no=" + meetingtype_no
-				+ ", area_no=" + area_no + ", book_class_no=" + book_class_no + ", like_no=" + like_no
-				+ ", meeting_title=" + meeting_title + ", meeting_content=" + meeting_content + ", meeting_personnel="
-				+ meeting_personnel + ", meeting_kakaotalk=" + meeting_kakaotalk + ", meeting_approved="
-				+ meeting_approved + "]";
+				+ ", area_no=" + area_no + ", book_class_no=" + book_class_no + ", meeting_title=" + meeting_title
+				+ ", meeting_content=" + meeting_content + ", meeting_personnel=" + meeting_personnel
+				+ ", meeting_kakaotalk=" + meeting_kakaotalk + ", meeting_approved=" + meeting_approved + "]";
 	}
 	public int getMeeting_no() {
 		return meeting_no;
@@ -56,12 +54,6 @@ public class Meeting {
 	}
 	public void setBook_class_no(int book_class_no) {
 		this.book_class_no = book_class_no;
-	}
-	public int getLike_no() {
-		return like_no;
-	}
-	public void setLike_no(int like_no) {
-		this.like_no = like_no;
 	}
 	public String getMeeting_title() {
 		return meeting_title;
