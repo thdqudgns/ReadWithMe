@@ -8,9 +8,8 @@
 <meta charset="UTF-8">
 <title> : : : ReadWithMe : : : </title>
 
-<!-- jquery, se2 -->
+<!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
@@ -71,9 +70,10 @@
 
 /* 기본 틀 - 전체, 로고, 메뉴 */
 .menu {display:table;width:100%;table-layout:fixed;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}	
-.menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuMain {display:table-cell;width:180px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar span {display: table-cell;}
+.menuProfile {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 
 /* 가로 메뉴바 전체를 묶는 ul */
 ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table;align-items:center;height:60px;}
@@ -82,8 +82,8 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;}
-ul.menuList > div.menuMain > a > div {color:#000;text-decoration:none;margin-top:6px;font-size:20px;font-family:'Dangdanghae';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:200px; height:45px;margin-top:6px;}
+/* ul.menuList > div.menuMain > a > div {color:#9f8170;text-decoration:none;font-size:20px;font-family:'notoBold';display:inline-block;} */
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
@@ -91,7 +91,7 @@ ul.menuList > div.menuBar > li.all {margin-top:5px;}
 ul.menuList > div.menuBar > li.all > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
 ul.menuList > div.menuBar > li.all > ul > li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
 ul.menuList > div.menuBar > li:hover > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuBar > li.all > ul > li > a {background: #FFF;color:#000; text-decoration:none; width:80px;display:inline-block;text-align:center;}
+ul.menuList > div.menuBar > li.all > ul > li > a {background: #FFF;color:black; text-decoration:none; width:80px;display:inline-block;text-align:center;}
 ul.menuList > div.menuBar > li.all > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
 /* #menubar { z-index:9999;} */
 
@@ -103,9 +103,14 @@ ul.menuList > div.menuBar > a > span:hover {color:tomato;text-decoration:none;}
 
 
 /* 프로필 */
+ul.menuList > div.menuProfile {vertical-align: middle;text-decoration:none;}
+ul.menuList > div.menuProfile > li {font-size:15px;}
+ul.menuList > div.menuProfile > li > img {vertical-align: middle;}
+ul.menuList > div.menuProfile > li > span {vertical-align: middle;}
+ul.menuList > div.menuProfile > li > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
 ul.menuList > div.menuProfile > li > ul > li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
-ul.menuList > div.menuProfile > li:visited > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuProfile > li > ul > li > a {background: #FFF;color:#fff;text-decoration:none;width:80px;display:inline-block;text-align:center;}
+ul.menuList > div.menuProfile > li:hover > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuProfile > li > ul > li > a {background: #FFF;color:black;text-decoration:none;width:100px;display:inline-block;text-align:center;}
 ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
 
 
@@ -122,29 +127,32 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(9) {width:42px;}
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
-.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:active {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-gray {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
+.btn-gray:active {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:active {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
 
-.center {text-align:center;vertical-align: middle;}
+.center {text-align:center;vertical-align: middle;margin: 0 auto;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 
 </head>
 <body>
 
-<!-- FAMOUS SENTENSE BAR -->
+<!-- FAMOUS SENTENcE BAR -->
 
 
 <!-- MENU BAR -->
-
 <div id="menuBarFrame" class="menu">
 	<ul class="menuList">
 	
 		<!-- 이미지, 이름 -->
 		<div class="menuMain">
-			<a href="<%=request.getContextPath() %>">
-			<img alt="menuBarLogo" src="https://i.imgur.com/IBaUS0j.png">
-			<div>Read With Me</div>
+			<a href="/">
+			<img alt="menuBarLogo" src="https://i.imgur.com/BH7NGuy.png">
+<!-- 			<div>Read With Me</div> -->
 			</a>
 		</div>
 	
@@ -157,7 +165,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
 					<li><a href="<%=request.getContextPath() %>">후기</a></li>
-					<li><a href="<%=request.getContextPath() %>">명언</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/famous/list">명언</a></li>
 					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
 					<li><a href="<%=request.getContextPath() %>">1:1문의</a></li>
 				</ul>
@@ -167,7 +175,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<!-- 검색 -->
 		<div class="menuBar">
 			<form id="search" action="#" method="get" style="width:250px;">
-            	<input  type="text" name="search" style="width:180px;"><button type="submit" style="width:26px;height:23px;"><img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/BtRjKQq.png"></button>
+            	<input  type="text" name="search" style="width:180px;border: 3px solid #9f8170;"><button type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; "><img style="margin-top:1px;object-fit:full;width:16px;height:14px;" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
             </form>
 		</div>
 
@@ -183,7 +191,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><span>명언</span></a>
+			<a href="<%=request.getContextPath() %>/user/famous/list"><span>명언</span></a>
 		</div>
 
 		<!-- 메뉴명 -->
@@ -194,45 +202,46 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		<c:if test="${empty login or not login }">
 			<!-- 회원가입 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button class="btn-white">회원가입</button></a> 
+				<a href="<%=request.getContextPath() %>/join"><button class="btn-white">회원가입</button></a> 
 			</div>
 		
 			<!-- 로그인 -->
 			<div class="menuBar">
-				<a href="<%=request.getContextPath() %>"><button class="btn-brown">로그인</button></a>
+				<a href="<%=request.getContextPath() %>/login"><button class="btn-white">로그인</button></a>
 			</div>
 		</c:if>
 	
-		<c:if test="${not empty login and login and user_lv ne 9 }">
+		<c:if test="${not empty login and login and user_lv ne 4 }">
 		<!-- 프로필, 닉네임, 마이페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
-				<img alt="" src="https://i.imgur.com/G5gV56A.png">
-				<span>닉네임</span>
+				<img alt="profile" src="https://i.imgur.com/G5gV56A.png" width="20px" height="20px">
+				<span>${user_nick }님</span>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">마이페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>">로그아웃</a></li>
+					<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</div>
 		</c:if>
 
-		<c:if test="${not empty login and login and user_lv eq 9 }">
+		<c:if test="${not empty login and login and user_lv eq 4 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
-				<img alt="" src="https://i.imgur.com/t4UvTix.png">
-				<span>닉네임</span>
+				<img alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
+				<span>${user_nick }님</span>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">관리자페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>">로그아웃</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin">관리자페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</div>
 		</c:if>
 	
 	</ul>
-</div>
+</div><!-- MENU BAR END-->
+
 
 
 	<div class="quickmenu">
