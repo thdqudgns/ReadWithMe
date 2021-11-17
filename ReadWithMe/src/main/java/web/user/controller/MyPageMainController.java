@@ -11,8 +11,9 @@ public class MyPageMainController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageMainController.class);
 	
 	@RequestMapping(value="/mypage/main")
-	public void myPageMain() {
+	public String myPageMain() {
 		logger.info("/mypage/main");
+		
+		return "user/mypage/main";
 	}
-
 }

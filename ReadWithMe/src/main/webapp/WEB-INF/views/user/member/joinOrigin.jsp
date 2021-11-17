@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
 <link href="/resources/css/join.css" rel="stylesheet">
 <script src="/resources/js/join_script.js"></script>
 
-<h1>이메일로 회원가입</h1>
+<h1>회원가입</h1>
 <form action="/join" method="post">
-<input type="hidden" name="type" value="email"/>
+<input type="hidden" name="type" value="origin"/>
+<input type="hidden" name="phone" value="${param.phone }"/>
 
 <label>아이디(*) <br> <input type="text" name="id" id="id" placeholder="4~20자 사이의 영문, 숫자로 입력해주세요"></label><br>
 <div id="id_check"></div>
@@ -24,7 +24,7 @@
 <hr>
 <label>닉네임(*) <br> <input type="text" name="nick" id="nick" placeholder="자유롭게 사용하실 닉네임을 입력해주세요!"></label><br>
 <div id="nick_check"></div>
-<label>이메일 주소(*) <br> <input type="text" name="email" id="email" placeholder="사용하시는 이메일 주소를 입력해주세요."></label><br>
+<label>이메일 주소(*) <br> <input type="text" name="email" id="email" value="${param.email }" placeholder="사용하시는 이메일 주소를 입력해주세요."></label><br>
 <div id="email_check"></div>
 <hr>
 <label>생년월일 <br> <input type="date" name="birth"></label><br>

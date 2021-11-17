@@ -13,7 +13,9 @@ Read With Me에서는 누구나 독서모임을 주최하고 참여하실 수 �
 <form action="/join/social">
 <button>Google로 회원가입</button>
 <button>Naver로 회원가입</button>
-<button>Kakao로 회원가입</button>
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=340845721c27a182bf54bae03bc43340&redirect_uri=http://localhost:8888/login/kakao&response_type=code">
+	<img src="/resources/img/kakao_join_medium_wide.png">
+	</a>
 </form>
 
 이미 계정이 있으세요? <a href="/login">로그인</a>
