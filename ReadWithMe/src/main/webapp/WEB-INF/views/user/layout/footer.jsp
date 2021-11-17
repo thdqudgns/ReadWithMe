@@ -6,13 +6,13 @@
 <br><br>
 
 <style type="text/css">
-#footer{text-align:center;background:#353b48;height:140px; }
-div#footer01{padding-left:20px;height:60px;text-align:left;vertical-align:middle; }
-div#footer02{padding-left:40px;color:#DDD;text-align:left;height:80px;font-size:11px; }
+#footer{text-align:center;background:#ede7e4;height:140px; }
+div#footer01{padding-left:20px;height:60px;text-align:center;vertical-align:middle; }
+div#footer02{padding-left:40px;color:black;text-align:center;height:80px;font-size:11px; }
 div#footer01 > div.foot-bar {display:inline-block;padding:19px 20px 0px 20px;}
-div#footer01 > div > a {color:#DDD;text-decoration:none;font-size:12px;}
+div#footer01 > div > a {color:black;text-decoration:none;font-size:12px;}
 div#footer01 > div > a:hover {color:tomato;text-decoration:none;vertical-align:middle;}
-div#footer01 > span {color:#DDD;}
+div#footer01 > span {color:black;}
 </style>
 
 <div id="footer">
@@ -25,22 +25,7 @@ div#footer01 > span {color:#DDD;}
 			<span>&Iota;</span>
 			
 			<div class="foot-bar">
-				<a href="#">개인정보 취급방침</a>
-			</div>
-			<span>&Iota;</span>
-			
-			<div class="foot-bar">
 				<a href="#">이용약관</a>
-			</div>
-			<span>&Iota;</span>
-			
-			<div class="foot-bar">
-				<a href="#">고객센터</a>
-			</div>
-			<span>&Iota;</span>
-			
-			<div class="foot-bar">
-				<a href="#">회사소개</a>
 			</div>
 			
 	</div>
