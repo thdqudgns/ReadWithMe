@@ -6,4 +6,72 @@
   
   <mapper namespace="web.user.dao.face.FamousDao">
   
+  	<sql id="selectFamous">
+		SELECT
+			famous_no, user_no, nick, famous_content
+			, famous_date , famous_rcmnd
+		FROM famous
+	</sql>
+
+	<sql id="whereTitleSearch">
+		WHERE famous_content LIKE '%' || #{search} || '%'
+	</sql>
+  
+  
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT COUNT(*) FROM (
+			<include refid="selectFamous"/>
+			<include refid="whereTitleSearch"/>
+		)
+	</select>
+	
+	<select id="selectList" resultType="web.user.dto.Famous" parameterType="web.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, F.* FROM (
+				<include refid="selectFamous"/>
+				<include refid="whereTitleSearch"/>
+				ORDER BY famous_no DESC
+			) F
+		) R
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<insert id="insertFamous" parameterType="web.user.dto.Famous">
+		INSERT INTO famous (famous_no, user_no, famous_content, nick)
+		VALUES ( famous_seq.nextval, #{user_no}, #{famous_content}, #{nick} )
+	</insert>
+	
+	<delete id="deleteFamous" parameterType="web.user.dto.Famous">
+		DELETE famous
+		WHERE famous_no = #{famous_no}
+	</delete>
+	
+	<select id="countFamous" resultType="int" parameterType="web.user.dto.Famous">
+		SELECT COUNT(*) FROM famous 
+		WHERE famous_no = #{famous_no}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
   </mapper>
