@@ -128,11 +128,13 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 /* 버튼 설정 */
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
-.btn-white:active {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-white:hover {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-report {border:none;background-color: #FFF; color:gray;}
+.btn-report:hover {border:none;color:tomato;}
 .btn-gray {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
-.btn-gray:active {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-gray:hover {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:tomato;}
 .btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
-.btn-brown:active {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-brown:hover {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
 
 .center {text-align:center;vertical-align: middle;margin: 0 auto;}
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
@@ -164,7 +166,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 					alt="menu_icon" src="https://i.imgur.com/wG6Siyb.png">
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
-					<li><a href="<%=request.getContextPath() %>">후기</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/review/list">후기</a></li>
 					<li><a href="<%=request.getContextPath() %>/user/famous/list">명언</a></li>
 					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
 					<li><a href="<%=request.getContextPath() %>">1:1문의</a></li>
@@ -186,7 +188,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><span>후기</span></a>
+			<a href="<%=request.getContextPath() %>/user/review/list"><span>후기</span></a>
 		</div>
 
 		<!-- 메뉴명 -->
