@@ -16,7 +16,7 @@ alert('Read With Me의 회원이 아닙니다. 간단한 회원가입 후 이용
 <form action="/join/kakao" method="post">
 
 <input type="hidden" name="id" value="${user.id }"/>
-<input type="hidden" name="type" value="kakao"/>
+<input type="hidden" name="type" value="${social }"/>
 <c:if test="${not empty user.email }">
 <input type="hidden" name="email" value="${user.email }" />
 </c:if>
