@@ -98,4 +98,11 @@ public interface NoticeDao {
 	 */
 	public void deleteFileTb(Notice notice);
 
+	/**
+	 * 선택된 게시글을 게시글 번호를 이용하여 삭제한다
+	 * 
+	 * @param no - 선택된 게시글의 번호
+	 */
+	public void deleteByBoardno(String no);
+
 }

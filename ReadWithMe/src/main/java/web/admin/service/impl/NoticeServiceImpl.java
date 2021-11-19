@@ -178,6 +178,12 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.selectNoticefileByFileno(file_no);
 	}
 	
+	// 선택된 게시글 삭제
+	@Override
+	public void deleteChecked(String no) {
+		noticeDao.deleteByBoardno(no);
+	}
+	
 }
 
 

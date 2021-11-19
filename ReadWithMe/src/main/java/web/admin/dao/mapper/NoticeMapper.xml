@@ -16,6 +16,14 @@
 	<sql id="whereTitleSearch">
 		WHERE board_title LIKE '%' || #{search} || '%'
 	</sql>
+	
+	<sql id="orderByHit">
+		ORDER BY hit DESC
+	</sql>
+	
+	<sql id="orderByDate">
+		ORDER BY board_date DESC
+	</sql>
  
  
  	<select id="selectAll" resultType="web.user.dto.Notice" parameterType="web.util.Paging">
@@ -103,6 +111,11 @@
 			WHERE A.file_no = B.file_no
 			AND B.board_no = #{board_no }
 			) 
+ 	</delete>
+ 	
+ 	<delete id="deleteByBoardno" parameterType="String">
+ 		DELETE notice
+ 		WHERE board_no = #{board_no }
  	</delete>
  	
  </mapper>

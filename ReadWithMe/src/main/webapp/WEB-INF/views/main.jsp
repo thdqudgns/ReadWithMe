@@ -7,7 +7,7 @@
 
 
 
-<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
+<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%><%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
 =======
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 

@@ -12,13 +12,13 @@
 <div>
 	휴대폰 인증<br>
 	고객님 명의의 휴대폰으로 인증<br>
-	<a href="/join/email"><button>인증하기</button></a>
+	<a href="/phone/register"><button>인증하기</button></a>
 </div>
 
 <div>
 	이메일 인증 <br>
 	고객님의 이메일로 인증
-	<a href="/register"><button>인증하기</button></a>
+	<a href="/email/register"><button>인증하기</button></a>
 </div>
 
 

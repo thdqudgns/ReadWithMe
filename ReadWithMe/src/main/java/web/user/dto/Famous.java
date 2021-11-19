@@ -5,13 +5,14 @@ import java.util.Date;
 public class Famous {
 	private int famous_no;
 	private int user_no;
+	private String nick;
 	private String famous_content;
 	private Date famous_date;
 	private int famous_rcmnd;
 	@Override
 	public String toString() {
-		return "Famous [famous_no=" + famous_no + ", user_no=" + user_no + ", famous_content=" + famous_content
-				+ ", famous_rcmnd=" + famous_rcmnd + "]";
+		return "Famous [famous_no=" + famous_no + ", user_no=" + user_no + ", nick=" + nick + ", famous_content="
+				+ famous_content + ", famous_date=" + famous_date + ", famous_rcmnd=" + famous_rcmnd + "]";
 	}
 	public int getFamous_no() {
 		return famous_no;
@@ -24,6 +25,12 @@ public class Famous {
 	}
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	public String getFamous_content() {
 		return famous_content;
@@ -43,5 +50,6 @@ public class Famous {
 	public void setFamous_rcmnd(int famous_rcmnd) {
 		this.famous_rcmnd = famous_rcmnd;
 	}
+	
 	
 }

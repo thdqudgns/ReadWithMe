@@ -2,6 +2,7 @@ package web.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import web.admin.service.face.NoticeService;
 import web.user.dto.FileTb;
 import web.user.dto.Notice;
-import web.user.dto.Notice_file;
 import web.util.Paging;
 
 @Controller
@@ -37,6 +37,8 @@ public class NoticeController {
 		Paging paging = noticeService.getPaging( paramData );
 		
 		List<Notice> list = noticeService.list(paging);
+		
+		logger.info("paramData:{}", paramData.getSearch());
 		
 		for(Notice n : list) {
 			logger.info("{}", n);
@@ -133,6 +135,20 @@ public class NoticeController {
 		}
 		
 		noticeService.delete(notice);
+		
+		return "redirect:/admin/notice";
+	}
+	
+	// 공지사항 선택삭제
+	@RequestMapping(value="/admin/notice/delete")
+	public String ajaxTest(HttpServletRequest request) {
+		
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		for(int i=0; i<size; i++) {
+			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
+			noticeService.deleteChecked(ajaxMsg[i]);
+		}
 		
 		return "redirect:/admin/notice";
 	}
