@@ -8,18 +8,18 @@
 	
 	<select id="selectCntRecommend" parameterType="web.user.dto.Famous_rec" resultType="int">
 		SELECT count(*) FROM famous_rec
-		WHERE user_nick = #{user_nickd}
+		WHERE user_no = #{user_no}
 			AND famous_no = #{famous_no}
 	</select>
 
 	<insert id="insertRecommend" parameterType="web.user.dto.Famous_rec">
 		INSERT INTO famous_rec
-		VALUES ( #{user_nick}, #{famous_no} )
+		VALUES ( #{user_no}, #{famous_no} )
 	</insert>
 	
 	<delete id="deleteRecommend" parameterType="web.user.dto.Famous_rec">
 		DELETE famous_rec
-		WHERE user_nick = #{user_nick}
+		WHERE user_no = #{user_no}
 			AND famous_no = #{famous_no}
 	</delete>
 	
