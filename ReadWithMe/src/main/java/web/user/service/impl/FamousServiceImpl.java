@@ -1,6 +1,9 @@
 package web.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,9 @@ public class FamousServiceImpl implements FamousService {
 	@Autowired private FamousDao famousDao;
 	@Autowired private Famous_recDao famous_recDao;
 	
+	@Autowired private HttpSession httpSession;
+;
+	
 	@Override
 	public Paging getPaging(Paging paramData) {
 		
@@ -35,11 +41,32 @@ public class FamousServiceImpl implements FamousService {
 		return paging;
 	}
 
+//	@Override
+//	public List<Famous> getFamousListO(Paging paging) {
+//		return famousDao.selectListO(paging);
+//	}
+
 	@Override
-	public List<Famous> getFamousList(Paging paging) {
-		return famousDao.selectList(paging);
+		public List<HashMap<String, Object>> getFamousList(Paging paging) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paging", paging);
+		
+		if( (String)httpSession.getAttribute("user_no") != null) {
+			map.put("user_no", Integer.parseInt((String)httpSession.getAttribute("user_no"))); //나중에 이걸로 바꿔야함
+		}
+//		map.put("user_id", httpSession.getAttribute("user_id") );
+		
+		
+//		return famousDao.selectList(paging);
+		return famousDao.selectList(map);
 	}
 
+//	@Override
+//	public String getIdByUserNo(Famous famous) {
+//		return famousDao.getIdByUserNo(famous);
+//	}
+	
 	@Override
 	public void insertFamous(Famous famous) {
 		famousDao.insertFamous(famous);
@@ -88,6 +115,25 @@ public class FamousServiceImpl implements FamousService {
 	public int getTotalCntRecommend(Famous_rec recommend) {
 		return famous_recDao.selectTotalCntRecommend(recommend);
 	}
+
+	@Override
+	public boolean updateFamous(Famous famous) {
+		int res = famousDao.updateFamous(famous);
+		
+		if( res  > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+//	@Override
+//	public String getIdByUserNo(int user_no) {
+//		return famousDao.getIdByUserNo2(user_no);
+//	}
+
+
 
 	
 	
