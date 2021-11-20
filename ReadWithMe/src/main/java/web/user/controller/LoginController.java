@@ -68,7 +68,7 @@ public class LoginController {
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
 //			if( user.getRemember() > 0) {
-//				logger.info("remember {}", user.getRemember());
+//				logger.info("remember {}", user.getRemember()); 
 //				Cookie loginCookie = new Cookie("loginCookie", session.getId());
 //				loginCookie.setPath("/");
 //				int amount = 60*60*24*7;
