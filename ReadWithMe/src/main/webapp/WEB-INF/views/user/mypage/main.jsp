@@ -15,5 +15,7 @@
 
 <a href="/알아서/하삼"><button>To Do List</button></a>
 
+ReadWithMe를 더이상 이용하지 않는다면 <a href="">회원탈퇴 바로가기</a>
+
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />

@@ -196,7 +196,7 @@ public class LoginServiceImpl implements LoginService {
 					"<a href='http://localhost:8888/email/confirm?email=" + user.getEmail() +
 					"&key=" + key +
 					"' target='_blenk'>이메일 인증 확인</a>");
-			sendMail.setFrom("pol_fo@naver.com", "Read With Me");
+			sendMail.setFrom("anzu.only@gmail.com", "Read With Me");
 			sendMail.setTo(user.getEmail());
 			sendMail.send();
 		} catch (MessagingException | UnsupportedEncodingException e) {
@@ -231,6 +231,14 @@ public class LoginServiceImpl implements LoginService {
 		}
 	}
 	
+	
+	@Override
+	public boolean getNaverId(UserTb user) {		
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
 	
 	
 	
