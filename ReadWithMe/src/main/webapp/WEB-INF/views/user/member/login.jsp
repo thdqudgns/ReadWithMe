@@ -24,8 +24,18 @@
 </form>
 	
 <div>
-	<button>구글 로그인</button>
-	<button>네이버 로그인</button>
+	<a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?
+	client_id=604366855673-sn0moenehgundmgh9hf20dksulomr1en.apps.googleusercontent.com
+	&redirect_uri=http://localhost:8888/login/google
+	&response_type=code
+	&scope=email%20profile%20openid
+	&access_type=offline
+	&flowName=GeneralOAuthFlow">
+		<button>구글 로그인</button>
+	</a>
+	<a href="/login/naver">
+	<img src="/resources/img/naver_login_btn.png">
+	</a>
 	<a href="https://kauth.kakao.com/oauth/authorize?client_id=340845721c27a182bf54bae03bc43340&redirect_uri=http://localhost:8888/login/kakao&response_type=code">
 	<img src="/resources/img/kakao_login_medium_wide.png">
 	</a>

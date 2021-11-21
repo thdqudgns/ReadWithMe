@@ -35,7 +35,7 @@
 		<property name="port" value="587" />
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="username" value="anzu.only@gmail.com" />
-		<property name="password" value="dlwmdkswm1102." />
+		<property name="password" value="uupluuklkwitqxti" />
 
 	<!-- email 요청시는 SMTP -->
 		<property name="javaMailProperties">
@@ -49,8 +49,8 @@
 			</props>
 		</property>
 	</bean>
-	
-		
+
+			
 	<!-- 마이바티스 수행 객체 설정( SqlSession ) -->
 	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	

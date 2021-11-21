@@ -67,6 +67,7 @@ public interface LoginService {
 	 * @return 사용자의 레벨
 	 */
 	public String getUserLv(String user);
+	
 	/**
 	 * kakao아이디가 존재하는지 확인
 	 * @param user - 고객의 아이디가 담긴 DTO객체
@@ -115,6 +116,13 @@ public interface LoginService {
 	 * @return
 	 */
 	public boolean phoneRegister(PhoneAuth phoneAuth);
+
+	/**
+	 * naver아이디가 존재하는지 확인
+	 * @param user - 고객의 아이디가 담긴 DTO객체
+	 * @return
+	 */
+	public boolean getNaverId(UserTb user);
 
 
 

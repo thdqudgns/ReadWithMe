@@ -5,5 +5,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="web.user.dao.face.ReviewDao">
+ 	
+ 	<sql id="selectReview">
+		SELECT
+			review_no, user_no, nick, id, review_title
+			, review_content, review_date
+			, review_views , review_rcmnd, review_last_modify
+		FROM review
+	</sql>
+
+	<sql id="whereTitleSearch">
+		WHERE REVIEW_TITLE LIKE '%' || #{search} || '%'
+	</sql>
+
+	  
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT COUNT(*) FROM (
+			<include refid="selectReview"/>
+			<include refid="whereTitleSearch"/>
+		)
+	</select>
+	
+	<select id="selectList" resultType="web.user.dto.Review" parameterType="web.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, R.* FROM (
+				<include refid="selectReview"/>
+				<include refid="whereTitleSearch"/>
+				ORDER BY review_no DESC
+			) R
+		) R
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
   
 </mapper>

@@ -1,5 +1,6 @@
 package web.user.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import web.user.dto.Famous;
@@ -27,7 +28,9 @@ public interface FamousService {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Famous> getFamousList(Paging paging);
+//	public List<Famous> getFamousListO(Paging paging);
+	
+	public List<HashMap<String, Object>> getFamousList(Paging paging);
 
 	/**
 	 * 새로운 글을 삽입한다
@@ -65,6 +68,29 @@ public interface FamousService {
 	 * @return 총 추천 수
 	 */
 	public int getTotalCntRecommend(Famous_rec recommend);
+
+	/**
+	 * 사용자 번호로 id 조회하기
+	 * 
+	 * @param famous - 사용자 번호
+	 * @return 사용자 id 반환
+	 */
+//	public String getIdByUserNo(Famous famous);
+
+	/**
+	 * 글 수정 메소드
+	 * @param famous - 글 정보가 담긴 객체
+	 */
+	public boolean updateFamous(Famous famous);
+
+	/**
+	 * 사용자 번호로 id 조회하기
+	 * 
+	 * @param famous - 사용자 번호
+	 * @return 사용자 id 반환
+	 */
+//	public String getIdByUserNo(int user_no);
+
 
 
 	
