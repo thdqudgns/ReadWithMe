@@ -8,6 +8,7 @@ import web.user.dto.EmailAuth;
 
 public interface LoginDao {
 
+	
 	public void join(UserTb user);
 
 	public void login(UserTb user);
@@ -123,6 +124,26 @@ public interface LoginDao {
 	 * @return
 	 */
 	public int selectCntByPhoneAuth(PhoneAuth phoneAuth);
+
+	/**
+	 * email, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmailandId(UserTb user);
+	
+	/**
+	 * phone, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByPhoneandId(UserTb user);
+	
+	/**
+	 * 고객이 발급받은 임시 비밀번호로 고객 DB수정
+	 * @param user
+	 */
+	public void updatePw(UserTb user);
 
 
 

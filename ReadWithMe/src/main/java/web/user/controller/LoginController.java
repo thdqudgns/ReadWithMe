@@ -199,56 +199,6 @@ public class LoginController {
 	
 	//---------------------------------- 구글 로그인(회원가입) ---------------------------------------
 
-//	@RequestMapping(value="/login/google")
-//	public void googleLogin(Model model, @RequestParam(value = "code") String authCode) throws JsonProcessingException {
-//
-//		//HTTP Request를 위한 RestTemplate
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		//Google OAuth Access Token 요청을 위한 파라미터 세팅
-//		GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest
-//				.builder()
-//				.clientId("604366855673-sn0moenehgundmgh9hf20dksulomr1en.apps.googleusercontent.com")
-//				.clientSecret("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")
-//				.code(authCode)
-//				.redirectUri("http://localhost:8888/login/google")
-//				.grantType("authorization_code").build();
-//
-//		
-//		//JSON 파싱을 위한 기본값 세팅
-//		//요청시 파라미터는 스네이크 케이스로 세팅되므로 Object mapper에 미리 설정해준다.
-//		ObjectMapper mapper = new ObjectMapper();
-//		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-//		mapper.setSerializationInclusion(Include.NON_NULL);
-//
-//		//AccessToken 발급 요청
-//		ResponseEntity<String> resultEntity = restTemplate.postForEntity(GOOGLE_TOKEN_BASE_URL, googleOAuthRequestParam, String.class);
-//
-//		//Token Request
-//		GoogleOAuthResponse result = mapper.readValue(resultEntity.getBody(), new TypeReference<GoogleOAuthResponse>() {
-//		});
-//		
-//		System.out.println(resultEntity.getBody());
-//
-//		//ID Token만 추출 (사용자의 정보는 jwt로 인코딩 되어있다)
-//		String jwtToken = result.getIdToken();
-//		String requestUrl = UriComponentsBuilder.fromHttpUrl("https://oauth2.googleapis.com/tokeninfo")
-//		.queryParam("id_token", jwtToken).encode().toUriString();
-//		
-//		String resultJson = restTemplate.getForObject(requestUrl, String.class);
-//		
-//		Map<String,String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>(){});
-//		model.addAllAttributes(userInfo);
-//		model.addAttribute("token", result.getAccessToken());
-//		System.out.println(userInfo);
-//
-//
-//
-//
-//		return "/google.html";
-//
-//	}
-	
 	//---------------------------------- 로그아웃 ---------------------------------------
 	
 	@RequestMapping(value="/logout")
@@ -380,12 +330,44 @@ public class LoginController {
 	
 	//---------------------------------- 아이디/비밀번호찾기 ---------------------------------------
 	
-	public void findId(UserTb user) {
-		loginService.findId(user);
+	@RequestMapping(value="/seach/login")
+	public String seachLogin(UserTb user) {
+		return "/user/member/seachLogin";	
 	}
 	
-	public void findPw(UserTb user) {
-		loginService.findPw(user);
+	@RequestMapping(value="/find/pw", method = RequestMethod.GET)
+	public String findPw() {
+		return "/user/member/findPw";	
+	}
+	
+	@RequestMapping(value="/find/pw", method = RequestMethod.POST)
+	public String findPwProc(UserTb user) {
+		logger.info("/find/pw [POST]");
+		
+		logger.info("user {}", user);
+		
+		if( loginService.findPw(user) ) {
+			if(user.getEmail() != "" && user.getEmail() != null ) {				
+				loginService.sendPwByEmail(user);
+			} else if(user.getPhone() != "" && user.getPhone() != null ) {	
+				logger.info("getPhone() [POST]");
+				loginService.sendPwByPhone(user);
+			}
+		}
+		
+		return "/user/member/findPwEnd";					
+	}
+	
+	@RequestMapping(value="/find/id", method = RequestMethod.GET)
+	public String findId() {
+
+		return "/user/member/findId";	
+	}
+	
+	@RequestMapping(value="/find/email", method = RequestMethod.GET)
+	public String findEmail() {
+
+		return "/user/member/findEmail";	
 	}
 	
 	

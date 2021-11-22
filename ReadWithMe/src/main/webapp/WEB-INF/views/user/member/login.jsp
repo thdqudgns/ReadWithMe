@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
+
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
@@ -17,7 +19,7 @@
 </div>
 
 <div>
-<input type="radio" name="remember" value="1"/>로그인 상태 유지<br>
+<input type="checkbox" name="remember-me"/>로그인 상태 유지<br>
 <a href="/seach/login">비밀번호 또는 아이디 찾기</a>
 </div>
 <button>로그인</button>

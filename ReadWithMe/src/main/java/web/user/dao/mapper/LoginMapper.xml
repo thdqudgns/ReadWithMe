@@ -21,8 +21,8 @@
 			SELECT usertb_seq.nextval FROM dual
 		</selectKey>
 		 
-		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, birth, location, gender )
-		VALUES ( #{user_no }, 1, #{id }, #{password }, #{type }, #{name }, #{nick }, #{email }
+		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, phone, birth, location, gender )
+		VALUES ( #{user_no }, 1, #{id }, #{password }, #{type }, #{name }, #{nick }, #{email }, #{phone }
 			,  #{birth }, #{location }, #{gender })
 
 	</insert>
@@ -97,4 +97,23 @@
 		WHERE phone = #{phone }
 		AND authKey = #{authKey }
 	</select>
+	
+	<select id="selectCntByEmailandId" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+		AND email = #{email }
+	</select>
+	
+	<select id="selectCntByPhoneandId" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+		AND phone = #{phone }
+	</select>
+	
+	<update id="updatePw" parameterType="web.user.dto.UserTb">
+		update UserTb
+		set password = #{password } 
+		where id = #{id }
+	</update>
+	
 </mapper>

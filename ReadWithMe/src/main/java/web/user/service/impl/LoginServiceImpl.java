@@ -23,6 +23,7 @@ import web.user.dto.EmailAuth;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 import web.util.MailHandler;
+import web.util.MessageService;
 import web.util.TempKey;
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -134,18 +135,6 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	@Override
-	public boolean kakaoLogin(UserTb user) {
-		
-//		if ( loginDao.selectKakaoCnt(user) >= 1 ) {
-//			
-//		}
-		
-		
-		return false;
-	}
-	
-	
-	@Override
 	public boolean KakaoJoin(UserTb user, HttpServletRequest req) {
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
@@ -241,6 +230,74 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	
+	@Override
+	public boolean findPw(UserTb user) {
+		
+		if( user.getEmail() != "" && user.getEmail() != null) {
+			
+			if(loginDao.selectCntByEmailandId(user) > 0) {
+				return true;
+			} else {
+				return false;				
+			}
+			
+		} else if ( user.getPhone() != "" && user.getPhone() != null ) {
+			logger.info("getPhone()");
+			
+			if(loginDao.selectCntByPhoneandId(user) > 0) {
+				return true;
+			} else {
+				return false;				
+			}			
+		}
+		return false;		
+	}
+	
+	@Override
+	public void sendPwByEmail(UserTb user) {
+		logger.info("sendPwByEmail()");
+					
+			String random = MessageService.makePwRandom(10);
+			
+
+			String encPassword = passwordEncoder.encode(random);
+			user.setPassword(encPassword);
+			logger.info("암호화된 비밀번호 : "+user.getPassword());
+
+			loginDao.updatePw(user);
+		
+			try {
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("[임시 비밀번호]");
+				sendMail.setText( 
+						"<h1>임시 비밀번호</h1>" +
+						"고객님의 임시 비밀번호는" + random + "입니다<br>" +
+						"개인정보 보호를 위해 로그인 후 꼭 비밀번호를 바꿔주세요!");
+				sendMail.setFrom("anzu.only@gmail.com", "Read With Me");
+				sendMail.setTo(user.getEmail());
+				sendMail.send();
+			} catch (MessagingException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+
+	}
+	
+	@Override
+	public void sendPwByPhone(UserTb user) {
+		logger.info("sendPwByPhone()");
+		
+		String random = MessageService.makePwRandom(10);		
+
+		String encPassword = passwordEncoder.encode(random);
+		user.setPassword(encPassword);
+		logger.info("암호화된 비밀번호 : "+user.getPassword());
+
+		loginDao.updatePw(user);
+		
+//		MessageService.sendPwMessage(user.getPhone(), random);		
+	}
+	
+	
 	
 	
 	
@@ -267,11 +324,6 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 
-	@Override
-	public void findPw(UserTb user) {
-		loginDao.selectPwById(user);
-		
-	}
 	
 
 }

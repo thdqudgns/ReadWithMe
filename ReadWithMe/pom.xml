@@ -29,7 +29,7 @@
 
 	<dependencies>
 	
-<!-- 비밀번호 암호화 -->
+<!-- 시큐리티 -->
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-core</artifactId>
@@ -43,6 +43,11 @@
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-config</artifactId>
+    <version>5.5.3</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-taglibs</artifactId>
     <version>5.5.3</version>
 </dependency>
 
@@ -65,6 +70,8 @@
     <artifactId>httpclient</artifactId>
     <version>4.5.13</version>
 </dependency>
+
+<!-- 구글 로그인 -->
 
 <!-- 네이버 로그인 -->
 <dependency>
