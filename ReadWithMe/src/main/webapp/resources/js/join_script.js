@@ -158,6 +158,40 @@ $(document).ready(function() {
 		
 	});
 
+	$("#email").blur(function() {
+		const email = $('#email').val();
+		$.ajax({
+			type : 'get'
+				, url : '/emailCheck'
+					, data: {'email': email}
+		, dataType: 'json'
+			, success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data >= 1) {
+					$("#email_check").text("사용중인 이메일입니다");
+					$("#email_check").css("color", "#9F8170");
+					$("#reg_submit").attr("disabled", true);
+				} else {
+					
+					if(!mailJ.test(email)){
+						$('#email_check').text('이메일 형식에 맞게 작성 해주세요! ex)aaaa@gmail.com');
+						$('#email_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", true);				
+						
+					} else {
+						$('#email_check').text("사용할 수 있는 이메일 입니다!");
+						$('#email_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", false);
+					}
+					
+				}
+			}, error : function() {
+				console.log("실패");
+			}
+		});
+		
+	});
 	
 	
 	var inval_Arr = new Array(5).fill(false);

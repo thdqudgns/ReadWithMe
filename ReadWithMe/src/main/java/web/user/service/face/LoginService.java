@@ -16,12 +16,6 @@ public interface LoginService {
 	 */
 	public boolean login(UserTb member);
 
-	public void naverLogin(Social_account social);
-
-	public void googleLogin(Social_account social);
-
-	public void findId(UserTb user);
-
 	/**
 	 * 비밀번호 찾기 위해 이메일주소(혹은 핸드폰번호)와 아이디가 일치하는지 확인
 	 * @param user - 이메일,핸드폰번호,아이디가 담겨있는 DTO
@@ -50,6 +44,13 @@ public interface LoginService {
 	 * @return
 	 */
 	public int userNickCheck(String nick);
+
+	/**
+	 * 이메일 중복 체크
+	 * @param email - 고객이 입력한 이메일
+	 * @return
+	 */	
+	public int userEmailCheck(String email);
 
 	/**
 	 * 회원의 닉네임 조회
@@ -135,6 +136,20 @@ public interface LoginService {
 	 * @return
 	 */
 	public void sendPwByPhone(UserTb user);
+
+	/**
+	 * 입력받은 이메일 혹은 핸드폰 번호로 id찾기
+	 * @param user
+	 * @return
+	 */
+	public String findId(UserTb user);
+
+	/**
+	 * 입력받은 이메일주소 확인
+	 * @param user
+	 * @return
+	 */
+	public void findEmail(UserTb user);
 
 
 

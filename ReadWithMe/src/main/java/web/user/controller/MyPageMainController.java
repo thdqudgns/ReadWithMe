@@ -1,14 +1,24 @@
 package web.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import web.user.dto.UserTb;
+import web.user.service.face.MyPageService;
 
 @Controller
 public class MyPageMainController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageMainController.class);
+	@Autowired MyPageService myPageService;
 	
 	@RequestMapping(value="/mypage/main")
 	public String myPageMain() {
@@ -16,4 +26,87 @@ public class MyPageMainController {
 		
 		return "user/mypage/main";
 	}
+	
+	// --------------------------------------- 회원 탈퇴 ---------------------------------------
+	@RequestMapping(value="/mypage/wthdr", method = RequestMethod.GET)
+	public String Wthdr() {		
+		return "user/mypage/profile/wthdr";
+	}
+	
+	@RequestMapping(value="/mypage/wthdr", method = RequestMethod.POST)
+	public String WthdrProc(HttpSession session) {		
+		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		System.out.println(user_no);
+		myPageService.wthdrUser(user_no);
+		session.invalidate();	
+		return "user/mypage/profile/wthdrEnd";
+	}
+	
+	// --------------------------------------- 비밀번호 변경---------------------------------------
+	
+	@RequestMapping(value="/pwchange", method = RequestMethod.GET)
+	public String PwChange() {
+		return "user/mypage/profile/pwChange";
+	}
+	
+	@RequestMapping(value="/pwchange", method = RequestMethod.POST)
+	public String PwChangeProc(UserTb user, HttpSession session) {
+		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		user.setUser_no(user_no);
+		logger.info("user {}", user);
+		myPageService.pwChange(user);
+		
+		return "user/mypage/profile/pwChangeEnd";
+	}
+	
+	@RequestMapping(value="/pwCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int PwCheck(@RequestParam("prsntPw") String prsntPw, UserTb user, HttpSession session) {
+		logger.info(prsntPw);
+
+		user.setPassword(prsntPw);
+
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		user.setUser_no(user_no);
+		int res = myPageService.userPwCheck(user);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
+	
+	@RequestMapping(value="/pwCheck1", method = RequestMethod.GET)
+	@ResponseBody
+	public int PwCheck1(@RequestParam("password") String password, UserTb user, HttpSession session) {
+		logger.info(password);
+		
+		user.setPassword(password);
+		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		user.setUser_no(user_no);
+		int res = myPageService.userPwCheck(user);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/profile", method=RequestMethod.GET)
+	public String Profile(UserTb user, HttpSession session) {
+		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		user.setUser_no(user_no);
+		
+		UserTb userProfile = myPageService.getUserProfile(user);
+		
+		return"user/mypage/profile/profile";
+	}
+	
+	
+	
+	
+	
 }

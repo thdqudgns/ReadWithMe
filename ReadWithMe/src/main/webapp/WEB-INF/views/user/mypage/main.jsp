@@ -7,15 +7,15 @@
 
 <a href="/message/main"><button>쪽지함</button></a>
 
-<a href="/알아서/하삼"><button>프로필 변경</button></a>
+<a href="/profile"><button>프로필 변경</button></a>
 
-<a href="/알아서/하삼"><button>비밀번호 변경</button></a>
+<a href="/pwchange"><button>비밀번호 변경</button></a>
 
 <a href="/알아서/하삼"><button>내가 작성한 후기</button></a>
 
 <a href="/알아서/하삼"><button>To Do List</button></a>
 
-ReadWithMe를 더이상 이용하지 않는다면 <a href="">회원탈퇴 바로가기</a>
+ReadWithMe를 더이상 이용하지 않는다면 <a href="/mypage/wthdr">회원탈퇴 바로가기</a>
 
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="web.user.dao.face.MyPageDao">
+
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM userTb
+		WHERE user_no = #{user_no }
+	</delete>
+	
+	<select id="selectPwByUser_no" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT password FROM UserTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectCntPwMtc" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE user_no = #{user_no }
+		AND password = #{password }
+	</select>
+	
+	<update id="updatePw" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET password = #{password }
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<select id="selectUserByUser_no" resultType="web.user.dto.UserTb" parameterType="web.user.dto.UserTb">
+		SELECT name, nick, email, birth, gender, location, profile
+		FROM UserTb
+		WHERE user_no = #{user_no }
+		
+	</select>
+</mapper>

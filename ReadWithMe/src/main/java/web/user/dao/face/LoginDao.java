@@ -13,14 +13,6 @@ public interface LoginDao {
 
 	public void login(UserTb user);
 
-	public void naverLogin(Social_account social);
-
-	public void googleLogin(Social_account social);
-
-	public void kakaoLogin(Social_account social);
-
-	public void selectIdByEmail(UserTb user);
-
 	public void selectPwById(UserTb user);
 
 	/**
@@ -37,6 +29,13 @@ public interface LoginDao {
 	 */
 	public int selectCntByNick(String nick);
 
+	/**
+	 * email이 존재하는 값인지 확인한다
+	 * @param email - 조회하려는 회원의 email
+	 * @return
+	 */
+	public int selectCntByEmailInUserTb(String email);
+	
 	/**
 	 * 회원 가입
 	 * @param user
@@ -98,7 +97,7 @@ public interface LoginDao {
 	 * @param user
 	 * @return
 	 */
-	public int selectCntByEmail(EmailAuth user);
+	public int selectCntByEmailInEmailAuth(EmailAuth user);
 
 	/**
 	 * 이메일인증위한 고객이메일/인증키값
@@ -144,6 +143,26 @@ public interface LoginDao {
 	 * @param user
 	 */
 	public void updatePw(UserTb user);
+	
+	/**
+	 * 고객이 입력한 email로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByEmail(UserTb user);
+	
+	/**
+	 * 고객이 입력한 phone로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByPhone(UserTb user);
+
+	/**
+	 * 고객이 입력한 email 인증테이블에서 삭제
+	 * @param user
+	 */
+	public void deleteEmail(UserTb user);
 
 
 

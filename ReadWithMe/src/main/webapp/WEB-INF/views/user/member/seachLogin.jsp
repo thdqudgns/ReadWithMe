@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 <input type="radio" name="seachLogin" value="/find/pw" checked="checked">비밀번호를 잃어버렸습니다 <br>
 <input type="radio" name="seachLogin" value="/find/id">아이디를 잊어버렸어요<br>
-<input type="radio" name="seachLogin" value="/find/email">가입할 때 등록한 이메일을 잊어버렸습니다 <br>
+<input type="radio" name="seachLogin" value="/find/email">가입할 때 등록한 이메일을 잊어버렸어요<br>
 <hr>
 <a href="/login"><button>취소</button></a>
 <button id="radioBtn">확인</button>

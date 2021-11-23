@@ -108,8 +108,8 @@ public class LoginController {
 		
 		if( isKakaoLogin ) {
 			session.setAttribute("login", isKakaoLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			return "redirect:/";
 		} else {
@@ -163,11 +163,10 @@ public class LoginController {
 		} 
 
 		boolean isNaverLogin = loginService.getNaverId(user);
-		
 		if ( isNaverLogin ) {
 			session.setAttribute("login", isNaverLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			return "redirect:/";
 		} else {
@@ -266,6 +265,17 @@ public class LoginController {
 	}
 	
 	
+	@RequestMapping(value="/emailCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int emailCheck(@RequestParam("email") String email) {
+		logger.info(email);
+		int res = loginService.userEmailCheck(email);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
 	//---------------------------------- 이메일 인증 ---------------------------------------
 	
 	@RequestMapping(value = "/email/register", method = RequestMethod.GET)
@@ -360,35 +370,39 @@ public class LoginController {
 	
 	@RequestMapping(value="/find/id", method = RequestMethod.GET)
 	public String findId() {
-
 		return "/user/member/findId";	
+	}
+	
+	@RequestMapping(value="/find/id", method = RequestMethod.POST)
+	public String findIdProc(UserTb user, Model model) {
+		
+		logger.info("/find/id [POST]");
+		
+		logger.info("user {}", user);
+				
+		String id = loginService.findId(user);
+	
+		model.addAttribute("id", id);
+		
+		
+		return "/user/member/findIdEnd";	
 	}
 	
 	@RequestMapping(value="/find/email", method = RequestMethod.GET)
 	public String findEmail() {
-
 		return "/user/member/findEmail";	
 	}
 	
-	
-	
-	//---------------------------------- 회원탈퇴 ---------------------------------------
-	
-	
+	@RequestMapping(value="/find/email", method = RequestMethod.POST)
+	public String findEmailProc(UserTb user, Model model) {
+		logger.info("/find/email [POST]");
+		
+		loginService.findEmail(user);
+				
+		return "/user/member/findEmailEnd";	
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

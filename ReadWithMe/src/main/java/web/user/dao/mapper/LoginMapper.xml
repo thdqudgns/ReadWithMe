@@ -15,6 +15,11 @@
 		WHERE nick = #{nick }
 	</select>
 	
+	<select id="selectCntByEmailInUserTb" resultType="int" parameterType="String">
+		SELECT count(*) FROM UserTb
+		WHERE email = #{email }
+	</select>
+	
 	<insert id="insertMember" parameterType="web.user.dto.UserTb">
 	
 		<selectKey order="BEFORE" resultType="int" keyProperty="user_no">
@@ -70,7 +75,7 @@
 
 	</insert>
 	
-	<select id="selectCntByEmail" resultType="int" parameterType="web.user.dto.EmailAuth">
+	<select id="selectCntByEmailInEmailAuth" resultType="int" parameterType="web.user.dto.EmailAuth">
 		SELECT count(*) FROM EmailAuth
 		WHERE email = #{email }
 	</select>
@@ -115,5 +120,20 @@
 		set password = #{password } 
 		where id = #{id }
 	</update>
+	
+	<select id="selectIdByEmail" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT id FROM UserTb
+		WHERE email = #{email }
+	</select>
+	
+	<select id="selectIdByPhone" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT id FROM UserTb
+		WHERE phone = #{phone }
+	</select>
+	
+	<delete id="deleteEmail" parameterType="web.user.dto.UserTb">
+		DELETE FROM emailAuth
+		WHERE email = #{email }
+	</delete>
 	
 </mapper>

@@ -42,10 +42,14 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int userNickCheck(String nick) {
 		return loginDao.selectCntByNick(nick);
-		
 	}
 	
-@Override
+	@Override
+	public int userEmailCheck(String email) {
+		return loginDao.selectCntByEmailInUserTb(email);
+	}
+	
+	@Override
 	public boolean join(UserTb user, HttpServletRequest req) {
 		logger.info("join() 호출 {} : ", user);
 		
@@ -168,7 +172,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean create(EmailAuth user) {
 
-		if( loginDao.selectCntByEmail(user) > 0) {
+		if( loginDao.selectCntByEmailInEmailAuth(user) > 0) {
 			return false;
 		} else {
 		
@@ -299,31 +303,25 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	
-	
-	
-	
-	
-
 	@Override
-	public void naverLogin(Social_account social) {
-		loginDao.naverLogin(social);
+	public String findId(UserTb user) {
+		
+		String id = null;
+		
+		if( user.getEmail() != "" && user.getEmail() != null) {
+			id = loginDao.selectIdByEmail(user);
+		} else if ( user.getPhone() != "" && user.getPhone() != null ) {
+			id =loginDao.selectIdByPhone(user);
+		}
+		
+		return id;
 		
 	}
-
+	
 	@Override
-	public void googleLogin(Social_account social) {
-		loginDao.googleLogin(social);
-		// TODO Auto-generated method stub
-		
+	public void findEmail(UserTb user) {
+		loginDao.deleteEmail(user);
 	}
-
-
-	@Override
-	public void findId(UserTb user) {
-		loginDao.selectIdByEmail(user);
-		
-	}
-
 	
 
 }
