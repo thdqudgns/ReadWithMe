@@ -13,7 +13,7 @@
 
 <a href="/알아서/하삼"><button>내가 작성한 후기</button></a>
 
-<a href="/알아서/하삼"><button>To Do List</button></a>
+<a href="/todolist"><button>To Do List</button></a>
 
 ReadWithMe를 더이상 이용하지 않는다면 <a href="/mypage/wthdr">회원탈퇴 바로가기</a>
 

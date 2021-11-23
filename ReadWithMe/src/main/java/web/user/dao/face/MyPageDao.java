@@ -1,10 +1,13 @@
 package web.user.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
+import web.util.Paging;
 
 public interface MyPageDao {
 
@@ -78,6 +81,27 @@ public interface MyPageDao {
 	 * @param profileFile
 	 */
 	public void insertFile(FileTb profileFile);
+
+	/**
+	 * todolist 추가
+	 * @param toDoList
+	 */
+	public void insertToDoList(ToDoList toDoList);
+
+	/**
+	 * 전체 게시글 수를 조회한다
+	 * 
+	 * @return 총 게시글 수
+	 */
+	public int selectCntAll(Paging paramData);
+
+	/**
+	 * 페이징을 적용하여  todolist 조회
+
+	 * @param paging - 페이징 정보 객체
+	 * @return 페이징이 적용된 게시글 목록
+	 */
+	public List<HashMap<String, Object>> selectToDoList(HashMap<String, Object> map);
 
 
 

@@ -1,13 +1,20 @@
 package web.user.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
+import web.util.Paging;
 
 @Controller
 public class MyPageMainController {
@@ -135,6 +144,47 @@ public class MyPageMainController {
 		return"user/mypage/main";
 	}
 	
+	
+	// --------------------------------------- To Do List ---------------------------------------
+	
+	@RequestMapping(value="/todolist", method=RequestMethod.GET)
+	public String Todolist(Paging paramData, Model model, HttpSession session) {
+		
+		Paging paging = myPageService.getPaging(paramData);
+		
+		List<HashMap<String,Object>> toDoListLS = myPageService.getToDoList(paging, session);
+		
+		for(HashMap<String,Object> m : toDoListLS) {
+			logger.info("{}", m);
+		}
+		
+		logger.info("todolist!! {}", toDoListLS);
+		
+		model.addAttribute("toDoList", toDoListLS);
+		model.addAttribute("paging", paging);
+		
+		return"user/mypage/todolist/list";
+	}
+	
+	@RequestMapping(value="/todolist", method=RequestMethod.POST)
+	public String TodolistProc(HttpSession session, ToDoList toDoList) {	
+		
+		toDoList.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
+		logger.info("toDoList {}", toDoList);
+		
+		myPageService.toDoListWrite(toDoList);
+		
+		return"redirect:/todolist";
+	}
+
+	@RequestMapping(value="/todolist/send", method = RequestMethod.POST)
+	@ResponseBody
+	public String TodolistSend(@RequestBody int[] checkArr) {
+		
+		logger.info("checkArr: {}", checkArr);
+
+		return"";
+	}
 	
 	
 	

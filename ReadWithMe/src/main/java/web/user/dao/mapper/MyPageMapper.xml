@@ -68,5 +68,28 @@
 		VALUES ( FILETB_SEQ.nextval, #{user_no }, #{url }, #{origin_name }, #{stored_name } )
 	</insert> 
 	
+		
+	<insert id="insertToDoList" parameterType="web.user.dto.ToDoList">
+		INSERT INTO ToDoList (list_no, user_no, list_content, bookname, bookthum)
+		VALUES ( TODOLIST_SEQ.nextval, #{user_no }, #{list_content }, #{bookname }, #{bookthum })
+	</insert>
+	
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT count(*) FROM ToDoList
+	</select>
+	
+	<select id="selectToDoList" resultType="hashmap" parameterType="hashmap">
+		SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+		FROM (
+   			 SELECT rownum rnum, L.*
+   			 FROM (
+       			 SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+       			 FROM todolist
+       			 WHERE user_no = #{user_no }
+       			 ORDER BY list_no DESC
+       		 ) L
+   		 ) list
+		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	</select>
 	
 </mapper>

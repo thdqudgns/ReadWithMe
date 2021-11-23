@@ -3,11 +3,13 @@ package web.user.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import web.user.dao.face.MyPageDao;
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
+import web.util.Paging;
 
 
 @Service
@@ -170,12 +174,38 @@ public class MyPageServiceInpl implements MyPageService {
 		profileFile.setStored_name(stored);
 		profileFile.setUrl(storedPath);
 		
-		myPageDao.insertFile(profileFile);
-		
+		myPageDao.insertFile(profileFile);		
 		
 	}
 	
+	@Override
+	public void toDoListWrite(ToDoList toDoList) {
+		myPageDao.insertToDoList(toDoList);		
+	}
 	
+	@Override
+	public Paging getPaging(Paging paramData) {
+		
+		//총 게시글 수 조회
+		int totalCount = myPageDao.selectCntAll(paramData);
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+		
+		return paging;
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getToDoList(Paging paging, HttpSession session) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("paging", paging);		
+		map.put("user_no", Integer.parseInt((String)session.getAttribute("user_no")));
+		
+		return myPageDao.selectToDoList(map);
+		
+	}
 	
 	
 	
