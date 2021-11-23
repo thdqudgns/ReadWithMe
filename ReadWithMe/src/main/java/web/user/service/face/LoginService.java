@@ -98,9 +98,9 @@ public interface LoginService {
 
 	/**
 	 * 인증확인했을 때 요청확인
-	 * @param email
+	 * @param user
 	 */
-	public void userAuth(String email);
+	public void userAuth(UserTb user);
 
 	/**
 	 * 핸드폰 번호랑 인증번호랑 저장 

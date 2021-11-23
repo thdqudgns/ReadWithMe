@@ -56,6 +56,7 @@ public class LoginServiceImpl implements LoginService {
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
 		
+		
 		String encPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encPassword);
 		logger.info("암호화된 비밀번호 : "+user.getPassword());
@@ -66,14 +67,29 @@ public class LoginServiceImpl implements LoginService {
 		Interest interest = new Interest();
 		
 		interest.setUser_no( user.getUser_no() );
-		
-		if( interests[0] != null ) {
+
+		if( interests.length == 1 ) {
+			
 			interest.setInterest(interests[0]);
-		} else if ( interests[1] !=null ) {
+			logger.info("interests확인 {}", interest);
+			
+		} else if( interests.length == 2 ) {
+			
+			interest.setInterest(interests[0]);
 			interest.setInterest2(interests[1]);
-		} else if ( interests[2] !=null ) {
+			logger.info("interests확인1 {}", interest);
+			
+		} else if( interests.length == 3 ) {
+			
+			interest.setInterest(interests[0]);
+			interest.setInterest2(interests[1]);
 			interest.setInterest3(interests[2]);
-		} 
+			logger.info("interests확인2 {}", interest);
+			
+		}
+		
+		
+		logger.info("interest 입니다 {}", interest);
 		
 		//관심분야(삽입)
 		loginDao.insertInterest(interest);
@@ -202,8 +218,12 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public void userAuth(String email) {
-		loginDao.userAuth(email);	
+	public void userAuth(UserTb user) {
+		if(user.getEmail() != "" && user.getEmail() != null) {
+			loginDao.userEmailAuth(user.getEmail());				
+		} else if (user.getPhone() != "" && user.getPhone() != null) {
+			loginDao.userPhonAuth(user.getPhone());
+		}
 	}
 	
 	@Override

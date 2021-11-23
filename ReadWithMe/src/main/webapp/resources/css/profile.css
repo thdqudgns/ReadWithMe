@@ -41,3 +41,22 @@ input[type="checkbox"]:checked + label {
   background-color: #9F8170;
   color: #fff;
 }
+
+
+#preview {
+	width: 200px;
+	height: 200px;
+	background-color: #ccc;	
+	border-radius: 50%;
+}
+
+#storedProfile {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+
+
+
+

@@ -220,7 +220,7 @@ public class LoginController {
 		logger.info("user {}", user);
 		
 		boolean res = loginService.join(user, req);
-		loginService.userAuth(user.getEmail());
+		loginService.userAuth(user);
 		if(res) {
 			logger.info("회원가입 성공");
 			return "/user/member/joinEnd";

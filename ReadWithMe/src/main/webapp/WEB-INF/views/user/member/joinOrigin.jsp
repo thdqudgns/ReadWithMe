@@ -61,9 +61,6 @@
 
 <div class="input__title">관심분야</div>
 최대 3개까지 선택 가능합니다
-<!-- 	<input type="hidden" name="interest" id="interest"/> -->
-<!-- 	<input type="hidden" name="interest2" id="interest2"/> -->
-<!-- 	<input type="hidden" name="interest3" id="interest3"/> -->
 <div>
 	<input onclick="CountChecked(this)" type="checkbox" name="interest" value="culture" id="culture" />
 	<label for="culture">문화생활</label>

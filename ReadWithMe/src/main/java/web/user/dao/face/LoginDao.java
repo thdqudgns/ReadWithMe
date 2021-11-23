@@ -109,8 +109,14 @@ public interface LoginDao {
 	 * 이메일 인증 확인
 	 * @param email
 	 */
-	public void userAuth(String email);
+	public void userEmailAuth(String email);
 
+	/**
+	 * 핸드폰 인증 확인
+	 * @param email
+	 */
+	public void userPhonAuth(String phone);
+	
 	/**
 	 * 핸드폰번호와 인증번호 DB에 저장
 	 * @param phoneAuth

@@ -84,12 +84,20 @@
 		insert into EmailAuth values(#{email}, #{authKey})
 	</insert>
 	
-	<update id="userAuth" parameterType="String">
+	<update id="userEmailAuth" parameterType="String">
 		update UserTb
 		set userCertification = 1 
 		where 
         (select count(*) from EmailAuth 
 		where email = #{email }) > 0
+	</update>
+	
+	<update id="userPhonAuth" parameterType="String">
+		update UserTb
+		set userCertification = 1 
+		where 
+        (select count(*) from PhoneAuth 
+		where phone = #{phone }) > 0
 	</update>
 	
 	<insert id="insertPhone" parameterType="web.user.dto.PhoneAuth">

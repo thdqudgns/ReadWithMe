@@ -1,16 +1,21 @@
 package web.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import web.user.dto.FileTb;
+import web.user.dto.Interest;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
 
@@ -95,16 +100,40 @@ public class MyPageMainController {
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.GET)
-	public String Profile(UserTb user, HttpSession session) {
+	public String Profile(UserTb user, HttpSession session, Model model) {
 		
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
 		user.setUser_no(user_no);
 		
 		UserTb userProfile = myPageService.getUserProfile(user);
+		Interest userInterest = myPageService.getUserInterest(user);
+		FileTb userFile = myPageService.getUserFile(user);
+		
+		
+		model.addAttribute("user", userProfile);
+		model.addAttribute("interest", userInterest);
+		model.addAttribute("file", userFile);
+		
+		logger.info("user {}", userProfile);
+		logger.info("interest {}", userInterest);
+		logger.info("file {}", userFile);
 		
 		return"user/mypage/profile/profile";
 	}
 	
+	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	public String ProfileProc (UserTb user, HttpSession session, MultipartFile file, HttpServletRequest req) {
+	
+		user.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
+		logger.info("user입니다 {}", user);
+		
+		myPageService.updateProfile(user, req, file);
+		
+		UserTb userProfile = myPageService.getUserProfile(user);
+		Interest userInterest = myPageService.getUserInterest(user);
+		
+		return"user/mypage/main";
+	}
 	
 	
 	
