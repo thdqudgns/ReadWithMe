@@ -34,4 +34,12 @@ public interface ReviewCommentDao {
 	 */
 	public int countComment(Rv_cmt comment);
 
+	/**
+	 * 댓글 수정
+	 * 
+	 * @param comment - 댓글 객체
+	 * @return
+	 */
+	public int updateReviewComment(Rv_cmt comment);
+
 }

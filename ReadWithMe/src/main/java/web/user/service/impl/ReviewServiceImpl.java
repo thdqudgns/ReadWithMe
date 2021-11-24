@@ -60,11 +60,11 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		if(cnt > 0) { //추천했음
 			return true;
-			
-		} else { //추천하지 않았음
+		} 
+//		else { //추천하지 않았음
 			return false;
 			
-		}
+//		}
 	}
 
 	@Override
@@ -260,6 +260,18 @@ public class ReviewServiceImpl implements ReviewService {
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	//댓글 수정
+	@Override
+	public boolean updateReviewComment(Rv_cmt comment) {
+		int res = reviewCommentDao.updateReviewComment(comment);
+		
+		if( res  > 0 ) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 

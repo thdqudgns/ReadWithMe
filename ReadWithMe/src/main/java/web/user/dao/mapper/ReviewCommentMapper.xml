@@ -38,6 +38,12 @@
 		FROM Rv_cmt 
 		WHERE comment_no = #{comment_no}
 	</select>
+	
+	<update id="updateReviewComment" parameterType="web.user.dto.Rv_cmt">
+		UPDATE Rv_cmt
+		SET comment_content = #{comment_content}
+		WHERE comment_no = #{comment_no}
+	</update>
 
 
 </mapper>

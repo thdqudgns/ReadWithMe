@@ -9,9 +9,9 @@
 	<select id="selectCntRecommend" parameterType="web.user.dto.Review_rec" resultType="int">
 		SELECT count(*) FROM review_rec
 		WHERE review_no = #{review_no}
-		<if test="user_no != null and !''.equals(user_no)">
+<!-- 		<if test="user_no != null and !''.equals(user_no)"> -->
 			AND user_no = #{user_no}
-		</if>	
+<!-- 		</if>	 -->
 	</select>
 
 	<insert id="insertRecommend" parameterType="web.user.dto.Review_rec">

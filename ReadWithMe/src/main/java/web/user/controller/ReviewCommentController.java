@@ -5,10 +5,13 @@ import java.io.Writer;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import web.user.dto.Rv_cmt;
 import web.user.service.face.ReviewService;
@@ -16,6 +19,9 @@ import web.user.service.face.ReviewService;
 @Controller
 @RequestMapping(value = "/user/review/comment")
 public class ReviewCommentController {
+	
+	//로깅 객체
+		private static final Logger logger = LoggerFactory.getLogger(ReviewCommentController.class);
 	
 	@Autowired private ReviewService reviewService;
 	
@@ -41,5 +47,22 @@ public class ReviewCommentController {
 		}
 		
 	}
+	
+	
+	//수정
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public void updateProcess(Rv_cmt comment, Writer writer, HttpSession session) {
+		
+		logger.info("comment : {}", comment);
+		
+		boolean success = reviewService.updateReviewComment(comment);
+		
+		try {
+			writer.append("{\"success\":"+success+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 }

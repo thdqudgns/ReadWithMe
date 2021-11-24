@@ -34,7 +34,7 @@ $(document).ready(function() {
 		$("#newFile").toggle();
 	})
 	
-	if(${empty reviewfile}) { //아직 controller에서 제대로 된 값을 못받음
+	if( ${empty reviewfile } ) {
 		$("#newFile").show();
 	} else {
 		$("#originFile").show();
@@ -126,9 +126,6 @@ function submitContents(elClickedObj) {
 	
 }
 </script>
-
-</div><!-- .container -->
-
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
 

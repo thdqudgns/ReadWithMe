@@ -149,6 +149,15 @@ public interface ReviewService {
 	 */
 	public boolean deleteComment(Rv_cmt comment);
 
+	//댓글 수정
+	/**
+	 * 댓글 정보가 담긴 객체
+	 * 
+	 * @param comment - 댓글 정보 객체
+	 * @return
+	 */
+	public boolean updateReviewComment(Rv_cmt comment);
+
 
 
 }
