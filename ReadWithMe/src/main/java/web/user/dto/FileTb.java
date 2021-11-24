@@ -4,12 +4,12 @@ public class FileTb {
 	private int file_no;
 	private int user_no;
 	private String url;
-	private String thumbnail_url;
+	private String stored_name;
 	private String origin_name;
 	@Override
 	public String toString() {
-		return "FileTb [file_no=" + file_no + ", user_no=" + user_no + ", url=" + url + ", thumbnail_url="
-				+ thumbnail_url + ", origin_name=" + origin_name + "]";
+		return "FileTb [file_no=" + file_no + ", user_no=" + user_no + ", url=" + url + ", stored_name=" + stored_name
+				+ ", origin_name=" + origin_name + "]";
 	}
 	public int getFile_no() {
 		return file_no;
@@ -29,11 +29,11 @@ public class FileTb {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getThumbnail_url() {
-		return thumbnail_url;
+	public String getStored_name() {
+		return stored_name;
 	}
-	public void setThumbnail_url(String thumbnail_url) {
-		this.thumbnail_url = thumbnail_url;
+	public void setStored_name(String stored_name) {
+		this.stored_name = stored_name;
 	}
 	public String getOrigin_name() {
 		return origin_name;
@@ -41,5 +41,7 @@ public class FileTb {
 	public void setOrigin_name(String origin_name) {
 		this.origin_name = origin_name;
 	}
+	
+	
 	
 }

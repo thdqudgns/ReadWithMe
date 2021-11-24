@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> : : : ReadWithMe : : : </title>
+<link rel="icon" type="image/x-icon" href="https://i.imgur.com/KN7zwhf.png">
+<title>ReadWithMe</title>
 
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

@@ -8,18 +8,20 @@
 	
 	<select id="selectCntRecommend" parameterType="web.user.dto.Review_rec" resultType="int">
 		SELECT count(*) FROM review_rec
-		WHERE id = #{id}
-			AND review_no = #{review_no}
+		WHERE review_no = #{review_no}
+		<if test="user_no != null and !''.equals(user_no)">
+			AND user_no = #{user_no}
+		</if>	
 	</select>
 
 	<insert id="insertRecommend" parameterType="web.user.dto.Review_rec">
 		INSERT INTO review_rec
-		VALUES ( #{id}, #{review_no} )
+		VALUES ( #{user_no}, #{review_no} )
 	</insert>
 	
 	<delete id="deleteRecommend" parameterType="web.user.dto.Review_rec">
 		DELETE review_rec
-		WHERE id = #{id}
+		WHERE user_no = #{user_no}
 			AND review_no = #{review_no}
 	</delete>
 	
