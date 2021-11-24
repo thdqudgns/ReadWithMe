@@ -2,11 +2,16 @@ package web.user.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +30,7 @@ import web.user.dto.Interest;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
+import web.util.MailHandler;
 import web.util.Paging;
 
 
@@ -34,6 +41,8 @@ public class MyPageServiceInpl implements MyPageService {
 	@Autowired	MyPageDao myPageDao;
 	@Autowired PasswordEncoder passwordEncoder;
 	@Autowired ServletContext context;
+	@Inject
+	private JavaMailSender mailSender;
 	
 	@Override
 	public void wthdrUser(int user_no) {
@@ -207,6 +216,80 @@ public class MyPageServiceInpl implements MyPageService {
 		
 	}
 	
+	@Override
+		public void sendToDoList(HttpServletRequest req) {
+			logger.info("sendToDoList()");
+			
+			String[] todolists = req.getParameterValues("toDoListCheck");
+			logger.info("todolists {}", Arrays.toString(todolists));
+			
+			List<Map<String, Object>> list = new ArrayList<>();
+	        Map<String, Object> map = null;
+	        
+	        for(int i=0; i<todolists.length; i++) {
+	        	 map = new HashMap<>();	        	 
+	        	 map.put("todolist", myPageDao.selectToDoListByListNo(Integer.parseInt(todolists[i])));
+	        	 list.add(map);
+	        }
+	        
+	    
+	        
+	        ToDoList toDoList = null;
+	        
+	        for(int i=1; i<list.size()+1; i++) {
+	        	toDoList = new ToDoList();
+	        	toDoList = (ToDoList) list.get(i-1).get("todolist");
+	        	logger.info("과연 {}", toDoList);
+	        	
+	        	try {
+	        		MailHandler sendMail = new MailHandler(mailSender);
+	        		sendMail.setSubject("[To Do List]");
+	        		sendMail.setText( 
+	        				"<h1>!To Do List!</h1> [ " +
+	        				toDoList.getBookname()+ " ] 을 읽고 회원님이 다짐해주신 목표는 [ "+
+	        				toDoList.getList_content() + " ] 입니다!<br>" +
+	        				"이룰 수 있게 노력하는 하루가 되었으면 좋겠습니다!");
+	        		sendMail.setFrom("anzu.only@gmail.com", "Read With Me");
+	        		sendMail.setTo(myPageDao.selectEmailByUserNo(toDoList));
+	        		sendMail.send();
+	        	} catch (MessagingException | UnsupportedEncodingException e) {
+	        		e.printStackTrace();
+	        	}
+	        	
+	        }
+	        
+			
+			
+		}
+	
+	@Override
+	public void deleteToDoList(HttpServletRequest req) {
+
+		String[] todolists = req.getParameterValues("toDoListCheck");
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> map = null;
+        
+        for(int i=0; i<todolists.length; i++) {
+        	 map = new HashMap<>();	        	 
+        	 map.put("todolist", myPageDao.selectToDoListByListNo(Integer.parseInt(todolists[i])));
+        	 list.add(map);
+        }
+        
+    
+        
+        ToDoList toDoList = null;
+        
+        for(int i=1; i<list.size()+1; i++) {
+        	toDoList = new ToDoList();
+        	toDoList = (ToDoList) list.get(i-1).get("todolist");
+        	logger.info("삭제를 위한.. {}", toDoList);
+        	
+        	myPageDao.deleteToDoList(toDoList.getList_no());
+        	
+        }
+		
+	}
 	
 	
 }

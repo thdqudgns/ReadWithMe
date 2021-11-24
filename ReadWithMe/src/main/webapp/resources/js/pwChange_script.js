@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	// 비밀번호 정규식
 	const pwJ = /^(?=.*[a-zA-Z0-9$`~!@$!%*#^?&])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&]).{8,16}$/;
+	$("#reg_submit").attr("disabled", true);				
 	
 	
 	$("#prsntPw").blur(function() {
@@ -47,7 +48,7 @@ $(document).ready(function() {
 					} else {
 						if (pwJ.test($('#password').val())) {
 							console.log('true');
-								if ($('#password').val() != $(this).val()) {
+								if ($('#password').val() != $('#password2').val()) {
 									$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
 									$('#pw2_check').css('color', '#9F8170');
 									$("#reg_submit").attr("disabled", true);

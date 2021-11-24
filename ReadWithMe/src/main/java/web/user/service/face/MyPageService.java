@@ -2,6 +2,7 @@ package web.user.service.face;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -85,6 +86,18 @@ public interface MyPageService {
 	 * @return 전체 게시글 목록
 	 */
 	public List<HashMap<String, Object>> getToDoList(Paging paging, HttpSession session);
+
+	/**
+	 * todolist조회해서 이메일로 발송
+	 * @param req
+	 */
+	public void sendToDoList(HttpServletRequest req);
+
+	/**
+	 * todolist 삭제
+	 * @param req
+	 */
+	public void deleteToDoList(HttpServletRequest req);
 
 
 }

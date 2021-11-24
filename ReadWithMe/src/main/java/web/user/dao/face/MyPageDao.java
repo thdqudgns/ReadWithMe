@@ -103,6 +103,26 @@ public interface MyPageDao {
 	 */
 	public List<HashMap<String, Object>> selectToDoList(HashMap<String, Object> map);
 
+	/**
+	 * list_no으로 todolist 조회
+	 * @param list_no
+	 * @return
+	 */
+	public ToDoList selectToDoListByListNo(int list_no);
+
+	/**
+	 * userno으로 email조회
+	 * @param toDoList
+	 * @return
+	 */
+	public String selectEmailByUserNo(ToDoList toDoList);
+
+	/**
+	 * list_no으로 todolist 삭제
+	 * @param list_no
+	 */
+	public void deleteToDoList(int list_no);
+
 
 
 }

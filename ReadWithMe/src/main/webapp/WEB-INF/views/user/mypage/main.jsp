@@ -5,7 +5,7 @@
 
 <h1>마이페이지 메인</h1>
 
-<a href="/message/main"><button>쪽지함</button></a>
+<a href="/user/mypage/message"><button>쪽지함</button></a>
 
 <a href="/profile"><button>프로필 변경</button></a>
 

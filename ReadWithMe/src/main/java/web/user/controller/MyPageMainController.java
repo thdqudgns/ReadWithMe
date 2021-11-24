@@ -1,6 +1,7 @@
 package web.user.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,15 +177,22 @@ public class MyPageMainController {
 		return"redirect:/todolist";
 	}
 
-	@RequestMapping(value="/todolist/send", method = RequestMethod.POST)
-	@ResponseBody
-	public String TodolistSend(@RequestBody int[] checkArr) {
-		
-		logger.info("checkArr: {}", checkArr);
+	@RequestMapping(value="/todolist/send", method = RequestMethod.GET)
+	public String TodolistSend(HttpServletRequest req) {
 
-		return"";
+		myPageService.sendToDoList(req);
+		
+		return"user/mypage/todolist/emailSend";
 	}
 	
+	@RequestMapping(value="/todolist/delete", method = RequestMethod.GET)
+	public String TodolistDelete(HttpServletRequest req) {
+		logger.info("/todolist/delete [GET]");
+		
+		myPageService.deleteToDoList(req);
+				
+		return"redirect:/todolist";
+	}
 	
 	
 }

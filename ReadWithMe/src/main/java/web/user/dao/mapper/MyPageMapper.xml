@@ -66,8 +66,7 @@
 	<insert id="insertFile" parameterType="web.user.dto.FileTb">
 		INSERT INTO FileTb ( file_no, user_no, url, origin_name, stored_name )
 		VALUES ( FILETB_SEQ.nextval, #{user_no }, #{url }, #{origin_name }, #{stored_name } )
-	</insert> 
-	
+	</insert> 	
 		
 	<insert id="insertToDoList" parameterType="web.user.dto.ToDoList">
 		INSERT INTO ToDoList (list_no, user_no, list_content, bookname, bookthum)
@@ -91,5 +90,21 @@
    		 ) list
 		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
+	
+	<select id="selectToDoListByListNo" resultType="web.user.dto.ToDoList" parameterType="int">
+		SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+		FROM ToDoList
+		WHERE list_no = #{list_no }
+	</select>
+	
+	<select id="selectEmailByUserNo" resultType="String" parameterType="web.user.dto.ToDoList">
+		SELECT email FROM UserTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<delete id="deleteToDoList" parameterType="int">
+		DELETE FROM ToDoList
+		WHERE list_no = #{list_no }
+	</delete>
 	
 </mapper>

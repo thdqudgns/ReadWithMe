@@ -15,8 +15,8 @@ $(document).ready(function() {
 			, success : function(res) {
 				$("#bookname").val(res.documents[0].title);
 				$("#bookthum").val(res.documents[0].thumbnail);
-				$("#bookName").append(res.documents[0].title);
-				$("#bookThum").append("<img src='"+res.documents[0].thumbnail +"'/>");
+				$("#bookName").html(res.documents[0].title);
+				$("#bookThum").html("<img src='"+res.documents[0].thumbnail +"'/>");
 			}
 			, error : function() {
 				console.log("ajax 책 불러오기 오류");
@@ -48,40 +48,18 @@ $(document).ready(function() {
         else{
             $("#chkAll").prop("checked", false);
         }
-    })
+    });
     
+    $("#emailSend").click(function() {
+    	console.log("emailSend clicked");
+    	$("#toDoListForm").attr("action", "/todolist/send");
+    	$("#toDoListForm").submit();
+    });
     
-    
-    //이메일 전송
-    
-    $("#emailsend").click(function() {
-    	
-    	const checkArr = new Array();
-    	
-    	$("input[name=todolistCheck]:checked").each(function() {
-    		checkArr.push($(this).val()); 
-    	});
-    	
-    	console.log("체크되어있는거 확인" + checkArr);
-    	console.log("데이터 타입 확인" + jQuery.type(checkArr));
-    	
-    	
-    	$.ajax({
-			type : 'post'
-			, url : '/todolist/send'
-			, data: JSON.stringify(checkArr)
-			, contentType: 'application/json'
-//			, dataType: 'json'
-			, success : function(data) {
-				console.log("성공");							
-				
-			}, error : function() {
-				console.log("실패");
-			}
-		});
-    	
-    	
-    	
+    $("#todolistDelete").click(function() {
+    	console.log("todolistDelete clicked");
+    	$("#toDoListForm").attr("action", "/todolist/delete");
+    	$("#toDoListForm").submit();
     });
     
 });
