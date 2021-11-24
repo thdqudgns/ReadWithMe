@@ -99,7 +99,8 @@ public class MyPageServiceInpl implements MyPageService {
 		
 		List<Integer> fileno = new ArrayList<Integer>();
 		fileno = myPageDao.selectFileByUser_no(user);
-				
+		
+		
 		int file_no = fileno.get(0);
 		logger.info("file_no {}", file_no);
 		
