@@ -45,7 +45,7 @@
         <fieldset class="srch">
                 <legend>검색영역</legend>
                 <input type="text" name="query" id="query" accesskey="s" title="검색어" class="keyword" />
-                <input type="button" id="search" name="search" alt="검색" value="검색" />
+                <input type="button" id="search" name="search" alt="검색" onclick="callAjax( $('#query').val() );" value="검색" />
         </fieldset>
         
         <table cellspacing="0" border="1" summary="책검색 API 결과" class="tbl_type">
@@ -76,7 +76,7 @@
                         </tr>
                         <tr class="__template" style="display: none">
                                 <td><img src="#image#"  width="50px" height="70px" /></td>
-                                <td>#title#</td>
+                                <td><a href="#link#">#title#</a></td>
                                 <td>#author#</td>
                                 <td>#publisher#</td>
                                 <td>#pubdate#</td>
@@ -94,28 +94,28 @@
 
 
 <script type="text/javascript">
-        $('#search').click( function() {
-                if($('#query').val() == ''){
-                        alert('검색어를 입력해 주세요');
-                        $('#query').focus();
-                }else{
-                        callAjax($('#query').val());
-                        $('#name').val("");
-                }
-        });
+//         $('#search').click( function() {
+//                 if( $('#query').val() != '' ) {
+//                 	callAjax($('#query').val());
+//                 	$('#name').val("");
+//                 } else if ( $('#query').val() == '') {
+//             		alert('검색어를 입력해 주세요');
+//             		$('#query').focus();
+//                 }
+//         });
 
         function callAjax(query) {
                 $.ajax({
-                        url: "/주소",
+                        url: "/searchBook",
                         dataType:'json',
                         type:'post',
                         data:{'query':query},
-                        headers: { 'X-Naver-Client-Id': "qRxWO46cR3KnAJeibbcy", 'X-Naver-Client-Secret': "tkYW0s1NFR"}
+                        headers: { 'X-Naver-Client-Id': "qRxWO46cR3KnAJeibbcy", 'X-Naver-Client-Secret': "tkYW0s1NFR"},
                         success:function(result){
                                 $('#result').html('');
-                                if(result['channel']['display'] > 0){
+                                if(responseBody['channel']['display'] > 0){
                                         $('.__oldlist').remove();
-                                        for(var i in result['channel']['item']){
+                                        for(var i in responseBody['channel']['item']){
                                                 var item = result['channel']['item'][i];
                                                 $html = template('__template', item);
                                                 $html.addClass('__oldlist');

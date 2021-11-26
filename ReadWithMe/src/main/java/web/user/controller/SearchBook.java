@@ -1,6 +1,6 @@
 package web.user.controller;
 
-//네이버 검색 API 예제 - book 검색
+//네이버 검색 API 예제 - blog 검색
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -9,28 +9,22 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
-public class ApiExamSearchBook {
+public class SearchBook {
 
-//	private static final Logger logger = LoggerFactory.getLogger(ApiExamSearchBook.class);
- 
- @ResponseBody	
- @RequestMapping(value = "/searchBook")
- public void book(String query, Model model) {
+@ResponseBody
+@RequestMapping(value="/searchBook")
+ public static void search(String query, Model model) {
+     String clientId = "qRxWO46cR3KnAJeibbcy"; //애플리케이션 클라이언트 아이디값"
+     String clientSecret = "tkYW0s1NFR"; //애플리케이션 클라이언트 시크릿값"
 
-//	 logger.info("검색어 : {}", query);
+     System.out.println(query);
 
-	 String clientId = "qRxWO46cR3KnAJeibbcy"; //애플리케이션 클라이언트 아이디값"
-	 String clientSecret = "tkYW0s1NFR"; //애플리케이션 클라이언트 시크릿값"
-	 
      String text = null;
      try {
          text = URLEncoder.encode(query, "UTF-8");
@@ -48,10 +42,9 @@ public class ApiExamSearchBook {
      requestHeaders.put("X-Naver-Client-Secret", clientSecret);
      String responseBody = get(apiURL,requestHeaders);
      
-//     model.addAttribute("responseBody", responseBody);
-//     return "redirect:/user/review/book";
+     model.addAttribute("responseBody", responseBody);
 
-     System.out.println(responseBody);
+    	 System.out.println(responseBody);
  }
 
 
