@@ -107,4 +107,26 @@
 		WHERE list_no = #{list_no }
 	</delete>
 	
+	<select id="selectMeetingHosted" resultType="web.user.dto.Meeting" parameterType="int">
+		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
+			, meeting_board_date, meeting_approved
+		FROM Meeting
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectMeetingAttend" resultType="web.user.dto.Meeting" parameterType="int">
+		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
+			, meeting_board_date, meeting_approved
+		FROM Meeting
+		WHERE meeting_no = #{meeting_no }
+	</select>
+	
+	<select id="selectMeetingNoByUser_no" resultType="int" parameterType="int">
+		SELECT meeting_no FROM participation
+		WHERE user_no = #{user_no }
+	</select>
+	
+	
 </mapper>

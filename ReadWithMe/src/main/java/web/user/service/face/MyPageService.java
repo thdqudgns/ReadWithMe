@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.Meeting;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.util.Paging;
@@ -98,6 +99,20 @@ public interface MyPageService {
 	 * @param req
 	 */
 	public void deleteToDoList(HttpServletRequest req);
+
+	/**
+	 * 자기가 주최자인 모임 불러오기
+	 * @param user
+	 * @return
+	 */
+	public List<Meeting> getMeetingHosted(int user_no);
+
+	/**
+	 * 자기가 참여하는 모임 불러오기
+	 * @param user
+	 * @return
+	 */
+	public List<Meeting> getMeetingAttend(int user_no);
 
 
 }

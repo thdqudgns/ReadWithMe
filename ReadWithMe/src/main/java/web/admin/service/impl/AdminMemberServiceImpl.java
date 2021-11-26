@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import web.admin.dao.face.AdminMemberDao;
 import web.admin.service.face.AdminMemberService;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 @Service
@@ -45,4 +46,17 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		
 		return adminMemberDao.selectMemberList(map);
 	}
+	
+	@Override
+	public void setAdmin(UserTb user, HttpServletRequest req) {
+		
+		if( req.getParameter("val").equals("del") ) {
+			adminMemberDao.delAdmin(user);
+		} else if ( req.getParameter("val").equals("set") ) {
+			adminMemberDao.setAdmin(user);			
+		}
+		
+	}
+	
+	
 }

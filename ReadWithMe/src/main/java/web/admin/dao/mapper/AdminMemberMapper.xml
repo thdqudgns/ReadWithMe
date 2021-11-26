@@ -35,4 +35,16 @@
 		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
 	
+	<update id="delAdmin" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET user_lv = 1
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<update id="setAdmin" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET user_lv = 2
+		WHERE user_no = #{user_no }
+	</update>
+	
  </mapper>

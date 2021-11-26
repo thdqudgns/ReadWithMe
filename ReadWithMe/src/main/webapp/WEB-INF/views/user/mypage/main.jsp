@@ -1,12 +1,20 @@
+<%@page import="web.user.dto.Meeting"%>
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+ 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<script src="https://kit.fontawesome.com/0d232bdc2d.js" crossorigin="anonymous"></script>
 <link href="/resources/css/mypageMain.css" rel="stylesheet">
 
 <%
+
+List<Meeting> meetingHostList = (List) request.getAttribute("meetingHostList");
+List<Meeting> meetingaAttendList = (List) request.getAttribute("meetingaAttendList");
 
 Calendar weatherCal = Calendar.getInstance();
 String pm = weatherCal.get(Calendar.HOUR_OF_DAY) < 6 || weatherCal.get(Calendar.HOUR_OF_DAY) >= 20 ? "moon" : "sun";
@@ -100,20 +108,18 @@ if(n_m == 13) {
 <table>
 	<caption id="controllDay">
 		<div style="width: 400px;">
-			<form id="frm" method="get" action="<%=request.getContextPath() %>/schedule">
-				<a href="<%=request.getContextPath() %>/schedule?year=<%=b_y %>&month=<%=b_m %>" class="fas fa-angle-left"></a>
+			<form id="frm" method="get" action="/mypage/main">
+				<a href="<%=request.getContextPath() %>/mypage/main?year=<%=b_y %>&month=<%=b_m %>" class="fas fa-angle-left"></a>
 				
 					<input type="number" id="year" name="year" max="2100" min="2000" value="<%=y %>" />년 
 					<input type="number" id="month" name="month" max="12" min="1" value="<%=m+1 %>" />월
 					<input type="submit" style="display: none;" />
 				
-				<a href="<%=request.getContextPath() %>/schedule?year=<%=n_y %>&month=<%=n_m %>" class="fas fa-angle-right"></a>
+				<a href="<%=request.getContextPath() %>/mypage/main?year=<%=n_y %>&month=<%=n_m %>" class="fas fa-angle-right"></a>
 			</form>
 		</div>
 	</caption>
-	
-<form id="deleteFrm" method="post" action="<%=request.getContextPath() %>/schedule/delete">
-	
+		
 	<tr id="dayWeek">
 		<th style="color: red;">일</th>
 		<th>월</th>
@@ -135,7 +141,7 @@ if(n_m == 13) {
 		
 		for(int j=0; j<7; j++) {
 			
-			String color="var(--color-black)";
+			String color="#000";
 			if(j == 6) {
 				color = "blue";
 			} else if(j == 0) {
@@ -144,7 +150,7 @@ if(n_m == 13) {
 			
 			//저번달 숫자
 			if(s < dayOfweek) {
-				out.print("<td style='color: var(--color-light-grey)'>" + ((prevLastMth+s+1)-dayOfweek) + "</td>");
+				out.print("<td style='color: #ccc'>" + ((prevLastMth+s+1)-dayOfweek) + "</td>");
 				
 				s++;
 				continue;
@@ -166,31 +172,57 @@ if(n_m == 13) {
 					zeroM = "";
 				}
 				
-				String strDate = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				String strDateByHost = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				String endDateByHost = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				
+				String strDateByGuest = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				String endDateByGuest = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				
 				String sqlDate = y + "-" + zeroM + (m+1) + "-" + zeroD + d;
 				
-// 				//DB에서 가져온 일정과 일치하는 날짜 분별
-// 				if(scheduleList != null) { 
-// 					for(int k = 0; k < scheduleList.size(); k++) {
-// 						Date schedule_day = scheduleList.get(k).getSchedule_date();
+				//DB에서 가져온 모임과 일치하는 날짜 분별
+				if(meetingHostList != null) { 
+					for(int k = 0; k < meetingHostList.size(); k++) {
+						Date schedule_start_day_By_Host = meetingHostList.get(k).getMeeting_start();
+						Date schedule_end_day_By_Host = meetingHostList.get(k).getMeeting_end();
 						
-// 						String datePattern = "yyyyMMdd";
-// 						SimpleDateFormat format = new SimpleDateFormat(datePattern);
+						Date schedule_start_day_By_Guest = meetingaAttendList.get(k).getMeeting_start();
+						Date schedule_end_day_By_Guest = meetingaAttendList.get(k).getMeeting_end();
 						
-// 						String schedule_Day_Str = format.format(schedule_day);
+						String datePattern = "yyyyMMdd";
 						
-// 						if(strDate.equals(schedule_Day_Str)) {
-// 							count++;
-// 						}
+						SimpleDateFormat format = new SimpleDateFormat(datePattern);
 						
-// 					}
-// 				}
+						String schedule_Day_Str_By_Host = format.format(schedule_start_day_By_Host);
+						String schedule_Day_End_By_Host = format.format(schedule_end_day_By_Host);
+						
+						String schedule_Day_Str_By_Guest = format.format(schedule_start_day_By_Guest);
+						String schedule_Day_End_By_Guest = format.format(schedule_end_day_By_Guest);
+						
+						if(strDateByHost.equals(schedule_Day_Str_By_Host)) {
+							count++;
+						}
+						
+						if(endDateByHost.equals(schedule_Day_End_By_Host)) {
+							count++;
+						}
+						
+						if(strDateByGuest.equals(schedule_Day_Str_By_Guest)) {
+							count++;
+						}
+						
+						if(endDateByGuest.equals(schedule_Day_End_By_Guest)) {
+							count++;
+						}
+						
+					}
+				}
 				
 				//이번달 td 생성
 				if(count == 0) {
-					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDate + "'>"+ d + "</td>");
+					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDateByHost + "'>"+ d + "</td>");
 				} else if(count == 1) {
-					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
+					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDateByHost + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
 							+ " style='display: none;' value='" + sqlDate + "' />" 
 							+ "<a href='" 
@@ -206,7 +238,7 @@ if(n_m == 13) {
 			
 			//다음달 숫자
 			if(d > lastday) {
-				out.print("<td style='color: var(--color-light-grey)'>" + nextMonthNo +" </td>");
+				out.print("<td style='color: #ccc'>" + nextMonthNo +" </td>");
 				
 				nextMonthNo++;
 			}
@@ -218,22 +250,11 @@ if(n_m == 13) {
 	}
 	
 	%>
-	
-</form>
 </table>
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+	
 			
 			
 			

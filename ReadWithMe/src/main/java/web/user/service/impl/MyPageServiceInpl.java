@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.user.dao.face.MyPageDao;
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.Meeting;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
@@ -290,6 +291,20 @@ public class MyPageServiceInpl implements MyPageService {
         	
         }
 		
+	}
+	
+	
+	@Override
+	public List<Meeting> getMeetingHosted(int user_no) {		
+		return myPageDao.selectMeetingHosted(user_no);
+	}
+	
+	@Override
+	public List<Meeting> getMeetingAttend(int user_no) {
+		int meeting_no = myPageDao.selectMeetingNoByUser_no(user_no);
+		logger.info("meetingno {}", meeting_no);
+	
+		return myPageDao.selectMeetingAttend(meeting_no);
 	}
 	
 	

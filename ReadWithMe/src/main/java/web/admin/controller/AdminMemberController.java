@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import web.admin.service.face.AdminMemberService;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 @Controller
@@ -24,7 +25,7 @@ public class AdminMemberController {
 	@Autowired private AdminMemberService adminMemberService;
 	
 	@RequestMapping(value="/admin/member", method=RequestMethod.GET)
-	public String Member(Paging paramData, Model model, HttpServletRequest req) {
+	public String Member(Paging paramData, Model model, HttpServletRequest req, HttpSession session) {
 		
 		Paging paging = adminMemberService.getPaging(paramData);
 		
@@ -32,17 +33,28 @@ public class AdminMemberController {
 				
 		logger.info("memberList {}", memberList);
 		
+		String userLv = (String) session.getAttribute("user_lv");
+		logger.info("lv {}", userLv);
+		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("paging", paging);
+		model.addAttribute("userLv", userLv);
 		
 		return"/admin/member/list";
 	}
 	
 	
-	@RequestMapping(value="/admin/prmsnadmin", method=RequestMethod.GET)
-	public String PrmsnAdmin() {
+	@RequestMapping(value="/admin/set", method=RequestMethod.GET)
+	public String PrmsnAdmin(UserTb user, HttpServletRequest req) {
 		
+		logger.info("User {}", user);
 		
-		return"";
+		adminMemberService.setAdmin(user, req);
+		
+		return"redirect:/admin/member";
 	}
+	
+
+	
+	
 }

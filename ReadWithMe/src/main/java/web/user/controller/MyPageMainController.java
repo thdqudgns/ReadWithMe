@@ -1,10 +1,7 @@
 package web.user.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.Meeting;
+import web.user.dto.Participation;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
@@ -35,11 +33,34 @@ public class MyPageMainController {
 	@Autowired MyPageService myPageService;
 	
 	@RequestMapping(value="/mypage/main")
-	public String myPageMain() {
+	public String myPageMain(UserTb user, HttpSession session, Model model) {
 		logger.info("/mypage/main");
+		
+		int user_no = Integer.parseInt((String)session.getAttribute("user_no"));
+		
+		logger.info("user_no {}", user_no);
+		
+		//로그인한 사람이 주최자인 모임 조회
+		List<Meeting> meetingHostList = myPageService.getMeetingHosted(user_no);
+		
+		//로그인한 사람이 참여자인 모임 조회
+		List<Meeting> meetingaAttendList = myPageService.getMeetingAttend(user_no);
+
+		
+		logger.info("meetingHostList {}", meetingHostList);
+		logger.info("meetingGuestList {}", meetingaAttendList);
+
+		
+		
+		model.addAttribute("meetingHostList", meetingHostList);
+		model.addAttribute("meetingaAttendList", meetingaAttendList);
+		
+		
 		
 		return "user/mypage/main";
 	}
+	
+	
 	
 	// --------------------------------------- 회원 탈퇴 ---------------------------------------
 	@RequestMapping(value="/mypage/wthdr", method = RequestMethod.GET)
@@ -154,9 +175,9 @@ public class MyPageMainController {
 		
 		List<HashMap<String,Object>> toDoListLS = myPageService.getToDoList(paging, session);
 		
-		for(HashMap<String,Object> m : toDoListLS) {
-			logger.info("{}", m);
-		}
+//		for(HashMap<String,Object> m : toDoListLS) {
+//			logger.info("{}", m);
+//		}
 		
 		logger.info("todolist!! {}", toDoListLS);
 		
@@ -193,6 +214,10 @@ public class MyPageMainController {
 				
 		return"redirect:/todolist";
 	}
+
+	
+	
+	
 	
 	
 }

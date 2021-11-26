@@ -5,6 +5,7 @@ import java.util.List;
 
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
+import web.user.dto.Meeting;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.util.Paging;
@@ -122,6 +123,28 @@ public interface MyPageDao {
 	 * @param list_no
 	 */
 	public void deleteToDoList(int list_no);
+
+	/**
+	 * 주최한 모임 조회
+	 * @param map
+	 * @return
+	 */
+	public List<Meeting> selectMeetingHosted(int user_no);
+
+	/**
+	 * 참여한 모임 조회
+	 * @param map
+	 * @return
+	 */
+	public List<Meeting> selectMeetingAttend(int meeting_no);
+
+	/**
+	 * 참여한 모임의 meetingno을 user_no이용하여 구함
+	 * @param user_no
+	 * @return
+	 */
+	public int selectMeetingNoByUser_no(int user_no);
+
 
 
 
