@@ -27,6 +27,34 @@ $(document).ready(function() {
 		history.go(-1);
 	})
 })
+
+$(document).ready(function() {
+
+
+	$("#bookBtn").click(function() {
+		const book = $('#book').val();
+		
+		console.log("book:" + book);
+		
+		$.ajax({
+			type : 'get'
+			, url : 'https://dapi.kakao.com/v3/search/book?target=title'
+			, data: { query : book }
+			, headers : { Authorization: "KakaoAK 340845721c27a182bf54bae03bc43340" }
+			, dataType: 'json'
+			, success : function(res) {
+				console.log(res.documents[0].title);
+				$("#bookName").append(res.documents[0].title);
+				$("#bookThum").append("<img src='"+res.documents[0].thumbnail +"'/>");
+			}
+			, error : function() {}
+		});
+	
+	 });
+
+	
+});
+
 </script>
 
 <style type="text/css">
@@ -36,6 +64,9 @@ $(document).ready(function() {
 
 <h1>글쓰기 페이지</h1>
 <hr>
+
+
+
 
 <form action="/user/review/write" method="post" enctype="multipart/form-data">
 <div class="form-group">
@@ -48,7 +79,12 @@ $(document).ready(function() {
 </div>
 <div class="form-group">
 	<label for="review_content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="review_content" name="review_content"></textarea>
+	<textarea rows="10" style="width: 100%;" id="review_content" name="review_content">
+	<input type="text" id="book" placeholder="읽은 책을 검색하세요!">
+	<button id="bookBtn">검색</button>
+	<div id="bookName"></div>
+	<div id="bookThum"></div>
+	</textarea>
 </div>
 
 <div class="form-group">

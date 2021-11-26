@@ -80,15 +80,20 @@ $(document).ready(function() {
 		$form.submit();
 		
 	}); //$("#btnCommInsert").click() end
+	
+// 	$("#commentTb").on("click", ".commentUpdate", function(){
+// 		alert("댓글 수정버튼 클릭");
+// 	});
 
 });
 
-//댓글 수정 입력 창 활성화
-function updateInput(th) {
-// 	console.log( $(th).parents("table.comment") )
-// 	console.log( $tb.find("td.review-comment-content") )
 
-	var $tb = $(th).parents("table.comment");
+//댓글 수정 입력 창 활성화
+function updateInput(comment_no, th) {
+// 	console.log( $(th).parents("table#commentTb [data-comment_no='"+ comment_no +"']") )
+// 	console.log( $(th).parents("table#commentTb [data-comment_no='"+ comment_no +"']").find("td.review-comment-content").html() )
+
+	var $tb = $(th).parents("table#commentTb [data-comment_no='"+ comment_no +"']");
 	var beforeContent = $tb.find("td.review-comment-content").html();
 	
 	$tb.find("td.review-comment-content").html("")
@@ -112,12 +117,12 @@ function updateComment(comment_no, th) {
 		, dataType: "json"
 		, data: {
 			comment_no: comment_no
-			, comment_content: $(th).parent().prev().find("input[name='comment_content']").val()
+			, comment_content: $(th).parents("table#commentTb [data-comment_no='"+ comment_no +"']").find("input[name='comment_content']").val()
 		}
 		, success: function(data){
 			if(data.success) {
 				
-				location.href="/user/review/list?curPage=${paging.curPage}";
+				location.href="/user/review/view?review_no=${viewReview.review_no}";
 				
 			} else {
 				alert("글 수정 실패");
@@ -166,7 +171,7 @@ td:not(.info) {
 
 <div class="container">
 
-<h1>게시글 상세보기</h1>
+<h1>후기 게시글 ${viewReview.review_no }</h1>
 <c:if test="${login }">
 <button id="btnRecommend" class="btn pull-right">추천</button>
 </c:if>
@@ -228,7 +233,7 @@ td:not(.info) {
 	</c:if>
 	
 	<!-- 댓글 리스트 -->
-	<table class="comment table table-striped table-hover table-condensed">
+	<table id="commentTb" class="comment table table-striped table-hover table-condensed">
 	<thead>
 	<tr>
 		<th style="width: 5%;">번호</th>
@@ -247,8 +252,8 @@ td:not(.info) {
 		<td style="width: 20%;"><fmt:formatDate value="${comment.comment_write_date }" pattern="yy.MM.dd hh:mm:ss" /></td>
 		<td style="width: 5%;">
 			<c:if test="${sessionScope.user_no eq comment.user_no }">
-			<button class="btn-gray" onclick="updateInput(this);">수정</button>
-			<button class="btn-gray" style="display: none;" onclick="updateComment(${comment.comment_no }, this);">적용</button>
+			<button class="commentUpdate btn-gray" onclick="updateInput(${comment.comment_no }, this);">수정</button>
+			<button class="btn-gray" style="display:none;" onclick="updateComment(${comment.comment_no }, this);">적용</button>
 			<button class="btn-gray" onclick="deleteComment(${comment.comment_no });">삭제</button>
 			</c:if>
 		</td>

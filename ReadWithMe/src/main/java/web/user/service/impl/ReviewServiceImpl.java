@@ -58,13 +58,13 @@ public class ReviewServiceImpl implements ReviewService {
 	public boolean isRecommend(Review_rec recommend) {
 		int cnt = review_recDao.selectCntRecommend(recommend);
 		
-		if(cnt > 0) { //추천했음
+		if(cnt == 1) { //추천했음
 			return true;
 		} 
-//		else { //추천하지 않았음
+		else { //추천하지 않았음
 			return false;
 			
-//		}
+		}
 	}
 
 	@Override

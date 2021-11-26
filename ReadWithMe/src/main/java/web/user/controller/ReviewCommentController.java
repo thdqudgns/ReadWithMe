@@ -3,6 +3,7 @@ package web.user.controller;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -50,10 +51,14 @@ public class ReviewCommentController {
 	
 	
 	//수정
-	@RequestMapping(value="/update", method=RequestMethod.POST)
+	@RequestMapping(value="/update")
 	public void updateProcess(Rv_cmt comment, Writer writer, HttpSession session) {
 		
-		logger.info("comment : {}", comment);
+		logger.info("comment_no : {}", comment);
+		
+		//테스트 - 매개변수에 String comment_content 추가
+//		logger.info("comment_content : {}", comment_content); //null로 뜬다.
+//		comment.setComment_content(comment_content);
 		
 		boolean success = reviewService.updateReviewComment(comment);
 		

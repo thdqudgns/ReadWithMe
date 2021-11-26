@@ -68,17 +68,7 @@ public class ReviewController {
 		Review_file reviewfile = reviewService.getAttachFile(viewReview);
 		model.addAttribute("reviewfile", reviewfile);
 		
-		if( session == null || !"".equals(session)) {
-
-			Review_rec recommend = new Review_rec();
-			recommend.setReview_no(viewReview.getReview_no()); //게시글 번호
-			
-			//추천 상태 전달
-			boolean isRecommend = reviewService.isRecommend(recommend);
-			model.addAttribute("isRecommend", isRecommend);
-			model.addAttribute("cntRecommend", reviewService.getTotalCntRecommend(recommend));
-		
-		} else if( session.getAttribute("user_no") != null && !"".equals(session.getAttribute("user_no")) ) {
+		if( session.getAttribute("user_no") != null && !"".equals(session.getAttribute("user_no")) ) {
 
 			//추천 상태 조회
 			Review_rec recommend = new Review_rec();
@@ -88,6 +78,15 @@ public class ReviewController {
 			//추천 상태 전달
 			boolean isRecommend = reviewService.isRecommend(recommend);
 			model.addAttribute("isRecommend", isRecommend);
+			model.addAttribute("cntRecommend", reviewService.getTotalCntRecommend(recommend));
+		
+		} else if( session == null || !"".equals(session)) {
+
+			Review_rec recommend = new Review_rec();
+			recommend.setReview_no(viewReview.getReview_no()); //게시글 번호
+			
+			//추천 상태 전달
+			model.addAttribute("isRecommend", false);
 			model.addAttribute("cntRecommend", reviewService.getTotalCntRecommend(recommend));
 			
 		}
@@ -225,7 +224,12 @@ public class ReviewController {
 	public void report(Review review) {
 		
 	}
-	
+
+	//책 검색
+	@RequestMapping(value="/book")
+	public void book() {
+//		return "user/review/book";
+	}
 	
 	
 	
