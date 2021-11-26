@@ -72,13 +72,13 @@ if(n_m == 13) {
 				<div id="profile-change">
 					<h3>프로필 변경</h3>
 					고객님의 프로필 정보를 변경하실 수 있습니다.<br><br>
-					<a href="<%=request.getContextPath() %>/profile"><button id="mypage">변&nbsp;&nbsp;경</button></a>
+					<a href="<%=request.getContextPath() %>/mypage/profile"><button id="mypage">변&nbsp;&nbsp;경</button></a>
 				</div>
 				
 				<div id="pw-change">
 					<h3>비밀번호 변경</h3>
 					고객님의 비밀번호를 변경하실 수 있습니다.<br><br>
-					<a href="<%=request.getContextPath() %>/pwchange"><button id="mypage">변&nbsp;&nbsp;경</button></a>
+					<a href="<%=request.getContextPath() %>/mypage/pwchange"><button id="mypage">변&nbsp;&nbsp;경</button></a>
 				</div>
 			</div>
 			<br>
@@ -93,7 +93,7 @@ if(n_m == 13) {
 				<div id="to-do-list">
 					<h3>To Do List</h3>
 					나의 To Do List 목록을 확인할 수 있습니다.<br><br>
-					<a href="<%=request.getContextPath() %>/todolist"><button id="mypage">자세히 보기</button></a>
+					<a href="<%=request.getContextPath() %>/mypage/todolist"><button id="mypage">자세히 보기</button></a>
 				</div>
 			</div>
 			
@@ -172,46 +172,28 @@ if(n_m == 13) {
 					zeroM = "";
 				}
 				
-				String strDateByHost = y + "" + zeroM + (m+1) + "" + zeroD + d;
-				String endDateByHost = y + "" + zeroM + (m+1) + "" + zeroD + d;
-				
-				String strDateByGuest = y + "" + zeroM + (m+1) + "" + zeroD + d;
-				String endDateByGuest = y + "" + zeroM + (m+1) + "" + zeroD + d;
-				
+				String strDate = y + "" + zeroM + (m+1) + "" + zeroD + d;
+				String endDate = y + "" + zeroM + (m+1) + "" + zeroD + d;
 				String sqlDate = y + "-" + zeroM + (m+1) + "-" + zeroD + d;
 				
 				//DB에서 가져온 모임과 일치하는 날짜 분별
 				if(meetingHostList != null) { 
 					for(int k = 0; k < meetingHostList.size(); k++) {
-						Date schedule_start_day_By_Host = meetingHostList.get(k).getMeeting_start();
-						Date schedule_end_day_By_Host = meetingHostList.get(k).getMeeting_end();
-						
-						Date schedule_start_day_By_Guest = meetingaAttendList.get(k).getMeeting_start();
-						Date schedule_end_day_By_Guest = meetingaAttendList.get(k).getMeeting_end();
+						Date schedule_start_day = meetingHostList.get(k).getMeeting_start();
+						Date schedule_end_day = meetingHostList.get(k).getMeeting_end();
 						
 						String datePattern = "yyyyMMdd";
 						
 						SimpleDateFormat format = new SimpleDateFormat(datePattern);
 						
-						String schedule_Day_Str_By_Host = format.format(schedule_start_day_By_Host);
-						String schedule_Day_End_By_Host = format.format(schedule_end_day_By_Host);
+						String schedule_Day_Str = format.format(schedule_start_day);
+						String schedule_Day_End = format.format(schedule_end_day);
 						
-						String schedule_Day_Str_By_Guest = format.format(schedule_start_day_By_Guest);
-						String schedule_Day_End_By_Guest = format.format(schedule_end_day_By_Guest);
-						
-						if(strDateByHost.equals(schedule_Day_Str_By_Host)) {
+						if(strDate.equals(schedule_Day_Str)) {
 							count++;
 						}
 						
-						if(endDateByHost.equals(schedule_Day_End_By_Host)) {
-							count++;
-						}
-						
-						if(strDateByGuest.equals(schedule_Day_Str_By_Guest)) {
-							count++;
-						}
-						
-						if(endDateByGuest.equals(schedule_Day_End_By_Guest)) {
+						if(endDate.equals(schedule_Day_End)) {
 							count++;
 						}
 						
@@ -220,9 +202,9 @@ if(n_m == 13) {
 				
 				//이번달 td 생성
 				if(count == 0) {
-					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDateByHost + "'>"+ d + "</td>");
+					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDate + "'>"+ d + "</td>");
 				} else if(count == 1) {
-					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDateByHost + "'>" 
+					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
 							+ " style='display: none;' value='" + sqlDate + "' />" 
 							+ "<a href='" 

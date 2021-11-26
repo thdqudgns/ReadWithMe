@@ -80,12 +80,12 @@ public class MyPageMainController {
 	
 	// --------------------------------------- 비밀번호 변경---------------------------------------
 	
-	@RequestMapping(value="/pwchange", method = RequestMethod.GET)
+	@RequestMapping(value="/mypage/pwchange", method = RequestMethod.GET)
 	public String PwChange() {
 		return "user/mypage/profile/pwChange";
 	}
 	
-	@RequestMapping(value="/pwchange", method = RequestMethod.POST)
+	@RequestMapping(value="/mypage/pwchange", method = RequestMethod.POST)
 	public String PwChangeProc(UserTb user, HttpSession session) {
 		
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
@@ -129,7 +129,7 @@ public class MyPageMainController {
 		return res;
 	}
 	
-	@RequestMapping(value="/profile", method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/profile", method=RequestMethod.GET)
 	public String Profile(UserTb user, HttpSession session, Model model) {
 		
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
@@ -151,7 +151,7 @@ public class MyPageMainController {
 		return"user/mypage/profile/profile";
 	}
 	
-	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	@RequestMapping(value="/mypage/profile", method=RequestMethod.POST)
 	public String ProfileProc (UserTb user, HttpSession session, MultipartFile file, HttpServletRequest req) {
 	
 		user.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
@@ -168,7 +168,7 @@ public class MyPageMainController {
 	
 	// --------------------------------------- To Do List ---------------------------------------
 	
-	@RequestMapping(value="/todolist", method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/todolist", method=RequestMethod.GET)
 	public String Todolist(Paging paramData, Model model, HttpSession session) {
 		
 		Paging paging = myPageService.getPaging(paramData);
@@ -187,7 +187,7 @@ public class MyPageMainController {
 		return"user/mypage/todolist/list";
 	}
 	
-	@RequestMapping(value="/todolist", method=RequestMethod.POST)
+	@RequestMapping(value="/mypage/todolist", method=RequestMethod.POST)
 	public String TodolistProc(HttpSession session, ToDoList toDoList) {	
 		
 		toDoList.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
