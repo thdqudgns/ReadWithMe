@@ -8,17 +8,10 @@ import web.user.dto.EmailAuth;
 
 public interface LoginDao {
 
+	
 	public void join(UserTb user);
 
 	public void login(UserTb user);
-
-	public void naverLogin(Social_account social);
-
-	public void googleLogin(Social_account social);
-
-	public void kakaoLogin(Social_account social);
-
-	public void selectIdByEmail(UserTb user);
 
 	public void selectPwById(UserTb user);
 
@@ -36,6 +29,13 @@ public interface LoginDao {
 	 */
 	public int selectCntByNick(String nick);
 
+	/**
+	 * email이 존재하는 값인지 확인한다
+	 * @param email - 조회하려는 회원의 email
+	 * @return
+	 */
+	public int selectCntByEmailInUserTb(String email);
+	
 	/**
 	 * 회원 가입
 	 * @param user
@@ -97,7 +97,7 @@ public interface LoginDao {
 	 * @param user
 	 * @return
 	 */
-	public int selectCntByEmail(EmailAuth user);
+	public int selectCntByEmailInEmailAuth(EmailAuth user);
 
 	/**
 	 * 이메일인증위한 고객이메일/인증키값
@@ -109,8 +109,14 @@ public interface LoginDao {
 	 * 이메일 인증 확인
 	 * @param email
 	 */
-	public void userAuth(String email);
+	public void userEmailAuth(String email);
 
+	/**
+	 * 핸드폰 인증 확인
+	 * @param email
+	 */
+	public void userPhonAuth(String phone);
+	
 	/**
 	 * 핸드폰번호와 인증번호 DB에 저장
 	 * @param phoneAuth
@@ -123,6 +129,46 @@ public interface LoginDao {
 	 * @return
 	 */
 	public int selectCntByPhoneAuth(PhoneAuth phoneAuth);
+
+	/**
+	 * email, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmailandId(UserTb user);
+	
+	/**
+	 * phone, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByPhoneandId(UserTb user);
+	
+	/**
+	 * 고객이 발급받은 임시 비밀번호로 고객 DB수정
+	 * @param user
+	 */
+	public void updatePw(UserTb user);
+	
+	/**
+	 * 고객이 입력한 email로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByEmail(UserTb user);
+	
+	/**
+	 * 고객이 입력한 phone로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByPhone(UserTb user);
+
+	/**
+	 * 고객이 입력한 email 인증테이블에서 삭제
+	 * @param user
+	 */
+	public void deleteEmail(UserTb user);
 
 
 

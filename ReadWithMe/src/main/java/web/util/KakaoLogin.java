@@ -111,9 +111,7 @@ public class KakaoLogin {
 			user.setNick(properties.path("nickname").asText());
 			if( kakao_account.path("email").asText() != null ) {
 				user.setEmail(kakao_account.path("email").asText());
-			} else if ( properties.path("profile_image").asText() !=null ) {
-				user.setProfile(properties.path("profile_image").asText());
-			}
+			} 
 		}
 		return user;
 	}

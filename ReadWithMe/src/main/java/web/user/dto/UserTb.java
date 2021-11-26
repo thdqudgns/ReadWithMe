@@ -18,15 +18,16 @@ public class UserTb {
 	private Date birth;
 	private String location;
 	private String gender;
-	private String profile;
-	private int remember;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date create_date;
+	private int file_no;
 	private String userCertification;
 	@Override
 	public String toString() {
 		return "UserTb [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
 				+ ", type=" + type + ", name=" + name + ", nick=" + nick + ", email=" + email + ", phone=" + phone
-				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", profile=" + profile
-				+ ", remember=" + remember + ", userCertification=" + userCertification + "]";
+				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", create_date=" + create_date
+				+ ", file_no=" + file_no + ", userCertification=" + userCertification + "]";
 	}
 	public int getUser_no() {
 		return user_no;
@@ -100,17 +101,17 @@ public class UserTb {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getProfile() {
-		return profile;
+	public Date getCreate_date() {
+		return create_date;
 	}
-	public void setProfile(String profile) {
-		this.profile = profile;
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
 	}
-	public int getRemember() {
-		return remember;
+	public int getFile_no() {
+		return file_no;
 	}
-	public void setRemember(int remember) {
-		this.remember = remember;
+	public void setFile_no(int file_no) {
+		this.file_no = file_no;
 	}
 	public String getUserCertification() {
 		return userCertification;
@@ -118,7 +119,7 @@ public class UserTb {
 	public void setUserCertification(String userCertification) {
 		this.userCertification = userCertification;
 	}
-	
+
 	
 	
 	
