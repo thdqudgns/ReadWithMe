@@ -4,28 +4,30 @@ import java.util.Date;
 
 public class Message {
 	private int msg_no;
-	private int send_use;
+	private int send_user;
 	private int rec_user;
 	private String msg_title;
 	private String msg_content;
 	private Date send_date;
 	private String msg_read;
+	
 	@Override
 	public String toString() {
-		return "Message [msg_no=" + msg_no + ", send_use=" + send_use + ", rec_user=" + rec_user + ", msg_title="
+		return "Message [msg_no=" + msg_no + ", send_use=" + send_user + ", rec_user=" + rec_user + ", msg_title="
 				+ msg_title + ", msg_content=" + msg_content + ", msg_read=" + msg_read + "]";
 	}
+	
 	public int getMsg_no() {
 		return msg_no;
 	}
 	public void setMsg_no(int msg_no) {
 		this.msg_no = msg_no;
 	}
-	public int getSend_use() {
-		return send_use;
+	public int getSend_user() {
+		return send_user;
 	}
-	public void setSend_use(int send_use) {
-		this.send_use = send_use;
+	public void setSend_user(int send_user) {
+		this.send_user = send_user;
 	}
 	public int getRec_user() {
 		return rec_user;
