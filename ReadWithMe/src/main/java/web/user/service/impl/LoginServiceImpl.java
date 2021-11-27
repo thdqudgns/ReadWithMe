@@ -23,6 +23,7 @@ import web.user.dto.EmailAuth;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
 import web.util.MailHandler;
+import web.util.MessageService;
 import web.util.TempKey;
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -41,15 +42,20 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int userNickCheck(String nick) {
 		return loginDao.selectCntByNick(nick);
-		
 	}
 	
-@Override
+	@Override
+	public int userEmailCheck(String email) {
+		return loginDao.selectCntByEmailInUserTb(email);
+	}
+	
+	@Override
 	public boolean join(UserTb user, HttpServletRequest req) {
 		logger.info("join() 호출 {} : ", user);
 		
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
+		
 		
 		String encPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encPassword);
@@ -61,14 +67,29 @@ public class LoginServiceImpl implements LoginService {
 		Interest interest = new Interest();
 		
 		interest.setUser_no( user.getUser_no() );
-		
-		if( interests[0] != null ) {
+
+		if( interests.length == 1 ) {
+			
 			interest.setInterest(interests[0]);
-		} else if ( interests[1] !=null ) {
+			logger.info("interests확인 {}", interest);
+			
+		} else if( interests.length == 2 ) {
+			
+			interest.setInterest(interests[0]);
 			interest.setInterest2(interests[1]);
-		} else if ( interests[2] !=null ) {
+			logger.info("interests확인1 {}", interest);
+			
+		} else if( interests.length == 3 ) {
+			
+			interest.setInterest(interests[0]);
+			interest.setInterest2(interests[1]);
 			interest.setInterest3(interests[2]);
-		} 
+			logger.info("interests확인2 {}", interest);
+			
+		}
+		
+		
+		logger.info("interest 입니다 {}", interest);
 		
 		//관심분야(삽입)
 		loginDao.insertInterest(interest);
@@ -134,18 +155,6 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	@Override
-	public boolean kakaoLogin(UserTb user) {
-		
-//		if ( loginDao.selectKakaoCnt(user) >= 1 ) {
-//			
-//		}
-		
-		
-		return false;
-	}
-	
-	
-	@Override
 	public boolean KakaoJoin(UserTb user, HttpServletRequest req) {
 		String[] interests = req.getParameterValues("interest");
 		logger.info("interests {}", Arrays.toString(interests));
@@ -179,7 +188,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean create(EmailAuth user) {
 
-		if( loginDao.selectCntByEmail(user) > 0) {
+		if( loginDao.selectCntByEmailInEmailAuth(user) > 0) {
 			return false;
 		} else {
 		
@@ -209,8 +218,12 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public void userAuth(String email) {
-		loginDao.userAuth(email);	
+	public void userAuth(UserTb user) {
+		if(user.getEmail() != "" && user.getEmail() != null) {
+			loginDao.userEmailAuth(user.getEmail());				
+		} else if (user.getPhone() != "" && user.getPhone() != null) {
+			loginDao.userPhonAuth(user.getPhone());
+		}
 	}
 	
 	@Override
@@ -241,36 +254,93 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	
-	
-	
-	
-	
-	
-
 	@Override
-	public void naverLogin(Social_account social) {
-		loginDao.naverLogin(social);
+	public boolean findPw(UserTb user) {
+		
+		if( user.getEmail() != "" && user.getEmail() != null) {
+			
+			if(loginDao.selectCntByEmailandId(user) > 0) {
+				return true;
+			} else {
+				return false;				
+			}
+			
+		} else if ( user.getPhone() != "" && user.getPhone() != null ) {
+			logger.info("getPhone()");
+			
+			if(loginDao.selectCntByPhoneandId(user) > 0) {
+				return true;
+			} else {
+				return false;				
+			}			
+		}
+		return false;		
+	}
+	
+	@Override
+	public void sendPwByEmail(UserTb user) {
+		logger.info("sendPwByEmail()");
+					
+			String random = MessageService.makePwRandom(10);
+			
+
+			String encPassword = passwordEncoder.encode(random);
+			user.setPassword(encPassword);
+			logger.info("암호화된 비밀번호 : "+user.getPassword());
+
+			loginDao.updatePw(user);
+		
+			try {
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("[임시 비밀번호]");
+				sendMail.setText( 
+						"<h1>임시 비밀번호</h1>" +
+						"고객님의 임시 비밀번호는" + random + "입니다<br>" +
+						"개인정보 보호를 위해 로그인 후 꼭 비밀번호를 바꿔주세요!");
+				sendMail.setFrom("anzu.only@gmail.com", "Read With Me");
+				sendMail.setTo(user.getEmail());
+				sendMail.send();
+			} catch (MessagingException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+
+	}
+	
+	@Override
+	public void sendPwByPhone(UserTb user) {
+		logger.info("sendPwByPhone()");
+		
+		String random = MessageService.makePwRandom(10);		
+
+		String encPassword = passwordEncoder.encode(random);
+		user.setPassword(encPassword);
+		logger.info("암호화된 비밀번호 : "+user.getPassword());
+
+		loginDao.updatePw(user);
+		
+//		MessageService.sendPwMessage(user.getPhone(), random);		
+	}
+	
+	
+	
+	@Override
+	public String findId(UserTb user) {
+		
+		String id = null;
+		
+		if( user.getEmail() != "" && user.getEmail() != null) {
+			id = loginDao.selectIdByEmail(user);
+		} else if ( user.getPhone() != "" && user.getPhone() != null ) {
+			id =loginDao.selectIdByPhone(user);
+		}
+		
+		return id;
 		
 	}
-
+	
 	@Override
-	public void googleLogin(Social_account social) {
-		loginDao.googleLogin(social);
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void findId(UserTb user) {
-		loginDao.selectIdByEmail(user);
-		
-	}
-
-	@Override
-	public void findPw(UserTb user) {
-		loginDao.selectPwById(user);
-		
+	public void findEmail(UserTb user) {
+		loginDao.deleteEmail(user);
 	}
 	
 

@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+
+<script src="/resources/js/pwChange_script.js"></script>
+
+<h1>내 정보</h1>
+
+<h3>비밀번호 변경</h3>
+안전한 비밀번호로 고객님의 정보를 보호하세요!
+
+<form action="/pwchange" method="post">
+<input type="password" id="prsntPw" placeholder="현재 비밀번호">
+<div id="pw1_check"></div>
+
+<input type="password" id="password" name="password" placeholder="새 비밀번호">
+<input type="password" id="password2" placeholder="새 비밀번호 확인">
+<div id="pw2_check"></div>
+
+<button id="reg_submit">확인</button>
+<a href="mypage/main"><button type="button">취소</button></a>
+</form>
+
+
+<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
