@@ -144,4 +144,8 @@
 		WHERE email = #{email }
 	</delete>
 	
+	<select id="selectBanUser" resultType="web.user.dto.Ban" parameterType="int">
+		SELECT start_ban, end_ban FROM ban
+		WHERE user_no = #{user_no }
+	</select>
 </mapper>

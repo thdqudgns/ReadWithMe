@@ -13,7 +13,7 @@
 
 <div id="checkBtns" style="text-align: center;">
 <a href="/join"><button class="checkBtn" style="background-color: #9f8170; color:#FFF;">회원가입</button></a>
-<a href="/main"><button class="checkBtn">홈으로 가기</button></a>
+<a href="/"><button class="checkBtn">홈으로 가기</button></a>
 </div>
 </section>
 

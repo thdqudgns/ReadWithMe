@@ -4,6 +4,7 @@ import web.user.dto.UserTb;
 import web.user.dto.Interest;
 import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 
 public interface LoginDao {
@@ -169,6 +170,13 @@ public interface LoginDao {
 	 * @param user
 	 */
 	public void deleteEmail(UserTb user);
+
+	/**
+	 * 제재내용 확인
+	 * @param user_no
+	 * @return
+	 */
+	public Ban selectBanUser(int user_no);
 
 
 

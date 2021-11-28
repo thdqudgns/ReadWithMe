@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import web.user.dto.UserTb;
 import web.user.dto.Social_account;
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 import web.user.dto.PhoneAuth;
 
@@ -150,6 +151,13 @@ public interface LoginService {
 	 * @return
 	 */
 	public void findEmail(UserTb user);
+
+	/**
+	 * 유저 제재 상태 확인시켜주기 위함
+	 * @param user_no
+	 * @return
+	 */
+	public Ban banUser(int user_no);
 
 
 

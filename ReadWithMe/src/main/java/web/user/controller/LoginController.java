@@ -2,7 +2,6 @@ package web.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,26 +10,18 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 import web.user.dto.PhoneAuth;
 import web.user.dto.UserSessionTb;
@@ -54,7 +45,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp) {
+	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp, Model model)  {
 		
 		logger.info("user {}", user);
 		boolean isLogin = loginService.login(user);
@@ -63,26 +54,27 @@ public class LoginController {
 
 		
 		if( isLogin ) {
-			session.setAttribute("login", isLogin);
-			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
-			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
-			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
-//			if( user.getRemember() > 0) {
-//				logger.info("remember {}", user.getRemember()); 
-//				Cookie loginCookie = new Cookie("loginCookie", session.getId());
-//				loginCookie.setPath("/");
-//				int amount = 60*60*24*7;
-//				loginCookie.setMaxAge(amount);
-//				
-//				resp.addCookie(loginCookie);
-//				
-//				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
-//				loginService.KeepLogin(login.)
-//			}
-			
-			
-			return "redirect:/";
+			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
+						        
+				int user_no = Integer.parseInt(loginService.getUserNo(user.getId()));
+				logger.info("user_no {}", user_no);
+				
+				Ban ban = loginService.banUser(user_no);
+				
+				logger.info("ban {}", ban);
+				model.addAttribute("ban", ban);
+				
+		        return "/user/member/userBan";
+		        
+			} else {
+				session.setAttribute("login", isLogin);
+				session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+				session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
+				session.setAttribute("user_nick", loginService.getNick(user.getId()));
+				
+				return "redirect:/";
+			}
 			
 		} else {
 			session.invalidate();

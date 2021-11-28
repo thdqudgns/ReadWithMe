@@ -26,7 +26,7 @@ td, th {
 <h1>To Do List</h1>
 결심한 내용 지켜봐요!<br>
 
-<form action="/todolist" method="post">
+<form action="/mypage/todolist" method="post">
 <div>
 <input type="text" id="book" placeholder="읽은 책을 검색하세요!">
 <button type="button" id="bookBtn">검색</button>

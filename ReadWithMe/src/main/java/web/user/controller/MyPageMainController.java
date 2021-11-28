@@ -195,7 +195,7 @@ public class MyPageMainController {
 		
 		myPageService.toDoListWrite(toDoList);
 		
-		return"redirect:/todolist";
+		return"redirect:/mypage/todolist";
 	}
 
 	@RequestMapping(value="/todolist/send", method = RequestMethod.GET)

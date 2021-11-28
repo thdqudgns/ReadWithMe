@@ -19,6 +19,7 @@ import web.user.dao.face.LoginDao;
 import web.user.dto.Interest;
 import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
@@ -120,8 +121,7 @@ public class LoginServiceImpl implements LoginService {
 			}else {
 				logger.info("비밀번호 불일치");
 			}  
-		  
-		  
+
 		if( loginDao.selectCnt(user) >=1 ) {
 			return true;
 		} else {
@@ -341,6 +341,11 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void findEmail(UserTb user) {
 		loginDao.deleteEmail(user);
+	}
+	
+	@Override
+	public Ban banUser(int user_no) {
+		return loginDao.selectBanUser(user_no);
 	}
 	
 
