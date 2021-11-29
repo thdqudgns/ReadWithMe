@@ -65,13 +65,12 @@ p {
 	text-align: right;
 }
 #wthdr {
-	font-size: 10px;
+	font-size: 13px;
 	margin: 10px;
 	text-align: right;
 }
 section {
 	height: 1500px;
-/* 	margin-bottom: 450px; */
 }
 
 
@@ -94,7 +93,6 @@ td {
 
 th, td {
 	border: 1px solid #ddd;
-	text-align: left;
 }
 
 th {
@@ -148,11 +146,6 @@ tr#dayWeek th {
 	border: none;
 	font-size: 30px;
 	text-align: right;
-}
-
-#controllDay {
-	margin: 20px;
-    margin-top: 60px;
 }
 
 #controllDay a:first-child {
@@ -227,6 +220,7 @@ td.schedule>a {
 	display: inline-block;
 	width:1123px;
 	height:165px;
+	background-color: #dsdfas;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	position: relative;
@@ -270,6 +264,7 @@ td.schedule>a {
 }
 
 .underScheduleList {
+	background-color: #dsdfas;
 	width: 100%;
 	height: 100%;
 	text-align: center;

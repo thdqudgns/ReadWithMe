@@ -101,18 +101,12 @@ public interface MyPageService {
 	public void deleteToDoList(HttpServletRequest req);
 
 	/**
-	 * 자기가 주최자인 모임 불러오기
+	 * 모임 불러오기
 	 * @param user
 	 * @return
 	 */
-	public List<Meeting> getMeetingHosted(int user_no);
+	public List<Meeting> getMeeting(UserTb user);
 
-	/**
-	 * 자기가 참여하는 모임 불러오기
-	 * @param user
-	 * @return
-	 */
-	public List<Meeting> getMeetingAttend(int user_no);
 
 
 }

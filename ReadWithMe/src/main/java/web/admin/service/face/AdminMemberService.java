@@ -21,10 +21,31 @@ public interface AdminMemberService {
 	public List<HashMap<String, Object>> getMemberList(Paging paging, HttpServletRequest req);
 
 	/**
+	 * 제재 멤버 목록 불러오기
+	 * @param paging
+	 * @param req
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getBanMemberList(Paging paging, HttpServletRequest req);
+
+	/**
 	 * 관리자 권한 설정
 	 * @param user
 	 * @param req 
 	 */
 	public void setAdmin(UserTb user, HttpServletRequest req);
+
+	/**
+	 * 회원 제재
+	 * @param req
+	 */
+	public void banUser(HttpServletRequest req);
+
+	/**
+	 * 회원 제재 삭제
+	 * @param req
+	 */
+	public void banDeleteUser(HttpServletRequest req);
+
 
 }

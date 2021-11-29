@@ -295,16 +295,34 @@ public class MyPageServiceInpl implements MyPageService {
 	
 	
 	@Override
-	public List<Meeting> getMeetingHosted(int user_no) {		
-		return myPageDao.selectMeetingHosted(user_no);
-	}
-	
-	@Override
-	public List<Meeting> getMeetingAttend(int user_no) {
-		int meeting_no = myPageDao.selectMeetingNoByUser_no(user_no);
-		logger.info("meetingno {}", meeting_no);
-	
-		return myPageDao.selectMeetingAttend(meeting_no);
+	public List<Meeting> getMeeting(UserTb user) {	
+		
+		List<Meeting> list = new ArrayList<Meeting>();
+		
+		List<Meeting> meetingList1 = myPageDao.selectMeetingHosted(user);
+		logger.info("user!!!!!!!!!!{}", user);
+		
+		int user_no = myPageDao.selectMeetingNoByUser_no(user);
+		logger.info("user_no!!!!!!!!!!{}", user_no);
+		List<Meeting> meetingList2 = myPageDao.selectMeetingAttend(user_no);
+		
+		for(Meeting mList1 : meetingList1) {
+			logger.info("mList1{}", mList1);
+			
+			list.add(mList1);
+		};
+		
+		for(Meeting mList2 : meetingList2) {
+			logger.info("mList2{}", mList2);
+			
+			list.add(mList2);
+		};
+		
+		for(Meeting list2 : list) {
+			logger.info("list2list2{}", list2);
+		};
+		
+		return list;
 	}
 	
 	
