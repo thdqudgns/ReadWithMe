@@ -109,12 +109,18 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
-.btn-white:active {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:tomato;}
-.btn-brown {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
-.btn-brown:active {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
-.btn-black {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
-.btn-black:active {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:tomato;}
+.btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-report {border:none;background-color: #FFF; color:gray;}
+.btn-report:hover {border:none;color:tomato;}
+.btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
+.btn-gray:hover {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-none {border:0px solid gray;background-color: #FFF; color:black;}
+.btn-none:hover {border:0px solid gray;background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:hover {border-radius: 3px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-black {border-radius: 3px; border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-black:active {border-radius: 3px; border:1px solid black; background-color: black; color:tomato;}
 
 .center {text-align:center;vertical-align: middle;}
 hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
@@ -150,8 +156,8 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 				<div style="display: inline-block;">게시판관리</div>
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
-					<li><a href="<%=request.getContextPath() %>">후기</a></li>
-					<li><a href="<%=request.getContextPath() %>">명언</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/review/list">후기</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/famous/list">명언</a></li>
 				</ul>
 			</li>
 		</div>
@@ -188,7 +194,7 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 				<div style="display: inline-block;">닉네임</div>
 				<ul>
 					<li><a href="<%=request.getContextPath() %>/">메인페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>">로그아웃</a></li>
+					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</div>
