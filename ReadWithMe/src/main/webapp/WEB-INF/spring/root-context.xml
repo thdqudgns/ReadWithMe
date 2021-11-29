@@ -34,8 +34,13 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="defaultEncoding" value="utf-8" />
+<<<<<<< HEAD
 		<property name="username" value="ant1993j@gmail.com" />
 		<property name="password" value="ghddmlvy" />
+=======
+		<property name="username" value="anzu.only@gmail.com" />
+		<property name="password" value="uupluuklkwitqxti" />
+>>>>>>> e15f5cbb95a14e1b9736562e1e5027b5a82d812a
 
 	<!-- email 요청시는 SMTP -->
 		<property name="javaMailProperties">
@@ -51,6 +56,8 @@
 	</bean>
 	
 		
+
+			
 	<!-- 마이바티스 수행 객체 설정( SqlSession ) -->
 	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	
