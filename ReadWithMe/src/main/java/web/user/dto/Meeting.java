@@ -2,6 +2,8 @@ package web.user.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Meeting {
 	private int meeting_no;
 	private int user_no;
@@ -11,11 +13,16 @@ public class Meeting {
 	private String meeting_location;
 	private String meeting_title;
 	private String meeting_content;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_rcr_start;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_rcr_end;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_start;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_end;
 	private String meeting_personnel;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_board_date;
 	private String meeting_approved;
 

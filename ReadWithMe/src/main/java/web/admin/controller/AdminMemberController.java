@@ -1,5 +1,6 @@
 package web.admin.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,13 +31,17 @@ public class AdminMemberController {
 		Paging paging = adminMemberService.getPaging(paramData);
 		
 		List<HashMap<String,Object>> memberList = adminMemberService.getMemberList(paging, req);
+		List<HashMap<String,Object>> banMemberList = adminMemberService.getBanMemberList(paging, req);
+	
 				
 		logger.info("memberList {}", memberList);
+		logger.info("banMemberList {}", banMemberList);
 		
 		String userLv = (String) session.getAttribute("user_lv");
 		logger.info("lv {}", userLv);
 		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("banMemberList", banMemberList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("userLv", userLv);
 		
@@ -54,7 +59,23 @@ public class AdminMemberController {
 		return"redirect:/admin/member";
 	}
 	
+	//------------------------------- 회원 제재 -------------------------
+	
+	@RequestMapping(value="/admin/ban", method=RequestMethod.GET)
+	public String BanUser(HttpServletRequest req) {
+		
+		adminMemberService.banUser(req);
+		
+		return"redirect:/admin/member";
+	}
 
+	@RequestMapping(value="/admin/banDelete", method=RequestMethod.GET)
+	public String BanUserDelete (HttpServletRequest req) {
+		
+		adminMemberService.banDeleteUser(req);
+		
+		return"redirect:/admin/member";
+	}
 	
 	
 }

@@ -144,4 +144,26 @@
 		WHERE email = #{email }
 	</delete>
 	
+	<select id="selectBanUser" resultType="web.user.dto.Ban" parameterType="int">
+		SELECT start_ban, end_ban FROM ban
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectCntIsBanUser" resultType="int" parameterType="int">
+		SELECT count(*) FROM Ban
+		WHERE user_no = #{user_no }
+		AND end_ban = to_char(sysdate, 'YYYY/MM/DD')
+	</select>
+	
+	<update id="updateUser" parameterType="int">
+		update UserTb
+		set user_lv = 1
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<delete id="deleteBan" parameterType="int">
+		DELETE FROM ban
+		WHERE user_no = #{user_no }
+	</delete>
+	
 </mapper>
