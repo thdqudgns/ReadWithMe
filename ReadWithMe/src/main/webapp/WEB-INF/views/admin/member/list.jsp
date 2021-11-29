@@ -5,22 +5,10 @@
 
 <c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
+<link href="/resources/css/adminMember.css" rel="stylesheet">
 <script src="/resources/js/adminMember_script.js"></script>
 
 <style type="text/css">
-table {
-	width: 80%;
-	margin: 35px auto;
-	border: 1px solid #000;
-	border-collapse: collapse;
-}
-
-td, th {
-	text-align: center;
-	border: 1px solid #000;
-	border-collapse: collapse;
-}
-
 input[type="radio"] {
     display:none;
 }
@@ -39,18 +27,23 @@ input[type="radio"]:checked + label span {
 }
 </style>
 
-
+<section>
+<div id="seachMemberForm">
 <form id="adminMemberForm" method="get">
 <input type="hidden" id="admin" value="${userLv }">
 
+<div id="clsfc">
+<label for="selectBox">이메일</label>
 <select name="selectBox" id="selectBox">
-<option value="email">이메일</option>
+<option value="email" selected="selected">이메일</option>
 <option value="nick">닉네임</option>
 </select>
+</div>
+
 <input type="text" name="search" id="search">
 <button id="seachMember">검색</button>
 </form>
-
+</div>
 <div id="checkArea">
 <input type="radio" name="member" value="member" checked="checked" id="memberArea">     
 <label for="memberArea"><span></span>회원관리 &nbsp&nbsp&nbsp</label>
@@ -61,10 +54,13 @@ input[type="radio"]:checked + label span {
 
 <div id="memberTable">
 <form method="get" id="banForm1">
+
+<div class="banClass">
 <button id="banMemberBtn1">제재</button>
 <button id="deleteBanMemberBtn1">제재 해제</button>
+</div>
 
-<table>
+<table class="table-hover" style="margin: 0 auto; margin-top: 10px;">
 	<tr>
 		<th><input type="checkbox" name="memberCheck" id="chkAll"></th>
 		<th>이메일</th>
@@ -76,7 +72,7 @@ input[type="radio"]:checked + label span {
 	</tr>
 	<c:forEach items="${memberList }" var="list">
 	<tr>
-		<th><input type="checkbox" value="${list.USER_NO }" name="memberCheck"></th>
+		<td><input type="checkbox" value="${list.USER_NO }" name="memberCheck"></td>
 		<td>${list.EMAIL }</td>
 		<td>${list.NICK }</td>
 		<td><fmt:formatDate value="${list.CREATE_DATE }" pattern="yyyy.MM.dd HH:mm"/></td>
@@ -116,8 +112,10 @@ input[type="radio"]:checked + label span {
 
 <div id="banMemberTable">
 <form method="get" id="banForm" >
+<div class="banClass">
 <button id="banMemberBtn">제재</button>
 <button id="deleteBanMemberBtn">제재 해제</button>
+</div>
 
 <table >
 	<tr>
@@ -129,7 +127,7 @@ input[type="radio"]:checked + label span {
 	</tr>
 	<c:forEach items="${banMemberList }" var="list">
 	<tr>
-		<th><input type="checkbox" value="${list.USER_NO }" name="banMemberCheck"></th>
+		<td><input type="checkbox" value="${list.USER_NO }" name="banMemberCheck"></td>
 		<td>${list.EMAIL }</td>
 		<td>${list.NICK }</td>
 		<td><fmt:formatDate value="${list.START_BAN }" pattern="yyyy.MM.dd HH:mm"/></td>
@@ -141,5 +139,7 @@ input[type="radio"]:checked + label span {
 </form>
 </div>
 
+</section>
 <c:import url="/WEB-INF/views/admin/layout/paging.jsp" />
+
 <c:import url="/WEB-INF/views/admin/layout/footer.jsp" />

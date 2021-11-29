@@ -159,6 +159,13 @@ public interface LoginService {
 	 */
 	public Ban banUser(int user_no);
 
+	/**
+	 * 현재 제재 상태인지 확인 (날짜 비교)
+	 * @param user_no
+	 * @return
+	 */
+	public boolean isBan(int user_no);
+
 
 
 

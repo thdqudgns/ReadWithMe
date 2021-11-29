@@ -129,21 +129,21 @@ public interface MyPageDao {
 	 * @param map
 	 * @return
 	 */
-	public List<Meeting> selectMeetingHosted(int user_no);
+	public List<Meeting> selectMeetingHosted(UserTb user);
 
 	/**
 	 * 참여한 모임 조회
 	 * @param map
 	 * @return
 	 */
-	public List<Meeting> selectMeetingAttend(int meeting_no);
+	public List<Meeting> selectMeetingAttend(int user_no);
 
 	/**
 	 * 참여한 모임의 meetingno을 user_no이용하여 구함
 	 * @param user_no
 	 * @return
 	 */
-	public int selectMeetingNoByUser_no(int user_no);
+	public int selectMeetingNoByUser_no(UserTb user);
 
 
 

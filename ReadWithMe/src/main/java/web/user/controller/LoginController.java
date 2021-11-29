@@ -56,16 +56,33 @@ public class LoginController {
 		if( isLogin ) {
 			
 			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
-						        
+
 				int user_no = Integer.parseInt(loginService.getUserNo(user.getId()));
-				logger.info("user_no {}", user_no);
 				
-				Ban ban = loginService.banUser(user_no);
+				boolean res = loginService.isBan(user_no);
+			
 				
-				logger.info("ban {}", ban);
-				model.addAttribute("ban", ban);
+				if( res ) {
+					logger.info("user_no {}", user_no);
+					
+					Ban ban = loginService.banUser(user_no);
+					
+					logger.info("ban {}", ban);
+					model.addAttribute("ban", ban);
+					session.invalidate();
+					
+					return "/user/member/userBan";			
+					
+				} else {
+					session.setAttribute("login", isLogin);
+					session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+					session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
+					session.setAttribute("user_nick", loginService.getNick(user.getId()));
+					
+					return "redirect:/";
+					
+				}
 				
-		        return "/user/member/userBan";
 		        
 			} else {
 				session.setAttribute("login", isLogin);

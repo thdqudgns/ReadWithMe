@@ -1,5 +1,9 @@
 package web.user.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import web.user.dto.FileTb;
 import web.user.dto.Interest;
 import web.user.dto.Meeting;
-import web.user.dto.Participation;
 import web.user.dto.ToDoList;
 import web.user.dto.UserTb;
 import web.user.service.face.MyPageService;
@@ -35,29 +38,18 @@ public class MyPageMainController {
 	@RequestMapping(value="/mypage/main")
 	public String myPageMain(UserTb user, HttpSession session, Model model) {
 		logger.info("/mypage/main");
+			
+		user.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		
-		int user_no = Integer.parseInt((String)session.getAttribute("user_no"));
-		
-		logger.info("user_no {}", user_no);
-		
-		//로그인한 사람이 주최자인 모임 조회
-		List<Meeting> meetingHostList = myPageService.getMeetingHosted(user_no);
-		
-		//로그인한 사람이 참여자인 모임 조회
-		List<Meeting> meetingaAttendList = myPageService.getMeetingAttend(user_no);
-
-		
-		logger.info("meetingHostList {}", meetingHostList);
-		logger.info("meetingGuestList {}", meetingaAttendList);
-
+		List<Meeting> meetingList = myPageService.getMeeting(user);
 		
 		
-		model.addAttribute("meetingHostList", meetingHostList);
-		model.addAttribute("meetingaAttendList", meetingaAttendList);
+		model.addAttribute("meetingList", meetingList);
 		
 		
 		
 		return "user/mypage/main";
+		
 	}
 	
 	
@@ -212,12 +204,8 @@ public class MyPageMainController {
 		
 		myPageService.deleteToDoList(req);
 				
-		return"redirect:/todolist";
+		return"redirect:/mypage/todolist";
 	}
-
-	
-	
-	
 	
 	
 }

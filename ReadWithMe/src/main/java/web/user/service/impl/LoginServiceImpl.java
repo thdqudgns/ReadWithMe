@@ -348,5 +348,19 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.selectBanUser(user_no);
 	}
 	
+	@Override
+	public boolean isBan(int user_no) {
+		
+		if( loginDao.selectCntIsBanUser(user_no) < 1 ) {
+			logger.info("트루입니다");
+			return true;			
+		} else {
+			logger.info("트루가 아닙니다");
+			loginDao.updateUser(user_no);
+			loginDao.deleteBan(user_no);
+			return false;			
+		}
+	}
+	
 
 }
