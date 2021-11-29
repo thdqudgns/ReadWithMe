@@ -25,8 +25,8 @@ $(document).ready(function() {
 // 	}
 
 	//검색 버튼 클릭
-	$("#btnSearch").click(function() {
-		location.href="/user/famous/list?search="+$("#search").val();
+	$("#btnfamousSearch").click(function() {
+		location.href="/user/famous/list?search="+$("#famousSearch").val();
 	});
 	
 	// 글 입력
@@ -298,9 +298,9 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 <br>
 
 <div class="text-center">
-	<form id="search" action="/user/famous/list" method="get" style="width:250px;">
+	<form id="famousSearch" action="/user/famous/list" method="get" style="width:250px;">
 	<input class="form-control" type="text" name="search" style="width:180px;border: 3px solid #9f8170;"/>
-	<button id="btnSearch" type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; ">
+	<button id="btnfamousSearch" type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; ">
 		<img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/97QT6ay.png">
 	</button>
 	</form>

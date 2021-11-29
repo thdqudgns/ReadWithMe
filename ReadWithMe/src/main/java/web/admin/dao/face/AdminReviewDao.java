@@ -1,13 +1,15 @@
-package web.user.dao.face;
+package web.admin.dao.face;
 
 import java.util.List;
 
 import web.user.dto.Review;
 import web.user.dto.Review_file;
+import web.user.dto.Review_rec;
+import web.user.dto.Rv_cmt;
 import web.util.Paging;
 
-public interface ReviewDao {
-	
+public interface AdminReviewDao {
+
 	/**
 	 * 전체 게시글 수를 조회한다
 	 * 
@@ -25,16 +27,6 @@ public interface ReviewDao {
 	 */
 	public List<Review> selectList(Paging paging);
 
-	//==========================================================
-	
-	// 상세보기 Dao 메소드
-	/**
-	 * 조회수 1 증가
-	 * 
-	 * @param viewReview 게시글 번호
-	 */
-	public void hit(Review viewReview);
-
 	/**
 	 * 게시글 번호로 후기 조회하기
 	 * 
@@ -44,14 +36,6 @@ public interface ReviewDao {
 	public Review selectReviewByReviewNo(Review viewReview);
 
 	/**
-	 * 게시글 번호로 파일 번호 조회
-	 * 
-	 * @param viewReview - 게시글 번호가 담긴 객체
-	 * @return - 파일번호객체
-	 */
-//	public Review_file getFileNo(Review viewReview);
-
-	/**
 	 * 게시글 번호를 이용하여 첨부파일 정보를 조회한다
 	 * 
 	 * @param viewBoard - 조회할 게시글 번호
@@ -59,23 +43,22 @@ public interface ReviewDao {
 	 */
 	public Review_file selectReviewfileByReviewNo(Review viewReview);
 
-	//==========================================================
-	
-	//글 작성 메소드
 	/**
-	 * 글 작성
+	 * 게시글의 전체 추천 수 조회
 	 * 
-	 * @param review - 글제목, 글내용, 회원번호, 닉네임 정보가 담겨있다.
+	 * @param recommend - 추천 수를 조회할 게시글 정보
+	 * @return 전체 추천 수
 	 */
-	public void insertReview(Review review);
+	public int selectTotalCntRecommend(Review_rec recommend);
 
 	/**
-	 * 첨부파일 정보를 삽입한다
+	 * 게시글 번호를 매개로, 해당 게시글의 댓글을 같이 조회한다.
 	 * 
-	 * @param reviewfile - 삽입할 첨부파일 정보
+	 * @param viewReview - 게시글 번호
+	 * @return - 댓글 목록 반환
 	 */
-	public void insertFile(Review_file reviewfile);
-	
+	public List<Rv_cmt> selectComment(Review viewReview);
+
 	/**
 	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
 	 * 
@@ -83,17 +66,6 @@ public interface ReviewDao {
 	 * @return 조회된 첨부파일 정보
 	 */
 	public Review_file selectReviewfileByFileno(int file_no);
-
-	//==========================================================
-
-	/**
-	 * 게시글정보를 수정
-	 * 
-	 * @param review - 수정할 내용을 가진 게시글 객체
-	 */
-	public void update(Review review);
-
-	//==========================================================
 
 	/**
 	 * 게시글의 첨부파일을 삭제한다
@@ -110,11 +82,17 @@ public interface ReviewDao {
 	public void delete(Review review);
 
 	/**
-	 * 마지막에 추가된 행의 글  번호를 조회
-	 * 
-	 * @return - 글 번호
+	 * 댓글 삭제
+	 * @param comment - 삭제하려는 댓글 정보
 	 */
-	public int lastReviewNo();
+	public void deleteComment(Rv_cmt comment);
+
+	/**
+	 * 댓글 수 구하기
+	 * @param comment - 게시글에 작성된 댓글 개수 구하기
+	 * @return 댓글 개수
+	 */
+	public int countComment(Rv_cmt comment);
 
 
 }

@@ -19,5 +19,19 @@ public interface Review_recDao {
 	 * @return 전체 추천 수
 	 */
 	public int selectTotalCntRecommend(Review_rec recommend);
+
+	/**
+	 * 추천상태 지우기
+	 * 
+	 * @param review_rec - 추천 정보 객체
+	 */
+	public void deleteRecommend(Review_rec review_rec);
+
+	/**
+	 * 추천상태 넣기
+	 * 
+	 * @param review_rec - 추천 정보 객체
+	 */
+	public void insertRecommend(Review_rec review_rec);
 	
 }

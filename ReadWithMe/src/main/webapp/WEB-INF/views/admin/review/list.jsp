@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/header.jsp" />
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <!-- 부트스트랩 3 -->
@@ -16,14 +17,9 @@
 
 $(document).ready(function() {
 
-	$("#btnWrite").click(function() {
-		$(location).attr("href", "/user/review/write");
-// 		location.href = "/board/write";
-	})
-	
 	//검색 버튼 클릭
 	$("#btnreviewSearch").click(function() {
-		location.href="/user/review/list?search="+$("#reviewsearch").val();
+		location.href="/admin/review/list?search="+$("#reviewsearch").val();
 	});
 })
 
@@ -46,8 +42,6 @@ td:nth-child(2) {
 <div class="container">
 <br>
 
-<img alt="bookimage" src="https://i.imgur.com/AV85hvj.jpg" width="1140px;">
-
 <h1>후기 게시판</h1>
 <hr>
 
@@ -66,7 +60,7 @@ td:nth-child(2) {
 	<c:forEach items="${reviewList }" var="reviewList">
 		<tr>
 			<td>${reviewList.review_no }</td>
-			<td><a href="/user/review/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a></td>
+			<td><a href="/admin/review/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a></td>
 			<td>${reviewList.nick}</td>
 			<td>${reviewList.review_views }</td>
 			<td><fmt:formatDate value="${reviewList.review_date }" pattern="yyyy-MM-dd"/></td>
@@ -75,9 +69,6 @@ td:nth-child(2) {
 	</tbody>
 	</table>
 </div>
-<c:if test="${login}">
-<button id="btnWrite" class="btn btn-primary pull-left">글쓰기</button>
-</c:if>
 <span class="pull-right">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
 
@@ -89,9 +80,9 @@ td:nth-child(2) {
 <br><br>
 
 
-<c:import url="/WEB-INF/views/user/layout/reviewPaging.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/adminReviewPaging.jsp" />
 
 </div><!-- .container -->
 
 
-<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/footer.jsp" />
