@@ -30,6 +30,13 @@ public interface MeetingDao {
 	 * @param viewMeeting - 조회하려는 모임의 글 번호 객체
 	 * @return 조회된 모임 정보
 	 */
-	public Meeting selectMeetingByMeetingno(Meeting viewMeeting);
-
+	public Meeting selectMeetingByMeetingno(int no);
+	
+	/**
+	 * 모임 정보를 삽입한다
+	 * 
+	 * @param meeting - 삽입할 모임 정보
+	 */
+	public void insertMeeting(Meeting meeting);
+	
 }

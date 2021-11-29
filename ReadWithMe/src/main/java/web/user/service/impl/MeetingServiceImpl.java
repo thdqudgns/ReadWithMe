@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dao.face.MeetingDao;
 import web.user.dto.Meeting;
@@ -33,7 +34,20 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Meeting view(Meeting viewMeeting) {
-		return meetingDao.selectMeetingByMeetingno(viewMeeting);
+	public Meeting view(int no) {
+		return meetingDao.selectMeetingByMeetingno(no);
 	}
+
+	@Override
+	public void write(Meeting meeting, MultipartFile file) {
+
+		//게시글 정보 처리
+		if( "".equals(meeting.getMeeting_title()) ) {
+			meeting.setMeeting_title("(제목없음)");
+		}
+		meetingDao.insertMeeting(meeting);
+		
+	}
+
+
 }

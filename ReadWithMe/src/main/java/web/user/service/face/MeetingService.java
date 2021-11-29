@@ -2,6 +2,8 @@ package web.user.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import web.user.dto.Meeting;
 import web.util.Paging;
 
@@ -34,6 +36,30 @@ public interface MeetingService {
 	 * @param viewMeeting - 상세 조회할 모임 번호 DTO
 	 * @return 조회된 모임 정보
 	 */
-	public Meeting view(Meeting viewMeeting);
+	public Meeting view(int no);
+	
+	/**
+	 * 게시글 + 첨부파일을 처리한다
+	 * 
+	 * @param board - 게시글 정보 DTO
+	 * @param file - 첨부파일 정보 DTO
+	 */
+	public void write(Meeting meeting, MultipartFile file);
+
+//	/**
+//	 * 게시글번호를 이용하여 업로드된 파일의 정보를 조회한다
+//	 * 
+//	 * @param viewMeeting - 조회할 게시글 번호를 가진 객체
+//	 * @return 첨부파일 정보
+//	 */
+//	public FileTb getAttachFile(Meeting view);
+
+//	/**
+//	 * 파일번호를 이용하여 업로드된 파일의 정보를 조회한다
+//	 * 
+//	 * @param fileNo - 조회할 파일 번호
+//	 * @return 첨부파일 정보
+//	 */
+//	public FileTb getFile(int file_no);
 	
 }
