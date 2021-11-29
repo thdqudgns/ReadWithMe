@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-import web.user.dto.FileTb;
+import web.user.dto.Notice_file;
 
 //import web.dto.Boardfile;
 
@@ -31,11 +31,11 @@ public class DownloadView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 
 		//모델값 가져오기
-		FileTb file = (FileTb) model.get("downFile");
+		Notice_file file = (Notice_file) model.get("downFile");
 		logger.info("{}", file);
 		
 		//업로드된 파일 객체
-		File src = new File(context.getRealPath("upload"), file.getThumbnail_url());
+		File src = new File(context.getRealPath("upload"), file.getStored_name());
 		
 		//파일 입력 스트림
 		FileInputStream fis = new FileInputStream(src);

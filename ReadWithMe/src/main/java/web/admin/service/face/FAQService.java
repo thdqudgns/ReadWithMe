@@ -56,4 +56,25 @@ public interface FAQService {
 	 */
 	public void delete(FAQ faq);
 
+	/**
+	 * 자주묻는질문 게시판에서 선택항목 삭제
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void deleteChecked(String no);
+
+	/**
+	 * 자주묻는질문 게시판에서 선택항목 등록
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void registerChecked(String no);
+
+	/**
+	 * 자주묻는질문 게시판에서 선택항목 등록취소
+	 * 
+	 * @param string - 게시글 번호
+	 */
+	public void cancelChecked(String no);
+
 }

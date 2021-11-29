@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.user.dao.face.UserInquiryDao">
+
+	<sql id="selectInquiry">
+		SELECT
+		board_no, board_title, board_content
+		, board_date, check_reply
+		FROM inquiry
+	</sql>
+	
+	<sql id="whereTitleSearch">
+		WHERE board_title LIKE '%' || #{search} || '%' 
+	</sql>
+	
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT COUNT(*) FROM (
+			<include refid="selectInquiry" />
+			<include refid="whereTitleSearch" />
+		)
+	</select>
+	
+	<select id="selectAll" resultType="web.user.dto.Inquiry" parameterType="web.user.dto.Inquiry">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				<include refid="selectInquiry" />
+				<include refid="whereTitleSearch" />
+			ORDER BY board_no DESC
+			) B
+		) R
+		WHERE rnum BETWEEN #{startNo } AND #{endNo}
+	</select>
+
+	<insert id="insertInquiry" parameterType="web.user.dto.Inquiry">
+		<selectKey order="BEFORE" resultType="int" keyProperty="board_no">
+			SELECT inquiry_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO inquiry (board_no, user_no, board_title, board_content)
+		VALUES (#{board_no }, 1, #{board_title }, #{board_content })
+	</insert>
+	
+	<select id="selectInquiryByBoardno" resultType="web.user.dto.Inquiry" parameterType="web.user.dto.Inquiry">
+		SELECT * FROM inquiry
+		WHERE board_no = #{board_no }
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -34,8 +34,8 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="defaultEncoding" value="utf-8" />
-		<property name="username" value="anzu.only@gmail.com" />
-		<property name="password" value="dlwmdkswm1102." />
+		<property name="username" value="ant1993j@gmail.com" />
+		<property name="password" value="ghddmlvy" />
 
 	<!-- email 요청시는 SMTP -->
 		<property name="javaMailProperties">

@@ -2,6 +2,7 @@ package web.admin.service.face;
 
 import java.util.List;
 
+import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.util.Paging;
 
@@ -30,5 +31,26 @@ public interface InquiryService {
 	 * @return
 	 */
 	public Inquiry view(Inquiry inquiry);
+
+	/**
+	 * 관리자 댓글 작성
+	 * 
+	 * @param adminInquiry - 댓글 정보를 담은 객체
+	 */
+	public void insertComment(AdminInquiry adminInquiry);
+
+	/**
+	 * 답변 완료 체크하기
+	 *  
+	 * @param adminInquiry - inquiry의 board_no 을 담은 객체
+	 */
+	public void checkReply(AdminInquiry adminInquiry);
+
+	/**
+	 * 댓글 수정하기
+	 * 
+	 * @param adminInquiry - comment_no, content 을 담은 DTO
+	 */
+	public void updateComment(AdminInquiry adminInquiry);
 
 }

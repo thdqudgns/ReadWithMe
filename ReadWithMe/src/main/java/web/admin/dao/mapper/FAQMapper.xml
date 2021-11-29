@@ -9,7 +9,7 @@
   	<sql id="selectFAQ">
   		SELECT
   			board_no, board_title, board_content
-  			, board_date
+  			, board_date, type, register, hit, updated_date
   		FROM FAQ
   	</sql>
   
@@ -28,6 +28,9 @@
   			) B
   		) R
   		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+  		<if test="type != 0">
+		AND type = #{type }
+		</if>
   	</select>
   
   	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
@@ -43,18 +46,19 @@
   	</select>
   	
   	<insert id="insertFAQ" parameterType="web.user.dto.FAQ">
-  		<selectKey order="BEFORE" resultType="int" keyProperty="boardNo">
+  		<selectKey order="BEFORE" resultType="int" keyProperty="board_no">
   			SELECT faq_seq.nextval FROM dual
   		</selectKey>
   	
-  		INSERT INTO faq( board_no, board_title, board_content )
-  		VALUES (#{boardNo }, #{board_title }, #{board_content })
+  		INSERT INTO faq( board_no, board_title, board_content, type )
+  		VALUES (#{board_no }, #{board_title }, #{board_content }, #{type })
   	</insert>
   	
   	<update id="update" parameterType="web.user.dto.FAQ">
   		UPDATE faq
   		SET board_title = #{board_title }
   			, board_content = #{board_content }
+  			, updated_date = sysdate
   		WHERE board_no = #{board_no }
   	</update>
   	
@@ -63,6 +67,22 @@
   		WHERE board_no = #{board_no }
   	</delete>
   	
+  	<delete id="deleteByBoardno" parameterType="String">
+  		DELETE faq
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	 <update id="registerByBoardno" parameterType="String">
+ 		UPDATE faq
+ 		SET register = 1
+ 		WHERE board_no = #{board_no }
+ 	</update>
+ 	
+ 	<update id="updateToCancelByBoardno" parameterType="String">
+ 		UPDATE faq
+ 		SET register = 0
+ 		WHERE board_no = #{board_no }
+ 	</update>
   		
   </mapper>
   

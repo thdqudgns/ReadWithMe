@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import web.admin.dao.face.InquiryDao;
 import web.admin.service.face.InquiryService;
+import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.util.Paging;
 
@@ -48,6 +49,23 @@ public class InquiryServiceImpl implements InquiryService{
 	public Inquiry view(Inquiry inquiry) {
 		
 		return inquiryDao.selectInquiryByBoardno(inquiry);
+	}
+	
+	@Override
+	public void insertComment(AdminInquiry adminInquiry) {
+			inquiryDao.insertComment(adminInquiry);	//	댓글 정보 DB에 입력
+//			inquiryDao.check_reply(adminInquiry);	//	답변 완료
+	}
+	
+	@Override
+	public void checkReply(AdminInquiry adminInquiry) {
+		inquiryDao.check_reply(adminInquiry);
+	}
+	
+	@Override
+	public void updateComment(AdminInquiry adminInquiry) {
+		inquiryDao.updateComment(adminInquiry);
+		
 	}
 	
 }

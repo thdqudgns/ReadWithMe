@@ -43,6 +43,7 @@
 	</beans:bean> 
 	
 	
+	
 	<!-- MultipartResolver 설정 -->
 	<!-- 	-> 파일업로드 요청을 처리하는 클래스(스프링 빈) -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

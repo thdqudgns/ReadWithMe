@@ -52,4 +52,25 @@ public interface FAQDao {
 	 */
 	public void delete(FAQ faq);
 
+	/**
+	 * 자주묻는질문 선택항목 삭제
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void deleteByBoardno(String no);
+
+	/**
+	 * 자주묻는질문 선택항목 등록
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void registerByBoardno(String no);
+
+	/**
+	 * 자주묻는질문 선택항목 등록취소
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void updateToCancelByBoardno(String no);
+
 }

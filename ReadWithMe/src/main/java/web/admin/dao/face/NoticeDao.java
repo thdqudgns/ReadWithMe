@@ -60,29 +60,15 @@ public interface NoticeDao {
 	 * @param viewNotice - 조회할 게시글 번호
 	 * @return 조회된 첨부파일 정보
 	 */
-	public FileTb selectNoticefileByNoticeno(Notice viewNotice);
-
-	/**
-	 * 첨부파일 정보를 삽입한다
-	 * 
-	 * @param notice_file - 삽입할 첨부파일 정보
-	 */
-	public void insertFileIntoNotice_file(Notice_file notice_file);
+	public Notice_file selectNoticefileByNoticeno(Notice viewNotice);
 
 	/**
 	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
 	 * 
-	 * @param file_no - 조회할 파일 번호
+	 * @param Notice_file - 조회할 파일 번호
 	 * @return 조회된 첨부파일 정보
 	 */
-	public FileTb selectNoticefileByFileno(int file_no);
-
-	/**
-	 * 첨푸파일 정보를 삽입한다
-	 * 
-	 * @param fileTb - 삽입할 첨부파일 정보
-	 */
-	public void insertFileIntoFileTb(FileTb fileTb);
+	public Notice_file selectNoticefileByFileno(int file_no);
 
 	/**
 	 * 게시글의 첨부파일을 삭제한다
@@ -92,17 +78,31 @@ public interface NoticeDao {
 	public void deleteFile(Notice notice);
 
 	/**
-	 * 게시글의 첨부파일을 삭제한다
-	 * 
-	 * @param notice - 첨부파일을 삭제할 게시글 객체
-	 */
-	public void deleteFileTb(Notice notice);
-
-	/**
 	 * 선택된 게시글을 게시글 번호를 이용하여 삭제한다
 	 * 
 	 * @param no - 선택된 게시글의 번호
 	 */
 	public void deleteByBoardno(String no);
+
+	/**
+	 * 선택한 게시글 번호의 게시글 등록
+	 * 
+	 * @param no - 선택한 게시글 번호
+	 */
+	public void registerByBoardno(String no);
+
+	/**
+	 * 선택한 게시글을 게시글 번호로 조회하여 취소
+	 * 
+	 * @param no - 선택한 게시글 번호
+	 */
+	public void updateToCancelByBoardno(String no);
+
+	/**
+	 * 첨부파일 정보를 삽입한다
+	 * 
+	 * @param notice_file - 삽입할 첨부파일 정보
+	 */
+	public void insertFile(Notice_file notice_file);
 
 }

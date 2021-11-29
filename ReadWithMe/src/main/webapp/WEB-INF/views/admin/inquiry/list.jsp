@@ -68,14 +68,23 @@ table, th {
 		<th>글 번호</th>
 		<th>제목</th>
 		<th>작성일</th>
+		<th>답변여부</th>
 	</tr>
 </thead>
 <tbody>
-<c:forEach items="${inquiryList }" var="inquiry">
+<c:forEach items="${inquiry }" var="inquiry">
 	<tr>
 		<td>${inquiry.board_no }</td>
-		<td><a href="/admin/faq/view?board_no=${inquiry.board_no }">${inquiry.board_title }</a></td>
+		<td><a href="/admin/inquiry/view?board_no=${inquiry.board_no }">${inquiry.board_title }</a></td>
 		<td><fmt:formatDate value="${inquiry.board_date }" pattern="yy-MM-dd HH:mm:ss" /></td>
+		<td>
+		<c:if test="${inquiry.check_reply == 0 }">
+		답변 x
+		</c:if>
+		<c:if test="${inquiry.check_reply == 1 }">
+		답변 ㅇ
+		</c:if>
+		</td>
 	</tr>
 </c:forEach>
 </tbody>

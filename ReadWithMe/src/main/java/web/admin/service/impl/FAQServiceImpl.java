@@ -85,6 +85,24 @@ public class FAQServiceImpl implements FAQService{
 		
 	}
 	
+	//자주묻는질문 선택항목 삭제
+	@Override
+	public void deleteChecked(String no) {
+		faqDao.deleteByBoardno(no);
+	}
+	
+	//자주묻는질문 선택항목 등록
+	@Override
+	public void registerChecked(String no) {
+		faqDao.registerByBoardno(no);
+	}
+	
+	//자주묻는질문 선택항목 등록취소
+	@Override
+	public void cancelChecked(String no) {
+		faqDao.updateToCancelByBoardno(no);
+	}
+	
 }
 
 

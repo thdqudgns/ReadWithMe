@@ -2,6 +2,7 @@ package web.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import web.admin.service.face.FAQService;
 import web.user.dto.FAQ;
@@ -29,12 +29,17 @@ public class FAQController {
 	
 	//	자주묻는질문 목록
 	@RequestMapping(value="/admin/faq/list")
-	public void FAQList(Paging paramData, Model model) {	
+	public void FAQList(FAQ faq, Paging paramData, Model model) {	
 		//	로깅
 		logger.info("/admin/faq/list");
 		
 		//	페이징 계산
 		Paging paging = faqService.getPaging( paramData );
+		
+		//타입 번호
+		int type_no = faq.getType();
+		paging.setType(type_no);
+		
 		
 		//	게시판 조회하기
 		List<FAQ> list = faqService.list(paging);
@@ -60,10 +65,6 @@ public class FAQController {
 		
 		//	게시판 상세 조회
 		viewFAQ = faqService.view(viewFAQ);
-		
-//		//	첨부파일
-//		FileTb fileTb = faqService.getAttachFile(viewFAQ);
-//		model.addAttribute("FAQfile", fileTb);
 		
 		//	모델값
 		model.addAttribute("viewFAQ", viewFAQ);
@@ -126,6 +127,51 @@ public class FAQController {
 		return "redirect:/admin/faq/list";
 		
 	}
+	
+	//자주묻는질문 선택항목 삭제
+	@RequestMapping( value = "/admin/faq/delete", method = RequestMethod.POST)
+	public String ajaxDelete(HttpServletRequest req) {
+		
+		String[] ajaxMsg = req.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		for(int i=0; i<size; i++) {
+			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
+			faqService.deleteChecked(ajaxMsg[i]);
+		}
+		
+		return "redirect:/admin/faq/list";
+	}
+	
+	//자주묻는질문 선택항목 등록
+	@RequestMapping(value = "/admin/faq/register")
+	public String ajaxRegister(HttpServletRequest req) {
+		
+		String[] ajaxMsg = req.getParameterValues("valueArr2");
+
+		int size = ajaxMsg.length;
+		for(int i=0; i<size; i++) {
+			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
+			faqService.registerChecked(ajaxMsg[i]);
+		}
+		
+		return "redirect:/admin/notice";
+	}
+	
+	//자주묻는질문 선택항목 등록취소
+	@RequestMapping(value = "/admin/faq/cancel")
+	public String ajaxCancel(HttpServletRequest req) {
+		
+		String[] ajaxMsg = req.getParameterValues("valueArr3");
+
+		int size = ajaxMsg.length;
+		for (int i=0; i<size; i++) {
+			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
+			faqService.cancelChecked(ajaxMsg[i]);
+		}
+		
+		return "redirect:/admin/notice";
+	}
+	
 	
 }
 

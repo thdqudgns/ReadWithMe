@@ -9,7 +9,7 @@
   		<sql id="selectInquiry">
   			SELECT
   				board_no, board_title, board_content
-  				,	board_date
+  				,	board_date, check_reply
   			FROM inquiry
   		</sql>
   		
@@ -39,6 +39,25 @@
   			SELECT * FROM inquiry
   			WHERE board_no = #{board_no }
   		</select>
+  		
+  	<insert id="insertComment" parameterType="web.user.dto.AdminInquiry">
+  		INSERT INTO admininquiry (comment_no, board_no, content )
+  		VALUES (admininquiry_seq.nextval, #{board_no }, #{content } )
+  	</insert>
+  	
+  	<update id="check_reply" parameterType="web.user.dto.AdminInquiry">
+  		UPDATE inquiry
+  		SET check_reply = 1
+  		WHERE board_no = #{board_no }
+  	</update>
+  	
+  	<update id="updateComment" parameterType="web.user.dto.AdminInquiry">
+  		UPDATE admininquiry
+  		SET content = #{content }
+  		WHERE comment_no = #{comment_no }
+  	</update>
+  	
+  	
   	
   	</mapper>
   	

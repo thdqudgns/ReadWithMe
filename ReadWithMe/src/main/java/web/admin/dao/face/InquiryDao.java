@@ -2,6 +2,7 @@ package web.admin.dao.face;
 
 import java.util.List;
 
+import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.util.Paging;
 
@@ -30,6 +31,27 @@ public interface InquiryDao {
 	 * @return
 	 */
 	public Inquiry selectInquiryByBoardno(Inquiry inquiry);
+
+	/**
+	 * 댓글 정보 입력
+	 * 
+	 * @param adminInquiry - 댓글 정보 담은 객체
+	 */
+	public void insertComment(AdminInquiry adminInquiry);
+
+	/**
+	 * 답변 완료 기록 db에 남기기
+	 * 
+	 * @param adminInquiry - 댓글 정보 담은 객체
+	 */
+	public void check_reply(AdminInquiry adminInquiry);
+
+	/**
+	 * 댓글 수정하기
+	 * 
+	 * @param adminInquiry - comment_no, content 담은 DTO
+	 */
+	public void updateComment(AdminInquiry adminInquiry);
 
 	
 }

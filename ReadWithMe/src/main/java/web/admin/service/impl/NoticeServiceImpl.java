@@ -93,13 +93,10 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		Notice_file notice_file = new Notice_file();
 		notice_file.setBoard_no(notice.getBoard_no());
+		notice_file.setOrigin_name(originName);
+		notice_file.setStored_name(storedName);
 		
-		FileTb fileTb = new FileTb();
-		fileTb.setOrigin_name(originName);
-		fileTb.setThumbnail_url(storedName);
-		
-		noticeDao.insertFileIntoFileTb(fileTb);
-		noticeDao.insertFileIntoNotice_file(notice_file);
+		noticeDao.insertFile(notice_file);
 		
 		
 	}
@@ -146,35 +143,29 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		Notice_file notice_file = new Notice_file();
 		notice_file.setBoard_no(notice.getBoard_no());
+		notice_file.setOrigin_name(originName);
+		notice_file.setStored_name(storedName);
 		
-		FileTb fileTb = new FileTb();
-		fileTb.setOrigin_name(originName);
-		fileTb.setThumbnail_url(storedName);
-		
-		noticeDao.deleteFileTb(notice);
 		noticeDao.deleteFile(notice);
-		
-		noticeDao.insertFileIntoNotice_file(notice_file);
-		noticeDao.insertFileIntoFileTb(fileTb);
+		noticeDao.insertFile(notice_file);
 		
 	}
 	
 	@Override
 	public void delete(Notice notice) {
 		
-		noticeDao.deleteFileTb(notice);
 		noticeDao.deleteFile(notice);
 		noticeDao.delete(notice);
 		
 	}
 	
 	@Override
-	public FileTb getAttachFile(Notice viewNotice) {
+	public Notice_file getAttachFile(Notice viewNotice) {
 		return noticeDao.selectNoticefileByNoticeno(viewNotice);
 	}
 	
 	@Override
-	public FileTb getFile(int file_no) {
+	public Notice_file getFile(int file_no) {
 		return noticeDao.selectNoticefileByFileno(file_no);
 	}
 	
@@ -184,6 +175,17 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDao.deleteByBoardno(no);
 	}
 	
+	//선택한 게시글 등록
+	@Override
+	public void registerChecked(String no) {
+		noticeDao.registerByBoardno(no);
+	}
+	
+	//선택한 게시글 취소
+	@Override
+	public void cancelChecked(String no) {
+		noticeDao.updateToCancelByBoardno(no);
+	}
 }
 
 
