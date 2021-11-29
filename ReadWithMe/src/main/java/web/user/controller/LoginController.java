@@ -1,7 +1,7 @@
 package web.user.controller;
 
 import java.io.IOException;
-import java.util.Map;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,26 +10,18 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 import web.user.dto.PhoneAuth;
 import web.user.dto.UserSessionTb;
@@ -53,7 +45,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp) {
+	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp, Model model)  {
 		
 		logger.info("user {}", user);
 		boolean isLogin = loginService.login(user);
@@ -62,26 +54,44 @@ public class LoginController {
 
 		
 		if( isLogin ) {
-			session.setAttribute("login", isLogin);
-			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
-			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
-			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			
-//			if( user.getRemember() > 0) {
-//				logger.info("remember {}", user.getRemember()); 
-//				Cookie loginCookie = new Cookie("loginCookie", session.getId());
-//				loginCookie.setPath("/");
-//				int amount = 60*60*24*7;
-//				loginCookie.setMaxAge(amount);
-//				
-//				resp.addCookie(loginCookie);
-//				
-//				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
-//				loginService.KeepLogin(login.)
-//			}
+			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
+
+				int user_no = Integer.parseInt(loginService.getUserNo(user.getId()));
+				
+				boolean res = loginService.isBan(user_no);
 			
-			
-			return "redirect:/";
+				
+				if( res ) {
+					logger.info("user_no {}", user_no);
+					
+					Ban ban = loginService.banUser(user_no);
+					
+					logger.info("ban {}", ban);
+					model.addAttribute("ban", ban);
+					session.invalidate();
+					
+					return "/user/member/userBan";			
+					
+				} else {
+					session.setAttribute("login", isLogin);
+					session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+					session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
+					session.setAttribute("user_nick", loginService.getNick(user.getId()));
+					
+					return "redirect:/";
+					
+				}
+				
+		        
+			} else {
+				session.setAttribute("login", isLogin);
+				session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+				session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
+				session.setAttribute("user_nick", loginService.getNick(user.getId()));
+				
+				return "redirect:/";
+			}
 			
 		} else {
 			session.invalidate();
@@ -108,8 +118,8 @@ public class LoginController {
 		
 		if( isKakaoLogin ) {
 			session.setAttribute("login", isKakaoLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			return "redirect:/";
 		} else {
@@ -142,10 +152,17 @@ public class LoginController {
 	//---------------------------------- 네이버 로그인(회원가입) ---------------------------------------
 	
 	@RequestMapping(value="/login/naver", method=RequestMethod.GET)
-	public ModelAndView naverLogin(HttpSession session) {
+	public void naverLogin(HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		String naverAuthUrl = NaverLogin.getAuthorizationUrl(session);
+		
+		PrintWriter writer = response.getWriter();
+        writer.println("<script>");
+        writer.print("location.href =\"");
+        writer.println(request.getContextPath() + naverAuthUrl +"\";");
+        writer.println("</script>");
+        
 		logger.info("/naver/login [GET]");
-		return new ModelAndView("user/member/NaverWait", "url", naverAuthUrl);
+		
 	}
 	
 	@RequestMapping(value="/login/naver/token",method = RequestMethod.GET)
@@ -163,11 +180,10 @@ public class LoginController {
 		} 
 
 		boolean isNaverLogin = loginService.getNaverId(user);
-		
 		if ( isNaverLogin ) {
 			session.setAttribute("login", isNaverLogin);
-			session.setAttribute("user_no", user.getUser_no());
-			session.setAttribute("user_lv", user.getUser_lv());
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			return "redirect:/";
 		} else {
@@ -199,56 +215,6 @@ public class LoginController {
 	
 	//---------------------------------- 구글 로그인(회원가입) ---------------------------------------
 
-//	@RequestMapping(value="/login/google")
-//	public void googleLogin(Model model, @RequestParam(value = "code") String authCode) throws JsonProcessingException {
-//
-//		//HTTP Request를 위한 RestTemplate
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		//Google OAuth Access Token 요청을 위한 파라미터 세팅
-//		GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest
-//				.builder()
-//				.clientId("604366855673-sn0moenehgundmgh9hf20dksulomr1en.apps.googleusercontent.com")
-//				.clientSecret("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")
-//				.code(authCode)
-//				.redirectUri("http://localhost:8888/login/google")
-//				.grantType("authorization_code").build();
-//
-//		
-//		//JSON 파싱을 위한 기본값 세팅
-//		//요청시 파라미터는 스네이크 케이스로 세팅되므로 Object mapper에 미리 설정해준다.
-//		ObjectMapper mapper = new ObjectMapper();
-//		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-//		mapper.setSerializationInclusion(Include.NON_NULL);
-//
-//		//AccessToken 발급 요청
-//		ResponseEntity<String> resultEntity = restTemplate.postForEntity(GOOGLE_TOKEN_BASE_URL, googleOAuthRequestParam, String.class);
-//
-//		//Token Request
-//		GoogleOAuthResponse result = mapper.readValue(resultEntity.getBody(), new TypeReference<GoogleOAuthResponse>() {
-//		});
-//		
-//		System.out.println(resultEntity.getBody());
-//
-//		//ID Token만 추출 (사용자의 정보는 jwt로 인코딩 되어있다)
-//		String jwtToken = result.getIdToken();
-//		String requestUrl = UriComponentsBuilder.fromHttpUrl("https://oauth2.googleapis.com/tokeninfo")
-//		.queryParam("id_token", jwtToken).encode().toUriString();
-//		
-//		String resultJson = restTemplate.getForObject(requestUrl, String.class);
-//		
-//		Map<String,String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>(){});
-//		model.addAllAttributes(userInfo);
-//		model.addAttribute("token", result.getAccessToken());
-//		System.out.println(userInfo);
-//
-//
-//
-//
-//		return "/google.html";
-//
-//	}
-	
 	//---------------------------------- 로그아웃 ---------------------------------------
 	
 	@RequestMapping(value="/logout")
@@ -271,7 +237,7 @@ public class LoginController {
 		logger.info("user {}", user);
 		
 		boolean res = loginService.join(user, req);
-		loginService.userAuth(user.getEmail());
+		loginService.userAuth(user);
 		if(res) {
 			logger.info("회원가입 성공");
 			return "/user/member/joinEnd";
@@ -316,6 +282,28 @@ public class LoginController {
 	}
 	
 	
+	@RequestMapping(value="/emailCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int emailCheck(@RequestParam("email") String email) {
+		logger.info(email);
+		int res = loginService.userEmailCheck(email);
+		
+		logger.info("res {}", res);
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/agree/personal")
+	public String PersonalAgree(Model model) {
+		model.addAttribute("agree", "personal");
+		return"user/member/agree";
+	}
+	
+	@RequestMapping(value="/agree/service")
+	public String ServiceAgree(Model model) {
+		model.addAttribute("agree", "service");
+		return"user/member/agree";
+	}
 	//---------------------------------- 이메일 인증 ---------------------------------------
 	
 	@RequestMapping(value = "/email/register", method = RequestMethod.GET)
@@ -339,11 +327,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/email/confirm", method = RequestMethod.GET)
-	public String emailConfirm(String email, Model model) throws Exception {
+	public void emailConfirm(String email, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		logger.info(email);
 		model.addAttribute("email", email);
 
-		return "/user/member/emailConfirm";
+		response.setContentType("text/html; charset=utf-8");
+		
+		PrintWriter writer = response.getWriter();
+        writer.println("<script>");
+        writer.println("alert('이메일 인증이 완료되었습니다, 회원가입을 할 수 있는 페이지로 이동합니다')");
+        writer.print("location.href =\"");
+        writer.println(request.getContextPath() + "/join/origin?email=" + email +"\";");
+        writer.println("</script>");
 	}
 	
 	
@@ -367,46 +362,105 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/phone/confirm", method=RequestMethod.POST)
-	public String PhoneConfirmProc(PhoneAuth phoneAuth, Model model) {	
+	public void PhoneConfirmProc(PhoneAuth phoneAuth, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {	
 		logger.info("phoneAuth {}", phoneAuth);
 		
+		String phone = phoneAuth.getPhone();
+		
 		if( loginService.phoneRegister(phoneAuth) ) {
-			return "/user/member/phoneConfirm";	
+			
+			response.setContentType("text/html; charset=utf-8");
+			
+			PrintWriter writer = response.getWriter();
+	        writer.println("<script>");
+	        writer.println("alert('핸드폰 인증이 완료되었습니다, 회원가입을 할 수 있는 페이지로 이동합니다')");
+	        writer.print("location.href =\"");
+	        writer.println(request.getContextPath() + "/join/origin?phone=" + phone +"\";");
+	        writer.println("</script>");
+	        
 		} else {			
-			return "/user/member/phoneFail";	
+			response.setContentType("text/html; charset=utf-8");
+			
+			PrintWriter writer = response.getWriter();
+	        writer.println("<script>");
+	        writer.print("location.href =\"");
+	        writer.println(request.getContextPath() + "/phone/fail\";");
+	        writer.println("</script>");	
 		}
 	}
+	
+	@RequestMapping(value="/phone/fail")
+	public String phoneFail() {
+		return"user/member/phoneFail";
+	}
+	
 	
 	
 	//---------------------------------- 아이디/비밀번호찾기 ---------------------------------------
 	
-	public void findId(UserTb user) {
-		loginService.findId(user);
+	@RequestMapping(value="/seach/login")
+	public String seachLogin(UserTb user) {
+		return "/user/member/seachLogin";	
 	}
 	
-	public void findPw(UserTb user) {
-		loginService.findPw(user);
+	@RequestMapping(value="/find/pw", method = RequestMethod.GET)
+	public String findPw() {
+		return "/user/member/findPw";	
 	}
 	
+	@RequestMapping(value="/find/pw", method = RequestMethod.POST)
+	public String findPwProc(UserTb user) {
+		logger.info("/find/pw [POST]");
+		
+		logger.info("user {}", user);
+		
+		if( loginService.findPw(user) ) {
+			if(user.getEmail() != "" && user.getEmail() != null ) {				
+				loginService.sendPwByEmail(user);
+			} else if(user.getPhone() != "" && user.getPhone() != null ) {	
+				logger.info("getPhone() [POST]");
+				loginService.sendPwByPhone(user);
+			}
+		}
+		
+		return "/user/member/findPwEnd";					
+	}
 	
+	@RequestMapping(value="/find/id", method = RequestMethod.GET)
+	public String findId() {
+		return "/user/member/findId";	
+	}
 	
-	//---------------------------------- 회원탈퇴 ---------------------------------------
+	@RequestMapping(value="/find/id", method = RequestMethod.POST)
+	public String findIdProc(UserTb user, Model model) {
+		
+		logger.info("/find/id [POST]");
+		
+		logger.info("user {}", user);
+				
+		String id = loginService.findId(user);
 	
+		model.addAttribute("id", id);
+		
+		
+		return "/user/member/findIdEnd";	
+	}
 	
+	@RequestMapping(value="/find/email", method = RequestMethod.GET)
+	public String findEmail() {
+		return "/user/member/findEmail";	
+	}
+	
+	@RequestMapping(value="/find/email", method = RequestMethod.POST)
+	public String findEmailProc(UserTb user, Model model) {
+		logger.info("/find/email [POST]");
+		
+		loginService.findEmail(user);
+				
+		return "/user/member/findEmailEnd";	
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

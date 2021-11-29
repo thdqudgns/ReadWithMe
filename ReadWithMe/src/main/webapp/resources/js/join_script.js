@@ -19,9 +19,12 @@ $(document).ready(function() {
 	    genderButtons[currentGender].classList.remove('active');
 	    genderButtons[genderNum].classList.add('active');
 	    currentGender = genderNum;
+
+	    $("#gender").val(genderButtons[currentGender].getAttribute('data-gender'));
 	    
 	}
-	$("#gender").val(genderButtons[currentGender].getAttribute('data-gender'));
+	
+	 
 	
 	//정규식
 	
@@ -158,51 +161,125 @@ $(document).ready(function() {
 		
 	});
 
+	$("#email").blur(function() {
+		const email = $('#email').val();
+		$.ajax({
+			type : 'get'
+				, url : '/emailCheck'
+					, data: {'email': email}
+		, dataType: 'json'
+			, success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data >= 1) {
+					$("#email_check").text("사용중인 이메일입니다");
+					$("#email_check").css("color", "#9F8170");
+					$("#reg_submit").attr("disabled", true);
+				} else {
+					
+					if(!mailJ.test(email)){
+						$('#email_check').text('이메일 형식에 맞게 작성 해주세요! ex)aaaa@gmail.com');
+						$('#email_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", true);				
+						
+					} else {
+						$('#email_check').text("사용할 수 있는 이메일 입니다!");
+						$('#email_check').css('color', '#9F8170');
+						$("#reg_submit").attr("disabled", false);
+					}
+					
+				}
+			}, error : function() {
+				console.log("실패");
+			}
+		});
+		
+	});
+	
+	$('a[href="/agree/personal"]').click(function(){
+		window.open(this.href);
+		return false;
+		});
+	$('a[href="/agree/service"]').click(function(){
+		window.open(this.href);
+		return false;
+	});
 	
 	
-	var inval_Arr = new Array(5).fill(false);
 	$('#reg_submit').click(function(){
-		// 비밀번호가 같은 경우 && 비밀번호 정규식
+
+		var checkbox = $('#serviceAgree').is(":checked");
+		console.log("과연" + checkbox);
+		
+		var date = $('#birth').val();
+		console.log("생일" + date);
+		console.log(date == "");
+
 		if (($('#password').val() == ($('#password2').val()))
 				&& pwJ.test($('#password').val())) {
-			inval_Arr[0] = true;
-		} else {
-			inval_Arr[0] = false;
-		}
-		// 이메일 정규식
-		if (mailJ.test($('#email').val())){
-			console.log(phoneJ.test($('#email').val()));
-			inval_Arr[2] = true;
-		} else {
-			inval_Arr[2] = false;
-		}
-		
-		// 이름 정규식
-		if (nameJ.test($('#name').val())) {
-			inval_Arr[1] = true;	
-		} else {
-			inval_Arr[1] = false;
-		}
 
-		
-		var validAll = true;
-		for(var i = 0; i < inval_Arr.length; i++){
-			
-			if(inval_Arr[i] == false){
-				validAll = false;
+			if (mailJ.test($('#email').val())){
+				
+				if (nameJ.test($('#name').val())) {	
+					
+					if($('#birth').val() != "") {
+						
+						if($('#personalAgree').is(":checked") == true) {
+							
+							if($('#serviceAgree').is(":checked") == true ) {
+								$('form').submit();								
+							} else {
+								alert('서비스 이용약관에 동의 해주세요!');
+								return;	
+							}
+							
+						} else {
+							alert('개인정보 처리방침에 동의 해주세요!');
+							return;	
+						}
+						
+					} else {
+						alert('생일을 입력 해주세요!');
+						return;						
+					}
+					
+				} else {
+					alert('이름을 다시 확인해주세요!');
+					return;
+				}
+				
+			} else {
+				alert('이메일을 다시 확인해주세요!');
+				return;
 			}
+			
+		} else {
+			alert('비밀번호가 일치하지 않거나 형식에 맞지 않습니다.');
+			return;
 		}
 		
-		if(validAll){ // 유효성 모두 통과
-			alert('이메일에서 인증 메일을 확인해주세요!');
-			/* confirm_email(); */
-			/* location.href("${pageContext.request.contextPath}"); */
-			/* return false; */
-		} else{
-			alert('입력한 정보들을 다시 한번 확인해주세요 :)')
-			return false;
-		}
+
 	});
+	
+	
+	$(function() {
+		  var selectTarget = $('#locationSelect select');
+
+		  selectTarget.on({
+		    'focus': function() {
+		      $(this).parent().addClass('focus');
+		    },
+		    'blur': function() {
+		      $(this).parent().removeClass('focus');
+		    }
+		  });
+
+		  selectTarget.change(function() {
+		    var select_name = $(this).children('option:selected').text();
+		    $(this).siblings('label').text(select_name);
+		    $(this).parent().removeClass('focus');
+		  });
+		});
 	 
 	
 	

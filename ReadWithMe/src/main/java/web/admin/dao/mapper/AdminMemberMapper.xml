@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="web.admin.dao.face.AdminMemberDao">
+ 
+ 	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM userTb
+	</select>
+	
+	<select id="selectMemberList" resultType="hashmap" parameterType="hashmap">
+		SELECT user_no, user_lv, nick, email, gender, create_date
+		FROM (
+   			 SELECT rownum rnum, L.*
+   			 FROM (
+       			 SELECT user_no, user_lv, nick, email, gender, create_date
+       			 FROM userTb
+       			 <trim prefix="WHERE" prefixOverrides="AND|OR">
+					<choose>
+					<when test="selectBox!=null and selectBox.equals('nick')">
+						AND nick LIKE
+					</when>
+					<when test="selectBox!=null and selectBox.equals('email')">
+						AND email LIKE
+					</when>
+					</choose>
+				</trim>
+					<if test="search!=null and !search.equals('')">
+						'%' || #{search} || '%'
+					</if>
+       			 ORDER BY user_no DESC
+       		 ) L
+   		 ) list
+		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<select id="selectBanMemberList" resultType="hashmap" parameterType="hashmap">
+		SELECT user_no, user_lv, nick, email, gender, create_date, start_ban, end_ban
+		FROM (
+   			 SELECT rownum rnum, L.*
+   			 FROM (
+       			 SELECT B.user_no, user_lv, nick, email, gender, create_date, start_ban, end_ban
+       			 FROM userTb U, ban B
+       			 <trim prefix="WHERE" prefixOverrides="AND|OR">
+					<choose>
+					<when test="selectBox!=null and selectBox.equals('nick')">
+						AND nick LIKE
+					</when>
+					<when test="selectBox!=null and selectBox.equals('email')">
+						AND email LIKE
+					</when>
+					</choose>
+				</trim>
+					<if test="search!=null and !search.equals('')">
+						'%' || #{search} || '%'
+					</if>
+				 WHERE U.user_no = B.user_no
+       			 ORDER BY user_no DESC
+       		 ) L
+   		 ) list
+		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<update id="delAdmin" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET user_lv = 1
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<update id="setAdmin" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET user_lv = 2
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<insert id="insertBan" parameterType="web.user.dto.Ban">
+		INSERT INTO ban (ban_no, user_no, end_ban)
+		VALUES (ban_seq.nextval, #{user_no }, to_char(sysdate + 30, 'YYYY/MM/DD') )
+	</insert>
+	
+	<update id="updateUser" parameterType="web.user.dto.Ban">
+		update UserTb
+		set user_lv = 0
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<delete id="deleteBan" parameterType="web.user.dto.Ban">
+		DELETE FROM ban
+		WHERE user_no = #{user_no }
+	</delete>
+	
+	<update id="updateBanUser" parameterType="web.user.dto.Ban">
+		update UserTb
+		set user_lv = 1
+		WHERE user_no = #{user_no }
+	</update>
+	
+ </mapper>

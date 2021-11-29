@@ -4,8 +4,12 @@
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
-<script>
-self.location = '${url}'; // https://nid.naver.com/oauth2.0/authorize
-</script>
+	<script type="text/javascript">
+		
+		alert('이메일을 성공적으로 발송했습니다!');
+
+		self.location = '/todolist';
+	</script>
+
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import web.user.dto.UserTb;
 import web.user.dto.Social_account;
+import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
 import web.user.dto.PhoneAuth;
 
@@ -16,13 +17,12 @@ public interface LoginService {
 	 */
 	public boolean login(UserTb member);
 
-	public void naverLogin(Social_account social);
-
-	public void googleLogin(Social_account social);
-
-	public void findId(UserTb user);
-
-	public void findPw(UserTb user);
+	/**
+	 * 비밀번호 찾기 위해 이메일주소(혹은 핸드폰번호)와 아이디가 일치하는지 확인
+	 * @param user - 이메일,핸드폰번호,아이디가 담겨있는 DTO
+	 * @return 일치하면 true 아니면 false
+	 */
+	public boolean findPw(UserTb user);
 
 	/**
 	 * 회원가입
@@ -45,6 +45,13 @@ public interface LoginService {
 	 * @return
 	 */
 	public int userNickCheck(String nick);
+
+	/**
+	 * 이메일 중복 체크
+	 * @param email - 고객이 입력한 이메일
+	 * @return
+	 */	
+	public int userEmailCheck(String email);
 
 	/**
 	 * 회원의 닉네임 조회
@@ -74,13 +81,6 @@ public interface LoginService {
 	 * @return
 	 */
 	public boolean getKakaoId(UserTb user);
-	
-	/**
-	 * 카카오 소셜 로그인
-	 * @param user - 기본 정보가 들어있음
-	 * @return
-	 */
-	public boolean kakaoLogin(UserTb user);
 
 	/**
 	 * 회원가입
@@ -99,9 +99,9 @@ public interface LoginService {
 
 	/**
 	 * 인증확인했을 때 요청확인
-	 * @param email
+	 * @param user
 	 */
-	public void userAuth(String email);
+	public void userAuth(UserTb user);
 
 	/**
 	 * 핸드폰 번호랑 인증번호랑 저장 
@@ -123,6 +123,48 @@ public interface LoginService {
 	 * @return
 	 */
 	public boolean getNaverId(UserTb user);
+
+	/**
+	 * 임시 비밀번호를 발송
+	 * @param user
+	 * @return
+	 */
+	public void sendPwByEmail(UserTb user);
+
+	/**
+	 * 임시 비밀번호를 발송
+	 * @param user
+	 * @return
+	 */
+	public void sendPwByPhone(UserTb user);
+
+	/**
+	 * 입력받은 이메일 혹은 핸드폰 번호로 id찾기
+	 * @param user
+	 * @return
+	 */
+	public String findId(UserTb user);
+
+	/**
+	 * 입력받은 이메일주소 확인
+	 * @param user
+	 * @return
+	 */
+	public void findEmail(UserTb user);
+
+	/**
+	 * 유저 제재 상태 확인시켜주기 위함
+	 * @param user_no
+	 * @return
+	 */
+	public Ban banUser(int user_no);
+
+	/**
+	 * 현재 제재 상태인지 확인 (날짜 비교)
+	 * @param user_no
+	 * @return
+	 */
+	public boolean isBan(int user_no);
 
 
 
