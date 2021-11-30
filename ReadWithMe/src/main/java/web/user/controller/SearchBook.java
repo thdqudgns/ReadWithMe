@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SearchBook {
 
-@ResponseBody
+//@ResponseBody
 @RequestMapping(value="/searchBook")
- public static void search(String query, Model model) {
+ public static String search(String query, Model model) {
      String clientId = "qRxWO46cR3KnAJeibbcy"; //애플리케이션 클라이언트 아이디값"
      String clientSecret = "tkYW0s1NFR"; //애플리케이션 클라이언트 시크릿값"
 
@@ -44,7 +44,9 @@ public class SearchBook {
      
      model.addAttribute("responseBody", responseBody);
 
-    	 System.out.println(responseBody);
+	 System.out.println(responseBody);
+    	 
+	 return "jsonView";
  }
 
 
