@@ -125,27 +125,26 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(2) {width:40px;}
 .menuBar:nth-child(3) {width:250px;}
 .menuBar:nth-child(7) {width:120px;}
-<<<<<<< HEAD
+
+
 .menuBar:nth-child(9) {width:43px;}
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-=======
-.menuBar:nth-child(9) {width:42px;}
+
+
 
 /* 버튼 설정 */
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
 .btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
 
->>>>>>> acffd3c3dde255e9538baff391cf7451ea09ce36
+
+
 .center {text-align:center;vertical-align: middle;}
-=======
+
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
 .btn-white:hover {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
-=======
-.btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
-.btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
->>>>>>> c1726e1c4f95a6532f2f8503bece20411fb5482a
+
+
 .btn-report {border:none;background-color: #FFF; color:gray;}
 .btn-report:hover {border:none;color:tomato;}
 .btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
@@ -159,7 +158,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 
 .center {text-align:center;vertical-align: middle;margin: 0 auto;}
->>>>>>> 940294d8ad231581ad0bf95dd5373543e76964f7
+
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 

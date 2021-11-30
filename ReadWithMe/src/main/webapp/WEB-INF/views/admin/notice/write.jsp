@@ -9,8 +9,10 @@
 	src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript">
+
 	function submitContents(elClickedObj) {
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+
 
 		try {
 			elClickedObj.form.submit();

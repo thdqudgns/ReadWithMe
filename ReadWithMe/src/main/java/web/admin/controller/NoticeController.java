@@ -24,11 +24,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+
 import web.admin.service.face.NoticeService;
+import web.user.dto.FileTb;
 import web.user.dto.Notice;
 import web.user.dto.Notice_file;
 import web.util.Paging;
@@ -81,14 +84,17 @@ public class NoticeController {
 	public String Noticeview(Notice viewNotice, Model model, HttpSession session) {
 
 		if (viewNotice.getBoard_no() < 1) {
+
 			return "redirect:/admin/notice";
 		}
 
 		viewNotice = noticeService.view(viewNotice);
 
+
 		// 첨부파일 정보 전달
 		Notice_file notice_file = noticeService.getAttachFile(viewNotice);
 		model.addAttribute("notice_file", notice_file);
+
 
 		model.addAttribute("viewNotice", viewNotice);
 
@@ -96,6 +102,7 @@ public class NoticeController {
 	}
 
 	// 공지사항 글쓰기
+
 	@RequestMapping(value = "/admin/notice/write", method = RequestMethod.GET)
 	public void NoticeWrite() {
 	}
@@ -121,9 +128,11 @@ public class NoticeController {
 		return "down";
 	}
 
+
 	// 공지사항 수정
 	@RequestMapping(value = "/admin/notice/update", method = RequestMethod.GET)
 	public String NoticeUpdate(Notice notice, Model model) {
+
 
 		logger.info("{}", notice);
 
@@ -140,12 +149,15 @@ public class NoticeController {
 		// 게시글 첨부파일 전달
 		Notice_file noticefile = noticeService.getAttachFile(notice);
 		
+
 		logger.info("noticefile {}", noticefile);
+
 		
 		model.addAttribute("noticefile", noticefile);
 
 		return "admin/notice/update";
 	}
+
 
 	@RequestMapping(value = "/admin/notice/update", method = RequestMethod.POST)
 	public String NoticeUpdateProc(Notice notice, MultipartFile file) {
@@ -154,6 +166,7 @@ public class NoticeController {
 		noticeService.update(notice, file);
 
 		return "redirect:/admin/notice?board_no=" + notice.getBoard_no();
+
 	}
 
 	// 공지사항 삭제

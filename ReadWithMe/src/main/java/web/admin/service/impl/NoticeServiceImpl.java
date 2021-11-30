@@ -93,10 +93,12 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		Notice_file notice_file = new Notice_file();
 		notice_file.setBoard_no(notice.getBoard_no());
+
 		notice_file.setOrigin_name(originName);
 		notice_file.setStored_name(storedName);
 		
 		noticeDao.insertFile(notice_file);
+
 		
 		
 	}
@@ -143,11 +145,13 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		Notice_file notice_file = new Notice_file();
 		notice_file.setBoard_no(notice.getBoard_no());
+
 		notice_file.setOrigin_name(originName);
 		notice_file.setStored_name(storedName);
 		
 		noticeDao.deleteFile(notice);
 		noticeDao.insertFile(notice_file);
+
 		
 	}
 	
@@ -160,11 +164,14 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
+
 	public Notice_file getAttachFile(Notice viewNotice) {
+
 		return noticeDao.selectNoticefileByNoticeno(viewNotice);
 	}
 	
 	@Override
+
 	public Notice_file getFile(int file_no) {
 		return noticeDao.selectNoticefileByFileno(file_no);
 	}
@@ -186,6 +193,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public void cancelChecked(String no) {
 		noticeDao.updateToCancelByBoardno(no);
 	}
+
 }
 
 

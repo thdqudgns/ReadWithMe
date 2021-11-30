@@ -1,4 +1,5 @@
 
+
 <%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
 <%--     pageEncoding="UTF-8"%> --%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
@@ -19,6 +20,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
 <!doctype html>
@@ -34,16 +36,16 @@
 
 </head>
 
-<<<<<<< HEAD
+
 <script type="text/javascript">
 $(document).ready(function() {
 	var $slider_list = $("#slider li")
 	console.log($slider_list)
 
-<<<<<<< HEAD
+
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
->>>>>>> acffd3c3dde255e9538baff391cf7451ea09ce36
-=======
+
+
 	$slider_list.css("left", $("#sliderbox").css("width"))
 	$slider_list.eq(0).css("left", 0)
 
@@ -116,8 +118,7 @@ $(document).ready(function() {
 
 </style>
 
-=======
->>>>>>> c1726e1c4f95a6532f2f8503bece20411fb5482a
+
 <br>
 <div id="sliderbox">
 	<ul id="slider">
@@ -189,4 +190,6 @@ $(document).ready(function() {
 	</script>
 	
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+
+
 

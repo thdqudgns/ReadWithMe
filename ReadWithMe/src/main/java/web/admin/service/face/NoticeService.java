@@ -64,7 +64,9 @@ public interface NoticeService {
 	 * @param viewNotice - 조회할 게시글 번호를 가진 객체
 	 * @return 첨부파일 정보
 	 */
+
 	public Notice_file getAttachFile(Notice viewNotice);
+
 
 	/**
 	 * 파일번호를 이용하여 업로드된 파일의 정보를 조회한다
@@ -72,6 +74,7 @@ public interface NoticeService {
 	 * @param file_no - 조회할 파일 번호
 	 * @return 첨부파일 정보
 	 */
+
 	public Notice_file getFile(int file_no);
 
 	/**
@@ -94,6 +97,7 @@ public interface NoticeService {
 	 * @param string - 선택한 게시글 번호
 	 */
 	public void cancelChecked(String no);
+
 
 
 

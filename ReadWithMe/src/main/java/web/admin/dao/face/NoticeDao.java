@@ -60,6 +60,7 @@ public interface NoticeDao {
 	 * @param viewNotice - 조회할 게시글 번호
 	 * @return 조회된 첨부파일 정보
 	 */
+
 	public Notice_file selectNoticefileByNoticeno(Notice viewNotice);
 
 	/**
@@ -104,5 +105,6 @@ public interface NoticeDao {
 	 * @param notice_file - 삽입할 첨부파일 정보
 	 */
 	public void insertFile(Notice_file notice_file);
+
 
 }

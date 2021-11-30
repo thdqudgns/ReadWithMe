@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
+
 import web.user.dto.Inquiry_file;
 import web.user.dto.Notice_file;
+
 
 //import web.dto.Boardfile;
 
@@ -32,6 +34,7 @@ public class DownloadView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 
 		//모델값 가져오기
+
 		Notice_file file = (Notice_file) model.get("downFile");
 		
 		if(file != null) {
@@ -40,25 +43,31 @@ public class DownloadView extends AbstractView {
 				
 		//업로드된 파일 객체
 		File src = new File(context.getRealPath("upload"), file.getStored_name());
+
 		
 		//파일 입력 스트림
 		FileInputStream fis = new FileInputStream(src);
 		
+
+
 		//응답 헤더 설정
 		response.setContentType("application/octet-stream");
 		response.setContentLength((int) src.length());
 		response.setCharacterEncoding("UTF-8");
 		String outputName = URLEncoder.encode(file.getOrigin_name(), "UTF-8");
 
+
 		logger.info(outputName);
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + outputName + "\"");
 		
+
 		//서버 응답 출력 스트림
 		OutputStream out = response.getOutputStream();
 		
 		//클라이언트로 파일 전송
 		FileCopyUtils.copy(fis, out);
+
 		}
 
 		
@@ -85,6 +94,7 @@ public class DownloadView extends AbstractView {
 		
 		FileCopyUtils.copy(fis2, out2);
 		}
+
 	}
 	
 }

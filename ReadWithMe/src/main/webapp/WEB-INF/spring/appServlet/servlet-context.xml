@@ -44,12 +44,12 @@
 	</beans:bean> 
 	
 	<!-- DownloadView클래스를 down이라는 이름의 스프링빈으로 등록하기 -->
-<<<<<<< HEAD
-  	<beans:bean id="down" class="web.view.DownloadView" />
-=======
+
+
 <!--  	<beans:bean id="down" class="web.view.DownloadView" /> -->
  	<beans:bean id="reviewDown" class="web.view.ReviewDownloadView" />
->>>>>>> c1726e1c4f95a6532f2f8503bece20411fb5482a
+
+
 	
 	<!-- JSON 응답용 jsonView를 스프링빈으로 등록하기 -->
 	 <beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">

@@ -5,6 +5,7 @@
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#btnWrite").click(function() {
@@ -77,6 +78,7 @@
 				valueArr.push(list[i].value);
 			}
 		}
+
 
 		if (valueArr.legnth == 0) {
 			alert("선택된 글이 없습니다.");
@@ -414,4 +416,6 @@ table, th {
 	</div>
 	<!-- .wrap -->
 
+
 	<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+

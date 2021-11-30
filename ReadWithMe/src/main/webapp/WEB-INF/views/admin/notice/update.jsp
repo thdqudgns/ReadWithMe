@@ -98,6 +98,7 @@ $(document).ready(function() {
 		</form>
 
 		<script type="text/javascript">
+
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
@@ -119,7 +120,9 @@ function submitContents(elClickedObj) {
 }
 </script>
 
+
 	</div>
 	<!-- .container end -->
+
 
 	<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
