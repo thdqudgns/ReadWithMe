@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> : : : ReadWithMe : : : </title>
+<link rel="icon" type="image/x-icon" href="https://i.imgur.com/KN7zwhf.png">
+<title>ReadWithMe</title>
 
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -132,6 +133,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 /* 버튼 설정 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
 .btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
 
@@ -140,12 +142,21 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 =======
 .btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
 .btn-white:hover {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+=======
+.btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
+>>>>>>> c1726e1c4f95a6532f2f8503bece20411fb5482a
 .btn-report {border:none;background-color: #FFF; color:gray;}
 .btn-report:hover {border:none;color:tomato;}
-.btn-gray {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
-.btn-gray:hover {border-radius: 3px; padding:1px;border:0px solid gray; background-color: #FFF; color:tomato;}
-.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
-.btn-brown:hover {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
+.btn-gray:hover {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-none {border:0px solid gray;background-color: #FFF; color:black;}
+.btn-none:hover {border:0px solid gray;background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:hover {border-radius: 3px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-black {border-radius: 3px; border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-black:active {border-radius: 3px; border:1px solid black; background-color: black; color:tomato;}
+
 
 .center {text-align:center;vertical-align: middle;margin: 0 auto;}
 >>>>>>> 940294d8ad231581ad0bf95dd5373543e76964f7
@@ -225,7 +236,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 			</div>
 		</c:if>
 	
-		<c:if test="${not empty login and login and user_lv ne 4 }">
+		<c:if test="${not empty login and login and user_lv ne 3 }">
 		<!-- 프로필, 닉네임, 마이페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
@@ -239,14 +250,14 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		</div>
 		</c:if>
 
-		<c:if test="${not empty login and login and user_lv eq 4 }">
+		<c:if test="${not empty login and login and user_lv eq 3 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
 				<img alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
 				<span>${user_nick }님</span>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>/admin">관리자페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/member">관리자페이지</a></li>
 					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>

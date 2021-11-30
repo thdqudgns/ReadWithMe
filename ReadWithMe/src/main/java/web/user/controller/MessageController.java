@@ -17,12 +17,13 @@ import web.user.service.face.MessageService;
 import web.util.Paging;
 
 @Controller
+@RequestMapping(value="/user/mypage")
 public class MessageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	@Autowired private MessageService messageService;
 	
-	@RequestMapping(value="/user/mypage/message")
+	@RequestMapping(value="/message")
 	public String message(Paging paramData, Model model) {
 		logger.info("/message");
 		
@@ -42,12 +43,12 @@ public class MessageController {
 		return "user/mypage/message/message";
 	}
 
-	@RequestMapping(value="/user/mypage/message/view")
+	@RequestMapping(value="/message/view")
 	public String messageView(Message viewMessage, Model model, HttpSession session) {
 		logger.info("/message/view 파라미터 {}", viewMessage);
 		
 		if( viewMessage.getMsg_no() < 1 ) {
-			return "redirect:/message";
+			return "redirect:/user/mypage/message";
 		}
 		
 		viewMessage = messageService.view(viewMessage);
@@ -59,10 +60,10 @@ public class MessageController {
 		return "user/mypage/message/View";
 	}
 	
-	@RequestMapping(value="/user/mypage/message/write", method = RequestMethod.GET)
+	@RequestMapping(value="/message/write", method = RequestMethod.GET)
 	public void write() {}
 	
-	@RequestMapping(value="/user/mypage/message/write", method = RequestMethod.POST)
+	@RequestMapping(value="/message/write", method = RequestMethod.POST)
 	public String writeProc(Message message, HttpSession session) {
 		logger.info("{}", message);
 		
@@ -91,6 +92,6 @@ public class MessageController {
 	public String messageDelete(Message message) {
 		messageService.delete(message);
 		
-		return "redirect:/message";
+		return "redirect:/user/mypage/message";
 	}
 }

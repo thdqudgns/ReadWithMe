@@ -3,31 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style type="text/css">
-ul.pagination {
-	list-style:none;
-/* 	float:left; */
-	display:table-cell;
-}
-ul.pagination li {
-/* 	float:left; */
-	display:table-cell;
-}
-ul.pagination li a {
-/* 	float:left; */
-	padding:8px;
-	margin-right:3px;
-	width:20px;
-	color:#000;
-	font:bold 12px tahoma;
-	border:1px solid #eee;
-	border-radius:30%;
-	text-align:center;
-	text-decoration:none;
-}
-ul.pagination li a:hover, ul.pagination li a:focus {
-	color:#fff;
-	border:1px solid #9f8170;
-	background-color:#9f8170;
+.pagination>.active>a {
+	background-color: #9f8170;
+	color: #fff;
+    border-color: #9f8170;
 }
 </style>
 

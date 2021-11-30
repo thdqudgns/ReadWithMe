@@ -22,8 +22,8 @@ $(document).ready(function() {
 			$("#preview").html(
 					$("<img>").attr({
 						"src": e.target.result
-						, "width" : 200
-						, "height" : 200
+						, "width" : 120
+						, "height" : 120
 						, "style" : "border-radius: 50%"
 						}))			
 		};
@@ -89,6 +89,8 @@ $(document).ready(function() {
 		"input:checkbox[id=\"" + $('#userInterest2').val() + "\"]";
 	const SELECTED_USER_INTEREST3 = 
 		"input:checkbox[id=\"" + $('#userInterest3').val() + "\"]";
+	
+	console.log("움?" + SELECTED_USER_INTEREST);
 		
 	$(SELECTED_USER_INTEREST).prop("checked" , true);
 	$(SELECTED_USER_INTEREST2).prop("checked" , true);
