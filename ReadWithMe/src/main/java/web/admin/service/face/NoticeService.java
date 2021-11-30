@@ -64,7 +64,9 @@ public interface NoticeService {
 	 * @param viewNotice - 조회할 게시글 번호를 가진 객체
 	 * @return 첨부파일 정보
 	 */
-	public FileTb getAttachFile(Notice viewNotice);
+
+	public Notice_file getAttachFile(Notice viewNotice);
+
 
 	/**
 	 * 파일번호를 이용하여 업로드된 파일의 정보를 조회한다
@@ -72,6 +74,31 @@ public interface NoticeService {
 	 * @param file_no - 조회할 파일 번호
 	 * @return 첨부파일 정보
 	 */
-	public FileTb getFile(int file_no);
+
+	public Notice_file getFile(int file_no);
+
+	/**
+	 * 선택된 게시글을 게시글 번호를 이용하여 삭제한다
+	 * 
+	 * @param no - 선택된 게시글의 번호
+	 */
+	public void deleteChecked(String no);
+
+	/**
+	 * 선택한 게시글을 게시글 번호로 조회하여 등록처리한다
+	 * 
+	 * @param - 선택한 게시글 번호
+	 */
+	public void registerChecked(String no);
+
+	/**
+	 * 선택한 게시글을 게시글 번호로 조회하여 취소처리한다
+	 * 
+	 * @param string - 선택한 게시글 번호
+	 */
+	public void cancelChecked(String no);
+
+
+
 
 }

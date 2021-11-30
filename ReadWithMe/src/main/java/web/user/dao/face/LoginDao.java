@@ -2,22 +2,17 @@ package web.user.dao.face;
 
 import web.user.dto.UserTb;
 import web.user.dto.Interest;
+import web.user.dto.PhoneAuth;
 import web.user.dto.Social_account;
-import web.user.dto.UserAuth;
+import web.user.dto.Ban;
+import web.user.dto.EmailAuth;
 
 public interface LoginDao {
 
+	
 	public void join(UserTb user);
 
 	public void login(UserTb user);
-
-	public void naverLogin(Social_account social);
-
-	public void googleLogin(Social_account social);
-
-	public void kakaoLogin(Social_account social);
-
-	public void selectIdByEmail(UserTb user);
 
 	public void selectPwById(UserTb user);
 
@@ -35,6 +30,13 @@ public interface LoginDao {
 	 */
 	public int selectCntByNick(String nick);
 
+	/**
+	 * email이 존재하는 값인지 확인한다
+	 * @param email - 조회하려는 회원의 email
+	 * @return
+	 */
+	public int selectCntByEmailInUserTb(String email);
+	
 	/**
 	 * 회원 가입
 	 * @param user
@@ -92,10 +94,109 @@ public interface LoginDao {
 	public void insertKakaoMember(UserTb user);
 
 	/**
+	 * 이미 존재하는 이메일인지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmailInEmailAuth(EmailAuth user);
+
+	/**
 	 * 이메일인증위한 고객이메일/인증키값
 	 * @param user
 	 */
-	public void createAuthKey(UserAuth user);
+	public void createAuthKey(EmailAuth user);
+
+	/**
+	 * 이메일 인증 확인
+	 * @param email
+	 */
+	public void userEmailAuth(String email);
+
+	/**
+	 * 핸드폰 인증 확인
+	 * @param email
+	 */
+	public void userPhonAuth(String phone);
+	
+	/**
+	 * 핸드폰번호와 인증번호 DB에 저장
+	 * @param phoneAuth
+	 */
+	public void insertPhone(PhoneAuth phoneAuth);
+
+	/**
+	 * 고객이 입력한 인증번호 확인
+	 * @param phoneAuth
+	 * @return
+	 */
+	public int selectCntByPhoneAuth(PhoneAuth phoneAuth);
+
+	/**
+	 * email, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByEmailandId(UserTb user);
+	
+	/**
+	 * phone, id가 일치하는지 확인
+	 * @param user
+	 * @return
+	 */
+	public int selectCntByPhoneandId(UserTb user);
+	
+	/**
+	 * 고객이 발급받은 임시 비밀번호로 고객 DB수정
+	 * @param user
+	 */
+	public void updatePw(UserTb user);
+	
+	/**
+	 * 고객이 입력한 email로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByEmail(UserTb user);
+	
+	/**
+	 * 고객이 입력한 phone로 id를 찾음
+	 * @param user
+	 * @return
+	 */
+	public String selectIdByPhone(UserTb user);
+
+	/**
+	 * 고객이 입력한 email 인증테이블에서 삭제
+	 * @param user
+	 */
+	public void deleteEmail(UserTb user);
+
+	/**
+	 * 제재내용 확인
+	 * @param user_no
+	 * @return
+	 */
+	public Ban selectBanUser(int user_no);
+
+	/**
+	 * 현재 제재 상태인지 확인 (날짜 비교)
+	 * @param user_no
+	 * @return
+	 */
+	public int selectCntIsBanUser(int user_no);
+
+	/**
+	 * 제재풀기
+	 * @param user_no
+	 */
+	public void updateUser(int user_no);
+
+	/**
+	 * ban테이블에 등록된 user_no 지우기
+	 * @param user_no
+	 */
+	public void deleteBan(int user_no);
+
 
 
 

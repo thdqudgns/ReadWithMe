@@ -8,10 +8,8 @@
 <meta charset="UTF-8">
 <title> : : : RWM Admin : : : </title>
 
-<!-- jquery, se2 -->
+<!-- jquery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/resources/se2/js/service/httpRequest.js"></script>
-<!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -73,8 +71,10 @@
 /* 기본 틀 - 전체, 로고, 메뉴 */
 .menu {display:table;width:100%;table-layout:fixed;border-top:1px solid #ccc;border-bottom:1px solid #ccc; background-color: #754d17;}	
 .menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-.menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuBar {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar span {display: table-cell;}
+.menuProfile {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+
 
 /* 가로 메뉴바 전체를 묶는 ul */
 ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table;align-items:center;height:60px;}
@@ -83,41 +83,55 @@ ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table
 /* 로고 - 이미지와 사이트명 */
 ul.menuList > div.menuMain {vertical-align:middle;}
 ul.menuList > div.menuMain > a {vertical-align:middle;}
-ul.menuList > div.menuMain > a > div {color:#000;text-decoration:none;margin-top:6px;font-size:20px;font-family:'Dangdanghae';display:inline-block;}
+ul.menuList > div.menuMain > a > img {vertical-align:middle;width:26px; height:26px;margin-bottom:7px;}
+ul.menuList > div.menuMain > a > div {color:#FFF;text-decoration:none;margin-top:6px;font-size:20px;font-family:'notoBold';display:inline-block;}
 
 /* 전체메뉴 버튼 */
-.menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-ul.menuList > div.menuBar > li.all {margin-top:5px;}
-ul.menuList > div.menuBar > li.all > span {color:#FFF;text-decoration:none;font-size:15px;}
+ul.menuList > div.menuBar > li.all {align-items:center;text-align:center;}
+ul.menuList > div.menuBar > li.all > div {color:#FFF;text-decoration:none;font-size:15px;text-align:center;}
 ul.menuList > div.menuBar > li.all > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
 ul.menuList > div.menuBar > li.all > ul > li {background:#754d17;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
-ul.menuList > div.menuBar > li.all:hover > span {color:#11ee6f;}
-ul.menuList > div.menuBar > li.all:hover > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuBar > li.all > ul > li > a {background: #754d17;color:#FFF; text-decoration:none; width:80px;display:inline-block;text-align:center;}
+ul.menuList > div.menuBar > li.all:hover > div {color:#11ee6f;}
+ul.menuList > div.menuBar > li.all:hover > ul > li {width:100px;height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuBar > li.all > ul > li > a {background: #754d17;color:#FFF; text-decoration:none; width:100px;display:inline-block;text-align:center;}
 ul.menuList > div.menuBar > li.all > ul > li > a:hover {color:#11ee6f;background: #754d17;width:100%;vertical-align: middle;text-align:center;}
 /* #menubar { z-index:9999;} */
 
 /* 기본 메뉴바 - 검색, 모임, 후기, 명언, 안내&문의 */
-ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
-ul.menuList > div.menuBar > a {text-decoration:none;margin-bottom:10px;}
-ul.menuList > div.menuBar > a > span {color:#FFF;text-decoration:none;font-size:15px;}
-ul.menuList > div.menuBar > a > span:hover {color:#11ee6f;text-decoration:none;}
+ul.menuList > div.menuBar > a {text-decoration:none;}
+ul.menuList > div.menuBar > a > div {color:#FFF;text-decoration:none;font-size:15px;}
+ul.menuList > div.menuBar > a > div:hover {color:#11ee6f;text-decoration:none;}
 
 
 /* 프로필 */
-ul.menuList > div.menuProfile > li > ul > li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
-ul.menuList > div.menuProfile > li:visited > ul > li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuProfile > li > ul > li > a {background: #FFF;color:#fff;text-decoration:none;width:80px;display:inline-block;text-align:center;}
-ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
+ul.menuList > div.menuProfile {vertical-align: middle;text-decoration:none;}
+ul.menuList > div.menuProfile > li {font-size:15px;}
+ul.menuList > div.menuProfile > li > img {vertical-align: middle;}
+ul.menuList > div.menuProfile > li > span {vertical-align: middle;color:#FFF;}
+ul.menuList > div.menuProfile > li > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
+ul.menuList > div.menuProfile > li > ul > li {background:#754d17;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
+ul.menuList > div.menuProfile > li:hover > span {color:#11ee6f;}
+ul.menuList > div.menuProfile > li:hover > ul > li {width:100px;height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuProfile > li > ul > li > a {background: #754d17;color:#fff;text-decoration:none;width:100px;display:inline-block;text-align:center;}
+ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background: #754d17;width:100%;vertical-align: middle;text-align:center;}
 
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; padding:2px;border:1px solid black; background-color: #FFF; color:black;}
-.btn-brown {border-radius: 3px; padding:2px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
-.btn-black {border-radius: 3px; padding:2px;border:1px solid black; background-color: black; color:#FFF;}
+.btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
+.btn-report {border:none;background-color: #FFF; color:gray;}
+.btn-report:hover {border:none;color:tomato;}
+.btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
+.btn-gray:hover {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:tomato;}
+.btn-none {border:0px solid gray;background-color: #FFF; color:black;}
+.btn-none:hover {border:0px solid gray;background-color: #FFF; color:tomato;}
+.btn-brown {border-radius: 3px; border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown:hover {border-radius: 3px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
+.btn-black {border-radius: 3px; border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-black:active {border-radius: 3px; border:1px solid black; background-color: black; color:tomato;}
 
 .center {text-align:center;vertical-align: middle;}
-.mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
+hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 
 </head>
@@ -134,23 +148,24 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 		<!-- 이름 -->
 		<div class="menuMain">
 			<a href="<%=request.getContextPath() %>">
+			<img alt="menuBarLogo" src="https://i.imgur.com/XzJbPF7.png">&nbsp;
 			<div>RWM Admin</div>
 			</a>
 		</div>
 	
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><span>회원관리</span></a>
+			<a href="<%=request.getContextPath() %>"><div style="display: inline-block;">회원관리</div></a>
 		</div>
 
 		<!-- 게시판관리 탭 -->
 		<div class="menuBar">
 			<li class="all">
-				<span>게시판관리</span>
+				<div style="display: inline-block;">게시판관리</div>
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
-					<li><a href="<%=request.getContextPath() %>">후기</a></li>
-					<li><a href="<%=request.getContextPath() %>">명언</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/review/list">후기</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/famous/list">명언</a></li>
 				</ul>
 			</li>
 		</div>
@@ -158,7 +173,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 		<!-- 안내관리 탭 -->
 		<div class="menuBar">
 			<li class="all">
-				<span>안내관리</span>
+				<div style="display: inline-block;">안내관리</div>
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
 					<li><a href="<%=request.getContextPath() %>">자주 묻는 질문</a></li>
@@ -170,7 +185,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 		<!-- 게시판관리 탭 -->
 		<div class="menuBar">
 			<li class="all">
-				<span>신고내역</span>
+				<div style="display: inline-block;">신고내역</div>
 				<ul>
 					<li><a href="<%=request.getContextPath() %>">게시글</a></li>
 					<li><a href="<%=request.getContextPath() %>">댓글</a></li>
@@ -179,15 +194,15 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background
 		</div>
 
 		
-		<c:if test="${not empty login and login and user_lv eq 9 }">
+		<c:if test="${not empty login and login and user_lv eq 3 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
-				<img alt="" src="https://i.imgur.com/t4UvTix.png">
-				<span>닉네임</span>
+				<img alt="admin-img" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
+				<span>${user_nick }님</span>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">메인페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>">로그아웃</a></li>
+					<li><a href="<%=request.getContextPath() %>/">메인페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</div>

@@ -15,14 +15,19 @@
 		WHERE nick = #{nick }
 	</select>
 	
+	<select id="selectCntByEmailInUserTb" resultType="int" parameterType="String">
+		SELECT count(*) FROM UserTb
+		WHERE email = #{email }
+	</select>
+	
 	<insert id="insertMember" parameterType="web.user.dto.UserTb">
 	
 		<selectKey order="BEFORE" resultType="int" keyProperty="user_no">
 			SELECT usertb_seq.nextval FROM dual
 		</selectKey>
 		 
-		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, birth, location, gender )
-		VALUES ( #{user_no }, 1, #{id }, #{password }, #{type }, #{name }, #{nick }, #{email }
+		INSERT INTO UserTb( user_no, user_lv, id, password, type, name, nick, email, phone, birth, location, gender )
+		VALUES ( #{user_no }, 1, #{id }, #{password }, #{type }, #{name }, #{nick }, #{email }, #{phone }
 			,  #{birth }, #{location }, #{gender })
 
 	</insert>
@@ -70,16 +75,95 @@
 
 	</insert>
 	
-	<insert id="createAuthKey" parameterType="web.user.dto.UserAuth">
-		insert into userAuth values(#{email}, #{authKey})
+	<select id="selectCntByEmailInEmailAuth" resultType="int" parameterType="web.user.dto.EmailAuth">
+		SELECT count(*) FROM EmailAuth
+		WHERE email = #{email }
+	</select>
+	
+	<insert id="createAuthKey" parameterType="web.user.dto.EmailAuth">
+		insert into EmailAuth values(#{email}, #{authKey})
 	</insert>
 	
-<!-- 	<update id="userAuth"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		update user  -->
-<!-- 		set certification = 1  -->
-<!-- 		where (select count(*) from userAuth  -->
-<!-- 		where userEmail = #{userEmail}) > 0]]> -->
-<!-- 	</update> -->
+	<update id="userEmailAuth" parameterType="String">
+		update UserTb
+		set userCertification = 1 
+		where 
+        (select count(*) from EmailAuth 
+		where email = #{email }) > 0
+	</update>
+	
+	<update id="userPhonAuth" parameterType="String">
+		update UserTb
+		set userCertification = 1 
+		where 
+        (select count(*) from PhoneAuth 
+		where phone = #{phone }) > 0
+	</update>
+	
+	<insert id="insertPhone" parameterType="web.user.dto.PhoneAuth">
+		insert into PhoneAuth(phone, authKey)
+		VALUES (#{phone }, #{authKey })
+	</insert>
+	
+	<select id="selectCntByPhoneAuth" resultType="int" parameterType="web.user.dto.PhoneAuth">
+		SELECT count(*) FROM PhoneAuth
+		WHERE phone = #{phone }
+		AND authKey = #{authKey }
+	</select>
+	
+	<select id="selectCntByEmailandId" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+		AND email = #{email }
+	</select>
+	
+	<select id="selectCntByPhoneandId" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE id = #{id }
+		AND phone = #{phone }
+	</select>
+	
+	<update id="updatePw" parameterType="web.user.dto.UserTb">
+		update UserTb
+		set password = #{password } 
+		where id = #{id }
+	</update>
+	
+	<select id="selectIdByEmail" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT id FROM UserTb
+		WHERE email = #{email }
+	</select>
+	
+	<select id="selectIdByPhone" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT id FROM UserTb
+		WHERE phone = #{phone }
+	</select>
+	
+	<delete id="deleteEmail" parameterType="web.user.dto.UserTb">
+		DELETE FROM emailAuth
+		WHERE email = #{email }
+	</delete>
+	
+	<select id="selectBanUser" resultType="web.user.dto.Ban" parameterType="int">
+		SELECT start_ban, end_ban FROM ban
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectCntIsBanUser" resultType="int" parameterType="int">
+		SELECT count(*) FROM Ban
+		WHERE user_no = #{user_no }
+		AND end_ban = to_char(sysdate, 'YYYY/MM/DD')
+	</select>
+	
+	<update id="updateUser" parameterType="int">
+		update UserTb
+		set user_lv = 1
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<delete id="deleteBan" parameterType="int">
+		DELETE FROM ban
+		WHERE user_no = #{user_no }
+	</delete>
 	
 </mapper>
