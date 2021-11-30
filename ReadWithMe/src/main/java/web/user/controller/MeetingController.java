@@ -96,11 +96,11 @@ public class MeetingController {
 	}
 	
 	// 모임 삭제
-//	@RequestMapping(value="/delete", method=RequestMethod.GET)
-//	public String deleteProcess(Meeting meeting) {
-//		meetingService.delete(meeting);
-//		
-//		return "redirect:/user/meeting/list";
-//	}
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String delete(Meeting meeting) {
+		meetingService.delete(meeting);
+		
+		return "redirect:/user/meeting/list";
+	}
 	
 }

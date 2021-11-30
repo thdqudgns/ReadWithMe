@@ -62,4 +62,11 @@ public interface MeetingService {
 //	 */
 //	public FileTb getFile(int file_no);
 	
+	/**
+	 * 게시글 수정 처리
+	 * 
+	 * @param meeting - 삭제할 게시글의 게시글번호 객체
+	 */
+	public void delete(Meeting meeting);
+	
 }

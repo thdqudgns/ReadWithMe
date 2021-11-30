@@ -67,7 +67,7 @@
 		</where>
 	</select> -->
 	
-	<insert id="insertMeeting" parameterType="web.user.dto.Meeting">
+	<insert id="insert" parameterType="web.user.dto.Meeting">
 		<selectKey order="BEFORE" resultType="int" keyProperty="meeting_no">
 			SELECT board_seq.nextval FROM dual
 		</selectKey>
@@ -81,5 +81,10 @@
 				 #{meeting_rcr_end}, #{meeting_start}, #{meeting_end}, #{meeting_personnel},
 				 #{meeting_board_date}, #{meeting_approved} )
 	</insert>
+	
+	<delete id="delete" parameterType="web.user.dto.Meeting">
+		DELETE meeting
+		WHERE meeting_no = #{meeting_no}
+	</delete>
 	
 </mapper>

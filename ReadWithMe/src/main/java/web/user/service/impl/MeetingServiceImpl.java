@@ -45,9 +45,13 @@ public class MeetingServiceImpl implements MeetingService {
 		if( "".equals(meeting.getMeeting_title()) ) {
 			meeting.setMeeting_title("(제목없음)");
 		}
-		meetingDao.insertMeeting(meeting);
+		meetingDao.insert(meeting);
 		
 	}
 
-
+	@Override
+	public void delete(Meeting meeting) {
+		meetingDao.delete(meeting);
+		
+	}
 }

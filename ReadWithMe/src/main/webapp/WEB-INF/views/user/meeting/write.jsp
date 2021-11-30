@@ -190,7 +190,7 @@ textarea::placeholder {
 
 <div class="form-group">
 	<label class="form-label">모임 방식</label>
-	<select class="custom-select" name="meetingtype_no" style="width: 284px;">
+	<select class="custom-select" name="meetingtype_no" id="meetingtype_no" style="width: 284px;">
 		<option value="0" disabled selected hidden>선택</option>
 		<option value="1">자율 독서</option>
 		<option value="2">공통서적 독서</option>
@@ -205,7 +205,7 @@ textarea::placeholder {
 
 <div class="form-group">
 	<label class="form-label">지역</label>
-	<select class="custom-select" name="area_no" style="width: 284px;">
+	<select class="custom-select" name="area_no" id="area_no" style="width: 284px;">
 		<option value="0" disabled selected hidden>선택</option>	
 		<option value="1">서울</option>
 		<option value="2">인천</option>
@@ -411,11 +411,11 @@ textarea::placeholder {
 	<textarea rows="14" name="meeting_content" id="meeting_content" style="width: 566px; height: 340px; padding: 12px 15px;" placeholder="내용을 입력하세요"></textarea>
 </div>
 
-<div class="info-group">
+<!-- <div class="info-group">
 	<label class="form-label">주최자 이메일</label>
 	<input type="email" class="form-input" name="email" id="email" placeholder="email@email.com">
-</div>
- 
+</div>  -->
+
 <div class="checklist-area">
 1. ReadWithMe는 누구나 참여할 수 있는 공개 행사입니다.<br>
 2. ReadWithMe는 비영리 행사입니다.<br>

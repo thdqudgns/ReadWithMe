@@ -37,6 +37,13 @@ public interface MeetingDao {
 	 * 
 	 * @param meeting - 삽입할 모임 정보
 	 */
-	public void insertMeeting(Meeting meeting);
+	public void insert(Meeting meeting);
+
+	/**
+	 * r게시글 수정 처리
+	 * 
+	 * @param meeting
+	 */
+	public void delete(Meeting meeting);
 	
 }
