@@ -47,19 +47,19 @@ public class FamousServiceImpl implements FamousService {
 //	}
 
 	@Override
-		public List<HashMap<String, Object>> getFamousList(Paging paging) {
+	public List<HashMap<String, Object>> getFamousList(Paging paging) {
 		
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("paging", paging);
+	HashMap<String, Object> map = new HashMap<>();
+	map.put("paging", paging);
 		
-		if( (String)httpSession.getAttribute("user_no") != null) {
-			map.put("user_no", Integer.parseInt((String)httpSession.getAttribute("user_no"))); //나중에 이걸로 바꿔야함
-		}
-//		map.put("user_id", httpSession.getAttribute("user_id") );
+	if( (String)httpSession.getAttribute("user_no") != null) {
+		map.put("user_no", Integer.parseInt((String)httpSession.getAttribute("user_no"))); //나중에 이걸로 바꿔야함
+	}
+//	map.put("user_id", httpSession.getAttribute("user_id") );
 		
 		
-//		return famousDao.selectList(paging);
-		return famousDao.selectList(map);
+//	return famousDao.selectList(paging);
+	return famousDao.selectList(map);
 	}
 
 //	@Override

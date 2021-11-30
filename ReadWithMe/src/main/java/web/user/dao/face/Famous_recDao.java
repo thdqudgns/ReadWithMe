@@ -13,14 +13,14 @@ public interface Famous_recDao {
 	public int selectCntRecommend(Famous_rec recommend);
 
 	/**
-	 * 추천상태 넣기
+	 * 추천상태 지우기
 	 * 
 	 * @param recommend - 추천 정보 객체
 	 */
 	public void deleteRecommend(Famous_rec recommend);
 
 	/**
-	 * 추천상태 지우기
+	 * 추천상태 넣기
 	 * 
 	 * @param recommend - 추천 정보 객체
 	 */
