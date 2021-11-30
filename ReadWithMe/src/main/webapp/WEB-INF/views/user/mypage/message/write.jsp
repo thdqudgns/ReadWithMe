@@ -1,129 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<!doctype html>
+<html lang="ko">
+<head>
+    <%--head meta data--%>
+	<c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-    	
-    	//취소 버튼 누르면 뒤로가기
-    	$("#btnCancel").click(function() {
-    		location.href = "/user/mypage/message";
-    	});
-    	
-        $('#msg_content').on('keyup', function() {
-            $('#content_cnt').html($(this).val().length+" / 500자");
-     
-            if($(this).val().length > 500) {
-                $(this).val($(this).val().substring(0, 500));
-                $('#content_cnt').html("500 / 500자");
-            }
-        });   
-        
-        const rec_user = document.querySelector('#rec_user');
-        const msg_content = document.querySelector('#msg_content');
-        const msg_title = document.querySelector('#msg_title');
-      const btnSend = document.querySelector('#btnSend');
-
-      btnSend.addEventListener('click', () => $.ajax({
-          type: 'POST',
-          url: contextPath + '/user/mypage/message/write',
-          data: { rec_user: rec_user.value, msg_content: msg_content.value, msg_title: msg_title.value },
-          dataType: 'json',
-          success: data => {if(data.result)showModal('성공', '쪽지를 발송했습니다.', () => location.href = '/user/mypage/message'); else showModal('실패', data.msg);},
-          error: () => showModal('연결 오류', '서버와 정상적으로 통신하지 못했습니다.')
-       })); 
-    });
-    </script>
-    
+    <%--페이지별 css/ js--%>
+	<link href="${path}/resources/css/message_write_style.css" rel="stylesheet" />
+	<script src="${path}/resources/js/message_write_script.js"></script>
+	
 	<style type="text/css">
-    #container {
-    	margin: auto;
-    	text-align: center;
-    }
-    #msg_title {
-    	width: 530px;
-    	height: 30px;
-    	margin: 10px;
-    }
-    #msg_content {
-		width: 530px;
-		height: 280px;
-		resize: none;
+	input[name="msg_title"] {
+	    border: none;
+	    outline: none;
+	    border-bottom: 1px solid #ccc;
+	    width: 150px;
+	    padding-bottom: 3px;	
 	}
-	#rec_user {
-		text-align: right;
-		width: 100px;
-		height: 30px;
+	input[name="rec_user"] {
+	    border: none;
+	    outline: none;
+	    border-bottom: 1px solid #ccc;
+	    width: 150px;
+	    padding-bottom: 3px;	
 	}
-	#content_cnt {
-		margin: 0 auto;
-		margin-left: 465px;
+	textarea[name="msg_content"] {
+	    border: none;
+	    outline: none;
+	    border-bottom: 1px solid #ccc;
+	    width: 150px;
+	    padding-bottom: 3px;		
 	}
-    #square {
-    	height: 500px;
-    	width: 600px;
-    	position: relative;
-    	margin: auto;
-    	border-radius: 15px;
-    	padding-top: 5px;
-    }
-	h3 {
-		text-align: left;
-		color: #333333;
-	}
-	h2 {
-		text-align: center;
-	}  
-	#write-form {
-		margin-top: 40px;
-	}
-	#btnSend {
-		width: 60px;
-		height: 30px;
-		border-radius: 3px;
-		color: white;
-		background-color: #616161;
-		border: 1px solid #616161;
-	}
-	#btnCancel {
-		width: 60px;
-		height: 30px;
-		border-radius: 3px;
-		color: white;
-		background-color: #7ba5c1;
-		border: 1px solid #7ba5c1;
-	}
-    </style>
+	</style>
 
-<br><br><br><br>
-<h2>마이페이지</h2>
-<hr>
+</head>
 
-<div id="container">
-<form id="message-send" action="<%=request.getContextPath() %>/user/mypage/message/write" method="post">
+<section id="message_write_form">
 
-<br>
-
-<br><br>
-	<div id="square" style="background-color: #ffffff;">
-		<h3>쪽지 쓰기</h3>
+	<h2>My Page</h2>
+	<div id="line"></div>
 	
-		<div id="write-form">		
-			<div><input type="text" id="msg_title" name="msg_title" placeholder="제목" maxlength="20" required/></div>	
-			<div id="fromm">받는 사람&nbsp;&nbsp;ㅣ&nbsp;&nbsp;<input type="text" id="rec_user" name="rec_user" placeholder="받는 사람" required /></div><br>
-			<div><textarea name="msg_content" id="msg_content" placeholder="내용" required></textarea></div>			
-			<div id="content_cnt">0 / 500자</div>					
-		</div>
-		
-		<div id="btnBox">
-			<button type="button" id="btnSend">보내기</button>
-			<button type="button" id="btnCancel">취소</button>
-		</div>
+	<div id="message_write_container">
+		<form id="message-send" action="<%=request.getContextPath() %>/user/mypage/message/write" method="post">
+
+				<div id="message_write_form_title">
+					<h3>쪽지 보내기</h3>
+				</div>
+				
+				<div id="write-form">		
+					<div id="msg_title_input">
+						<input type="text" id="msg_title" name="msg_title" placeholder="제목을 입력하세요" maxlength="20" required/>
+					</div>
+					
+					<div id="rec_user_input">
+						<input type="text" id="rec_user" name="rec_user" placeholder="받는 사람" required />
+					</div>
+					
+					<div id="msg_content_textarea">
+						<textarea name="msg_content" id="msg_content" placeholder="내용을 입력하세요" required></textarea>
+					</div>	
+							
+					<div id="content_cnt">0 / 500자</div>					
+				</div>
+				
+				<div id="btnBox">
+					<button type="button" id="btnSend">보내기</button>
+					<button type="button" id="btnCancel">취소</button>
+				</div>
+		</form>
 	</div>
-	
-</form>
-</div>
-
+</section>
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
