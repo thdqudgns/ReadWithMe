@@ -64,7 +64,11 @@
 		<!-- 업로드된 파일 하나 당 최대 사이즈 제한 : 5MB -->
 		<beans:property name="maxUploadSizePerFile" value="5242880"/>		
 	</beans:bean>
-
+	
+	
+	<!-- 시큐리티 -->
+	<beans:bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+	
 	<context:component-scan base-package="web.user.controller, web.user.service, web.admin.controller, web.admin.service, web.aop"/>	
 	
 </beans:beans>
