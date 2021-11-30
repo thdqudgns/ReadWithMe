@@ -25,44 +25,38 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#delFile').click(function() {
-		$("#originFile").toggleClass("through");
-		$("#newFile").toggle();
-
-// 	$.ajax({
-// 		url : '/admin/notice/delete',
-// 		type : 'get',
-// 		traditional : true,
-// 		data : {
-// 			file_no : $(noticefile.file_no)
-// 		},
-// 		success : function(jdata) {
-// 			alert("첨부파일 삭제 완료");
-// 		} esle {
-// 			alert("실패");
-// 		}
-// 	});
-
-	if(${empty noticefile}) {
-		$("#newFile").show();
-	} else {
-		$("#originFile").show();
-	}
 	
-	})
-
-
-
+	//	업로드 파일 삭제 버튼
+	$('#delFile').click(function() {
+		
+		$("#originFile").hide();
+		$("#newFile").show();
+	
+	});
 	
 })	
 </script>
+
+<style>
+#delFile {
+	cursor: pointer;
+}
+
+#newFile {
+	display:none;
+}
+</style>
+
 </head>
 <body>
 
 	<div class="container">
 
-		<h1>글수정 페이지</h1>
-		<hr>
+		<div style="height: 20px;"></div>
+
+		<h1>공지사항 - 수정</h1>
+
+		<div style="height: 30px;"></div>
 
 		<form action="/admin/notice/update" method="post"
 			enctype="multipart/form-data">
@@ -97,8 +91,8 @@ $(document).ready(function() {
 			</div>
 
 			<div class="text-center">
-				<button class="btn btn-primary" id="btnUpdate">수정</button>
-				<input type="reset" id="cancel" class="btn btn-danger" value="취소" />
+				<button class="btn" id="btnUpdate" style="border-color: #D3D3D3; background: white; color: gray;">수정</button>
+				<input type="reset" id="cancel" class="btn" value="취소" style="border-color: #D3D3D3; background: white; color: gray;"/>
 			</div>
 
 		</form>

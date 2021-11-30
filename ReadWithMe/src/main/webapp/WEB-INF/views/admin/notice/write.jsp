@@ -36,8 +36,11 @@
 
 	<div class="container">
 
-		<h1>글쓰기 페이지</h1>
-		<hr>
+		<div style="height: 20px;"></div>
+
+		<h1>공지사항 - 글쓰기</h1>
+		
+		<div style="height: 30px;"></div>
 
 		<form action="/admin/notice/write" method="post"
 			enctype="multipart/form-data">
@@ -71,8 +74,8 @@
 			</div>
 
 			<div class="text-center">
-				<button class="btn btn-primary" id="btnWrite">작성</button>
-				<input type="reset" id="cancel" class="btn btn-danger" value="취소" />
+				<button class="btn" id="btnWrite" style="border-color: #D3D3D3; background: white; color: gray;">작성</button>
+				<input type="reset" id="cancel" class="btn" value="취소"  style="border-color: #D3D3D3; background: white; color: gray;"/>
 			</div>
 		</form>
 

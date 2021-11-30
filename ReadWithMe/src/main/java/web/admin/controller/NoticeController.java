@@ -139,6 +139,9 @@ public class NoticeController {
 
 		// 게시글 첨부파일 전달
 		Notice_file noticefile = noticeService.getAttachFile(notice);
+		
+		logger.info("noticefile {}", noticefile);
+		
 		model.addAttribute("noticefile", noticefile);
 
 		return "admin/notice/update";

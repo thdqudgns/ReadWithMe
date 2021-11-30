@@ -7,40 +7,68 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		// 글쓰기 버튼
 		$("#btnWrite").click(function() {
 			$(location).attr("href", "/user/faq/write");
 			// 		location.href = "/board/write";
 		});
 
-		var search = $("input[name='search']").val();
-
 		//	검색 버튼 클릭
 		$("#btnSearch").click(function() {
-			$(location).attr("href", "/user/faq?search=" + search);
-		});
+			
+// 			const urlParams = new URLSearchParams("?");
+			
+// 			urlParams.append('type');
+// 			urlParams.append('search', $("#search1").val());
+			
+// 			$(location).attr("href", "/user/faq/list?" + urlParams);
+			
+// 				var type = parseInt('${faq.type}');
+		
+// 			location.href = "/user/faq/list?type=" + type + "&search=" + $("#search1").val();
+			$(location).attr("href", "/user/faq/list?type=${faq.type }&search=" + $("#search1").val());
+
+// 			$.ajax({
+// 				url: "/user/faq/list"
+// 				, type: 'get'
+// 				, data: {
+// 					type : parseInt('${faq.type}');
+// 					search : $("#search1").val();
+// 				}
+// 				, success: function() {
+// 					alert("검색완료");
+// 					window.location.href = "/user/faq/list";
+// 				}
+// 				, error: function() {
+// 					alert('에러');
+// 				}
+// 			})
+
+	});
 		
 		//카테고리 버튼(1) - 전체
-		$("button[name='all']").click(function(){
+		$('.categories>li:eq(8)').children('a').click(function(){
 			$(location).attr("href", "/user/faq/list");
 		});
 		
 		//카테고리 버튼(2) - 모임
-		$("button[name='type1']").click(function(){
+		$('.categories>li:eq(6)').children('a').click(function(){
 			$(location).attr("href", "/user/faq/list?type=1");
 		});
 		
 		//카테고리 버튼(3) - 계정
-		$("button[name='type2']").click(function(){			
+		$('.categories>li:eq(4)').children('a').click(function(){			
 			$(location).attr("href", "/user/faq/list?type=2");
 		});
 		
 		//카테고리 버튼(4) - 서비스
-		$("button[name='type3']").click(function(){			
+		$('.categories>li:eq(2)').children('a').click(function(){			
 			$(location).attr("href", "/user/faq/list?type=3");
 		});
 		
 		//카테고리 버튼(5) - 이벤트
-		$("button[name='type4']").click(function(){
+		$('.categories>li:eq(0)').children('a').click(function(){
 			$(location).attr("href", "/user/faq/list?type=4");
 		});
 	});	
@@ -48,7 +76,9 @@
 
 <style type="text/css">
 table {
-	table-layout: fixed;
+	margin-top: 20px;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
 }
 
 table, th {
@@ -63,6 +93,35 @@ table, th {
 .container {
 	min-height: 400px;
 }
+
+.banner {
+	height: 180px;
+	background-image: url('/resources/img/book(1).jpg');
+	color: white;
+}
+
+.categories {
+	list-style-type: none;
+	margin-right: 20px;
+}
+
+.categories > li {
+	float: right;
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.categories > li > a {
+	cursor: pointer;
+	color: black;
+	text-decoration: none !important;
+}
+
+.categories > li > a:hover {
+	color: #0067A3;
+	text-decoration: underline;
+}
+
 </style>
 
 </head>
@@ -73,33 +132,40 @@ table, th {
 		<div class="container">
 
 			<div style="height: 50px;"></div>
-			
+			<div class="banner">
+			<div style="height: 50px;"></div>
 			<h1>자주묻는질문</h1>
-			
+			</div>
 			<div style="height: 20px;"></div>
 
-			<div>
-				<button class="btn btn-bg" name="all" value="전체">#전체</button>
-				<button class="btn btn-bg" name="type1" value="모임">#모임</button>
-				<button class="btn btn-bg" name="type2" value="계정">#계정</button>
-				<button class="btn btn-bg" name="type3" value="서비스">#서비스</button>
-				<button class="btn btn-bg" name="type4" value="이벤트">#이벤트</button>
+			<div style="height: 20px;">
+				<ul class="categories">
+					<li><a>이벤트</a></li>
+					<li><a>|</a></li>
+					<li><a>서비스</a></li>
+					<li><a>|</a></li>
+					<li><a>계정</a></li>
+					<li><a>|</a></li>
+					<li><a>모임</a></li>
+					<li><a>|</a></li>
+					<li><a>전체</a></li>
+				</ul>
 			</div>	
 			
 			<div style="height: 8px;"></div>
 			
 			<table class="table table-hover">
 				<thead class="table-dark">
-					<tr class="active">
-						<th style="width: 8%;">글번호</th>
-						<th style="width: 8%;">분류</th>
-						<th>제목</th>
-						<th style="width: 5%;">조회</th>
-						<th style="width: 15%;">작성일</th>
+					<tr>
+						<th style="width: 8%;">No.</th>
+						<th style="width: 8%;">#</th>
+						<th>Title</th>
+						<th style="width: 5%;">Hit</th>
+						<th style="width: 15%;">Date</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list }" var="faq">
+					<c:forEach items="${FAQ}" var="faq">
 						<tr>
 							<td>${faq.board_no }</td>
 							<td>
@@ -120,9 +186,9 @@ table, th {
 							</td>
 							<td><a
 								href="/user/faq/view?board_no=${faq.board_no }">${faq.board_title }</a></td>
-							<td>0</td>
-							<td><fmt:formatDate value="${faq.board_date }"
-									pattern="yy-MM-dd HH:mm:ss" /></td>
+							<td>${faq.hit }</td>
+							<td style="font-size: 14px;"><fmt:formatDate value="${faq.board_date }"
+									pattern="yyyy년 MM월 dd일" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -136,11 +202,8 @@ table, th {
 
 
 			<div class="form-inline text-center">
-
-				<form action="/user/faq/list" method="get">
-					<input class="form-control" type="text" id="search" name="search" value="${paramData.search }"/>
-					<button id="btnSearch" class="btn">검색</button>
-				</form>
+					<input class="form-control" type="text" id="search1" name="search" value="${paramData.search }"/>
+					<button id="btnSearch" class="btn" style="border-color: #D3D3D3; background: white; color: gray;">검색</button>
 			</div>
 
 

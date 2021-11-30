@@ -2,6 +2,8 @@ package web.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,9 @@ public class UserFAQController {
 	
 	//자주묻는질문 게시판
 	@RequestMapping(value="/user/faq/list")
-	public String UserFAQList(FAQ faq, Paging paramData, Model model) {
+	public void UserFAQList( FAQ faq, Paging paramData, Model model) {
 		
-		logger.info("/user/faq/list");
+		logger.info("paramData : {} ", paramData);
 		
 		//	페이징 처리
 		Paging paging = userFAQService.getPaging(paramData);
@@ -35,16 +37,17 @@ public class UserFAQController {
 		int type_no = faq.getType();
 		paging.setType(type_no);
 		
+		System.out.println("------------------ type_no ----------------- : " + type_no);
+		
 		//	자주묻는질문 게시판
 		List<FAQ> list = userFAQService.list(paging);
 		
 		
 		//	모델값 전달
+		model.addAttribute("paramData", paramData);
 		model.addAttribute("paging", paging);
-		model.addAttribute("list", list);
+		model.addAttribute("FAQ", list);
 		
-		
-		return "user/faq/list";
 	}
 	//자주묻는질문 상세보기
 	@RequestMapping(value="/user/faq/view")

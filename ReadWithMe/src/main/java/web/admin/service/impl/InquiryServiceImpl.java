@@ -68,6 +68,20 @@ public class InquiryServiceImpl implements InquiryService{
 		
 	}
 	
+	@Override
+	public void update(Inquiry inquiry) {
+			if("".equals(inquiry.getBoard_title())) {
+				inquiry.setBoard_title("(제목없음)");
+			}
+			inquiryDao.update(inquiry);
+	}
+	
+	@Override
+	public void delete(Inquiry inquiry) {
+		inquiryDao.deleteCommentByBoardno(inquiry);
+		inquiryDao.delete(inquiry);
+	}
+	
 }
 
 

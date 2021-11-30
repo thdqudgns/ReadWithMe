@@ -29,8 +29,6 @@
 	</repositories>
 
 	<dependencies>
-<<<<<<< HEAD
-=======
 	
 <!-- 시큐리티 -->
 <dependency>
@@ -53,7 +51,6 @@
     <artifactId>spring-security-taglibs</artifactId>
     <version>5.5.3</version>
 </dependency>
->>>>>>> e15f5cbb95a14e1b9736562e1e5027b5a82d812a
 
 		<!-- 비밀번호 암호화 -->
 		<dependency>
@@ -84,7 +81,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-<<<<<<< HEAD
 
 		<!-- 카카오 로그인 -->
 		<dependency>
@@ -110,7 +106,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.11</version>
 		</dependency>
-=======
+
 <!-- 카카오 로그인 -->
 <dependency>
     <groupId>org.apache.httpcomponents</groupId>
@@ -136,9 +132,7 @@
     <artifactId>commons-logging</artifactId>
     <version>1.2</version>
 </dependency>
-	
-	
->>>>>>> e15f5cbb95a14e1b9736562e1e5027b5a82d812a
+
 
 		<!-- Jackson Databind 2.13.0 -->
 		<dependency>

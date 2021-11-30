@@ -34,7 +34,8 @@ $(document).ready(function(){
 <style type="text/css">
 
 table {
-	table-layout: fixed;
+	border-top : 1.5px solid #D3D3D3;
+	border-bottom : 1px solid #D3D3D3;
 }
 
 table, th {
@@ -50,6 +51,23 @@ table, th {
 	min-height: 520px;
 }
 
+.categories {
+	list-style-type: none;
+	margin-right: 20px;
+}
+
+.categories > li {
+	float: right;
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.categories > li > a {
+	cursor: pointer;
+	color: black;
+	text-decoration: none !important;
+}
+
 </style>
 
 </head>
@@ -59,8 +77,27 @@ table, th {
 
 <div class="container">
 
+<div style="height: 50px;"></div>
+
 <h1>1:1 질문</h1>
-<hr>
+
+<div style="height: 10px;"></div>
+
+			<div style="height: 20px;">
+				<ul class="categories">
+					<li><a>이벤트</a></li>
+					<li><a>|</a></li>
+					<li><a>서비스</a></li>
+					<li><a>|</a></li>
+					<li><a>계정</a></li>
+					<li><a>|</a></li>
+					<li><a>모임</a></li>
+					<li><a>|</a></li>
+					<li><a>전체</a></li>
+				</ul>
+			</div>	
+
+<div style="height: 10px;"></div>
 
 <table class="table table-hover">
 <thead class="table-dark">
@@ -76,13 +113,12 @@ table, th {
 	<tr>
 		<td>${inquiry.board_no }</td>
 		<td><a href="/admin/inquiry/view?board_no=${inquiry.board_no }">${inquiry.board_title }</a></td>
-		<td><fmt:formatDate value="${inquiry.board_date }" pattern="yy-MM-dd HH:mm:ss" /></td>
+		<td><fmt:formatDate value="${inquiry.board_date }" pattern="yyyy.MM.dd HH:mm" /></td>
 		<td>
 		<c:if test="${inquiry.check_reply == 0 }">
-		답변 x
 		</c:if>
 		<c:if test="${inquiry.check_reply == 1 }">
-		답변 ㅇ
+		<span class="glyphicon glyphicon-envelope"></span>
 		</c:if>
 		</td>
 	</tr>
@@ -90,28 +126,13 @@ table, th {
 </tbody>
 </table>
 
-<button id="btnWrite" class="btn btn-primary pull-left">글쓰기</button>
-<span class="pull-right">total : ${paging.totalCount }</span>
-<div class="clearfix"></div>
 
-<div class="btn-group">
-  <button type="button" class="btn">분류</button>
-  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">조회수</a></li>
-    <li><a href="#">최신</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
+<span class="pull-left">total : ${paging.totalCount }</span>
+<div class="clearfix"></div>
 
 <div class="form-inline text-center">
 	<input class="form-control" type="text" id="search" value="${paramData.search }" />
-	<button id="btnSearch" class="btn">검색</button>
+	<button id="btnSearch" class="btn" style="border-color: gray; background:white; color:gray;">검색</button>
 </div>
 
 <c:if test="${not empty paramData.search }">

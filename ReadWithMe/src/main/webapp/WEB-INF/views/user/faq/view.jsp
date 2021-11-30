@@ -1,42 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
+
+<style type="text/css">
+.banner {
+	height: 180px;
+	background-image: url('/resources/img/book(1).jpg');
+	color: white;
+}
+</style>
 
 </head>
 <body>
 
-<div class="container">
+	<div class="container">
 
-<h1>자주묻는질문 상세보기</h1>
-<hr>
+		<div style="height: 50px;"></div>
 
-<table class="table table-bordered">
-<tr>
-	<td class="info">글번호</td><td>${faq.board_no }</td>
-	<td class="info">추천수</td><td id="recommend">${cntRecommend }</td>
-</tr>
-<tr>
-	<td class="info">아이디</td><td>ReadWithMe</td>
-	<td class="info">작성일</td><td><fmt:formatDate value="${faq.board_date }" pattern="yy-MM-dd HH:mm:ss"/></td>
-</tr>
-<tr>
-	<td class="info">제목</td><td colspan="3">${faq.board_title }</td>
-</tr>
-<tr>
-	<td class="info" colspan="4">본문</td>
-</tr>
-<tr>
-	<td colspan="4">${faq.board_content }</td>
-</tr>
-</table>
+		<div class="banner">
+			<div style="height: 50px;"></div>
+			<h1>자주묻는질문</h1>
+		</div>
 
-<div class="text-center">
-	<a href="/user/faq/list"><button class="btn btn-default">목록</button></a>
-</div>
+		<div style="height: 30px;"></div>
 
-</div><!-- .container -->
+		<table class="table table-bordered">
+			<tr>
+				<td>글 번호</td>
+				<td>${faq.board_no }</td>
+				<td>조회수</td>
+				<td id="recommend">${faq.hit }</td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td>ReadWithMe</td>
+				<td>작성일</td>
+				<td><fmt:formatDate value="${faq.board_date }"
+						pattern="yyyy년 MM월 dd일" /></td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td colspan="3">${faq.board_title }</td>
+			</tr>
+			<tr>
+				<td colspan="4">본문</td>
+			</tr>
+			<tr>
+				<td colspan="4">${faq.board_content }</td>
+			</tr>
+		</table>
 
-<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+		<div class="text-center">
+			<a href="/user/faq/list"><button class="btn"
+					style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
+		</div>
+
+	</div>
+	<!-- .container -->
+
+	<c:import url="/WEB-INF/views/user/layout/footer.jsp" />

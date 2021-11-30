@@ -44,6 +44,7 @@ public class UserNoticeController {
 		List<Notice> list = userNoticeService.list(paging);
 		
 		//	모델값 전달
+		model.addAttribute("paramData", paramData);
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		

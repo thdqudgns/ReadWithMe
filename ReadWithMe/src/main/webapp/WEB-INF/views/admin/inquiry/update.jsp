@@ -33,19 +33,19 @@ $(document).ready(function(){
 
 <div style="height: 30px;"></div>
 
-<form action="/admin/faq/update" method="post" enctype="multipart/form-data">
-<input type="hidden" name="board_no" value="${view.board_no }" >
+<form action="/admin/inquiry/update" method="post" enctype="multipart/form-data">
+<input type="hidden" name="board_no" value="${inquiry.board_no }" >
 <div class="form-group">
 	<label for="write">작성자</label>
 	<input type="text" id="write" value="ReadWithMe" class="form-control" readonly="readonly"/>
 </div>
 <div class="form-group">
 	<label for="title">제목</label>
-	<input type="text" id="title" name="board_title" class="form-control" value="${view.board_title }"/>
+	<input type="text" id="title" name="board_title" class="form-control" value="${inquiry.board_title }"/>
 </div>
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="board_content">${view.board_content }</textarea>
+	<textarea rows="10" style="width: 100%;" id="content" name="board_content">${inquiry.board_content }</textarea>
 </div>
 
 <br>

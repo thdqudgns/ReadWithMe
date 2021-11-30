@@ -9,7 +9,7 @@
   	<sql id="selectFAQ">
   		SELECT
   			board_no, board_title, board_content
-  			, board_date, type
+  			, board_date, type, hit
   		FROM faq
   	</sql>
   	

@@ -12,16 +12,16 @@ public class Inquiry {
 	private String writer_id;
 	private String writer_name;
 	private int check_reply;
+	private int type;
 	
 	
 	@Override
 	public String toString() {
 		return "Inquiry [board_no=" + board_no + ", user_no=" + user_no + ", nickname=" + nickname + ", board_title="
 				+ board_title + ", board_content=" + board_content + ", board_date=" + board_date + ", writer_id="
-				+ writer_id + ", writer_name=" + writer_name + ", check_reply=" + check_reply + "]";
+				+ writer_id + ", writer_name=" + writer_name + ", check_reply=" + check_reply + ", type=" + type + "]";
 	}
 
-	
 
 	public int getBoard_no() {
 		return board_no;
@@ -111,6 +111,19 @@ public class Inquiry {
 	public void setCheck_reply(int check_reply) {
 		this.check_reply = check_reply;
 	}
+
+
+	public int getType() {
+		return type;
+	}
+
+
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	
+	
 	
 	
 	

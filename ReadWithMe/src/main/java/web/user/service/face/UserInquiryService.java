@@ -2,8 +2,11 @@ package web.user.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
+import web.user.dto.Inquiry_file;
 import web.util.Paging;
 
 public interface UserInquiryService {
@@ -28,8 +31,9 @@ public interface UserInquiryService {
 	 * 1:1질문 글쓰기
 	 * 
 	 * @param inquiry - 글을 작성한 데이터를 포함한 DTO 객체
+	 * @param file - 업로드 파일
 	 */
-	public void write(Inquiry inquiry);
+	public void write(Inquiry inquiry, MultipartFile file);
 
 	/**
 	 * 1:1질문 상세보기
@@ -61,5 +65,42 @@ public interface UserInquiryService {
 	 * @return 삭제 성공 여부
 	 */
 	public boolean deleteComment(AdminInquiry adminInquiry);
+
+	/**
+	 * 선택된 1:1 질문 삭제
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void deleteChecked(String no);
+
+	/**
+	 * 1:1질문 수정
+	 * 
+	 * @param inquiry - 수정된 1:1질문 객체
+	 */
+	public void update(Inquiry inquiry);
+
+	/**
+	 * 1:1 질문 삭제
+	 * 
+	 * @param inquiry - 삭제할 1:1 질문 객체
+	 */
+	public void delete(Inquiry inquiry);
+
+	/**
+	 * 게시글 번호로 첨부파일 조회
+	 * 
+	 * @param inquiry - 게시글 번호를 가진 객체
+	 * @return
+	 */
+	public Inquiry_file getAttachFile(Inquiry inquiry);
+
+	/**
+	 * 파일번호를 이용하여 첨부파일 조회
+	 * 
+	 * @param file_no - 파일번호
+	 * @return
+	 */
+	public Inquiry_file getFile(int file_no);
 
 }

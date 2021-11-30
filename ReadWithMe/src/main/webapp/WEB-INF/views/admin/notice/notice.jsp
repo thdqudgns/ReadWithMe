@@ -245,7 +245,7 @@ table, th {
 			
 			<div>
 			<table class="table table-hover" >
-				<thead>
+				<thead >
 					<tr>
 						<th><input id="allCheck" type="checkbox" name="allCheck" /></th>
 						<th>글 번호</th>
@@ -304,20 +304,20 @@ table, th {
 			</div>
 			
 			<span class="glyphicon glyphicon-repeat pull-left"
-				style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px; color: skyblue; cursor: pointer;" 
-				onclick="window.location.reload();"></span>
+				style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px; color: gray; cursor: pointer;" 
+				onclick="window.location.reload(); "></span>
 			
 			<span style="margin-left: 10px;">total : ${paging.totalCount }</span>
 			
 			
 			<button id="btnCancel" class="btn pull-right"
-				onclick="cancelValue();" style="margin-right: 2px;">취소</button>
+				onclick="cancelValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">취소</button>
 			<button id="btnRegister2" class="btn pull-right"
-				onclick="registerValue();" style="margin-right: 2px;">등록</button>
+				onclick="registerValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">등록</button>
 			<button id="btnDelete" class="btn pull-right"
-				onclick="deleteValue();" style="margin-right: 2px;">삭제</button>
+				onclick="deleteValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">삭제</button>
 			<button id="btnWrite" class="btn pull-right"
-				style="margin-right: 2px;">글쓰기</button>
+				style="margin-right: 2px; border-color: gray; background:white; color:gray;">글쓰기</button>
 
 
 
@@ -326,7 +326,7 @@ table, th {
 
 			<div class="form-inline text-center">
 					<input class="form-control" type="text" id="search1" name="search"  value="${paramData.search }"/>
-					<button id="btnSearch" class="btn"" style="color: #80808;">검색</button>
+					<button id="btnSearch" class="btn"" style="border-color: gray; background:white; color:gray;">검색</button>
 			</div>
 
 

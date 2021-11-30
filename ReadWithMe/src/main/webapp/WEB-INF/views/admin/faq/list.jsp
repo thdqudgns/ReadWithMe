@@ -11,12 +11,10 @@
 		//	글쓰기 버튼
 		$("#btnWrite").click(function() {
 			$(location).attr("href", "/admin/faq/write");
-		})
+		});
 
 		//	검색 버튼 클릭
 		$("#btnSearch").click(function() {
-
-			console.log(search);
 			
 			$(location).attr("href", "/admin/faq/list?type=${FAQ.type}&search=" + $("#search1").val());
 	});
@@ -174,7 +172,7 @@
 table {
 	margin-top: 20px;
 	border-top: 1.5px solid #D3D3D3;
-	border-bottom: 1.5px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
 }
 
 table, th {
@@ -302,13 +300,13 @@ table, th {
 			<span style="margin-left: 10px;">total : ${paging.totalCount }</span>
 
 			<button id="btnCancel" class="btn pull-right"
-				onclick="cancelValue();">취소</button>
+				onclick="cancelValue();" style="border-color: gray; background:white; color:gray;">취소</button>
 			<button id="btnRegister2" class="btn pull-right"
-				onclick="registerValue();" style="margin-right: 2px;">등록</button>
+				onclick="registerValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">등록</button>
 			<button id="btnDelete" class="btn pull-right"
-				onclick="deleteValue();" style="margin-right: 2px;">삭제</button>
+				onclick="deleteValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">삭제</button>
 			<button id="btnWrite" class="btn pull-right"
-				style="margin-right: 2px;">글쓰기</button>
+				style="margin-right: 2px; border-color: gray; background:white; color:gray;">글쓰기</button>
 				
 				
 
@@ -317,7 +315,7 @@ table, th {
 			<div class="form-inline text-center">
 				<input class="form-control" type="text" id="search1"
 					value="${paramData.search }" />
-				<button id="btnSearch" class="btn">검색</button>
+				<button id="btnSearch" class="btn" style="border-color: gray; background:white; color:gray;">검색</button>
 			</div>
 
 			<c:if test="${not empty param.search }">

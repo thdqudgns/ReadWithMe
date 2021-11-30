@@ -57,7 +57,22 @@
   		WHERE comment_no = #{comment_no }
   	</update>
   	
+  	<update id="update" parameterType="web.user.dto.Inquiry">
+  		UPDATE inquiry
+  		SET board_title = #{board_title }
+  			,board_content = #{board_content }
+  		WHERE board_no = #{board_no }
+  	</update>
   	
+  	<delete id="delete" parameterType="web.user.dto.Inquiry">
+  		DELETE inquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	<delete id="deleteCommentByBoardno" parameterType="web.user.dto.Inquiry">
+  		DELETE admininquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
   	
   	</mapper>
   	

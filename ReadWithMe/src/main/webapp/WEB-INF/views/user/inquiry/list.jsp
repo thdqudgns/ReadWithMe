@@ -18,26 +18,99 @@
 		$("#btnDelete").click(function(){
 			$(location).attr("href", "/user/inquiry/delete")
 		});
-		
-		var search = $("input[name='search']").val();
  
 		//	검색 버튼 클릭
 		$("#btnSearch").click(function() {
-			$(location).attr("href", "/user/inquiry?search=" + search);
+			$(location).attr("href", "/user/inquiry/list?type=${inquiry.type }&search=" + $("#search1").val());
 		});
 		
-		//	카테고리 버튼
-		$("button[name='category']").click(function(){
-			var category = $("button[name='category']").val();
-			
-			$(location).attr("href", "/user/inquiry?category=" + category);
+		//카테고리 버튼(1) - 전체
+		$('.categories>li:eq(8)').children('a').click(function(){
+			$(location).attr("href", "/user/inquiry/list");
+		});
+		
+		//카테고리 버튼(2) - 모임
+		$('.categories>li:eq(6)').children('a').click(function(){
+			$(location).attr("href", "/user/inquiry/list?type=1");
+		});
+		
+		//카테고리 버튼(3) - 계정
+		$('.categories>li:eq(4)').children('a').click(function(){			
+			$(location).attr("href", "/user/inquiry/list?type=2");
+		});
+		
+		//카테고리 버튼(4) - 서비스
+		$('.categories>li:eq(2)').children('a').click(function(){			
+			$(location).attr("href", "/user/inquiry/list?type=3");
+		});
+		
+		//카테고리 버튼(5) - 이벤트
+		$('.categories>li:eq(0)').children('a').click(function(){
+			$(location).attr("href", "/user/inquiry/list?type=4");
 		});
 	});	
+	
+	$(function() {
+		var chkObj = document.getElementsByName("RowCheck");
+		var rowCnt = chkObj.length;
+
+		$("input[name='allCheck']").click(function() {
+			var chk_listArr = $("input[name='RowCheck']");
+			for (var i = 0; i < chk_listArr.length; i++) {
+				chk_listArr[i].checked = this.checked;
+			}
+		});
+		$("input[name='RowCheck']").click(function() {
+			if ($("input[name='RowCheck']:checked").length == rowCnt) {
+				$("input[name='allCheck']")[0].checked = true;
+			} else {
+				$("input[name='allCkeck']")[0].checked = false;
+			}
+		});
+	});	
+	
+	//	선택삭제
+	function deleteValue() {
+		var url = "/user/inquiry/delete"; // Controller로 보내고자 하는 URL
+		var valueArr = new Array();
+		var list = $("input[name='RowCheck']");
+		for (var i = 0; i < list.length; i++) {
+			if (list[i].checked) {
+				valueArr.push(list[i].value);
+			}
+		}
+
+		if (valueArr.legnth == 0) {
+			alert("선택된 글이 없습니다.");
+		} else {
+			var chk = confirm("정말 삭제하시겠습니까?");
+			$.ajax({
+				url : url,
+				type : 'POST',
+				traditional : true,
+				data : {
+					valueArr : valueArr
+				},
+				success : function(jdata) {
+					if (jdata=1) {
+						alert("삭제 완료");
+						location.replace("/user/inquiry/list");
+					} else {
+						alert("삭제 실패");
+						location.replace("/user/inquiry/list");
+					}
+				}
+			})
+		}
+	}	
+
 </script>
 
 <style type="text/css">
 table {
-	table-layout: fixed;
+	margin-top: 20px;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
 }
 
 table, th {
@@ -49,8 +122,36 @@ table, th {
 	width: 1200px;
 }
 
+.banner {
+	height: 180px;
+	background-image: url('/resources/img/book(1).jpg');
+	color: white;
+}
+
 .container {
 	min-height: 400px;
+}
+
+.categories {
+	list-style-type: none;
+	margin-right: 20px;
+}
+
+.categories > li {
+	float: right;
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.categories > li > a {
+	cursor: pointer;
+	color: black;
+	text-decoration: none !important;
+}
+
+.categories > li > a:hover {
+	color: #0067A3;
+	text-decoration: underline;
 }
 </style>
 
@@ -62,38 +163,71 @@ table, th {
 		<div class="container">
 
 			<div style="height: 50px;"></div>
-			
+
+			<div class="banner">
+			<div style="height: 50px;"></div>
 			<h1>1:1 질문</h1>
+			</div>
 			
 			<div style="height: 20px;"></div>
+			
+			<div style="height: 20px;">
+				<ul class="categories">
+					<li><a>이벤트</a></li>
+					<li><a>|</a></li>
+					<li><a>서비스</a></li>
+					<li><a>|</a></li>
+					<li><a>계정</a></li>
+					<li><a>|</a></li>
+					<li><a>모임</a></li>
+					<li><a>|</a></li>
+					<li><a>전체</a></li>
+				</ul>
+			</div>				
 			
 			<div style="height: 8px;"></div>
 			
 			<table class="table table-hover">
-				<thead class="table-dark">
-					<tr class="active">
-						<th style="width: 8%;">글번호</th>
-						<th>제목</th>
-						<th style="width: 5%;">조회</th>
-						<th style="width: 15%;">작성일</th>
-						<th>답변여부</th>
+				<thead>
+					<tr>
+						<th style="width: 5%;"><input id="allCheck" type="checkbox" name="allCheck" /></th>
+						<th style="width: 8%;">No.</th>
+						<th style="width: 8%;">#</th>
+						<th>Title</th>
+						<th style="width: 15%;">Date</th>
+						<th style="width: 8%;">Reply</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list }" var="inquiry">
 						<tr>
+							<td><input type="checkbox" name="RowCheck" value="${inquiry.board_no }" /></td>
 							<td>${inquiry.board_no }</td>
+							<td>
+							<c:choose>
+							<c:when test="${inquiry.type == 1 }">
+							모임
+							</c:when>
+							<c:when test="${inquiry.type == 2 }">
+							계정
+							</c:when>
+							<c:when test="${inquiry.type == 3 }">
+							서비스
+							</c:when>
+							<c:when test="${inquiry.type == 4 }">
+							이벤트
+							</c:when>
+							</c:choose>
+							</td>
 							<td><a
 								href="/user/inquiry/view?board_no=${inquiry.board_no }">${inquiry.board_title }</a></td>
-							<td>0</td>
-							<td><fmt:formatDate value="${inquiry.board_date }"
-									pattern="yy-MM-dd HH:mm:ss" /></td>
+							<td style="font-size: 14px;"><fmt:formatDate value="${inquiry.board_date }"
+									pattern="yyyy년 MM월 dd일" /></td>
 							<td>
-							<c:if test="${inquiry.check_reply == 0 }">
-							답변 x
-							</c:if>
 							<c:if test="${inquiry.check_reply == 1 }">
-							답변 ㅇ
+							<span class="glyphicon glyphicon-envelope"></span>
+							</c:if>
+							<c:if test="${inquiry.check_reply == 0 }">
 							</c:if>
 							</td>
 						</tr>
@@ -104,18 +238,18 @@ table, th {
 
 			<span class="pull-left">총 게시글 : ${paging.totalCount }개</span>
 
-			<div class="clearfix"></div>
+			
 			<div style="height: 10px;"></div>
 
-			<button id="btnWrite" class="btn btn-primary pull-left" style="margin-right: 2px;">글쓰기</button>
-			<button id="btnDelete" class="btn btn-primary pull-left" style="margin-right: 2px;">삭제</button>
+			<button id="btnDelete" class="btn pull-right" style="margin-right: 2px; border-color: #D3D3D3; background: white; color: gray;"
+				onclick="deleteValue()">삭제</button>
+			<button id="btnWrite" class="btn pull-right" style="margin-right: 2px; border-color: #D3D3D3; background: white; color: gray;">글쓰기</button>
+
+			<div class="clearfix"></div>
 
 			<div class="form-inline text-center">
-
-				<form action="/user/inquiry/list" method="get">
-					<input class="form-control" type="text" id="search" name="search" value="${paramData.search }"/>
-					<button id="btnSearch" class="btn">검색</button>
-				</form>
+					<input class="form-control" type="text" id="search1" name="search" value="${paramData.search }"/>
+					<button id="btnSearch" class="btn" style="border-color: #D3D3D3; background: white; color: gray;">검색</button>
 			</div>
 
 			

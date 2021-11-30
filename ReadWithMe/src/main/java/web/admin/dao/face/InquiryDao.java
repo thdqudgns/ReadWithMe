@@ -53,5 +53,26 @@ public interface InquiryDao {
 	 */
 	public void updateComment(AdminInquiry adminInquiry);
 
+	/**
+	 * 1:1질문 수정
+	 * 
+	 * @param inquiry
+	 */
+	public void update(Inquiry inquiry);
+
+	/**
+	 * 1:1 질문 삭제
+	 * 
+	 * @param inquiry - 삭제될 1:1질문 
+	 */
+	public void delete(Inquiry inquiry);
+
+	/**
+	 * 1:1 질문 댓글 삭제
+	 * 
+	 * @param inquiry - 삭제될 1:1 질문 board_no을 가진 객체
+	 */
+	public void deleteCommentByBoardno(Inquiry inquiry);
+
 	
 }

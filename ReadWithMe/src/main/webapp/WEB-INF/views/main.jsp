@@ -1,22 +1,25 @@
-<<<<<<< HEAD
+
 <%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
 <%--     pageEncoding="UTF-8"%> --%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 
-<<<<<<< HEAD
+
 <%-- <c:import url="/WEB-INF/views/layout/header.jsp" /> --%>
 
 
 
 <%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%><%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
-=======
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
-=======
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -25,7 +28,7 @@
 
     <%--페이지별 css/ js--%>
 	<link href="${cssPath}/home.css" rel="stylesheet">
->>>>>>> e15f5cbb95a14e1b9736562e1e5027b5a82d812a
+
 
 </head>
 
@@ -182,4 +185,4 @@ $(document).ready(function() {
 	</script>
 	
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
->>>>>>> e15f5cbb95a14e1b9736562e1e5027b5a82d812a
+

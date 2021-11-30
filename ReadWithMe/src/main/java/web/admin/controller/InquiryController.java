@@ -71,6 +71,7 @@ public class InquiryController {
 		return "admin/inquiry/view";
 	}
 	
+	//	답변 완료 로직
 	@RequestMapping(value = "/admin/inquiry/check_reply", method=RequestMethod.POST)
 	public void CheckReply(HttpServletRequest req, AdminInquiry adminInquiry) {
 		
@@ -79,8 +80,49 @@ public class InquiryController {
 		adminInquiry.setBoard_no(data_for_board_no);
 		
 		inquiryService.checkReply(adminInquiry);
-		
 	}
+	
+	//	1:1질문 수정
+	@RequestMapping( value = "/admin/inquiry/update", method = RequestMethod.GET)
+	public String InquiryUpdate(Inquiry inquiry, Model model) {
+		
+		logger.info("{}", inquiry);
+		
+		//	게시글 번호가 1보다 작으면 목록을 보내기
+		if(inquiry.getBoard_no() < 1 ) {
+			return "redirect:/admin/inquiry/list";
+		}
+		
+		//	게시글 상세 정보 전달
+		inquiry = userInquiryService.view(inquiry);
+		
+		//	모델값 전달
+		model.addAttribute("inquiry", inquiry);
+		
+		return "admin/inquiry/update";
+	}
+	
+	@RequestMapping( value = "/admin/inquiry/update", method = RequestMethod.POST)
+	public String InquiryUpdateProc(Inquiry inquiry) {
+		
+		inquiryService.update(inquiry);
+		
+		return "redirect:/admin/inquiry/list?board_no=" + inquiry.getBoard_no();
+	}
+	
+	//	1:1질문 삭제
+	@RequestMapping(value = "/admin/inquiry/delete" , method = RequestMethod.GET)
+	public String InquiryDelete(Inquiry inquiry) {
+		
+		if(inquiry.getBoard_no() < 1 ) {
+			return "redirect: /admin/inquiry/list";
+		}
+		
+		inquiryService.delete(inquiry);
+		
+		return "redirect:/admin/inquiry/list";
+	}
+	
 }
 
 

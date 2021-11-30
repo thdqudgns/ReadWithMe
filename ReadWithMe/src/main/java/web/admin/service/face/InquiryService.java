@@ -53,4 +53,18 @@ public interface InquiryService {
 	 */
 	public void updateComment(AdminInquiry adminInquiry);
 
+	/**
+	 * 1:1질문 수정
+	 * 
+	 * @param inquiry - 수정할 1:1질문 객체
+	 */
+	public void update(Inquiry inquiry);
+
+	/**
+	 * 1:1질문 삭제
+	 * 
+	 * @param inquiry - 삭제할 1:1질문 객체
+	 */
+	public void delete(Inquiry inquiry);
+
 }
