@@ -166,6 +166,10 @@ public interface LoginService {
 	 */
 	public boolean isBan(int user_no);
 
+	public void keepLogin(UserTb user);
+	public UserTb checkUserWithSessionKey(UserTb user);
+	public boolean AutoLogin(UserTb user);
+
 
 
 
