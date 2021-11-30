@@ -27,18 +27,11 @@
         .srch select,.srch input{margin:-1px 0 1px;font-size:12px;color:#373737;vertical-align:middle}
         .srch .keyword{margin-left:1px;padding:2px 3px 5px;border:1px solid #b5b5b5;font-size:12px;line-height:15px}
         .tbl_type,.tbl_type th,.tbl_type td{border:0}
-        .tbl_type{width:100%;border-bottom:2px solid #dcdcdc;font-family:Tahoma;font-size:11px;text-align:center}
+        .tbl_type{width:100%;border-bottom:2px solid #dcdcdc;font-family:Tahoma;font-size:11px;text-align:center;border-spacing:0;}
         .tbl_type caption{display:none}
         .tbl_type th{padding:7px 0 4px;border-top:2px solid #dcdcdc;background-color:#f5f7f9;color:#666;font-family:'돋움',dotum;font-size:12px;font-weight:bold}
         .tbl_type td{padding:6px 0 4px;border-top:1px solid #e5e5e5;color:#4c4c4c}
         </style>
-        
-        
-        
-        
-        
-        
-        
         
         
         <div class="search_book">
@@ -48,7 +41,7 @@
                 <input type="button" id="search" name="search" alt="검색" onclick="callAjax( $('#query').val() );" value="검색" />
         </fieldset>
         
-        <table cellspacing="0" border="1" summary="책검색 API 결과" class="tbl_type">
+        <table border="1" summary="책검색 API 결과" class="tbl_type">
         <caption>책검색 API 결과</caption>
                 <colgroup>
                         <col width="10%">
@@ -76,7 +69,7 @@
                         </tr>
                         <tr class="__template" style="display: none">
                                 <td><img src="#image#"  width="50px" height="70px" /></td>
-                                <td><a href="#link#">#title#</a></td>
+                                <td><a href="#link#" target="_blank">#title#</a></td>
                                 <td>#author#</td>
                                 <td>#publisher#</td>
                                 <td>#pubdate#</td>
@@ -86,10 +79,6 @@
                 </tbody>
         </table>
         </div>
-
-
-
-
 
 
 
@@ -105,18 +94,36 @@
 //         });
 
         function callAjax(query) {
-                $.ajax({
+        	console.log("bbb")
+
+			$.ajax({
                         url: "/searchBook",
                         dataType:'json',
                         type:'post',
                         data:{'query':query},
                         headers: { 'X-Naver-Client-Id': "qRxWO46cR3KnAJeibbcy", 'X-Naver-Client-Secret': "tkYW0s1NFR"},
-                        success:function(result){
+                        success:function(result) {
+//                         	console.log("-result-")
+//                         	console.log(result.responseBody)
+                        	
+                        	var responseBody = JSON.parse(result.responseBody);
+                        	
                                 $('#result').html('');
-                                if(responseBody['channel']['display'] > 0){
-                                        $('.__oldlist').remove();
-                                        for(var i in responseBody['channel']['item']){
-                                                var item = result['channel']['item'][i];
+                                
+//                                 if(responseBody['channel']['display'] > 0){
+//                                         $('.__oldlist').remove();
+//                                         for(var i in responseBody['channel']['item']){
+//                                                 var item = result['channel']['item'][i];
+//                                                 $html = template('__template', item);
+//                                                 $html.addClass('__oldlist');
+//                                                 $('#list').append($html);
+//                                                 $('.__oldlist').show();
+//                                         }
+                                if(responseBody['display'] > 0){
+                                	
+                                	$('.__oldlist').remove();
+                                        for(var i=0; i<responseBody.display; i++){
+                                                var item = responseBody['items'][i];
                                                 $html = template('__template', item);
                                                 $html.addClass('__oldlist');
                                                 $('#list').append($html);
@@ -129,7 +136,7 @@
                                 }
                         }
                 });
-        };
+        }
 
         function template(template_id, params){
                 var c = $('.' + template_id).clone();
