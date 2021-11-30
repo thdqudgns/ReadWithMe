@@ -68,7 +68,7 @@
 	
 	
 	<!-- 시큐리티 -->
-	<beans:bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+<!-- 	<beans:bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/> -->
 	
 	<context:component-scan base-package="web.user.controller, web.user.service, web.admin.controller, web.admin.service, web.aop"/>	
 	
