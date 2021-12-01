@@ -44,18 +44,13 @@
 	</beans:bean> 
 	
 	<!-- DownloadView클래스를 down이라는 이름의 스프링빈으로 등록하기 -->
-
-
-<!--  	<beans:bean id="down" class="web.view.DownloadView" /> -->
+ 	<beans:bean id="down" class="web.view.DownloadView" />
  	<beans:bean id="reviewDown" class="web.view.ReviewDownloadView" />
-
-
 	
 	<!-- JSON 응답용 jsonView를 스프링빈으로 등록하기 -->
 	 <beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="application/json;charset=UTF-8" />
 	</beans:bean> 	
-	
 	
 	<!-- MultipartResolver 설정 -->
 	<!-- 	-> 파일업로드 요청을 처리하는 클래스(스프링 빈) -->
