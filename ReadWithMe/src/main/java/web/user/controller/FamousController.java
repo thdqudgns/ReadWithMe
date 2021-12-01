@@ -85,7 +85,7 @@ public class FamousController {
 		
 	} // 끝 목록 메소드
 
-	//추천
+	//추천  
 	@RequestMapping(value = "/recommend")
 	public ModelAndView recommend(Famous_rec recommend, ModelAndView mav, HttpSession session) {
 		logger.info("/famous/recommend");
