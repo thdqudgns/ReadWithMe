@@ -4,17 +4,16 @@ import java.util.Date;
 
 public class Rpt_board {
 	private int report_no;
-	private int user_no;
+	private int user_no; //신고한 유저
 	private int case_no;
 	private int famous_no;
-	private int meeting_no;
 	private int review_no;
 	private String report_content;
 	private Date report_date;
 	@Override
 	public String toString() {
 		return "Rpt_board [report_no=" + report_no + ", user_no=" + user_no + ", case_no=" + case_no + ", famous_no="
-				+ famous_no + ", meeting_no=" + meeting_no + ", review_no=" + review_no + ", report_content="
+				+ famous_no + ", review_no=" + review_no + ", report_content="
 				+ report_content + "]";
 	}
 	public int getReport_no() {
@@ -40,12 +39,6 @@ public class Rpt_board {
 	}
 	public void setFamous_no(int famous_no) {
 		this.famous_no = famous_no;
-	}
-	public int getMeeting_no() {
-		return meeting_no;
-	}
-	public void setMeeting_no(int meeting_no) {
-		this.meeting_no = meeting_no;
 	}
 	public int getReview_no() {
 		return review_no;

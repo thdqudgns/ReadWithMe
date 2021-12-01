@@ -5,6 +5,7 @@ import java.util.List;
 
 import web.user.dto.Famous;
 import web.user.dto.Famous_rec;
+import web.user.dto.Rpt_board;
 import web.util.Paging;
 
 public interface FamousService {
@@ -82,6 +83,14 @@ public interface FamousService {
 	 * @param famous - 글 정보가 담긴 객체
 	 */
 	public boolean updateFamous(Famous famous);
+
+	/**
+	 * 명언 글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param famous - 명언 번호와 신고한 회원번호가 담긴 객체
+	 */
+	public boolean insertReportByFamousNo(Rpt_board famous);
+
 
 	/**
 	 * 사용자 번호로 id 조회하기

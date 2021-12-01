@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import web.user.dto.Review;
 import web.user.dto.Review_file;
 import web.user.dto.Review_rec;
+import web.user.dto.Rpt_board;
+import web.user.dto.Rpt_cmt;
 import web.user.dto.Rv_cmt;
 import web.util.Paging;
 
@@ -157,6 +159,20 @@ public interface ReviewService {
 	 * @return
 	 */
 	public boolean updateReviewComment(Rv_cmt comment);
+
+	/**
+	 * 후기글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param famous - 후기글번호와 신고한 회원번호가 담긴 객체
+	 */
+	public boolean insertReportByReviewNo(Rpt_board review);
+
+	/**
+	 * 후기 댓글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param famous - 후기 댓글번호와 신고한 회원번호가 담긴 객체
+	 */
+	public boolean insertReportCommentByReviewNo(Rpt_cmt comment);
 
 
 

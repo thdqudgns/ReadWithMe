@@ -4,6 +4,7 @@ import java.util.List;
 
 import web.user.dto.Review;
 import web.user.dto.Review_file;
+import web.user.dto.Rpt_board;
 import web.util.Paging;
 
 public interface ReviewDao {
@@ -115,6 +116,21 @@ public interface ReviewDao {
 	 * @return - 글 번호
 	 */
 	public int lastReviewNo();
+
+	/**
+	 * 후기글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param review - 후기글번호가 담긴 객체
+	 */
+	public void insertReportByReviewNo(Rpt_board review);
+
+	/**
+	 * 신고된 글 확인
+	 * 
+	 * @param review - 명언글 번호, 신고한 회원 번호
+	 * @return 데이터 개수
+	 */
+	public int countReport(Rpt_board review);
 
 
 }
