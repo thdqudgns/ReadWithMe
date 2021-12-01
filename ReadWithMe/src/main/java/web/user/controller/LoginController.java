@@ -2,7 +2,9 @@ package web.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -42,7 +45,7 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "user/member/login";
-	} 
+	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginProc(UserTb user, UserSessionTb userSession, HttpSession session, HttpServletResponse resp, Model model)  {
@@ -51,13 +54,12 @@ public class LoginController {
 		boolean isLogin = loginService.login(user);
 		
 		logger.info("isLogin : {}", isLogin);
-
+		int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
 		
 		if( isLogin ) {
 			
 			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
 
-				int user_no = Integer.parseInt(loginService.getUserNo(user.getId()));
 				
 				boolean res = loginService.isBan(user_no);
 			
@@ -75,26 +77,62 @@ public class LoginController {
 					
 				} else {
 					session.setAttribute("login", isLogin);
-					session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+					session.setAttribute("user_no", user_no);
 					session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 					session.setAttribute("user_nick", loginService.getNick(user.getId()));
 					
-					return "redirect:/";
+					logger.info(user.getRemember() + "???");
+					if(user.getRemember() == 1) {
+						logger.info("왜죠........? {}",user.getRemember());
+						
+						Cookie loginCookie = new Cookie("loginCookie", session.getId());
+						loginCookie.setPath("/");
+						loginCookie.setMaxAge(60*60*24*7);
+						
+						resp.addCookie(loginCookie);
+						
+						Date sessionLimit = new Date(System.currentTimeMillis() + (1000*60*60*24*7));
+					
+						user.setSession_limit(sessionLimit);
+						user.setSession_key(session.getId());
+						user.setUser_no(user_no);
+						loginService.keepLogin(user);
+					}
+					return "redirect:/"; 
 					
 				}
 				
 		        
 			} else {
 				session.setAttribute("login", isLogin);
-				session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+				session.setAttribute("user_no", user_no);
 				session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 				session.setAttribute("user_nick", loginService.getNick(user.getId()));
+				
+				logger.info("왜죠? {}", user.getRemember()==1);
+				if(user.getRemember() == 1) {
+					logger.info("왜죠........? {}",user.getRemember());
+					
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setPath("/");
+					loginCookie.setMaxAge(60*60*24*7);
+					
+					resp.addCookie(loginCookie);
+					Date sessionLimit = new Date(System.currentTimeMillis() + (1000*60*60*24*7));
+					logger.info("리밑 {}", sessionLimit);
+					logger.info("키 {}", session.getId());
+					user.setSession_limit(sessionLimit);
+					user.setSession_key(session.getId());
+					user.setUser_no(user_no);
+					loginService.keepLogin(user);
+				}
 				
 				return "redirect:/";
 			}
 			
 		} else {
 			session.invalidate();
+			logger.info("로그인실패이동페이지");
 			return "/user/member/loginFail";
 		}
 	}
@@ -121,6 +159,12 @@ public class LoginController {
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			Cookie loginCookie = new Cookie("loginCookie", session.getId());
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*7);
+			
+			response.addCookie(loginCookie);
+			
 			return "redirect:/";
 		} else {
 			model.addAttribute("user", user);
@@ -166,7 +210,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login/naver/token",method = RequestMethod.GET)
-	public String naverLoginProc(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, UserTb user) throws IOException {
+	public String naverLoginProc(@RequestParam String code, @RequestParam String state, HttpServletResponse response, HttpSession session, Model model, UserTb user) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 		logger.info("/naverlogin callback");
 		JsonParser json = new JsonParser();
@@ -185,6 +229,11 @@ public class LoginController {
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			Cookie loginCookie = new Cookie("loginCookie", session.getId());
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*7);
+			
+			response.addCookie(loginCookie);
 			return "redirect:/";
 		} else {
 			model.addAttribute("user", user);
@@ -218,8 +267,37 @@ public class LoginController {
 	//---------------------------------- 로그아웃 ---------------------------------------
 	
 	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();		
+	public String logout(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session) {
+		
+		Object object = request.getSession().getAttribute("login");
+		
+		if(object != null) {
+			boolean res = (boolean) object;
+			
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			if(loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				
+				Date date = new Date(System.currentTimeMillis());
+				UserTb user = new UserTb();
+				user.setSession_limit(date);
+				
+				logger.info("흑흑 {}", request.getSession().getAttribute("user_no"));
+				
+				user.setUser_no(Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_no"))));
+				user.setSession_key(request.getSession().getId());
+				loginService.keepLogin(user);
+				
+			}
+				
+			request.getSession().removeAttribute("login");
+			request.getSession().invalidate();
+			
+			
+		}
+		
 		return "redirect:/";	
 	}
 	

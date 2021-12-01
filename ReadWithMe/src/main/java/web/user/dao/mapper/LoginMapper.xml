@@ -166,4 +166,16 @@
 		WHERE user_no = #{user_no }
 	</delete>
 	
+	<update id="keepLogin" parameterType="web.user.dto.UserTb">
+		UPDATE userTb 
+		SET session_key = #{session_key }, session_limit = #{session_limit }
+		WHERE user_no = #{user_no }
+	</update>
+
+	
+	<select id="selectUserBySessionKey" resultType="web.user.dto.UserTb" parameterType="web.user.dto.UserTb">
+	 	SELECT id, password, session_key FROM userTb
+	 	WHERE session_key = #{session_key } and session_limit > sysdate
+	</select>
+	
 </mapper>
