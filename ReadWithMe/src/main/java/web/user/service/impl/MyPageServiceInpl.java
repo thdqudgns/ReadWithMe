@@ -212,7 +212,7 @@ public class MyPageServiceInpl implements MyPageService {
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("paging", paging);		
-		map.put("user_no", Integer.parseInt((String)session.getAttribute("user_no")));
+		map.put("user_no", Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		
 		return myPageDao.selectToDoList(map);
 		

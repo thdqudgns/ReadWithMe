@@ -155,7 +155,7 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 	
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><div style="display: inline-block;">회원관리</div></a>
+			<a href="<%=request.getContextPath() %>/admin/member"><div style="display: inline-block;">회원관리</div></a>
 		</div>
 
 		<!-- 게시판관리 탭 -->
@@ -163,7 +163,7 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 			<li class="all">
 				<div style="display: inline-block;">게시판관리</div>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">모임</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/meeting">모임</a></li>
 					<li><a href="<%=request.getContextPath() %>/admin/review/list">후기</a></li>
 					<li><a href="<%=request.getContextPath() %>/admin/famous/list">명언</a></li>
 				</ul>

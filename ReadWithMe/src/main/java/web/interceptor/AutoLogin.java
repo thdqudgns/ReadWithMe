@@ -37,6 +37,8 @@ public class AutoLogin implements HandlerInterceptor {
 			userSession.setSession_key(sessionKey);
 			UserTb user = loginService.checkUserWithSessionKey(userSession);
 			
+			logger.info("user하아.....{}", user);
+			
 			boolean isLogin = loginService.AutoLogin(user);
 			
 			if(isLogin) {

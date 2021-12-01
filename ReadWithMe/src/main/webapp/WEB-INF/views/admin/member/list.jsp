@@ -28,7 +28,7 @@ input[type="radio"]:checked + label span {
 </style>
 
 <section>
-<div id="seachMemberForm">
+<div id="seachMemberForm" style="text-align: center; margin-top: 30px;">
 <form id="adminMemberForm" method="get">
 <input type="hidden" id="admin" value="${userLv }">
 

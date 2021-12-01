@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
 
 <link href="/resources/css/login.css" rel="stylesheet">
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
@@ -37,13 +36,7 @@
 	
 <div id="socialLogin">
 	<div class="socialLoginBtn">
-	<a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?
-	client_id=604366855673-sn0moenehgundmgh9hf20dksulomr1en.apps.googleusercontent.com
-	&redirect_uri=http://localhost:8888/login/google
-	&response_type=code
-	&scope=email%20profile%20openid
-	&access_type=offline
-	&flowName=GeneralOAuthFlow">
+	<a href="/login/google/wait">
 	<img src="/resources/img/google_login_btn.png">
 	</a>
 	</div>

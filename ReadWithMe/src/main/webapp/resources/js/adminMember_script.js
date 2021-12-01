@@ -186,7 +186,37 @@ $(document).ready(function() {
 	
 	
 	
+	$("#approvalBtn").click(function() {
+		console.log("deleteBanMemberBtn1 clicked");
 		
+		var chk_arr =[];
+		
+		$("input[name='memberCheck']:checked").each(function(){
+			var chk=$(this).val();
+			chk_arr.push(chk);
+		});
+		
+		console.log("과연" + chk_arr);
+		
+		$("#banForm1").attr("action", "/admin/meetingApproval");
+		$("#banForm1").submit();
+	});
+		
+	$("#deleteBtn").click(function() {
+		console.log("deleteBanMemberBtn1 clicked");
+		
+		var chk_arr =[];
+		
+		$("input[name='memberCheck']:checked").each(function(){
+			var chk=$(this).val();
+			chk_arr.push(chk);
+		});
+		
+		console.log("과연" + chk_arr);
+		
+		$("#banForm1").attr("action", "/admin/meetingDelete");
+		$("#banForm1").submit();
+	});
 		
 
 	

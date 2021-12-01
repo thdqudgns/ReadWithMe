@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="web.admin.dao.face.AdminMeetingDao">
+ 
+  	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM meeting
+	</select>
+	
+	<select id="selectMeetingList" resultType="hashmap" parameterType="hashmap">
+		SELECT meeting_no, user_no, book_class_no, meeting_title, meeting_rcr_start, meeting_approved, nick, book_class_name, CNT
+		FROM (
+		    SELECT rownum rnum, BUCM.* 
+		    FROM (
+		        select UCM.*, book_class_name
+		        from
+		            (select CM.*, U.nick
+		            from
+		                (select CNT.*, M.meeting_no, M.user_no, M.book_class_no, meeting_title, meeting_rcr_start, meeting_approved
+		                from
+		                    (select count(*) CNT
+		                    from participation
+		                    Where meeting_no = #{meeting_no }
+		                    ) CNT, Meeting M 
+		                ) CM, UserTb U
+		            where CM.user_no = U.user_no
+		            <trim prefix="WHERE" prefixOverrides="AND|OR">
+					<choose>
+					<when test="selectBox!=null and selectBox.equals('meeting')">
+						AND meeting LIKE
+					</when>
+					<when test="selectBox!=null and selectBox.equals('user')">
+						AND user LIKE
+					</when>
+					</choose>
+				</trim>
+					<if test="search!=null and !search.equals('')">
+						'%' || #{search} || '%'
+					</if>
+		            ) UCM, book_class B
+		        where UCM.book_class_no = B.book_class_no
+		    )BUCM
+		) WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<update id="updateMeeting" parameterType="web.user.dto.Meeting">
+		UPDATE Meeting
+		SET meeting_approved = 1
+		WHERE meeting_no = #{meeting_no }
+	</update>
+	
+	<delete id="deleteMeeting" parameterType="web.user.dto.Meeting">
+		DELETE FROM Meeting
+		WHERE meeting_no = #{meeting_no }
+	</delete>
+		
+ </mapper>

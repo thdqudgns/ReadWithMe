@@ -383,5 +383,14 @@ public class LoginServiceImpl implements LoginService {
 			return false;
 		}	
 	}
+	
+	@Override
+	public boolean getGoogleId(UserTb user) {
+		
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
 
 }

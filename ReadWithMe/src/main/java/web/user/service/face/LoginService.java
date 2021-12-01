@@ -170,6 +170,13 @@ public interface LoginService {
 	public UserTb checkUserWithSessionKey(UserTb user);
 	public boolean AutoLogin(UserTb user);
 
+	/**
+	 * google아이디가 존재하는지 확인
+	 * @param user - 고객의 아이디가 담긴 DTO객체
+	 * @return
+	 */
+	public boolean getGoogleId(UserTb user);
+
 
 
 

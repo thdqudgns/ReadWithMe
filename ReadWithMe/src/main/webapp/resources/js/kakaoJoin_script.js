@@ -94,17 +94,42 @@ $(document).ready(function() {
 	
 
 	$('#reg_submit').click(function(){
-		let res = false;
-		// 이름 정규식
-		if (nameJ.test($('#name').val())) {
-			res = true;	
-		} 
+
+		var checkbox = $('#serviceAgree').is(":checked");
+		console.log("과연" + checkbox);
 		
-		if(res){ 
-		} else{
-			alert('입력한 정보들을 다시 한번 확인해주세요 :)')
-			return false;
+		var date = $('#birth').val();
+		console.log("생일" + date);
+		console.log(date == "");
+
+		if (nameJ.test($('#name').val())) {	
+			
+			if($('#birth').val() != "") {
+				
+				if($('#personalAgree').is(":checked") == true) {
+					
+					if($('#serviceAgree').is(":checked") == true ) {
+						$('form').submit();								
+					} else {
+						alert('서비스 이용약관에 동의 해주세요!');
+						return;	
+					}
+					
+				} else {
+					alert('개인정보 처리방침에 동의 해주세요!');
+					return;	
+				}
+				
+			} else {
+				alert('생일을 입력 해주세요!');
+				return;						
+			}
+			
+		} else {
+			alert('이름을 다시 확인해주세요!');
+			return;
 		}
+
 	});
 	 
 	

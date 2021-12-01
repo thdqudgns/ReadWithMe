@@ -159,12 +159,7 @@ public class LoginController {
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
-			Cookie loginCookie = new Cookie("loginCookie", session.getId());
-			loginCookie.setPath("/");
-			loginCookie.setMaxAge(60*60*24*7);
-			
-			response.addCookie(loginCookie);
-			
+						
 			return "redirect:/";
 		} else {
 			model.addAttribute("user", user);
@@ -230,10 +225,7 @@ public class LoginController {
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
 			Cookie loginCookie = new Cookie("loginCookie", session.getId());
-			loginCookie.setPath("/");
-			loginCookie.setMaxAge(60*60*24*7);
 			
-			response.addCookie(loginCookie);
 			return "redirect:/";
 		} else {
 			model.addAttribute("user", user);
@@ -264,6 +256,54 @@ public class LoginController {
 	
 	//---------------------------------- 구글 로그인(회원가입) ---------------------------------------
 
+	@RequestMapping(value="/login/google/wait")
+	public String googleLoginWait(UserTb user) {
+		logger.info("구글로그인 {}", user);
+		
+		return "/user/member/googleWait";
+	}
+	
+	@RequestMapping(value="/login/google", method = RequestMethod.GET)
+	public String googleLogin(UserTb user, HttpSession session, HttpServletResponse response, Model model) {
+		logger.info("구글로그인입니닷 {}", user);
+		
+		boolean isGoogleLogin = loginService.getGoogleId(user);
+		logger.info("isGoogleLogin : {}", isGoogleLogin);
+		logger.info("user : {}", user);
+		
+		if( isGoogleLogin ) {
+			session.setAttribute("login", isGoogleLogin);
+			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
+			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
+			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+						
+			return "redirect:/";
+		} else {
+			model.addAttribute("user", user);
+			model.addAttribute("social", "google");
+			return "user/member/SocialLogin";
+		}
+		
+	}
+	
+	@RequestMapping(value="/join/google", method = RequestMethod.POST)
+	public String googleLoginProc(UserTb user, HttpServletRequest req) {
+		logger.info("구글회원가입 처리 {}", user);
+		
+		logger.info("snsUser {}:", user);
+		
+		boolean res = loginService.KakaoJoin(user, req);
+		
+		if(res) {
+			logger.info("회원가입 성공");
+			return "/user/member/joinEnd";
+		} else {
+			logger.info("회원가입 실패");
+			return "/user/member/joinFail";
+		}
+		
+	}
+	
 	//---------------------------------- 로그아웃 ---------------------------------------
 	
 	@RequestMapping(value="/logout")
