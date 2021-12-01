@@ -1,28 +1,9 @@
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
-<%--     pageEncoding="UTF-8"%> --%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
-
-
-<%-- <c:import url="/WEB-INF/views/layout/header.jsp" /> --%>
-
-
-
-<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%><%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -33,91 +14,7 @@
 	<link href="${path}/resources/css/main_home.css" rel="stylesheet" />
 	<script src="${path}/resources/js/main_home_script.js"></script>
 
-
 </head>
-
-
-<script type="text/javascript">
-$(document).ready(function() {
-	var $slider_list = $("#slider li")
-	console.log($slider_list)
-
-
-<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
-
-
-	$slider_list.css("left", $("#sliderbox").css("width"))
-	$slider_list.eq(0).css("left", 0)
-
-	var sliderClick = function() {
-		$("#sliderbox").click()	
-	}
-	
-	var tid = setInterval( sliderClick, 5000 );
-	var curSlide = 0;
-	
-	$("#sliderbox").click(function() {
-
-		clearInterval( tid )
-		tid = setInterval( sliderClick, 5000 );
-
-		var nextSlide = curSlide + 1;
-		nextSlide %= $slider_list.length;	
-		
-		console.log(curSlide, ":", nextSlide)
-
-		//현재 슬라이드 숨기기 - curSlide
-		$slider_list.eq(curSlide).animate({"left": "-=" + $("#sliderbox").css("width") })
-
-		//다음 슬라이드 준비하기
-		$slider_list.eq(nextSlide).css("left", $("#sliderbox").css("width"))
-		
-		//다음 슬라이드 보여주기 - nextSlide
-		$slider_list.eq(nextSlide).animate({"left": "-=" + $("#sliderbox").css("width") })
-
-		//증가식 (순환구조 만들기)
-		curSlide++;
-		curSlide %= $slider_list.length;
-	})
-})
-</script>
-
-<style type="text/css">
-/* 이미지 슬라이더 박스 */
-#sliderbox {
-	width: 600px;
-	height: 400px;
-	border: 1px solid #ccc;
-	
-	/* 외부 여백 */
-	margin: 0 auto;
-	
-	/* div영역을 벗어난 부분을 안보이게 처리 */
-/* 	overflow: visible; */
- 	overflow: hidden;
-}
-
-#slider {
-	/* ul태그의 기본 스타일 제거 */
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-	
-	/* 자식요소 absolute박스의 기준점으로 설정하기 */
-	position: relative;
-}
-
-#slider li {
-	position: absolute;
-}
-
-#slider li img {
-	width: 600px;
-	height: 400px;
-}
-
-</style>
-
 
 <br>
 <div id="sliderbox">
@@ -190,6 +87,3 @@ $(document).ready(function() {
 	</script>
 	
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
-
-
-
