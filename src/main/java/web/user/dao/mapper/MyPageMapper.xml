@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="web.user.dao.face.MyPageDao">
+
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM userTb
+		WHERE user_no = #{user_no }
+	</delete>
+	
+	<select id="selectPwByUser_no" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT password FROM UserTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectCntPwMtc" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM UserTb
+		WHERE user_no = #{user_no }
+		AND password = #{password }
+	</select>
+	
+	<update id="updatePw" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET password = #{password }
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<select id="selectUserByUser_no" resultType="web.user.dto.UserTb" parameterType="web.user.dto.UserTb">
+		SELECT user_no, name, nick, email, birth, gender, location
+		FROM UserTb
+		WHERE user_no = #{user_no }		
+	</select>
+
+	<select id="selectInterestByUser_no" resultType="web.user.dto.Interest" parameterType="web.user.dto.UserTb">
+		SELECT user_no, interest, interest2, interest3
+		FROM Interest
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectFileByUser_no" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT file_no FROM FileTb
+		WHERE user_no = #{user_no }
+		ORDER BY file_no DESC
+	</select>	
+	
+	<select id="selectFileByfile_no" resultType="web.user.dto.FileTb" parameterType="web.user.dto.UserTb">
+		SELECT file_no, user_no, url, stored_name, origin_name
+		FROM FileTb
+		WHERE file_no = #{file_no }
+	</select>	
+	
+	<update id="updateMember" parameterType="web.user.dto.UserTb">
+		UPDATE UserTb
+		SET name = #{name }, nick = #{nick }, email = #{email }, birth = #{birth }, location = #{location }, gender = #{gender }
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<update id="updateInterest" parameterType="web.user.dto.Interest">
+		UPDATE Interest
+		SET interest = #{interest }, interest2 = #{interest2 }, interest3 = #{interest3 }
+		WHERE user_no = #{user_no }
+	</update>
+	
+	<insert id="insertFile" parameterType="web.user.dto.FileTb">
+		INSERT INTO FileTb ( file_no, user_no, url, origin_name, stored_name )
+		VALUES ( FILETB_SEQ.nextval, #{user_no }, #{url }, #{origin_name }, #{stored_name } )
+	</insert> 	
+		
+	<insert id="insertToDoList" parameterType="web.user.dto.ToDoList">
+		INSERT INTO ToDoList (list_no, user_no, list_content, bookname, bookthum)
+		VALUES ( TODOLIST_SEQ.nextval, #{user_no }, #{list_content }, #{bookname }, #{bookthum })
+	</insert>
+	
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT count(*) FROM ToDoList
+	</select>
+	
+	<select id="selectToDoList" resultType="hashmap" parameterType="hashmap">
+		SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+		FROM (
+   			 SELECT rownum rnum, L.*
+   			 FROM (
+       			 SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+       			 FROM todolist
+       			 WHERE user_no = #{user_no }
+       			 ORDER BY list_no DESC
+       		 ) L
+   		 ) list
+		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<select id="selectToDoListByListNo" resultType="web.user.dto.ToDoList" parameterType="int">
+		SELECT list_no, user_no, list_content, bookname, bookthum, start_date
+		FROM ToDoList
+		WHERE list_no = #{list_no }
+	</select>
+	
+	<select id="selectEmailByUserNo" resultType="String" parameterType="web.user.dto.ToDoList">
+		SELECT email FROM UserTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<delete id="deleteToDoList" parameterType="int">
+		DELETE FROM ToDoList
+		WHERE list_no = #{list_no }
+	</delete>
+	
+	<select id="selectMeetingHosted" resultType="web.user.dto.Meeting" parameterType="web.user.dto.UserTb">
+		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
+			, meeting_board_date, meeting_approved
+		FROM Meeting
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectMeetingAttend" resultType="web.user.dto.Meeting" parameterType="int">
+		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
+			, meeting_board_date, meeting_approved
+		FROM Meeting
+		WHERE meeting_no = #{meeting_no }
+	</select>
+	
+	<select id="selectMeetingNoByUser_no" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT meeting_no FROM participation
+		WHERE user_no = #{user_no }
+	</select>
+	
+	
+</mapper>

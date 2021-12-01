@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+section {
+	width: 700px;
+	margin: 0 auto;
+}
+h2 {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #333333;
+}
+#line {
+	height: 2px;
+	width: 700px;
+	background-color: #e0e0e0;
+	margin: 0 auto;
+}
+#message_page_title {
+	margin: 20px;
+}
+#message_buttons {
+	margin: 10px;
+}
+#btnDelete {
+	width: 55px;
+	height: 25px;
+	border-radius: 3px;
+	color: white;
+	background-color: #3498db;
+	border: 1px solid #3498db;
+}
+#btnKeep {
+	width: 55px;
+	height: 25px;
+	border-radius: 3px;
+	color: black;
+	background-color: #e0e0e0;
+	border: 1px solid #e0e0e0;
+}
+#btnSend {
+	width: 80px;
+	height: 25px;
+	border-radius: 3px;
+	color: black;
+	background-color: #e0e0e0;
+	border: 1px solid #e0e0e0;	
+}
+#btnUnread {
+	width: 80px;
+	height: 25px;
+	color: black;
+	background-color: #ffffff;
+	border: 1px solid #ffffff;
+}
+select {
+	width: 100px;
+	height: 25px;
+}
+#message_otn_btn {
+	width: 680px;
+	margin: 0 auto;
+}
+#message_option {
+	float: right;
+}
+#message_buttons {
+	float: left;
+}
+#message_list_form {
+	clear: both;
+}
+table {
+	border-top: 1px solid #ccc;
+	border: collapse;
+}
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+
+
+

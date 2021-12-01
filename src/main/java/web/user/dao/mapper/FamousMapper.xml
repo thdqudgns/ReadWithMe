@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="web.user.dao.face.FamousDao">
+  
+  	<sql id="selectFamous">
+		SELECT
+			famous_no, user_no, nick, famous_content
+			, famous_date
+		FROM famous
+	</sql>
+
+	<sql id="whereSearch">
+		WHERE famous_content LIKE '%' || #{search} || '%'
+	</sql>
+  
+  
+	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+		SELECT COUNT(*) FROM (
+			<include refid="selectFamous"/>
+		<if test="search != null and !''.equals(search)">
+		WHERE famous_content LIKE '%' || #{search} || '%'
+		</if>
+		)
+	</select>
+	
+	
+<!-- 	<select id="selectListO" resultType="web.user.dto.Famous" parameterType="web.util.Paging"> -->
+<!-- 		SELECT -->
+<!-- 			R.* -->
+<!-- 			, ( SELECT count(*) FROM famous_rec FR WHERE FR.famous_no = R.famous_no AND FR.user_no = #{user_no} ) isRecommend -->
+<!-- 			, ( SELECT count(*) FROM famous_rec FR WHERE FR.famous_no = R.famous_no ) cntRecommend -->
+<!-- 		FROM ( -->
+<!-- 			SELECT rownum rnum, F.* FROM ( -->
+<!-- 				<include refid="selectFamous"/> -->
+<!-- 		<if test="paging.search != null and !''.equals(paging.search)"> -->
+<!-- 		WHERE famous_content LIKE '%' || #{paging.search} || '%' -->
+<!-- 		</if> -->
+<!-- 				ORDER BY famous_no DESC -->
+<!-- 			) F -->
+<!-- 		) R -->
+<!-- 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo} -->
+<!-- 	</select> -->
+
+
+	
+<!-- 			( SELECT count(*) FROM famous_rec FR WHERE FR.famous_no = R.famous_no AND FR.id = #{user_no} ) FROM (
+ 나중에 이걸로 바꿀 것 -->
+	<select id="selectList" resultType="hashmap" parameterType="hashmap">
+		SELECT
+			R.*
+			<if test="user_no != null and !''.equals(user_no)">
+			, ( SELECT count(*) FROM FAMOUS_REC FR WHERE FR.famous_no = R.famous_no AND FR.user_no = #{user_no} ) isRecommend
+			</if>
+			, ( SELECT count(*) FROM FAMOUS_REC FR WHERE FR.famous_no = R.famous_no ) cntRecommend
+		FROM (
+			SELECT rownum rnum, F.* FROM (
+				<include refid="selectFamous"/>
+				<if test="paging.search != null and !''.equals(paging.search)">
+				WHERE famous_content LIKE '%' || #{paging.search} || '%'
+				</if>
+				ORDER BY famous_no DESC
+			) F
+		) R
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
+	
+	<!-- <select id="getIdByUserNo" resultType="String" parameterType="web.user.dto.Famous">
+		SELECT id FROM usertb WHERE user_no = #{user_no}
+	</select> -->
+	
+	<!-- <select id="getIdByUserNo2" resultType="String" parameterType="int">
+		SELECT id FROM usertb WHERE user_no = #{user_no}
+	</select> -->
+	
+	<insert id="insertFamous" parameterType="web.user.dto.Famous">
+		INSERT INTO famous (famous_no, user_no, famous_content, nick)
+		VALUES ( famous_seq.nextval, #{user_no}, #{famous_content}, #{nick} )
+	</insert>
+	
+	<delete id="deleteFamous" parameterType="web.user.dto.Famous">
+		DELETE famous
+		WHERE famous_no = #{famous_no}
+	</delete>
+	
+	<select id="countFamous" resultType="int" parameterType="web.user.dto.Famous">
+		SELECT COUNT(*) FROM famous 
+		WHERE famous_no = #{famous_no}
+	</select>
+	
+	<update id="updateFamous" parameterType="web.user.dto.Famous">
+		UPDATE famous
+		SET famous_content = #{famous_content}
+		WHERE famous_no = #{famous_no}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
+  </mapper>
