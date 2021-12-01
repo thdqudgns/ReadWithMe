@@ -141,7 +141,7 @@ function updateFamous(famous_no, th) {
 	});
 }
 
-//글 삭제
+//글 삭제  
 function deleteFamous(famous_no, th) {
 // 	console.log(th)
 // 	console.log( $(th).parents("table.famous-tb") )
@@ -154,6 +154,7 @@ function deleteFamous(famous_no, th) {
 		, dataType: "json"
 		, data: {
 			famous_no: famous_no
+			, user_no: famousList.user_no
 		}
 		, success: function(data){
 			if(data.success) {
