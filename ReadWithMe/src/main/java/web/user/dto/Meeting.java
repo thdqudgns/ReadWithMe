@@ -22,6 +22,7 @@ public class Meeting {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_end;
 	private String meeting_personnel;
+	private String meeting_address;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_board_date;
 	private String meeting_approved;
@@ -32,8 +33,9 @@ public class Meeting {
 				+ ", area_no=" + area_no + ", book_class_no=" + book_class_no + ", meeting_location=" + meeting_location
 				+ ", meeting_title=" + meeting_title + ", meeting_content=" + meeting_content + ", meeting_rcr_start="
 				+ meeting_rcr_start + ", meeting_rcr_end=" + meeting_rcr_end + ", meeting_start=" + meeting_start
-				+ ", meeting_end=" + meeting_end + ", meeting_personnel=" + meeting_personnel + ", meeting_board_date="
-				+ meeting_board_date + ", meeting_approved=" + meeting_approved + "]";
+				+ ", meeting_end=" + meeting_end + ", meeting_personnel=" + meeting_personnel + ", meeting_address="
+				+ meeting_address + ", meeting_board_date=" + meeting_board_date + ", meeting_approved="
+				+ meeting_approved + "]";
 	}
 
 	public int getMeeting_no() {
@@ -140,6 +142,14 @@ public class Meeting {
 		this.meeting_personnel = meeting_personnel;
 	}
 
+	public String getMeeting_address() {
+		return meeting_address;
+	}
+
+	public void setMeeting_address(String meeting_address) {
+		this.meeting_address = meeting_address;
+	}
+
 	public Date getMeeting_board_date() {
 		return meeting_board_date;
 	}
@@ -155,4 +165,5 @@ public class Meeting {
 	public void setMeeting_approved(String meeting_approved) {
 		this.meeting_approved = meeting_approved;
 	}
+
 }

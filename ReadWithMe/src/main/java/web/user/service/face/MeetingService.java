@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.Meeting;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 public interface MeetingService {
@@ -68,5 +69,13 @@ public interface MeetingService {
 	 * @param meeting - 삭제할 게시글의 게시글번호 객체
 	 */
 	public void delete(Meeting meeting);
+	
+	/**
+	 * 유저 번호를 이용하여 유저 정보를 조회한다
+	 * 
+	 * @param user_no - 조회할 유저 번호
+	 * @return 유저 정보
+	 */
+	public UserTb getUser(int user_no);
 	
 }

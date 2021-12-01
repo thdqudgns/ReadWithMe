@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dao.face.MeetingDao;
+import web.user.dao.face.UserDao;
 import web.user.dto.Meeting;
+import web.user.dto.UserTb;
 import web.user.service.face.MeetingService;
 import web.util.Paging;
 
@@ -15,6 +17,7 @@ import web.util.Paging;
 public class MeetingServiceImpl implements MeetingService {
 	
 	@Autowired MeetingDao meetingDao;
+	@Autowired UserDao userDao;
 
 	@Override
 	public List<Meeting> list(Paging paging) {
@@ -53,5 +56,10 @@ public class MeetingServiceImpl implements MeetingService {
 	public void delete(Meeting meeting) {
 		meetingDao.delete(meeting);
 		
+	}
+
+	@Override
+	public UserTb getUser(int user_no) {
+		return userDao.selectUserTbByUserNo(user_no);
 	}
 }

@@ -111,6 +111,34 @@ p.addr {
 	margin-inline-end: 0px;
 }
 
+.btn-apply {
+	font-size: 16px;
+	width: 200px;
+	height: 48px;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	letter-spacing: -.5px;
+	border: 1px;
+	box-shadow: none;
+	color: #ffffff;
+	background-color: #9f8170;
+}
+
+.btn-delete {
+	font-size: 16px;
+	width: 200px;
+	height: 48px;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	letter-spacing: -.5px;
+	border: 1px;
+	box-shadow: none;
+}
+
 </style>
 
 <body>
@@ -132,24 +160,36 @@ p.addr {
 							<tr>
 								<th class="meeting-info-list"><br>
 								<span class="property">일시</span> <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy-MM-dd KK시"/><br>
-								<span class="property">장소</span> ${meeting.meeting_location }<br> <!-- 장소 이름으로 수정 -->
+								<span class="property">장소</span> ${meeting.meeting_location }<br>
 								<span class="property">인원</span> ${meeting.meeting_personnel }명<br>
 								<span class="property">모집</span> <fmt:formatDate value="${meeting.meeting_rcr_end }" pattern="yyyy-MM-dd KK시"/> 까지</th>
 							</tr>
 							<tr>
-								<th class="host-info">
+								<th class="host-profile">
 								<br>
-								<!-- 주최자 정보 -->
+								<div class="host-info">
+								<!-- 프로필 사진 물어보기 --> ${user.nick }
+								</div>
 								
 								<!-- 로그인상태 -->
 								<c:if test="${login }">
-									<button onclick='location.href="/user/meeting/write";' class="btn-white">신청하기</button>
+									<c:choose>
+									<c:when test="${user_no eq meeting.user_no }">
+										<!-- 내가 주최한 모임 -->
+										<a href="/user/meeting/delete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">삭제</button></a>								
+									</c:when>
+									<c:otherwise>
+										<!-- 로그인 상태 -->
+										<button onclick='location.href="/user/meeting/apply";' class="btn-apply">신청하기</button>
+									</c:otherwise>
+									</c:choose>
 								</c:if>
 								
 								<!-- 비로그인상태 -->
 								<c:if test="${not login }">
-									<button onclick='location.href="/login";' class="btn-white">신청하기</button>
+									<button onclick='location.href="/login";' class="btn-apply">신청하기</button>
 								</c:if>
+								
 								</th>
 							</tr>
 						</tbody>
@@ -177,7 +217,7 @@ p.addr {
 							<tr>
 								<th class="meeting-location"><p class="info-title">위치</p><br>
 								<div class="location">지도<!-- 지도 --></div>
-								<p class="addr">상세 주소</p>
+								<p class="addr">${meeting.meeting_address }</p>
 								</th>
 							</tr>
 						</thead>

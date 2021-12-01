@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.Meeting;
+import web.user.dto.UserTb;
 //import web.user.dto.Participation;
 import web.user.service.face.MeetingService;
 import web.util.Paging;
@@ -55,7 +56,10 @@ public class MeetingController {
 		logger.info("/meeting/view 파라미터 {}", no);
 		
 		Meeting meeting = meetingService.view(no);
+		UserTb user = meetingService.getUser(meeting.getUser_no());
+		
 		model.addAttribute("meeting", meeting);
+		model.addAttribute("user", user);
 		
 		return "user/meeting/view";
 	}
@@ -98,6 +102,8 @@ public class MeetingController {
 	// 모임 삭제
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(Meeting meeting) {
+		logger.info("/user/meeting/delete [GET]");
+		
 		meetingService.delete(meeting);
 		
 		return "redirect:/user/meeting/list";
