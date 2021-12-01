@@ -302,6 +302,8 @@ public class MyPageServiceInpl implements MyPageService {
 		List<Meeting> meetingList1 = myPageDao.selectMeetingHosted(user);
 		logger.info("user!!!!!!!!!!{}", user);
 		
+		
+		logger.info("확인 {}", myPageDao.selectMeetingNoByUser_no(user));
 		int user_no = myPageDao.selectMeetingNoByUser_no(user);
 		logger.info("user_no!!!!!!!!!!{}", user_no);
 		List<Meeting> meetingList2 = myPageDao.selectMeetingAttend(user_no);

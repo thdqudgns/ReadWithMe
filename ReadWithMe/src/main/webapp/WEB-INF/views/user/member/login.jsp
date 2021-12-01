@@ -24,7 +24,7 @@
 </div>
 
 <div style="margin-bottom: 25px;">
-<input type="checkbox" name="remember" value="1" style="display: inline-block;"/>로그인 상태 유지
+<label><input type="checkbox" name="remember" value="1" style="display: inline-block;"/>로그인 상태 유지</label>
 <a href="/seach/login" style="margin-left: 35px; display: inline-block;">비밀번호 또는 아이디 찾기</a>
 </div>
 <button id="loginBtn">로그인</button>

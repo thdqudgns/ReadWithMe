@@ -54,8 +54,7 @@ public class LoginController {
 		boolean isLogin = loginService.login(user);
 		
 		logger.info("isLogin : {}", isLogin);
-		int user_no = Integer.parseInt(loginService.getUserNo(user.getId()));
-
+		int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
 		
 		if( isLogin ) {
 			
