@@ -13,9 +13,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 부트스트랩 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- JavaScript -->
 <script type="text/javascript">
@@ -125,11 +125,26 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 .menuBar:nth-child(2) {width:40px;}
 .menuBar:nth-child(3) {width:250px;}
 .menuBar:nth-child(7) {width:120px;}
-.menuBar:nth-child(9) {width:42px;}
+
+
+.menuBar:nth-child(9) {width:43px;}
+.menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+
+
 
 /* 버튼 설정 */
-.btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
-.btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
+
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;}
+.btn-brown {border-radius: 3px; padding:1px;border:1px solid #9f8170; background-color: #9f8170; color:#FFF;}
+
+
+
+.center {text-align:center;vertical-align: middle;}
+
+.btn-white {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
+.btn-white:hover {border-radius: 3px; padding:1px;border:1px solid black; background-color: #FFF; color:tomato;}
+
+
 .btn-report {border:none;background-color: #FFF; color:gray;}
 .btn-report:hover {border:none;color:tomato;}
 .btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
@@ -143,6 +158,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 
 .center {text-align:center;vertical-align: middle;margin: 0 auto;}
+
 .mainpagebar hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}    
 </style>
 

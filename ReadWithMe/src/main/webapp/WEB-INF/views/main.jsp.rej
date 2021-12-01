@@ -1,0 +1,9 @@
+diff a/ReadWithMe/src/main/webapp/WEB-INF/views/main.jsp b/ReadWithMe/src/main/webapp/WEB-INF/views/main.jsp	(rejected hunks)
+@@ -7,6 +7,5 @@
+ 
+ 
+ 
+-<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
+\ No newline at end of file
+ <%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>
+ =======

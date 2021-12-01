@@ -50,7 +50,7 @@
 	</beans:bean> 
 	
 	<!-- DownloadView클래스를 down이라는 이름의 스프링빈으로 등록하기 -->
-<!--  	<beans:bean id="down" class="web.view.DownloadView" /> -->
+ 	<beans:bean id="down" class="web.view.DownloadView" />
  	<beans:bean id="reviewDown" class="web.view.ReviewDownloadView" />
 	
 	<!-- JSON 응답용 jsonView를 스프링빈으로 등록하기 -->
