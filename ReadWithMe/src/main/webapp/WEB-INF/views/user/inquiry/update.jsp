@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
@@ -11,21 +11,20 @@
 
 
 <!-- 스마트 에디터 2 라이브러리 로드 -->
-<script type="text/javascript"
-	src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
 <script type="text/javascript">
-
-$(document).ready(function() {
-	$("#btnUpdate").click(function() {
+$(document).ready(function(){
+	$("#btnUpdate").click(function(){
 		submitContents($("#btnUpdate"));
 		
 		$("form").submit();
-	});
+	})
 	
-	$("#cancel").click(function() {
+	$("#cancel").click(function(){
 		history.go(-1);
-	});
+	})
+	
 })
 </script>
 
@@ -56,35 +55,39 @@ $(document).ready(function() {
 </head>
 <body>
 
-	<div class="container">
+<div class="container">
 
-		<div style="height: 20px;"></div>
+<div style="height: 20px;"></div>
 
-		<h1>공지사항 - 수정</h1>
+<h1>자주묻는질문 - 수정</h1>
 
-		<div style="height: 30px;"></div>
+<div style="height: 30px;"></div>
 
-		<form action="/admin/notice/update" method="post"
-			enctype="multipart/form-data">
-			<input type="hidden" name="board_no" value="${view.board_no }">
-			<div class="form-group">
-				<label for="write">작성자</label> <input type="text" id="write"
-					value="ReadWithMe" class="form-control" readonly="readonly" />
-			</div>
-			<div class="form-group">
-				<label for="title">제목</label> <input type="text" id="title"
-					name="board_title" class="form-control"
-					value="${view.board_title }" />
-			</div>
-			<div class="form-group">
-				<label for="content">본문</label>
-				<textarea rows="10" style="width: 100%;" id="content"
-					name="board_content">${view.board_content }</textarea>
-			</div>
+<form action="/user/inquiry/update" method="post" enctype="multipart/form-data">
+<input type="hidden" name="board_no" value="${inquiry.board_no }" >
+<div class="form-group">
+	<label for="write">작성자</label>
+	<input type="text" id="write" value="ReadWithMe" class="form-control" readonly="readonly"/>
+</div>
+<div class="form-group">
+	<label for="title">제목</label>
+	<input type="text" id="title" name="board_title" class="form-control" value="${inquiry.board_title }"/>
+</div>
+<div class="form-group">
+	<label for="content">본문</label>
+	<textarea rows="10" style="width: 100%;" id="content" name="board_content">${inquiry.board_content }</textarea>
+</div>
+
+<br>
+
+<div class="text-center">
+	<button class="btn " id="btnUpdate" style="border-color: #D3D3D3; background: white; color: gray;">수정</button>
+	<input type="reset" id="cancel" class="btn " value="취소" style="border-color: #D3D3D3; background: white; color: gray;"/>
+</div>
 
 			<div id="fileBox">
 				<div id="originFile">
-					<a href="/admin/notice/download?file_no=${noticefile.file_no }">${noticefile.origin_name }</a>
+					<a href="/user/inquiry/download?file_no=${inquiryfile.file_no }">${inquiryfile.origin_name }</a>
 										<span id="delFile"  style="color:red;">X</span>
 
 				</div>
@@ -96,15 +99,9 @@ $(document).ready(function() {
 				</div>
 			</div>
 
-			<div class="text-center">
-				<button class="btn" id="btnUpdate" style="border-color: #D3D3D3; background: white; color: gray;">수정</button>
-				<input type="reset" id="cancel" class="btn" value="취소" style="border-color: #D3D3D3; background: white; color: gray;"/>
-			</div>
+</form>
 
-		</form>
-
-		<script type="text/javascript">
-
+<script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
@@ -126,9 +123,6 @@ function submitContents(elClickedObj) {
 }
 </script>
 
+</div><!-- .container end -->
 
-	</div>
-	<!-- .container end -->
-
-
-	<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+<c:import url="/WEB-INF/views/user/layout/footer.jsp" />

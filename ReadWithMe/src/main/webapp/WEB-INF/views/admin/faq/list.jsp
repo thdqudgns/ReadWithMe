@@ -10,49 +10,47 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
 <script type="text/javascript">
 	$(document).ready(function() {
+
+		//	글쓰기 버튼
 		$("#btnWrite").click(function() {
-			$(location).attr("href", "/admin/notice/write");
-			// 		location.href = "/board/write";
+			$(location).attr("href", "/admin/faq/write");
 		});
-		
+
 		//	검색 버튼 클릭
 		$("#btnSearch").click(function() {
-
-			console.log(search);
 			
-			$(location).attr("href", "/admin/notice?type=${notice.type}&search=" + $("#search1").val());
+			$(location).attr("href", "/admin/faq/list?type=${FAQ.type}&search=" + $("#search1").val());
 	});
-		
+
 		//카테고리 버튼(1) - 전체
 		$('.categories>li:eq(8)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice");
+			$(location).attr("href", "/admin/faq/list");
 		});
 		
 		//카테고리 버튼(2) - 모임
 		$('.categories>li:eq(6)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice?type=1");
+			$(location).attr("href", "/admin/faq/list?type=1");
 		});
 		
 		//카테고리 버튼(3) - 계정
 		$('.categories>li:eq(4)').children('a').click(function(){			
-			$(location).attr("href", "/admin/notice?type=2");
+			$(location).attr("href", "/admin/faq/list?type=2");
 		});
 		
 		//카테고리 버튼(4) - 서비스
 		$('.categories>li:eq(2)').children('a').click(function(){			
-			$(location).attr("href", "/admin/notice?type=3");
+			$(location).attr("href", "/admin/faq/list?type=3");
 		});
 		
 		//카테고리 버튼(5) - 이벤트
 		$('.categories>li:eq(0)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice?type=4");
+			$(location).attr("href", "/admin/faq/list?type=4");
 		});
-	});
 
-	
+	})
+
 	$(function() {
 		var chkObj = document.getElementsByName("RowCheck");
 		var rowCnt = chkObj.length;
@@ -71,11 +69,10 @@
 			}
 		});
 	});
-	
-	
+
 	//	선택삭제
 	function deleteValue() {
-		var url = "/admin/notice/delete"; // Controller로 보내고자 하는 URL
+		var url = "/admin/faq/delete"; // Controller로 보내고자 하는 URL
 		var valueArr = new Array();
 		var list = $("input[name='RowCheck']");
 		for (var i = 0; i < list.length; i++) {
@@ -83,7 +80,6 @@
 				valueArr.push(list[i].value);
 			}
 		}
-
 
 		if (valueArr.legnth == 0) {
 			alert("선택된 글이 없습니다.");
@@ -98,8 +94,8 @@
 				},
 				success : function(jdata) {
 					if (jdata = 1) {
-						alert("삭제 완료");
-						location.replace("/admin/notice");
+						alert("삭제 성공");
+						location.replace("/admin/faq/list");
 					} else {
 						alert("삭제 실패");
 					}
@@ -110,7 +106,7 @@
 	
 	//선택 등록
 	function registerValue() {
-		var url = "/admin/notice/register";	//Controller로 보내고자 하는 URL
+		var url = "/admin/faq/register";	//Controller로 보내고자 하는 URL
 		var valueArr2 = new Array();
 		var list = $("input[name='RowCheck']");
 		for (var i = 0; i < list.length; i++) {
@@ -133,7 +129,7 @@
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("등록 완료");
-						location.replace("/admin/notice");
+						location.replace("/admin/faq/list");
 					} else {
 						alert("등록 실패");
 					}
@@ -144,7 +140,7 @@
 	
 	//취소 버튼
 	function cancelValue() {
-		var url = "/admin/notice/cancel";
+		var url = "/admin/faq/cancel";
 		var valueArr3 = new Array();
 		var list = $("input[name='RowCheck']");
 		for (var i = 0; i < list.length; i++) {
@@ -167,7 +163,7 @@
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("취소 완료");
-						location.replace("/admin/notice");
+						location.replace("/admin/faq/list");
 					} else {
 						alert("취소 실패");
 					}
@@ -194,7 +190,7 @@ table, th {
 }
 
 .container {
-	min-height: 400px;
+	min-height: 520px;
 }
 
 .categories {
@@ -211,12 +207,7 @@ table, th {
 .categories > li > a {
 	cursor: pointer;
 	color: black;
-	text-decoration: none;
-}
-
-.categories > li > a:hover {
-	color: green;
-	text-decoration: underline;
+	text-decoration: none !important;
 }
 
 </style>
@@ -229,8 +220,8 @@ table, th {
 		<div class="container">
 
 			<div style="height: 50px;"></div>
-			
-			<h1>공지사항</h1>
+
+			<h1>자주묻는질문</h1>
 			
 			<div style="height: 10px;"></div>
 			
@@ -246,15 +237,14 @@ table, th {
 					<li><a>|</a></li>
 					<li><a>전체</a></li>
 				</ul>
-			</div>
+			</div>	
 			
 			<div style="height: 8px;"></div>
-			
-			<div>
-			<table class="table table-hover" >
-				<thead >
+
+			<table class="table table-hover">
+				<thead class="table-dark">
 					<tr>
-						<th><input id="allCheck" type="checkbox" name="allCheck" /></th>
+						<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 						<th>글 번호</th>
 						<th>분류</th>
 						<th style="width: 30%;">제목</th>
@@ -265,40 +255,39 @@ table, th {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list }" var="notice">
+					<c:forEach items="${FAQList }" var="FAQ">
 						<tr>
-							<td><input type="checkbox" name="RowCheck" value="${notice.board_no }" /></td>
-							<td>${notice.board_no }</td>
+							<td><input type="checkbox" name="RowCheck" value="${FAQ.board_no }" /></td>
+							<td>${FAQ.board_no }</td>
 							<td>
 							<c:choose>
-							<c:when test="${notice.type == 1 }">
+							<c:when test="${FAQ.type == 1 }">
 							모임
 							</c:when>
-							<c:when test="${notice.type == 2 }">
+							<c:when test="${FAQ.type == 2 }">
 							계정
 							</c:when>
-							<c:when test="${notice.type == 3 }">
+							<c:when test="${FAQ.type == 3 }">
 							서비스
 							</c:when>
-							<c:when test="${notice.type == 4 }">
+							<c:when test="${FAQ.type == 4 }">
 							이벤트
 							</c:when>
 							</c:choose>
 							</td>
-							<td><a
-								href="/admin/notice/view?board_no=${notice.board_no }">${notice.board_title }</a></td>
-							<td><fmt:formatDate value="${notice.board_date }"
+							<td><a href="/admin/faq/view?board_no=${FAQ.board_no }">${FAQ.board_title }</a></td>
+							<td><fmt:formatDate value="${FAQ.board_date }"
 									pattern="yyyy.MM.dd" /></td>
-							<td><fmt:formatDate value="${notice.updated_date }"
+							<td><fmt:formatDate value="${FAQ.updated_date }"
 									pattern="yyyy.MM.dd  HH:mm" /></td>
-							<td>${notice.hit }</td>
+							<td>${FAQ.hit }</td>
 							<td>
 							<c:choose>
-							<c:when test="${notice.register == 1}">
+							<c:when test="${FAQ.register == 1}">
 							<span class="glyphicon glyphicon-ok"
 								style="color: green;"></span>
 							</c:when>
-							<c:when test="${notice.register == 0}">
+							<c:when test="${FAQ.register == 0}">
 							<span class="glyphicon glyphicon-minus"
 								style="color: red;"></span>
 							</c:when>
@@ -308,40 +297,38 @@ table, th {
 					</c:forEach>
 				</tbody>
 			</table>
-			</div>
-			
+
 			<span class="glyphicon glyphicon-repeat pull-left"
-				style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px; color: gray; cursor: pointer;" 
-				onclick="window.location.reload(); "></span>
+				style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px; color: skyblue; cursor: pointer;" 
+				onclick="window.location.reload();"></span>
 			
 			<span style="margin-left: 10px;">total : ${paging.totalCount }</span>
-			
-			
+
 			<button id="btnCancel" class="btn pull-right"
-				onclick="cancelValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">취소</button>
+				onclick="cancelValue();" style="border-color: gray; background:white; color:gray;">취소</button>
 			<button id="btnRegister2" class="btn pull-right"
 				onclick="registerValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">등록</button>
 			<button id="btnDelete" class="btn pull-right"
 				onclick="deleteValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">삭제</button>
 			<button id="btnWrite" class="btn pull-right"
 				style="margin-right: 2px; border-color: gray; background:white; color:gray;">글쓰기</button>
-
-
+				
+				
 
 			<div class="clearfix"></div>
 
-
 			<div class="form-inline text-center">
-					<input class="form-control" type="text" id="search1" name="search"  value="${paramData.search }"/>
-					<button id="btnSearch" class="btn"" style="border-color: gray; background:white; color:gray;">검색</button>
+				<input class="form-control" type="text" id="search1"
+					value="${paramData.search }" />
+				<button id="btnSearch" class="btn" style="border-color: gray; background:white; color:gray;">검색</button>
 			</div>
 
-
-
-			<c:if test="${not empty paramData.search }">
+			<c:if test="${not empty param.search }">
 				<c:set var="searchParam" value="&search=${paramData.search }" />
 			</c:if>
 
+
+			<!-- 페이징 -->
 			<div class="text-center">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination pagination-sm justify-content-center">
@@ -349,14 +336,14 @@ table, th {
 						<%-- 첫 페이지로 이동 --%>
 						<c:if test="${paging.curPage ne 1 }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=1${searchParam }">처음</a></li>
+								href="/admin/faq/list?curPage=1${searchParam }">처음</a></li>
 						</c:if>
 
 						<%-- 이전 페이징 리스트로 이동 --%>
 						<c:choose>
 							<c:when test="${paging.startPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
+									href="/admin/faq/list?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
 							</c:when>
 							<c:when test="${paging.startPage eq 1 }">
 								<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
@@ -366,7 +353,7 @@ table, th {
 						<%-- 이전 페이지로 가기 --%>
 						<c:if test="${paging.curPage > 1 }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
+								href="/admin/faq/list?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
 						</c:if>
 
 
@@ -377,11 +364,11 @@ table, th {
 							var="i">
 							<c:if test="${paging.curPage eq i }">
 								<li class="page-item active"><a class="page-link"
-									href="/admin/notice?curPage=${i }${searchParam }">${i }</a></li>
+									href="/admin/faq/list?curPage=${i }${searchParam }">${i }</a></li>
 							</c:if>
 							<c:if test="${paging.curPage ne i }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${i }${searchParam }">${i }</a></li>
+									href="/admin/faq/list?curPage=${i }${searchParam }">${i }</a></li>
 							</c:if>
 						</c:forEach>
 
@@ -391,14 +378,14 @@ table, th {
 						<%-- 다음 페이지로 가기 --%>
 						<c:if test="${paging.curPage < paging.totalPage }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
+								href="/admin/faq/list?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
 						</c:if>
 
 						<%-- 다음 페이징 리스트로 이동 --%>
 						<c:choose>
 							<c:when test="${paging.endPage ne paging.totalPage }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
+									href="/admin/faq/list?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
 							</c:when>
 							<c:when test="${paging.endPage eq paging.totalPage }">
 								<li class="page-item disabled"><a class="page-link">&raquo;</a></li>
@@ -408,7 +395,7 @@ table, th {
 						<%-- 끝 페이지로 이동 --%>
 						<c:if test="${paging.curPage ne paging.totalPage }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.totalPage }${searchParam }">끝</a></li>
+								href="/admin/faq/list?curPage=${paging.totalPage }${searchParam }">끝</a></li>
 						</c:if>
 
 					</ul>
@@ -416,11 +403,9 @@ table, th {
 			</div>
 
 		</div>
-		<!-- .container -->
+		<!-- .container end -->
 
 	</div>
-	<!-- .wrap -->
-
+	<!-- .wrap end -->
 
 	<c:import url="/WEB-INF/views/user/layout/footer.jsp" />
-
