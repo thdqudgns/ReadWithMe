@@ -20,6 +20,8 @@ import web.user.dao.face.Review_recDao;
 import web.user.dto.Review;
 import web.user.dto.Review_file;
 import web.user.dto.Review_rec;
+import web.user.dto.Rpt_board;
+import web.user.dto.Rpt_cmt;
 import web.user.dto.Rv_cmt;
 import web.user.service.face.ReviewService;
 import web.util.Paging;
@@ -273,6 +275,37 @@ public class ReviewServiceImpl implements ReviewService {
 		} else {
 			return false;
 		}
+	}
+
+	//======================================================================
+
+	//신고 삽입
+	@Override
+	public boolean insertReportByReviewNo(Rpt_board review) {
+		
+		int count = reviewDao.countReport(review);
+		
+		if(count  > 0 ) {
+			return false;
+		} else {
+			reviewDao.insertReportByReviewNo(review);
+			return true;
+		}
+	}
+
+	//신고 댓글 삽입
+	@Override
+	public boolean insertReportCommentByReviewNo(Rpt_cmt comment) {
+	
+		int count = reviewCommentDao.countReportComment(comment);
+
+		if(count > 0) {
+			return false;
+		} else {
+			reviewCommentDao.insertReportCommentByReviewNo(comment);
+			return true;
+		}
+		
 	}
 
 

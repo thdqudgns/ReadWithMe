@@ -1,5 +1,7 @@
 package web.user.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import web.user.dto.Review;
 import web.user.dto.Review_file;
 import web.user.dto.Review_rec;
+import web.user.dto.Rpt_board;
 import web.user.dto.Rv_cmt;
 import web.user.service.face.ReviewService;
 import web.util.Paging;
@@ -221,7 +224,20 @@ public class ReviewController {
 	
 	//신고
 	@RequestMapping(value="/report")
-	public void report(Review review) {
+	public void report(Rpt_board review, Writer writer, HttpSession session) {
+		
+		logger.info("/review/report");
+		logger.info("review_no : {}", review);
+		
+		review.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+		
+		boolean success = reviewService.insertReportByReviewNo(review);
+		
+		try {
+			writer.append("{\"success\":"+success+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

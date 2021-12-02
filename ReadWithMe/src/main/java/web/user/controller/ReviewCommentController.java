@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import web.user.dto.Rpt_board;
+import web.user.dto.Rpt_cmt;
 import web.user.dto.Rv_cmt;
 import web.user.service.face.ReviewService;
 
@@ -68,6 +70,25 @@ public class ReviewCommentController {
 			e.printStackTrace();
 		}
 	}
+	
+	//신고
+		@RequestMapping(value="/report")
+		public void report(Rpt_cmt comment, Writer writer, HttpSession session) {
+			
+			logger.info("/review/report");
+			logger.info("review_no : {}", comment);
+			
+			comment.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+			
+			boolean success = reviewService.insertReportCommentByReviewNo(comment);
+			
+			try {
+				writer.append("{\"success\":"+success+"}");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
 	
 
 }

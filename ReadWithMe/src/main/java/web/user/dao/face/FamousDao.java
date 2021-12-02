@@ -5,6 +5,7 @@ import java.util.List;
 
 import web.user.dto.Famous;
 import web.user.dto.Famous_rec;
+import web.user.dto.Rpt_board;
 import web.util.Paging;
 
 public interface FamousDao {
@@ -60,6 +61,22 @@ public interface FamousDao {
 	 * @param famous - 글 번호 매개변수
 	 */
 	public int updateFamous(Famous famous);
+
+	/**
+	 * 명언 글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param famous_no - 명언 번호가 담긴 객체
+	 */
+	public void insertReportByFamousNo(Rpt_board famous_no);
+
+	/**
+	 * 신고된 글 확인
+	 * 
+	 * @param famous - 명언글 번호, 신고한 회원 번호
+	 * @return 데이터 개수
+	 */
+	public int countReport(Rpt_board famous);
+
 
 	/**
 	 * 사용자 번호로 id 조회하기
