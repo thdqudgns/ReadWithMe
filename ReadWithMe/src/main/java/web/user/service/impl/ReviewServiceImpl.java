@@ -282,25 +282,30 @@ public class ReviewServiceImpl implements ReviewService {
 	//신고 삽입
 	@Override
 	public boolean insertReportByReviewNo(Rpt_board review) {
-		reviewDao.insertReportByReviewNo(review);
 		
-		if(reviewDao.countReport(review)  > 0 ) {
-			return true;
-		} else {
+		int count = reviewDao.countReport(review);
+		
+		if(count  > 0 ) {
 			return false;
+		} else {
+			reviewDao.insertReportByReviewNo(review);
+			return true;
 		}
 	}
 
 	//신고 댓글 삽입
 	@Override
 	public boolean insertReportCommentByReviewNo(Rpt_cmt comment) {
-		reviewCommentDao.insertReportCommentByReviewNo(comment);
-		
-		if(reviewCommentDao.countReportComment(comment)  > 0 ) {
-			return true;
-		} else {
+	
+		int count = reviewCommentDao.countReportComment(comment);
+
+		if(count > 0) {
 			return false;
+		} else {
+			reviewCommentDao.insertReportCommentByReviewNo(comment);
+			return true;
 		}
+		
 	}
 
 

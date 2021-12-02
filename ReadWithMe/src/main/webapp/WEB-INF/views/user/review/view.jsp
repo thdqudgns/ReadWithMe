@@ -173,15 +173,14 @@ function reportReview(review_no, th){
 		}
 		, success: function(data){
 			if(data.success) {
-				console.log("신고되었습니다");
 				alert("신고되었습니다.");
 				
 			} else {
-				alert("신고 실패");
+				alert("이미 신고하셨습니다.");
 			}
 		}
 		, error: function() {
-			console.log("error");
+			console.log("신고 실패");
 		}
 	});
 }
@@ -201,15 +200,15 @@ function reportReviewComment(comment_no, th){
 		}
 		, success: function(data){
 			if(data.success) {
-				console.log("신고되었습니다");
 				alert("신고되었습니다.");
 				
 			} else {
-				alert("신고 실패");
+				alert("이미 신고하셨습니다.");
 			}
 		}
 		, error: function() {
 			console.log("error");
+				alert("신고 실패");
 		}
 	});
 }

@@ -35,7 +35,7 @@ public class AdminReviewController {
 	
 	//목록 조회
 	@RequestMapping(value="/list")
-	public void list(Paging paramData, Model model, HttpSession session, Review_rec recommend) {
+	public void list(Paging paramData, Model model) {
 		logger.info("/admin/review/list");
 		
 		//페이징 계산

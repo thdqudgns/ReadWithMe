@@ -132,12 +132,14 @@ public class FamousServiceImpl implements FamousService {
 	// 신고 정보 삽입
 	@Override
 	public boolean insertReportByFamousNo(Rpt_board famous) {
-		famousDao.insertReportByFamousNo(famous);
 		
-		if(famousDao.countReport(famous)  > 0 ) {
-			return true;
-		} else {
+		int count = famousDao.countReport(famous);
+		
+		if(count  > 0 ) {
 			return false;
+		} else {
+			famousDao.insertReportByFamousNo(famous);
+			return true;
 		}
 	}
 

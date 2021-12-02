@@ -6,6 +6,11 @@
 
 <c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
+<!-- 부트스트랩 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -64,12 +69,11 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 .btn-rec-origin {border:none;background-color:#FFF;color:black;font-size:12px;border-radius:20%;}
 .btn-rec-primary {border:none;background-color:#9f8170;color:#FFF;font-size:12px; border-radius:20%;}
 .btn-rec-warning {border:none;background-color:#FFF;color:red;font-size:12px;border-radius:20%;}
-#search {text-align:center;vertical-align: middle;margin: 0 auto;}
 </style>
 
 <div class="container">
 
-<h1>명언 게시판</h1>
+<h1>명언 게시판 관리</h1>
 <hr>
 
 <br>
@@ -111,13 +115,9 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 
 <br>
 
-<div class="text-center">
-	<form id="famousSearch" action="/admin/famous/list" method="get" style="width:250px;">
-	<input class="form-control" type="text" name="search" style="width:180px;border: 3px solid #9f8170;"/>
-	<button id="btnfamousSearch" type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; ">
-		<img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/97QT6ay.png">
-	</button>
-	</form>
+<div class="form-inline text-center">
+	<input class="form-control" type="text" name="search" id="famousSearch"/>
+	<button id="btnfamousSearch" type="submit" class="btn">검색</button>
 </div>
 
 <br>

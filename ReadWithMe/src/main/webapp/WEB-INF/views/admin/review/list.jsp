@@ -42,7 +42,7 @@ td:nth-child(2) {
 <div class="container">
 <br>
 
-<h1>후기 게시판</h1>
+<h1>후기 게시판 관리</h1>
 <hr>
 
 <div class="reviewToggle">
