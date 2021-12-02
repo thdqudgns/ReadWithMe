@@ -21,7 +21,7 @@ public class Meeting {
 	private Date meeting_start;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_end;
-	private String meeting_personnel;
+	private int meeting_personnel;
 	private String meeting_address;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meeting_board_date;
@@ -134,11 +134,11 @@ public class Meeting {
 		this.meeting_end = meeting_end;
 	}
 
-	public String getMeeting_personnel() {
+	public int getMeeting_personnel() {
 		return meeting_personnel;
 	}
 
-	public void setMeeting_personnel(String meeting_personnel) {
+	public void setMeeting_personnel(int meeting_personnel) {
 		this.meeting_personnel = meeting_personnel;
 	}
 

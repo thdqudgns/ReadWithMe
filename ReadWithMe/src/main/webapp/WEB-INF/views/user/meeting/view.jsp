@@ -178,14 +178,14 @@ p.addr {
 									</c:when>
 									<c:otherwise>
 										<!-- 로그인 상태 -->
-										<button onclick='location.href="/user/meeting/apply";' class="btn-apply">신청하기</button>
+										<button onclick='location.href="/user/meeting/apply?meeting_no=${meeting.meeting_no }";' class="btn-apply">신청하기</button>
 									</c:otherwise>
 									</c:choose>
 								</c:if>
 								
 								<!-- 비로그인상태 -->
 								<c:if test="${not login }">
-									<button onclick='location.href="/login";' class="btn-apply">신청하기</button>
+									<button onclick='apply()' class="btn-apply">신청하기</button>
 								</c:if>
 								
 								</th>
@@ -268,7 +268,12 @@ geocoder.addressSearch(address, function(result, status) {
 		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		map.setCenter(coords);
 	} 
-});    
+});
+
+function apply() {
+	const meeting_no = '${meeting.meeting_no}'
+	location.href="/user/meeting/apply?meeting_no=" + meeting_no
+}
 </script>
 </body>
 

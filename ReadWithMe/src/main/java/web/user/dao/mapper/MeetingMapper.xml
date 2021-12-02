@@ -69,7 +69,7 @@
 	
 	<insert id="insert" parameterType="web.user.dto.Meeting">
 		<selectKey order="BEFORE" resultType="int" keyProperty="meeting_no">
-			SELECT board_seq.nextval FROM dual
+			SELECT meeting_no_seq.nextval FROM dual
 		</selectKey>
 		
 		INSERT INTO meeting (meeting_no, user_no, meetingtype_no, area_no, book_class_no,
@@ -86,5 +86,10 @@
 		DELETE meeting
 		WHERE meeting_no = #{meeting_no}
 	</delete>
+	
+	<insert id="insertParticipation" parameterType="web.user.dto.Participation">
+		INSERT INTO participation (meeting_no, user_no)
+		VALUES ( #{meeting_no}, #{user_no} )
+	</insert>
 	
 </mapper>

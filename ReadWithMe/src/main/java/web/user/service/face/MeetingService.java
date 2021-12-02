@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.Meeting;
+import web.user.dto.Participation;
 import web.user.dto.UserTb;
 import web.util.Paging;
 
@@ -77,5 +78,11 @@ public interface MeetingService {
 	 * @return 유저 정보
 	 */
 	public UserTb getUser(int user_no);
+	
+	/**
+	 * 
+	 * @param participation 
+	 */
+	public void apply(Participation participation);
 	
 }
