@@ -5,14 +5,16 @@ import java.util.Date;
 public class Rpt_cmt {
 	private int report_no;
 	private int user_no;
-	private int case_no;
+	private int penalty;
+	private int dele;
 	private int comment_no;
 	private String report_content;
 	private Date report_date;
 	@Override
 	public String toString() {
-		return "Rpt_cmt [report_no=" + report_no + ", user_no=" + user_no + ", case_no=" + case_no + ", comment_no="
-				+ comment_no + ", report_content=" + report_content + "]";
+		return "Rpt_cmt [report_no=" + report_no + ", user_no=" + user_no + ", penalty=" + penalty + ", dele=" + dele
+				+ ", comment_no=" + comment_no + ", report_content=" + report_content + ", report_date=" + report_date
+				+ "]";
 	}
 	public int getReport_no() {
 		return report_no;
@@ -26,11 +28,17 @@ public class Rpt_cmt {
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
 	}
-	public int getCase_no() {
-		return case_no;
+	public int getPenalty() {
+		return penalty;
 	}
-	public void setCase_no(int case_no) {
-		this.case_no = case_no;
+	public void setPenalty(int penalty) {
+		this.penalty = penalty;
+	}
+	public int getDele() {
+		return dele;
+	}
+	public void setDele(int dele) {
+		this.dele = dele;
 	}
 	public int getComment_no() {
 		return comment_no;
@@ -50,6 +58,7 @@ public class Rpt_cmt {
 	public void setReport_date(Date report_date) {
 		this.report_date = report_date;
 	}
+	
 	
 	
 }

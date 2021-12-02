@@ -14,6 +14,7 @@ import web.user.dao.face.FamousDao;
 import web.user.dao.face.Famous_recDao;
 import web.user.dto.Famous;
 import web.user.dto.Famous_rec;
+import web.user.dto.Rpt_board;
 import web.user.service.face.FamousService;
 import web.util.Paging;
 
@@ -127,6 +128,21 @@ public class FamousServiceImpl implements FamousService {
 		}
 		
 	}
+
+	// 신고 정보 삽입
+	@Override
+	public boolean insertReportByFamousNo(Rpt_board famous) {
+		
+		int count = famousDao.countReport(famous);
+		
+		if(count  > 0 ) {
+			return false;
+		} else {
+			famousDao.insertReportByFamousNo(famous);
+			return true;
+		}
+	}
+
 
 //	@Override
 //	public String getIdByUserNo(int user_no) {

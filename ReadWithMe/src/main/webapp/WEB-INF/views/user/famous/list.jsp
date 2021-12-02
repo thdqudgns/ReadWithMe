@@ -141,7 +141,7 @@ function updateFamous(famous_no, th) {
 	});
 }
 
-//글 삭제  
+//글 삭제
 function deleteFamous(famous_no, th) {
 // 	console.log(th)
 // 	console.log( $(th).parents("table.famous-tb") )
@@ -154,13 +154,13 @@ function deleteFamous(famous_no, th) {
 		, dataType: "json"
 		, data: {
 			famous_no: famous_no
-			, user_no: famousList.user_no
 		}
 		, success: function(data){
 			if(data.success) {
 				
 				$(th).parents("table.famous-tb").next("hr.famous-hr").remove()
 				$(th).parents("table.famous-tb").remove()
+				alert("삭제되었습니다.");
 				
 			} else {
 				alert("글 삭제 실패");
@@ -174,11 +174,11 @@ function deleteFamous(famous_no, th) {
 
 //신고
 function reportFamous(famous_no, th){
-	console.log(th)
-	console.log( $(th).parents("table.famous-tb") )
+// 	console.log(th)
+// 	console.log( $(th).parents("table.famous-tb") )
 	
 	$.ajax({
-		type: "get"
+		type: "post"
 		, url: "/user/famous/report"
 		, dataType: "json"
 		, data: {
@@ -186,14 +186,14 @@ function reportFamous(famous_no, th){
 		}
 		, success: function(data){
 			if(data.success) {
-				alert("신고합니다")
+				alert("신고되었습니다.");
 				
 			} else {
-				alert("신고 실패");
+				alert("이미 신고하셨습니다.");
 			}
 		}
 		, error: function() {
-			console.log("error");
+			console.log("신고 실패");
 		}
 	});
 }
