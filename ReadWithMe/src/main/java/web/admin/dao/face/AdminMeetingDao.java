@@ -28,4 +28,11 @@ public interface AdminMeetingDao {
 	 */
 	public void deleteMeeting(Meeting meeting);
 
+	/**
+	 * 참여자 수 구하기
+	 * @param js
+	 * @return
+	 */
+	public int selectCntUser(String js);
+
 }

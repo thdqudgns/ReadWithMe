@@ -46,9 +46,26 @@ public class AdminMeetingServiceImpl implements AdminMeetingService {
 			map.put("search", req.getParameter("search") );
 		}
 		
+		List<HashMap<String, Object>> list = adminMeetingDao.selectMeetingList(map);
+				
+//		HashMap<String, Object> map1 = null;
+//		 List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+//		 
+//		for(int i=0; i<meetingList.size(); i++) {			
+//			String js = String.valueOf(meetingList.get(i).get("MEETING_NO"));
+//			map1 = new HashMap<>();
+//			map1.put("MEETING_NO", js );
+//			map1.put("CNT", adminMeetingDao.selectCntUser(js) );
+//			list.add(map1);
+//		};
+//		
+//		logger.info("listlist {}", list);
 		
-		return adminMeetingDao.selectMeetingList(map);
+		return list;
 	}
+	
+
+	
 	@Override
 	public void approvalMeeting(HttpServletRequest req) {
 		
@@ -63,8 +80,6 @@ public class AdminMeetingServiceImpl implements AdminMeetingService {
         	 map.put("Meetings", Integer.parseInt(Meetings[i]));
         	 list.add(map);
         }
-        
-    
         
         for(int i=1; i<list.size()+1; i++) {
         	Meeting meeting = new Meeting();

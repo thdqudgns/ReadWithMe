@@ -57,12 +57,12 @@ input[type="radio"]:checked + label span {
 		<td>${list.BOOK_CLASS_NAME }</td>
 		<td>${list.CNT }</td>
 		<td>
-		<c:if test="${list.MEETING_APPROVED == '0'}">
-		<p style="color:red;">미승인</p>
-		</c:if>
-		<c:if test="${list.MEETING_APPROVED != '0'}">
-		승인
-		</c:if>
+			<c:if test="${list.MEETING_APPROVED == '0'}">
+			<p style="color:red;">미승인</p>
+			</c:if>
+			<c:if test="${list.MEETING_APPROVED != '0'}">
+			승인
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>
@@ -75,10 +75,10 @@ input[type="radio"]:checked + label span {
 <form id="adminMemberForm" method="get">
 
 <div id="clsfc">
-<label for="selectBox">분류</label>
-<select name="selectBox" id="selectBox">
-<option value="meeting" selected="selected">모임이름</option>
-<option value="user">작성자</option>
+<label for="selectBox">모임이름</label>
+<select id="selectBox" name="selectBox">
+<option value="email" selected="selected">모임이름</option>
+<option value="nick">작성자</option>
 </select>
 </div>
 

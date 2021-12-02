@@ -27,8 +27,10 @@ public interface AdminMeetingService {
 
 	/**
 	 * 미팅 삭제
+	 * 
 	 * @param req
 	 */
 	public void deleteMeeting(HttpServletRequest req);
+
 
 }

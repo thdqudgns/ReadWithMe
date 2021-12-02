@@ -103,7 +103,6 @@ public class AdminMemberServiceImpl implements AdminMemberService {
         	ban = new Ban();
         	ban.setUser_no(Integer.parseInt(String.valueOf(list.get(i-1).get("banUser"))));
         	
-        	logger.info("왜 다 설정되나요 {}", ban);
         	adminMemberDao.insertBan(ban);
         	adminMemberDao.updateUser(ban);
         };

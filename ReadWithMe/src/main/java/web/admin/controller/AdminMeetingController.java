@@ -28,10 +28,9 @@ public class AdminMeetingController {
 		Paging paging = adminMeetingService.getPaging(paramData);
 		
 		List<HashMap<String,Object>> meetingList = adminMeetingService.getMeetingList(paging, req);
-	
 				
 		logger.info("memberList {}", meetingList);
-		
+
 		model.addAttribute("memberList", meetingList);
 		model.addAttribute("paging", paging);
 
@@ -45,7 +44,7 @@ public class AdminMeetingController {
 		
 		adminMeetingService.approvalMeeting(req);
 		
-		return "redirect:/admin/meeting/list";
+		return "redirect:/admin/meeting";
 	}
 	
 	@RequestMapping(value="/admin/meetingDelete")
@@ -53,7 +52,7 @@ public class AdminMeetingController {
 		
 		adminMeetingService.deleteMeeting(req);
 		
-		return "redirect:/admin/meeting/list";
+		return "redirect:/admin/meeting";
 	}
 	
 }

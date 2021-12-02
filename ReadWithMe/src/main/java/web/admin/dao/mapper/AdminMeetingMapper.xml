@@ -5,44 +5,49 @@
   
  <mapper namespace="web.admin.dao.face.AdminMeetingDao">
  
+ 	<sql id="selectMeetings">
+ 	SELECT
+ 		M.meeting_no, M.user_no, M.book_class_no, M.meeting_title, M.meeting_rcr_start, M.meeting_approved
+ 		, U.nick, B.book_class_name
+ 		, ( SELECT count(*) FROM participation P WHERE M.meeting_no = P.meeting_no ) cnt
+ 	FROM meeting M 
+ 	INNER JOIN usertb U ON M.user_no = U.user_no
+ 	INNER JOIN book_class B ON M.book_class_no = B.book_class_no
+ 	<trim prefix="WHERE" prefixOverrides="AND|OR">
+ 	<choose>
+ 		<when test="selectBox!=null and selectBox.equals('meeting')">
+ 			AND meeting_title LIKE
+ 		</when>
+ 		<when test="selectBox!=null and selectBox.equals('user')">
+ 			AND nick LIKE
+		</when>
+	</choose>
+	</trim>
+	<if test="search!=null and !search.equals('')">
+		'%' || #{search} || '%'
+	</if>
+ 	</sql>
+ 
   	<select id="selectCntAll" resultType="int">
-		SELECT count(*) FROM meeting
+  	SELECT COUNT(*) FROM (
+  		<include refid="selectMeetings" />
+  	)
 	</select>
 	
 	<select id="selectMeetingList" resultType="hashmap" parameterType="hashmap">
-		SELECT meeting_no, user_no, book_class_no, meeting_title, meeting_rcr_start, meeting_approved, nick, book_class_name, CNT
-		FROM (
-		    SELECT rownum rnum, BUCM.* 
-		    FROM (
-		        select UCM.*, book_class_name
-		        from
-		            (select CM.*, U.nick
-		            from
-		                (select CNT.*, M.meeting_no, M.user_no, M.book_class_no, meeting_title, meeting_rcr_start, meeting_approved
-		                from
-		                    (select count(*) CNT
-		                    from participation
-		                    Where meeting_no = #{meeting_no }
-		                    ) CNT, Meeting M 
-		                ) CM, UserTb U
-		            where CM.user_no = U.user_no
-		            <trim prefix="WHERE" prefixOverrides="AND|OR">
-					<choose>
-					<when test="selectBox!=null and selectBox.equals('meeting')">
-						AND meeting LIKE
-					</when>
-					<when test="selectBox!=null and selectBox.equals('user')">
-						AND user LIKE
-					</when>
-					</choose>
-				</trim>
-					<if test="search!=null and !search.equals('')">
-						'%' || #{search} || '%'
-					</if>
-		            ) UCM, book_class B
-		        where UCM.book_class_no = B.book_class_no
-		    )BUCM
-		) WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
+	SELECT * FROM (
+	    SELECT rownum rnum, MUBP.* FROM (
+	  		<include refid="selectMeetings" />
+	        ORDER BY meeting_no DESC
+	    ) MUBP
+	) RESULT
+	WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<select id="selectCntUser" resultType="int" parameterType="String">
+		select count(*) CNT
+		from participation
+		Where meeting_no = #{meeting_no }
 	</select>
 	
 	<update id="updateMeeting" parameterType="web.user.dto.Meeting">

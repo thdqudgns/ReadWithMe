@@ -67,7 +67,6 @@
 </div>
 
 
-
 <div id="locationDiv">
 <input type="hidden" id="userLocation" value="${user.location }">
 지역
@@ -92,6 +91,7 @@
 </select>
 </div>
 </div>
+
 <hr>
 
 

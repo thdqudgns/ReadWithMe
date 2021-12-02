@@ -40,6 +40,16 @@ input[type="radio"]:checked + label span {
 </select>
 </div>
 
+
+<div id="clsfc">
+<label for="selectBox">이메일</label>
+<select id="selectBox" name="selectBox">
+<option value="email" selected="selected">이메일</option>
+<option value="nick">닉네임</option>
+</select>
+</div>
+
+
 <input type="text" name="search" id="search">
 <button id="seachMember">검색</button>
 </form>
