@@ -160,6 +160,7 @@ function deleteFamous(famous_no, th) {
 				
 				$(th).parents("table.famous-tb").next("hr.famous-hr").remove()
 				$(th).parents("table.famous-tb").remove()
+				alert("삭제되었습니다.");
 				
 			} else {
 				alert("글 삭제 실패");
@@ -173,11 +174,11 @@ function deleteFamous(famous_no, th) {
 
 //신고
 function reportFamous(famous_no, th){
-	console.log(th)
-	console.log( $(th).parents("table.famous-tb") )
+// 	console.log(th)
+// 	console.log( $(th).parents("table.famous-tb") )
 	
 	$.ajax({
-		type: "get"
+		type: "post"
 		, url: "/user/famous/report"
 		, dataType: "json"
 		, data: {
@@ -185,14 +186,14 @@ function reportFamous(famous_no, th){
 		}
 		, success: function(data){
 			if(data.success) {
-				alert("신고합니다")
+				alert("신고되었습니다.");
 				
 			} else {
-				alert("신고 실패");
+				alert("이미 신고하셨습니다.");
 			}
 		}
 		, error: function() {
-			console.log("error");
+			console.log("신고 실패");
 		}
 	});
 }
@@ -200,8 +201,10 @@ function reportFamous(famous_no, th){
 </script>
 
 <style type="text/css">
-.insert {text-align: left;margin-left:35px;}
+div.img {text-align: center;}
+.insert {text-align: left;margin-left:35px;vertical-align:middle;}
 .container {margin: 0 auto;text-align: center;align-content: center;align-items: center;width:700px;}
+.center > form {margin: 0 auto;text-align: center;align-content: center;align-items: center;}
 table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 /* table, th, td{border: 1px solid gray;} */
 .famous-tb  {border-collapse:collapse;border-spacing:0;undefined;table-layout:fixed; width:700px;text-align: center;}
@@ -216,9 +219,13 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 #search {text-align:center;vertical-align: middle;margin: 0 auto;}
 </style>
 
+<div class="img">
+<img alt="bookimage" src="https://i.imgur.com/JlETEYh.jpg" style="width: 1140px; margin-top:40px; border-radius: 8px;">
+</div>
+
 <div class="container">
 
-<h1>명언 게시판</h1>
+<h1 style="text-align: left;">명언 게시판</h1>
 <hr>
 
 <br>
@@ -237,9 +244,11 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 	<!-- 글 입력 -->
 	<div class="center insert">
 		<strong>글 작성</strong><br>
-		<input type="text" size="15" class="form-control" id="famousWriter" style="margin-bottom:5px;" name="nick" value="${user_nick }" readonly="readonly"/><br>
-		<textarea rows="2" cols="86" class="form-control" id="famous_content"></textarea><br>
-		<div style="display: inline-block;text-align: right;width:620px;"><button id="btnInsert" type="submit" class="btn-brown">입력</button></div>
+		<input type="text" size="15" class="form-control" id="famousWriter" style="margin-bottom:5px;border:1px solid black; border-radius:3px; background-color:#ccc;" name="nick" value="${user_nick }" readonly="readonly"/><br>
+		<textarea rows="2" cols="86" class="form-control" id="famous_content" placeholder="내용을 작성해주세요"></textarea><br>
+		<div style="display: inline-block;text-align:center;width:620px;">
+		<button id="btnInsert" type="submit" class="btn-brown" style="width:621px; height:30px;">입력</button>
+		</div>
 		<br><br>
 	</div>	<!-- 글 입력 end -->
 	</c:if>
@@ -297,9 +306,9 @@ table{margin: 0 auto;/* border-bottom: 1px solid gray; */}
 
 <br>
 
-<div class="text-center">
+<div class="center">
 	<form id="famousSearch" action="/user/famous/list" method="get" style="width:250px;">
-	<input class="form-control" type="text" name="search" style="width:180px;border: 3px solid #9f8170;"/>
+	<input class="form-control" type="text" name="search" style="width:180px;border: 3px solid #9f8170;" placeholder="검색어를 입력해주세요"/>
 	<button id="btnfamousSearch" type="submit" style="width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170; ">
 		<img style="margin-top:1px;object-fit:full;width:14px;height:12px;" alt="search" src="https://i.imgur.com/97QT6ay.png">
 	</button>

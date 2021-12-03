@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SearchBook {
 
+@RequestMapping(value="/book")
+public void book() {}
+	
 //@ResponseBody
 @RequestMapping(value="/searchBook")
  public static String search(String query, Model model) {
@@ -33,7 +36,7 @@ public class SearchBook {
      }
 
 
-     String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text;    // json 결과
+     String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text + "&display=30&start=1&sort=count";    // json 결과
      //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
 

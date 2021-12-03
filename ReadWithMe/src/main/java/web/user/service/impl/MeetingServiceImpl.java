@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dao.face.MeetingDao;
+import web.user.dao.face.UserDao;
 import web.user.dto.Meeting;
+import web.user.dto.Participation;
+import web.user.dto.UserTb;
 import web.user.service.face.MeetingService;
 import web.util.Paging;
 
@@ -15,6 +18,7 @@ import web.util.Paging;
 public class MeetingServiceImpl implements MeetingService {
 	
 	@Autowired MeetingDao meetingDao;
+	@Autowired UserDao userDao;
 
 	@Override
 	public List<Meeting> list(Paging paging) {
@@ -46,12 +50,25 @@ public class MeetingServiceImpl implements MeetingService {
 			meeting.setMeeting_title("(제목없음)");
 		}
 		meetingDao.insert(meeting);
-		
 	}
 
 	@Override
 	public void delete(Meeting meeting) {
 		meetingDao.delete(meeting);
-		
+	}
+
+	@Override
+	public UserTb getUser(int user_no) {
+		return userDao.selectUserTbByUserNo(user_no);
+	}
+
+	@Override
+	public void apply(Participation participation) {
+		meetingDao.insertParticipation(participation);
+	}
+
+	@Override
+	public Participation getMeeting(int user_no) {
+		return userDao.selectParticipationByUserNo(user_no);
 	}
 }

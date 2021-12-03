@@ -187,8 +187,8 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 			<li class="all">
 				<div style="display: inline-block;">신고내역</div>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">게시글</a></li>
-					<li><a href="<%=request.getContextPath() %>">댓글</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/report/list">게시글</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/report/comment/list">댓글</a></li>
 				</ul>
 			</li>
 		</div>

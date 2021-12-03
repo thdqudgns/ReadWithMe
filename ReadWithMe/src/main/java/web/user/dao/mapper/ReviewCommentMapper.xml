@@ -44,6 +44,20 @@
 		SET comment_content = #{comment_content}
 		WHERE comment_no = #{comment_no}
 	</update>
+	
+	<!-- 후기 신고 댓글 삽입 -->
+	<insert id="insertReportCommentByReviewNo" parameterType="web.user.dto.Rpt_cmt">
+		INSERT INTO Rpt_cmt (report_no, user_no, comment_no)
+		VALUES ( rpt_cmt_seq.nextval, #{user_no}, #{comment_no} )
+	</insert>
+	
+	<!-- 댓글 신고 확인 -->
+	<select id="countReportComment" resultType="int" parameterType="web.user.dto.Rpt_cmt">
+		SELECT COUNT(*) 
+		FROM Rpt_cmt
+		WHERE comment_no = #{comment_no}
+			AND user_no = #{user_no}
+	</select>
 
 
 </mapper>

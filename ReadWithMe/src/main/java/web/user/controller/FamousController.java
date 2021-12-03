@@ -85,7 +85,7 @@ public class FamousController {
 		
 	} // 끝 목록 메소드
 
-	//추천
+	//추천  
 	@RequestMapping(value = "/recommend")
 	public ModelAndView recommend(Famous_rec recommend, ModelAndView mav, HttpSession session) {
 		logger.info("/famous/recommend");
@@ -157,9 +157,19 @@ public class FamousController {
 	
 	//신고
 	@RequestMapping(value="/report")
-	public void report(Rpt_board report, HttpSession session) {
+	public void report(Rpt_board famous, Writer writer, HttpSession session) {
 		logger.info("/famous/report");
-		logger.info("famous_no : {}", report);
+		logger.info("famous_no : {}", famous);
+		
+		famous.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+		
+		boolean success = famousService.insertReportByFamousNo(famous);
+		
+		try {
+			writer.append("{\"success\":"+success+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

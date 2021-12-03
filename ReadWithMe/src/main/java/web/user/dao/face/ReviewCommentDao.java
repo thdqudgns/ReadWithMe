@@ -3,6 +3,7 @@ package web.user.dao.face;
 import java.util.List;
 
 import web.user.dto.Review;
+import web.user.dto.Rpt_cmt;
 import web.user.dto.Rv_cmt;
 
 public interface ReviewCommentDao {
@@ -41,5 +42,20 @@ public interface ReviewCommentDao {
 	 * @return
 	 */
 	public int updateReviewComment(Rv_cmt comment);
+
+	/**
+	 * 후기 댓글번호와 함께 신고글에 정보 삽입
+	 * 
+	 * @param comment - 후기 댓글번호가 담긴 객체
+	 */
+	public void insertReportCommentByReviewNo(Rpt_cmt comment);
+
+	/**
+	 * 신고된 댓글 확인
+	 * 
+	 * @param comment - 명언글 번호, 신고한 회원 번호
+	 * @return 데이터 개수
+	 */
+	public int countReportComment(Rpt_cmt comment);
 
 }

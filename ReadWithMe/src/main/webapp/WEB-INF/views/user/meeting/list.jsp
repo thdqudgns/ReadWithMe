@@ -62,7 +62,7 @@ body {
 	height: 100%;
 	margin:0 auto;
 }
-ul, li {
+ul.meeting-ul, li.meeting-li {
 	display: inline-block;
 	text-align: center;
 	margin: 10px;
@@ -254,9 +254,9 @@ ul, li {
 				</div>
 
 				<div class="searchresult" id="searchresult">
-					<ul>
+					<ul class="meeting-ul">
 					<c:forEach items="${list }" var="meeting">
-						<li>
+						<li class="meeting-li">
 							<div class="meeting-thumbnail">
 								<a href="/user/meeting/view?no=${meeting.meeting_no}"><img src="https://i.imgur.com/qxqjwv4.jpg"></a><br>
 							</div>
@@ -268,7 +268,25 @@ ul, li {
 								장소 ${meeting.meeting_location }<br> <!-- 장소 이름으로 수정 -->
 								인원 ${meeting.meeting_personnel }명<br>
 								모집 <fmt:formatDate value="${meeting.meeting_rcr_end }" pattern="yyyy.MM.dd"/>까지
-							</div>						 
+								
+								<div class="meeting-btn">
+									<jsp:useBean id="now" class="java.util.Date" />
+									<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+									<fmt:formatDate value="${meeting.meeting_rcr_end}" pattern="yyyy-MM-dd" var="rcr" />
+									<c:choose>
+									<c:when test="${today <= rcr }">
+										<button class="btn-end" disabled>모집 중</button>
+									</c:when>
+																	
+									<c:when test="${today > rcr }">
+										<button class="btn-end" disabled>모집 마감</button>							
+									</c:when>
+									<c:when test="${meeting_personnel == null }">
+										<button class="btn-end" disabled>모집 마감</button>							
+									</c:when>
+									</c:choose>
+								</div>
+							</div> <!-- meeting-info end -->
 						</li>
 					</c:forEach>
 					</ul>

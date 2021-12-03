@@ -158,6 +158,61 @@ function deleteComment(comment_no) {
 		}
 	});
 }
+
+//신고
+function reportReview(review_no, th){
+// 	console.log(th)
+// 	console.log( $(th).parents("table.famous-tb") )
+	
+	$.ajax({
+		type: "post"
+		, url: "/user/review/report"
+		, dataType: "json"
+		, data: {
+			review_no: review_no
+		}
+		, success: function(data){
+			if(data.success) {
+				alert("신고되었습니다.");
+				
+			} else {
+				alert("이미 신고하셨습니다.");
+			}
+		}
+		, error: function() {
+			console.log("신고 실패");
+		}
+	});
+}
+
+
+//댓글 신고
+function reportReviewComment(comment_no, th){
+// 	console.log(th)
+// 	console.log( $(th).parents("table.famous-tb") )
+	
+	$.ajax({
+		type: "post"
+		, url: "/user/review/comment/report"
+		, dataType: "json"
+		, data: {
+			comment_no: comment_no
+		}
+		, success: function(data){
+			if(data.success) {
+				alert("신고되었습니다.");
+				
+			} else {
+				alert("이미 신고하셨습니다.");
+			}
+		}
+		, error: function() {
+			console.log("error");
+				alert("신고 실패");
+		}
+	});
+}
+
 </script>
 
 <style type="text/css">
@@ -247,6 +302,9 @@ td:not(.info) {
     	<c:if test="${user_no eq viewReview.user_no }">
 		<a href="/user/review/update?review_no=${viewReview.review_no }"><button class="btn-none">수정</button></a> | 
 		<a href="/user/review/delete?review_no=${viewReview.review_no }"><button class="btn-none">삭제</button></a>
+		</c:if>
+		<c:if test="${user_no ne viewReview.user_no and login}">
+		<button class="btn-report" onclick="reportReview(${viewReview.review_no }, this);">신고</button>
 		</c:if>
     </td>
   </tr>
@@ -378,6 +436,9 @@ td:not(.info) {
 						<button class="btn-none" style="display:none;" onclick="updateComment(${comment.comment_no }, this);">적용</button>
 						<button class="btn-none" onclick="deleteComment(${comment.comment_no });">삭제</button>
 						</c:if>
+						<c:if test="${user_no ne comment.user_no and login}">
+							<button class="btn-report" onclick="reportReviewComment(${comment.comment_no }, this);">신고</button>
+						</c:if>
 				    </td>
 				   </tr>
 				</c:forEach>
@@ -391,7 +452,7 @@ td:not(.info) {
 <br>
 
 <div class="center">
-	<a href="/user/review/list"><button class="btn-brown" style="width:50px">목록</button></a>
+	<a href="/user/review/list"><button class="btn-brown" style="width:70px;height:30px">목록</button></a>
 </div>
 
 

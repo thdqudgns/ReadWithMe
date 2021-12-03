@@ -3,6 +3,7 @@ package web.user.dao.face;
 import java.util.List;
 
 import web.user.dto.Meeting;
+import web.user.dto.Participation;
 import web.util.Paging;
 
 public interface MeetingDao {
@@ -27,7 +28,7 @@ public interface MeetingDao {
 	/**
 	 * 모임 번호를 이용하여 모임을 조회한다
 	 * 
-	 * @param viewMeeting - 조회하려는 모임의 글 번호 객체
+	 * @param Meeting - 조회하려는 모임의 글 번호 객체
 	 * @return 조회된 모임 정보
 	 */
 	public Meeting selectMeetingByMeetingno(int no);
@@ -40,10 +41,16 @@ public interface MeetingDao {
 	public void insert(Meeting meeting);
 
 	/**
-	 * r게시글 수정 처리
+	 * 게시글 수정 처리
 	 * 
 	 * @param meeting
 	 */
 	public void delete(Meeting meeting);
+	
+	/**
+	 * 
+	 * @param participation
+	 */
+	public void insertParticipation(Participation participation);
 	
 }
