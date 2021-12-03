@@ -12,11 +12,6 @@
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- 부트스트랩 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-
 <!-- JavaScript -->
 <script type="text/javascript">
 </script>
@@ -88,7 +83,7 @@ ul.menuList > div.menuMain > a.link-a > img.link-img {vertical-align:middle;widt
 
 /* 전체메뉴 버튼 */
 .menubarlogo {display:table-cell;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
-ul.menuList > div.menuBar > li.all {margin-top:5px;}
+ul.menuList > div.menuBar > li.all {margin-top:0px;}
 ul.menuList > div.menuBar > li.all > ul.menu-icon {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
 ul.menuList > div.menuBar > li.all > ul.menu-icon > li.menu-icon-li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
 ul.menuList > div.menuBar > li:hover > ul.menu-icon > li.menu-icon-li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
@@ -98,9 +93,9 @@ ul.menuList > div.menuBar > li.all > ul.menu-icon > li.menu-icon-li > a.menu-ico
 
 /* 검색 */
 ul.menuList > div.menuBar > form.menu-bar-search-form {width:250px;}
-ul.menuList > div.menuBar > input.menu-bar-search-input {width:180px;border: 3px solid #9f8170;}
-ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn {width:26px;height:25px;border: 3px solid #9f8170;background-color:#9f8170;}
-ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn > img.menu-bar-search-input-btn-img {margin-top:1px;object-fit:full;width:16px;height:14px;}
+ul.menuList > div.menuBar > input.menu-bar-search-input {width:180px; height:26px; border:3px solid #9f8170;}
+ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn {width:26px; height:26px; border:3px solid #9f8170; background-color:#9f8170;}
+ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn > img.menu-bar-search-input-btn-img {margin-bottom:0px;object-fit:full;}
 
 /* 기본 메뉴바 - 검색, 모임, 후기, 명언, 안내&문의 */
 ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
@@ -166,7 +161,6 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 		<div class="menuMain">
 			<a class="link-a" href="/">
 			<img class="link-img" alt="menuBarLogo" src="https://i.imgur.com/BH7NGuy.png">
-<!-- 			<div>Read With Me</div> -->
 			</a>
 		</div>
 	
@@ -189,8 +183,8 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 		
 		<!-- 검색 -->
 		<div class="menuBar">
-			<form id="search" action="#" method="get" class="menu-bar-search-form">
-            	<input class="menu-bar-search-input" type="text" name="search"><button class="menu-bar-search-input-btn" type="submit"><img class="menu-bar-search-input-btn-img" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
+			<form id="search" action="#" method="get" class="menu-bar-search-form" style="width:250px;">
+            	<input class="menu-bar-search-input" type="text" name="search" style="width:180px; height:26px; border:3px solid #9f8170;"><button style="width:26px; height:26px; border:3px solid #9f8170; background-color:#9f8170;" class="menu-bar-search-input-btn" type="submit"><img class="menu-bar-search-input-btn-img" style="margin-bottom:0px;object-fit:full;" width="16px;" height="14px;" alt="search" src="https://i.imgur.com/97QT6ay.png"></button>
             </form>
 		</div>
 
