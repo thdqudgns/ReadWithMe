@@ -103,4 +103,11 @@ public interface AdminReportDao {
 	 */
 	public void updateDeleR(Review review_no);
 
+	/**
+	 * 밴 테이블에 정보 추가
+	 * 
+	 * @param user_no - 회원번호
+	 */
+	public void insertBan(int user_no);
+
 }

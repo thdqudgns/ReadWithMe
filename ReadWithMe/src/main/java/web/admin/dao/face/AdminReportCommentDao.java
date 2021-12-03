@@ -66,5 +66,12 @@ public interface AdminReportCommentDao {
 	 * @param comment_no - 댓글번호
 	 */
 	public void updateDeleC(Rv_cmt comment_no);
+	
+	/**
+	 * 밴 테이블에 정보 추가
+	 * 
+	 * @param user_no - 회원번호
+	 */
+	public void insertBan(int user_no);
 
 }

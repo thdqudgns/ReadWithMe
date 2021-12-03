@@ -172,11 +172,11 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 					alt="menu_icon" src="https://i.imgur.com/wG6Siyb.png">
 				<ul>
 					<li><a href="<%=request.getContextPath() %>/book">도서검색</a></li>
-					<li><a href="<%=request.getContextPath() %>">모임</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/meeting/list">모임</a></li>
 					<li><a href="<%=request.getContextPath() %>/user/review/list">후기</a></li>
 					<li><a href="<%=request.getContextPath() %>/user/famous/list">명언</a></li>
-					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
-					<li><a href="<%=request.getContextPath() %>">1:1문의</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/notice/list">공지사항</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/inquiry/list">1:1문의</a></li>
 				</ul>
 			</li>
 		</div>
@@ -190,7 +190,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a href="<%=request.getContextPath() %>"><span>모임</span></a>
+			<a href="<%=request.getContextPath() %>/user/meeting/list"><span>모임</span></a>
 		</div>
 
 		<!-- 메뉴명 -->
@@ -220,13 +220,14 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 			</div>
 		</c:if>
 	
-		<c:if test="${not empty login and login and user_lv ne 3 }">
+		<c:if test="${not empty login and login and user_lv lt 2 }">
 		<!-- 프로필, 닉네임, 마이페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
 				<img alt="profile" src="https://i.imgur.com/G5gV56A.png" width="20px" height="20px">
 				<span>${user_nick }님</span>
 				<ul>
+					<li><a href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>
 					<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a></li>
 					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
@@ -234,14 +235,16 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 		</div>
 		</c:if>
 
-		<c:if test="${not empty login and login and user_lv eq 3 }">
+		<c:if test="${not empty login and login and user_lv ge 2 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>
 				<img alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
 				<span>${user_nick }님</span>
 				<ul>
+					<li><a href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>
 					<li><a href="<%=request.getContextPath() %>/admin/member">관리자페이지</a></li>
+					<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a></li>
 					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
