@@ -13,7 +13,7 @@ public class Message {
 	
 	@Override
 	public String toString() {
-		return "Message [msg_no=" + msg_no + ", send_use=" + send_user + ", rec_user=" + rec_user + ", msg_title="
+		return "Message [msg_no=" + msg_no + ", send_user=" + send_user + ", rec_user=" + rec_user + ", msg_title="
 				+ msg_title + ", msg_content=" + msg_content + ", msg_read=" + msg_read + "]";
 	}
 	

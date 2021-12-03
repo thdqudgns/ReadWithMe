@@ -12,12 +12,14 @@
 	<script src="${path}/resources/js/message_write_script.js"></script>
 	
 	<script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){
+		
 		$("#btnList").click(function() {
 			history.go(-1);
-		})	
-		$("btnSend").click(function(){
-			location.href = "/user/mypage/message/write";
+		})
+		
+		$("#btnSend").click(function() {
+			location.href="/user/mypage/message/write";
 		})
 	});
 	
@@ -42,7 +44,7 @@
 					</div>
 					
 					<div id="rec_user_input">
-						<input type="text" id="rec_user" name="rec_user" value="보낸 사람 : ${viewMessage.NICK}" required readonly/>
+						<input type="text" id="rec_user" name="rec_user" value="받는 사람 : ${viewMessage.NICK}" required readonly/>
 					</div>
 					
 					<div id="msg_content_textarea">
