@@ -12,9 +12,4 @@
 			WHERE user_no = #{user_no }
 		</select>
 		
-		<select id="selectParticipationByUserNo" resultType="web.user.dto.Participation" parameterType="int">
-			SELECT * FROM Participation
-			WHERE user_no = #{user_no }
-		</select>
-		
 </mapper>

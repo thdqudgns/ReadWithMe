@@ -80,6 +80,11 @@ public class MeetingServiceImpl implements MeetingService {
 		
 		return meetingDao.selectList(map);
 	}
+	
+//	@Override
+//	public List<Meeting> endlist(Paging paging) {
+//		return meetingDao.selectEndList(paging);
+//	}
 
 	@Override
 	public Paging getPaging(Paging paramData) {
@@ -124,7 +129,15 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Participation getMeeting(int user_no) {
-		return userDao.selectParticipationByUserNo(user_no);
+	public Participation getParticipation(int user_no, int meeting_no) {
+		HashMap<String, Integer> user_meeting_no = new HashMap<String, Integer>();
+		user_meeting_no.put("user_no", user_no);
+		user_meeting_no.put("meeting_no", meeting_no);
+		return meetingDao.selectParticipation(user_meeting_no);
+	}
+
+	@Override
+	public void deleteApply(Participation participation) {
+		meetingDao.deleteParticipation(participation);
 	}
 }

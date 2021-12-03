@@ -22,59 +22,63 @@ window.onload = function(){
 </script>
 
 <script>
-function check(){
+$(document).ready(function() {
+	$('#check').click(function(){
+		console.log("클릭되나");
+	
+		var type = document.getElementById("meetingtype_no");
+		var title = document.getElementById("meeting_title");
+		var area = document.getElementById("area_no");
+		var location = document.getElementById("meeting_location");
+		var rcrStart = document.getElementById("meeting_rcr_start");
+		var rcrEnd = document.getElementById("meeting_rcr_end");
+		var start = document.getElementById("meeting_start");
+		var end = document.getElementById("meeting_end");
+		var person = document.getElementById("meeting_personnel");
+		var book = document.getElementById("book_class_no");
+		var content = document.getElementById("meeting_content");
+		var agree = document.getElementById("req");
+	
+		if(type.value == "0") {
+			alert("모임 방식을 선택하세요.");
+			return false;
+		} else if (title.value == "") {
+			alert("모임 제목을 입력하세요.");
+			return false;
+		} else if (area.value == "0") {
+			alert("모임 지역을 선택하세요.");
+			return false;
+		} else if (location.value == "") {
+			alert("모임 장소를 입력하세요.");
+			return false;
+		} else if (rcrStart.value == "") {
+			alert("모집 기간을 선택하세요.");
+			return false;
+		} else if (rcrEnd.value == "") {
+			alert("모집 기간을 선택하세요.");
+			return false;
+		} else if (start.value == "") {
+			alert("진행 기간을 선택하세요.");
+			return false;
+		} else if (end.value == "") {
+			alert("진행 기간을 선택하세요.");
+			return false;
+		} else if (person.value == "") {
+			alert("인원 수를 입력하세요.");
+			person.focus();
+			return false;
+		} else if (content.value == "") {
+			alert("모임 정보를 입력하세요.");
+			content.focus();
+			return false;
+		} else if ($('#agree').is(":checked") != true) {
+			alert("약관 동의를 체크하세요.");
+			return false;
+		} else {
+			$('form').submit();
+		}
+	})
 
-	var type = document.getElementById("meetingtype_no");
-	var title = document.getElementById("meeting_title");
-	var area = document.getElementById("area_no");
-	var location = document.getElementById("meeting_location");
-	var rcrStart = document.getElementById("meeting_rcr_start");
-	var rcrEnd = document.getElementById("meeting_rcr_end");
-	var start = document.getElementById("meeting_start");
-	var end = document.getElementById("meeting_end");
-	var person = document.getElementById("meeting_personnel");
-	var book = document.getElementById("book_class_no");
-	var content = document.getElementById("meeting_content");
-	var agree = document.getElementById("req");
-
-	if(type.value == "0") {
-		alert("모임 방식을 선택하세요.");
-		return false;
-	} else if (title.value == "") {
-		alert("모임 제목을 입력하세요.");
-		return false;
-	} else if (area.value == "0") {
-		alert("모임 지역을 선택하세요.");
-		return false;
-	} else if (location.value == "") {
-		alert("모임 장소를 입력하세요.");
-		return false;
-	} else if (rcrStart.value == "") {
-		alert("모집 기간을 선택하세요.");
-		return false;
-	} else if (rcrEnd.value == "") {
-		alert("모집 기간을 선택하세요.");
-		return false;
-	} else if (start.value == "") {
-		alert("진행 기간을 선택하세요.");
-		return false;
-	} else if (end.value == "") {
-		alert("진행 기간을 선택하세요.");
-		return false;
-	} else if (person.value == "") {
-		alert("인원 수를 입력하세요.");
-		person.focus();
-		return false;
-	} else if (content.value == "") {
-		alert("모임 정보를 입력하세요.");
-		content.focus();
-		return false;
-	} else if (!agree.checked) { //체크박스 미체크시
-		alert("약관 동의를 체크하세요.");
-		return false;
-	} else {
-		return true;
-	}
 })
 </script>
 
@@ -87,7 +91,7 @@ $(document).ready(function() {
 		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 		fCreator: "createSEditor2"
 	});
-}
+});
 </script>
 
 <style type="text/css">
@@ -362,7 +366,7 @@ textarea::placeholder {
 3. ReadWithMe는 개인이 읽고 싶은 책을 자유롭게 읽는 행사입니다.<br>
 4. ReadWithMe는 최소 3명 이상, 최대 100명 미만 참여 가능합니다.<br>
 5. 참가자 정보는 ReadWithMe 행사에서의 정보 공유 목적으로만 사용되어야 합니다.<br><br>
-<input type="checkbox" name="agree"> 개인정보 수집 및 이용에 동의합니다.
+<input type="checkbox" id="agree" name="agree"> 개인정보 수집 및 이용에 동의합니다.
 </div>
 
 <div class="bt">

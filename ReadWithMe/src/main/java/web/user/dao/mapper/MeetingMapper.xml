@@ -51,13 +51,28 @@
 						</foreach>
 					</if>
 				</trim>
-				
-				
+				<![CDATA[
+				WHERE meeting_approved = 1 AND meeting_end > TO_CHAR(SYSDATE,'YYYY-MM-DD')
+				]]>				
        			 ORDER BY meeting_no DESC
        		 ) L
    		 ) list
 		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
+
+<!-- 	<select id="selectList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
+		SELECT * FROM (SELECT rownum rnum, M.* FROM (
+			SELECT
+				meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+				meeting_location, meeting_title, meeting_content, meeting_rcr_start,
+				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
+				meeting_address, meeting_board_date, meeting_approved
+			FROM meeting
+			<![CDATA[
+			WHERE meeting_approved = 1 AND meeting_end =< TO_CHAR(SYSDATE,'YYYY-MM-DD')
+			]]>
+		ORDER BY meeting_no DESC) M) R WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select> -->
 	
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM meeting
@@ -121,15 +136,25 @@
 				 #{meeting_rcr_end}, #{meeting_start}, #{meeting_end}, #{meeting_personnel},
 				 #{meeting_address}, #{meeting_board_date}, #{meeting_approved} )
 	</insert>
-	
+
 	<delete id="delete" parameterType="web.user.dto.Meeting">
 		DELETE meeting
 		WHERE meeting_no = #{meeting_no}
 	</delete>
+
+	<select id="selectParticipation" resultType="web.user.dto.Participation" parameterType="HashMap">
+		SELECT * FROM Participation
+		WHERE user_no = #{user_no } AND meeting_no = #{meeting_no}
+	</select>
 	
 	<insert id="insertParticipation" parameterType="web.user.dto.Participation">
 		INSERT INTO participation (meeting_no, user_no)
 		VALUES ( #{meeting_no}, #{user_no} )
 	</insert>
+	
+	<delete id="deleteParticipation" parameterType="web.user.dto.Participation">
+		DELETE participation
+		WHERE user_no = #{user_no } AND meeting_no = #{meeting_no}
+	</delete>
 	
 </mapper>

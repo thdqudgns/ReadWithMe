@@ -50,8 +50,26 @@ public interface MeetingDao {
 	
 	/**
 	 * 
+	 * @param user_no
+	 * @param meeting_no
+	 * @return
+	 */
+	public Participation selectParticipation(HashMap<String, Integer> user_meeting_no);	
+	
+	/**
+	 * 모임 신청
+	 * 
 	 * @param participation
 	 */
 	public void insertParticipation(Participation participation);
+	
+	/**
+	 * 신청 취소
+	 * 
+	 * @param meeting
+	 */
+	public void deleteParticipation(Participation participation);
+
+
 	
 }

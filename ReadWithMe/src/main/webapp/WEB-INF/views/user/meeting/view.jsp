@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+<fmt:formatDate value="${meeting.meeting_rcr_end}" pattern="yyyy-MM-dd" var="rcr" />
+<fmt:formatDate value="${meeting.meeting_end}" pattern="yyyy-MM-dd" var="end" />
+
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 <style type="text/css">
 
@@ -166,13 +171,9 @@ p.addr {
 								<th class="host-profile">
 								<br>
 								<div class="host-info">
-								<!-- 프로필 사진 물어보기 --> ${user.nick }
-								</div>
-								
+								${user.file_no } ${user.nick }
 								<div>
-								<jsp:useBean id="now" class="java.util.Date" />
-								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
-								<fmt:formatDate value="${meeting.meeting_rcr_end}" pattern="yyyy-MM-dd" var="rcr" />
+								</div>
 								<!-- 로그인상태 -->
 								<c:if test="${login }">
 									<c:choose>
@@ -181,9 +182,9 @@ p.addr {
 										<a href="/user/meeting/delete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">삭제</button></a>	
 									</c:when>
 									
-									<c:when test="${meeting.meeting_no eq participation.meeting_no}">
+									<c:when test="${user_no eq participation.user_no && meeting.meeting_no eq participation.meeting_no}">
 										<!-- 이미 신청한 모임 -->
-										<a href="/user/meeting/applyDelete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">신청 취소</button></a>	
+										<button onclick='deleteApply()' class="btn-delete">신청 취소</button>
 									</c:when>
 						
 									<c:when test="${today > rcr }">
@@ -295,6 +296,11 @@ geocoder.addressSearch(address, function(result, status) {
 function apply() {
 	const meeting_no = '${meeting.meeting_no}'
 	location.href="/user/meeting/apply?meeting_no=" + meeting_no
+}
+
+function deleteApply() {
+	const meeting_no = '${meeting.meeting_no}'
+	location.href="/user/meeting/deleteApply?meeting_no=" + meeting_no
 }
 </script>
 </body>
