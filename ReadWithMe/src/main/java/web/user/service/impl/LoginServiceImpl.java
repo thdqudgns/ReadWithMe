@@ -118,15 +118,17 @@ public class LoginServiceImpl implements LoginService {
 			if(passwordEncoder.matches(rawPw, pw)) {
 				logger.info("비밀번호 일치");
 				user.setPassword(pw);
+				
+				if( loginDao.selectCnt(user) >=1 ) {
+					return true;
+				} else {
+					return false;
+				}		
 			}else {
 				logger.info("비밀번호 불일치");
+				return false;
 			}  
 
-		if( loginDao.selectCnt(user) >=1 ) {
-			return true;
-		} else {
-			return false;
-		}		
 	}
 	
 	@Override
@@ -361,6 +363,34 @@ public class LoginServiceImpl implements LoginService {
 			return false;			
 		}
 	}
+
+
+	@Override
+	public void keepLogin(UserTb user) {
+		loginDao.keepLogin(user);		
+	}
+
+	@Override
+	public UserTb checkUserWithSessionKey(UserTb user) {
+		return loginDao.selectUserBySessionKey(user);
+	}
 	
+	@Override
+	public boolean AutoLogin(UserTb user) {
+		if( loginDao.selectCnt(user) >=1 ) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	@Override
+	public boolean getGoogleId(UserTb user) {
+		
+		if( loginDao.selectCntById(user.getId()) > 0) {
+			return true;
+		}	
+		return false;
+	}
 
 }

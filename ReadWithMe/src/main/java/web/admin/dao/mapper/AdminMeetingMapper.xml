@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="web.admin.dao.face.AdminMeetingDao">
+ 
+ 	<sql id="selectMeetings">
+ 	SELECT
+ 		M.meeting_no, M.user_no, M.book_class_no, M.meeting_title, M.meeting_rcr_start, M.meeting_approved
+ 		, U.nick, B.book_class_name
+ 		, ( SELECT count(*) FROM participation P WHERE M.meeting_no = P.meeting_no ) cnt
+ 	FROM meeting M 
+ 	INNER JOIN usertb U ON M.user_no = U.user_no
+ 	INNER JOIN book_class B ON M.book_class_no = B.book_class_no
+ 	<trim prefix="WHERE" prefixOverrides="AND|OR">
+ 	<choose>
+ 		<when test="selectBox!=null and selectBox.equals('meeting')">
+ 			AND meeting_title LIKE
+ 		</when>
+ 		<when test="selectBox!=null and selectBox.equals('user')">
+ 			AND nick LIKE
+		</when>
+	</choose>
+	</trim>
+	<if test="search!=null and !search.equals('')">
+		'%' || #{search} || '%'
+	</if>
+ 	</sql>
+ 
+  	<select id="selectCntAll" resultType="int">
+  	SELECT COUNT(*) FROM (
+  		<include refid="selectMeetings" />
+  	)
+	</select>
+	
+	<select id="selectMeetingList" resultType="hashmap" parameterType="hashmap">
+	SELECT * FROM (
+	    SELECT rownum rnum, MUBP.* FROM (
+	  		<include refid="selectMeetings" />
+	        ORDER BY meeting_no DESC
+	    ) MUBP
+	) RESULT
+	WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+	</select>
+	
+	<select id="selectCntUser" resultType="int" parameterType="String">
+		select count(*) CNT
+		from participation
+		Where meeting_no = #{meeting_no }
+	</select>
+	
+	<update id="updateMeeting" parameterType="web.user.dto.Meeting">
+		UPDATE Meeting
+		SET meeting_approved = 1
+		WHERE meeting_no = #{meeting_no }
+	</update>
+	
+	<delete id="deleteMeeting" parameterType="web.user.dto.Meeting">
+		DELETE FROM Meeting
+		WHERE meeting_no = #{meeting_no }
+	</delete>
+		
+ </mapper>

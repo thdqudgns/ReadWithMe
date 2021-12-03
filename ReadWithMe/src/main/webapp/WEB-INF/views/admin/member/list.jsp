@@ -28,7 +28,7 @@ input[type="radio"]:checked + label span {
 </style>
 
 <section>
-<div id="seachMemberForm">
+<div id="seachMemberForm" style="text-align: center; margin-top: 30px;">
 <form id="adminMemberForm" method="get">
 <input type="hidden" id="admin" value="${userLv }">
 
@@ -39,6 +39,16 @@ input[type="radio"]:checked + label span {
 <option value="nick">닉네임</option>
 </select>
 </div>
+
+
+<div id="clsfc">
+<label for="selectBox">이메일</label>
+<select id="selectBox" name="selectBox">
+<option value="email" selected="selected">이메일</option>
+<option value="nick">닉네임</option>
+</select>
+</div>
+
 
 <input type="text" name="search" id="search">
 <button id="seachMember">검색</button>
