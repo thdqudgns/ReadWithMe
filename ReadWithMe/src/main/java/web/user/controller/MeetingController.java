@@ -26,6 +26,8 @@ public class MeetingController {
 	private static final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	@Autowired private MeetingService meetingService;
+	
+	// 진행 중 모임
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public void MeetingList(Paging paramData, Model model) {
 		logger.info("/meeting/list");
@@ -44,6 +46,25 @@ public class MeetingController {
 		model.addAttribute("list", list);
 	}
 	
+//	// 종료된 모임
+//	@RequestMapping(value="/endlist", method = RequestMethod.GET)
+//	public void MeetingEndList(Paging paramData, Model model) {
+//		logger.info("/meeting/endlist");
+//		
+//		//페이징 계산
+//		Paging paging = meetingService.getPaging( paramData );
+//		logger.info("{}", paging);
+//		
+//		//모임 목록 조회
+//		List<Meeting> endlist = meetingService.list(paging);
+//		for(Meeting m : endlist) {
+//			logger.info("{}", m);
+//		}
+//		
+//		model.addAttribute("paging", paging);
+//		model.addAttribute("endlist", endlist);
+//	}	
+	
 	// 모임 검색
 	
 	
@@ -58,7 +79,7 @@ public class MeetingController {
 		
 		// 모임 신청 목록 조회
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
-		Participation participation = meetingService.getMeeting(user_no);
+		Participation participation = meetingService.getParticipation(user_no, no);
 		logger.info("{}", participation);
 		
 		model.addAttribute("meeting", meeting);
@@ -86,17 +107,16 @@ public class MeetingController {
 	
 	// 모임 신청 취소
 	@RequestMapping(value="/deleteApply", method=RequestMethod.GET)
-	public String delete(Participation participation, HttpSession session) {
-		logger.info("/user/meeting/applyDelete [GET]");
+	public String deleteApply(Participation participation, HttpSession session) {
 		
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
 		participation.setUser_no(user_no);
 		
 		logger.info("{}", participation);
 		
-		meetingService.delete(participation);
+		meetingService.deleteApply(participation);
 		
-		return "user/meeting/list";
+		return "redirect:/user/meeting/view?no=" + participation.getMeeting_no();
 	}
 	
 	// 모임 생성

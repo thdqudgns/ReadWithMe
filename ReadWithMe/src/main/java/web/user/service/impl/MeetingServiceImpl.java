@@ -1,5 +1,6 @@
 package web.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<Meeting> list(Paging paging) {
 		return meetingDao.selectList(paging);
 	}
+	
+//	@Override
+//	public List<Meeting> endlist(Paging paging) {
+//		return meetingDao.selectEndList(paging);
+//	}
 
 	@Override
 	public Paging getPaging(Paging paramData) {
@@ -68,12 +74,15 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Participation getMeeting(int user_no) {
-		return meetingDao.selectParticipation(user_no);
+	public Participation getParticipation(int user_no, int meeting_no) {
+		HashMap<String, Integer> user_meeting_no = new HashMap<String, Integer>();
+		user_meeting_no.put("user_no", user_no);
+		user_meeting_no.put("meeting_no", meeting_no);
+		return meetingDao.selectParticipation(user_meeting_no);
 	}
 
 	@Override
-	public void delete(Participation participation) {
+	public void deleteApply(Participation participation) {
 		meetingDao.deleteParticipation(participation);
 	}
 }

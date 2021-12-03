@@ -18,6 +18,14 @@ public interface MeetingService {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Meeting> list(Paging paging);
+	
+//	/**
+//	 * 페이징이 적용된 게시글 목록 조회
+//	 * 
+//	 * @param paging - 페이징 정보 객체
+//	 * @return 페이징이 적용된 게시글 목록
+//	 */
+//	public List<Meeting> endlist(Paging paging);
 
 	/**
 	 * 게시글 목록을 위한 페이징 객체를 생성한다
@@ -85,7 +93,7 @@ public interface MeetingService {
 	 * @param user_no - 조회할 유저 번호
 	 * @return 모임 정보
 	 */
-	public Participation getMeeting(int user_no);	
+	public Participation getParticipation(int user_no, int meeting_no);	
 	
 	/**
 	 * 
@@ -98,6 +106,6 @@ public interface MeetingService {
 	 * 
 	 * @param participation - 삭제할 신청목록의 모임번호 객체
 	 */
-	public void delete(Participation participation);
+	public void deleteApply(Participation participation);
 	
 }
