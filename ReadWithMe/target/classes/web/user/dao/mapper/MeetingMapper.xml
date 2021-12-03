@@ -6,17 +6,57 @@
 <mapper namespace="web.user.dao.face.MeetingDao">
 	
 	<select id="selectList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
-		<![CDATA[
-		SELECT * FROM (SELECT rownum rnum, M.* FROM (
-			SELECT
-				meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+		SELECT meeting_no, user_no, meetingtype_no, area_no, book_class_no,
 				meeting_location, meeting_title, meeting_content, meeting_rcr_start,
 				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
 				meeting_address, meeting_board_date, meeting_approved
-			FROM meeting
-			
-		ORDER BY meeting_no DESC) M) R WHERE rnum BETWEEN #{startNo } AND #{endNo }
-		]]>
+		FROM (
+   			 SELECT rownum rnum, L.*
+   			 FROM (
+       			 SELECT meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+				meeting_location, meeting_title, meeting_content, meeting_rcr_start,
+				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
+				meeting_address, meeting_board_date, meeting_approved
+       			 FROM meeting
+       			 <trim prefix="WHERE" prefixOverrides="AND|OR">
+					<choose>
+					<when test='searchType!="" and searchWord!="" and searchType.equals("meeting_title")'>
+						AND meeting_title LIKE
+					</when>
+					<when test='searchType!="" and searchWord!="" and searchType.equals("user_no")'>
+						AND user_no LIKE
+					</when>
+					</choose>
+				</trim>
+					<if test='searchType!="" and searchWord!=""'>
+						'%' || #{searchWord } || '%'
+					</if>
+				<trim prefix="WHERE" prefixOverrides="AND|OR">
+					<if test="area_no!=null">
+					AND area_no in
+						<foreach collection="area_no" item="item" index="index" open="(" close=")" separator=",">
+							#{item }
+						</foreach>
+					</if>
+					<if test="meetingtype_no!=null">
+					AND meetingtype_no in
+						<foreach collection="meetingtype_no" item="item1" index="index" open="(" close=")" separator=",">
+							#{item1 }
+						</foreach>
+					</if>
+					<if test="book_class_no!=null">
+					AND book_class_no in
+						<foreach collection="book_class_no" item="item2" index="index" open="(" close=")" separator=",">
+							#{item2 }
+						</foreach>
+					</if>
+				</trim>
+				
+				
+       			 ORDER BY meeting_no DESC
+       		 ) L
+   		 ) list
+		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
 	
 	<select id="selectCntAll" resultType="int">
