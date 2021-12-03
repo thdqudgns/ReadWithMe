@@ -1,6 +1,9 @@
 package web.user.service.face;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +18,10 @@ public interface MeetingService {
 	 * 페이징이 적용된 게시글 목록 조회
 	 * 
 	 * @param paging - 페이징 정보 객체
+	 * @param req 
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Meeting> list(Paging paging);
+	public List<HashMap<String, Object>> list(Paging paging, HttpServletRequest req);
 
 	/**
 	 * 게시글 목록을 위한 페이징 객체를 생성한다

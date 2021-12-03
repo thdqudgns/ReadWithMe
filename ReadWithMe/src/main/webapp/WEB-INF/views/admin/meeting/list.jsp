@@ -6,7 +6,6 @@
 <c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
 <link href="/resources/css/adminMember.css" rel="stylesheet">
-<script src="/resources/js/adminMember_script.js"></script>
 
 <style type="text/css">
 input[type="radio"] {
