@@ -1,6 +1,9 @@
 package web.user.service.face;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +18,10 @@ public interface MeetingService {
 	 * 페이징이 적용된 게시글 목록 조회
 	 * 
 	 * @param paging - 페이징 정보 객체
+	 * @param req 
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Meeting> list(Paging paging);
+	public List<HashMap<String, Object>> list(Paging paging, HttpServletRequest req);
 
 	/**
 	 * 게시글 목록을 위한 페이징 객체를 생성한다
@@ -65,9 +69,9 @@ public interface MeetingService {
 //	public FileTb getFile(int file_no);
 	
 	/**
-	 * 게시글 수정 처리
+	 * 모임 수정 처리
 	 * 
-	 * @param meeting - 삭제할 게시글의 게시글번호 객체
+	 * @param meeting - 삭제할 게시글의 모임번호 객체
 	 */
 	public void delete(Meeting meeting);
 	
@@ -78,6 +82,14 @@ public interface MeetingService {
 	 * @return 유저 정보
 	 */
 	public UserTb getUser(int user_no);
+
+	/**
+	 * 모임 번호를 이용하여 신청 정보를 조회한다
+	 * 
+	 * @param user_no - 조회할 유저 번호
+	 * @return 모임 정보
+	 */
+	public Participation getParticipation(int user_no, int meeting_no);	
 	
 	/**
 	 * 
@@ -86,11 +98,10 @@ public interface MeetingService {
 	public void apply(Participation participation);
 	
 	/**
-	 * 모임 번호를 이용하여 신청 정보를 조회한다
+	 * 게시글 수정 처리
 	 * 
-	 * @param user_no - 조회할 유저 번호
-	 * @return 모임 정보
+	 * @param participation - 삭제할 신청목록의 모임번호 객체
 	 */
-	public Participation getMeeting(int user_no);
+	public void deleteApply(Participation participation);
 	
 }

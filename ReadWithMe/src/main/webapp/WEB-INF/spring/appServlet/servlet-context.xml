@@ -22,6 +22,12 @@
 	
 		<interceptor>
 			<!-- 인터셉터가 적용될 URL -->
+			<mapping path="/**"/>
+			<!-- 인터셉터 클래스 지정 -->
+			<beans:bean class="web.interceptor.AutoLogin"/>
+		</interceptor>
+		<interceptor>
+			<!-- 인터셉터가 적용될 URL -->
 			<mapping path="/mypage/**"/>
 			<!-- 인터셉터 클래스 지정 -->
 			<beans:bean class="web.interceptor.InterceptorNoLogin"/>
@@ -84,10 +90,7 @@
 		<beans:property name="maxUploadSizePerFile" value="5242880"/>		
 	</beans:bean>
 	
-	
-	<!-- 시큐리티 -->
-<!-- 	<beans:bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/> -->
-	
+
 	<context:component-scan base-package="web.user.controller, web.user.service, web.admin.controller, web.admin.service, web.aop"/>	
 	
 </beans:beans>

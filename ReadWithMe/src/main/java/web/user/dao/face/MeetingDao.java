@@ -1,5 +1,6 @@
 package web.user.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import web.user.dto.Meeting;
@@ -13,10 +14,10 @@ public interface MeetingDao {
 	 * 
 	 * 	paging.startNo, paging.endNo를 이용하여 rownum을 조회한다
 	 * 
-	 * @param paging - 페이징 정보 객체
+	 * @param map - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */	
-	public List<Meeting> selectList(Paging paging);
+	public List<HashMap<String, Object>> selectList(HashMap<String, Object> map);
 
 	/**
 	 * 전체 게시글 수를 조회한다
@@ -49,8 +50,26 @@ public interface MeetingDao {
 	
 	/**
 	 * 
+	 * @param user_no
+	 * @param meeting_no
+	 * @return
+	 */
+	public Participation selectParticipation(HashMap<String, Integer> user_meeting_no);	
+	
+	/**
+	 * 모임 신청
+	 * 
 	 * @param participation
 	 */
 	public void insertParticipation(Participation participation);
+	
+	/**
+	 * 신청 취소
+	 * 
+	 * @param meeting
+	 */
+	public void deleteParticipation(Participation participation);
+
+
 	
 }

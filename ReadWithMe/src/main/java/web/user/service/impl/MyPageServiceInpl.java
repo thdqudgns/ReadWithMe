@@ -180,12 +180,16 @@ public class MyPageServiceInpl implements MyPageService {
 		//--------------------------------------------------------
 		
 		FileTb profileFile = new FileTb();
+		profileFile.setFile_no(user.getFile_no());
 		profileFile.setUser_no(user.getUser_no());
 		profileFile.setOrigin_name(originName);
 		profileFile.setStored_name(stored);
 		profileFile.setUrl(storedPath);
 		
+		
 		myPageDao.insertFile(profileFile);		
+		
+
 		
 	}
 	
@@ -212,7 +216,7 @@ public class MyPageServiceInpl implements MyPageService {
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("paging", paging);		
-		map.put("user_no", Integer.parseInt((String)session.getAttribute("user_no")));
+		map.put("user_no", Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		
 		return myPageDao.selectToDoList(map);
 		
@@ -302,6 +306,8 @@ public class MyPageServiceInpl implements MyPageService {
 		List<Meeting> meetingList1 = myPageDao.selectMeetingHosted(user);
 		logger.info("user!!!!!!!!!!{}", user);
 		
+		
+		logger.info("확인 {}", myPageDao.selectMeetingNoByUser_no(user));
 		int user_no = myPageDao.selectMeetingNoByUser_no(user);
 		logger.info("user_no!!!!!!!!!!{}", user_no);
 		List<Meeting> meetingList2 = myPageDao.selectMeetingAttend(user_no);

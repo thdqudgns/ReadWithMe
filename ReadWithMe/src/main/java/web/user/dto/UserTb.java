@@ -22,12 +22,17 @@ public class UserTb {
 	private Date create_date;
 	private int file_no;
 	private String userCertification;
+	private int remember;
+	private String session_key;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date session_limit;
 	@Override
 	public String toString() {
 		return "UserTb [user_no=" + user_no + ", user_lv=" + user_lv + ", id=" + id + ", password=" + password
 				+ ", type=" + type + ", name=" + name + ", nick=" + nick + ", email=" + email + ", phone=" + phone
 				+ ", birth=" + birth + ", location=" + location + ", gender=" + gender + ", create_date=" + create_date
-				+ ", file_no=" + file_no + ", userCertification=" + userCertification + "]";
+				+ ", file_no=" + file_no + ", userCertification=" + userCertification + ", remember=" + remember
+				+ ", session_key=" + session_key + ", session_limit=" + session_limit + "]";
 	}
 	public int getUser_no() {
 		return user_no;
@@ -119,9 +124,24 @@ public class UserTb {
 	public void setUserCertification(String userCertification) {
 		this.userCertification = userCertification;
 	}
-
-	
-	
+	public int getRemember() {
+		return remember;
+	}
+	public void setRemember(int remember) {
+		this.remember = remember;
+	}
+	public String getSession_key() {
+		return session_key;
+	}
+	public void setSession_key(String session_key) {
+		this.session_key = session_key;
+	}
+	public Date getSession_limit() {
+		return session_limit;
+	}
+	public void setSession_limit(Date session_limit) {
+		this.session_limit = session_limit;
+	}
 	
 	
 }
