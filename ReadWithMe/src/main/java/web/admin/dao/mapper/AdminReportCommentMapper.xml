@@ -72,7 +72,11 @@
  		WHERE comment_no = #{comment_no}
  	</update>
 	
-	
+	<!-- Ban 처리 -->
+ 	<insert id="insertBan" parameterType="web.user.dto.Ban">
+      INSERT INTO ban (ban_no, user_no, end_ban)
+      VALUES (ban_seq.nextval, #{user_no }, to_char(sysdate + 30, 'YYYY/MM/DD') )
+   	</insert>
 	
 	
 	

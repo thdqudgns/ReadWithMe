@@ -59,6 +59,7 @@ public class AdminReportCommentServiceImpl implements AdminReportCommentService 
 	@Override
 	public void penalty(int user_no) {
 		adminReportCommentDao.changeUser_lv(user_no);
+		adminReportCommentDao.insertBan(user_no);
 	}
 
 	//댓글 삭제

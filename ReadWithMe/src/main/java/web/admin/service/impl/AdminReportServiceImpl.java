@@ -66,6 +66,7 @@ public class AdminReportServiceImpl implements AdminReportService {
 	@Override
 	public void penalty(int user_no) {
 		adminReportDao.changeUser_lv(user_no);
+		adminReportDao.insertBan(user_no);
 	}
 
 	//명언 삭제
