@@ -14,20 +14,10 @@ public interface MeetingDao {
 	 * 
 	 * 	paging.startNo, paging.endNo를 이용하여 rownum을 조회한다
 	 * 
-	 * @param paging - 페이징 정보 객체
+	 * @param map - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */	
-	public List<Meeting> selectList(Paging paging);
-	
-//	/**
-//	 * 페이징을 적용하여 게시글 목록 조회
-//	 * 
-//	 * 	paging.startNo, paging.endNo를 이용하여 rownum을 조회한다
-//	 * 
-//	 * @param paging - 페이징 정보 객체
-//	 * @return 페이징이 적용된 게시글 목록
-//	 */	
-//	public List<Meeting> selectEndList(Paging paging);
+	public List<HashMap<String, Object>> selectList(HashMap<String, Object> map);
 
 	/**
 	 * 전체 게시글 수를 조회한다

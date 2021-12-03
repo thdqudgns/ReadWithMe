@@ -1,7 +1,10 @@
 package web.user.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -29,7 +32,7 @@ public class MeetingController {
 	
 	// 진행 중 모임
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public void MeetingList(Paging paramData, Model model) {
+	public void MeetingList(Paging paramData, Model model, HttpServletRequest req) {
 		logger.info("/meeting/list");
 		
 		//페이징 계산
@@ -37,15 +40,12 @@ public class MeetingController {
 		logger.info("{}", paging);
 		
 		//모임 목록 조회
-		List<Meeting> list = meetingService.list(paging);
-		for(Meeting m : list) {
-			logger.info("{}", m);
-		}
+		List<HashMap<String, Object>> list = meetingService.list(paging, req);
 		
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 	}
-	
+
 //	// 종료된 모임
 //	@RequestMapping(value="/endlist", method = RequestMethod.GET)
 //	public void MeetingEndList(Paging paramData, Model model) {
@@ -64,9 +64,6 @@ public class MeetingController {
 //		model.addAttribute("paging", paging);
 //		model.addAttribute("endlist", endlist);
 //	}	
-	
-	// 모임 검색
-	
 	
 	// 모임 상세보기
 	@RequestMapping(value="/view", method=RequestMethod.GET)
