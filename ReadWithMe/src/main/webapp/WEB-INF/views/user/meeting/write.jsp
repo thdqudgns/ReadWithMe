@@ -7,36 +7,87 @@
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+	document.getElementById("meeting_address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+		//카카오 지도 발생
+		new daum.Postcode({
+			oncomplete: function(data) { //선택시 입력값 세팅
+				document.getElementById("meeting_address").value = data.address; // 주소 넣기
+			}
+		}).open();
+	});
+}
+</script>
+
+<script>
+function check(){
+
+	var type = document.getElementById("meetingtype_no");
+	var title = document.getElementById("meeting_title");
+	var area = document.getElementById("area_no");
+	var location = document.getElementById("meeting_location");
+	var rcrStart = document.getElementById("meeting_rcr_start");
+	var rcrEnd = document.getElementById("meeting_rcr_end");
+	var start = document.getElementById("meeting_start");
+	var end = document.getElementById("meeting_end");
+	var person = document.getElementById("meeting_personnel");
+	var book = document.getElementById("book_class_no");
+	var content = document.getElementById("meeting_content");
+	var agree = document.getElementById("req");
+
+	if(type.value == "0") {
+		alert("모임 방식을 선택하세요.");
+		return false;
+	} else if (title.value == "") {
+		alert("모임 제목을 입력하세요.");
+		return false;
+	} else if (area.value == "0") {
+		alert("모임 지역을 선택하세요.");
+		return false;
+	} else if (location.value == "") {
+		alert("모임 장소를 입력하세요.");
+		return false;
+	} else if (rcrStart.value == "") {
+		alert("모집 기간을 선택하세요.");
+		return false;
+	} else if (rcrEnd.value == "") {
+		alert("모집 기간을 선택하세요.");
+		return false;
+	} else if (start.value == "") {
+		alert("진행 기간을 선택하세요.");
+		return false;
+	} else if (end.value == "") {
+		alert("진행 기간을 선택하세요.");
+		return false;
+	} else if (person.value == "") {
+		alert("인원 수를 입력하세요.");
+		person.focus();
+		return false;
+	} else if (content.value == "") {
+		alert("모임 정보를 입력하세요.");
+		content.focus();
+		return false;
+	} else if (!agree.checked) { //체크박스 미체크시
+		alert("약관 동의를 체크하세요.");
+		return false;
+	} else {
+		return true;
+	}
+})
+</script>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#reg_submit").click(function() {
-		submitContents($("#reg_submit"));
-		
-		$("form").submit();
-	})
-})
-
-//function check(){
-//	if (document.form.meetingtype_no.value == ""){
-//		alert("모임 방식을 선택해주세요.");
-//		document.form.meetingtype_no.value();
-//		return false;
-//	} else if (document.form.meeting_title.value == ""){
-//		alert("모임 제목을 입력해 주세요.");
-//		document.theform.meeting_title.focus();
-//		return false;
-//	} else {
-//		return true;
-//	}
-//}
-
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "meeting_content",
-	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
-});
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "meeting_content",
+		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+	});
+}
 </script>
 
 <style type="text/css">
@@ -186,7 +237,7 @@ textarea::placeholder {
 <div class="container">
 <div class="box">
 <p class="page-title">모임 등록</p>
-<form action="/user/meeting/write" method="post" enctype="multipart/form-data">
+<form action="/user/meeting/write" name="meeting_write" method="post" enctype="multipart/form-data">
 
 <div class="form-group">
 	<label class="form-label">모임 방식</label>
@@ -238,64 +289,10 @@ textarea::placeholder {
 	<div class="form-date-group">
 		<span class="sub-label">시작</span>
 		<input type="date" class="form-input-date" name="meeting_rcr_start" id="meeting_rcr_start">
-		<select class="custom-select" name="meeting_rcr_start_time" style="width: 184px;">
-			<option value="00:00">00:00</option>
-			<option value="01:00">01:00</option>
-			<option value="02:00">02:00</option>
-			<option value="03:00">03:00</option>
-			<option value="04:00">04:00</option>
-			<option value="05:00">05:00</option>
-			<option value="06:00">06:00</option>
-			<option value="07:00">07:00</option>
-			<option value="08:00">08:00</option>
-			<option value="09:00">09:00</option>
-			<option value="10:00">10:00</option>
-			<option value="11:00">11:00</option>
-			<option value="12:00">12:00</option>
-			<option value="13:00">13:00</option>
-			<option value="14:00">14:00</option>
-			<option value="15:00">15:00</option>
-			<option value="16:00">16:00</option>
-			<option value="17:00">17:00</option>
-			<option value="18:00">18:00</option>
-			<option value="19:00">19:00</option>
-			<option value="20:00">20:00</option>
-			<option value="21:00">21:00</option>
-			<option value="22:00">22:00</option>
-			<option value="23:00">23:00</option>
-			<option value="24:00">24:00</option>		
-		</select>
 	</div>
 	<div class="form-date-group">
 		<span class="sub-label">종료</span>
 		<input type="date" class="form-input-date" name="meeting_rcr_end" id="meeting_rcr_end">
-		<select class="custom-select" name="meeting_rcr_end_time" style="width: 184px;">
-			<option value="00:00">00:00</option>
-			<option value="01:00">01:00</option>
-			<option value="02:00">02:00</option>
-			<option value="03:00">03:00</option>
-			<option value="04:00">04:00</option>
-			<option value="05:00">05:00</option>
-			<option value="06:00">06:00</option>
-			<option value="07:00">07:00</option>
-			<option value="08:00">08:00</option>
-			<option value="09:00">09:00</option>
-			<option value="10:00">10:00</option>
-			<option value="11:00">11:00</option>
-			<option value="12:00">12:00</option>
-			<option value="13:00">13:00</option>
-			<option value="14:00">14:00</option>
-			<option value="15:00">15:00</option>
-			<option value="16:00">16:00</option>
-			<option value="17:00">17:00</option>
-			<option value="18:00">18:00</option>
-			<option value="19:00">19:00</option>
-			<option value="20:00">20:00</option>
-			<option value="21:00">21:00</option>
-			<option value="22:00">22:00</option>
-			<option value="23:00">23:00</option>
-			<option value="24:00">24:00</option>		
-		</select>
 	</div>
 </div>
 
@@ -304,64 +301,10 @@ textarea::placeholder {
 		<div class="form-date-group">
 			<span class="sub-label">시작</span>
 			<input type="date" class="form-input-date" name="meeting_start" id="meeting_start">
-			<select class="custom-select" name="meeting_start_time" style="width: 184px;">
-				<option value="00:00">00:00</option>
-				<option value="01:00">01:00</option>
-				<option value="02:00">02:00</option>
-				<option value="03:00">03:00</option>
-				<option value="04:00">04:00</option>
-				<option value="05:00">05:00</option>
-				<option value="06:00">06:00</option>
-				<option value="07:00">07:00</option>
-				<option value="08:00">08:00</option>
-				<option value="09:00">09:00</option>
-				<option value="10:00">10:00</option>
-				<option value="11:00">11:00</option>
-				<option value="12:00">12:00</option>
-				<option value="13:00">13:00</option>
-				<option value="14:00">14:00</option>
-				<option value="15:00">15:00</option>
-				<option value="16:00">16:00</option>
-				<option value="17:00">17:00</option>
-				<option value="18:00">18:00</option>
-				<option value="19:00">19:00</option>
-				<option value="20:00">20:00</option>
-				<option value="21:00">21:00</option>
-				<option value="22:00">22:00</option>
-				<option value="23:00">23:00</option>
-				<option value="24:00">24:00</option>		
-			</select>
 		</div>
 		<div class="form-date-group">
 			<span class="sub-label">종료</span>
 			<input type="date" class="form-input-date" name="meeting_end" id="meeting_end">
-			<select class="custom-select" name="meeting_end_time" style="width: 184px;">
-				<option value="00:00">00:00</option>
-				<option value="01:00">01:00</option>
-				<option value="02:00">02:00</option>
-				<option value="03:00">03:00</option>
-				<option value="04:00">04:00</option>
-				<option value="05:00">05:00</option>
-				<option value="06:00">06:00</option>
-				<option value="07:00">07:00</option>
-				<option value="08:00">08:00</option>
-				<option value="09:00">09:00</option>
-				<option value="10:00">10:00</option>
-				<option value="11:00">11:00</option>
-				<option value="12:00">12:00</option>
-				<option value="13:00">13:00</option>
-				<option value="14:00">14:00</option>
-				<option value="15:00">15:00</option>
-				<option value="16:00">16:00</option>
-				<option value="17:00">17:00</option>
-				<option value="18:00">18:00</option>
-				<option value="19:00">19:00</option>
-				<option value="20:00">20:00</option>
-				<option value="21:00">21:00</option>
-				<option value="22:00">22:00</option>
-				<option value="23:00">23:00</option>
-				<option value="24:00">24:00</option>		
-			</select>
 		</div>
 </div>
 
@@ -378,7 +321,7 @@ textarea::placeholder {
 <div class="form-group">
 	<label class="form-label">책 분야</label>
 	<select class="custom-select" name="book_class_no" id="book_class_no" style="width: 284px;">
-		<option value="0" disabled selected hidden>선택</option>
+		<option value="0">선택</option>
 		<option value="1">소설</option>
 		<option value="2">시,에세이</option>
 		<option value="3">경제,경영</option>
@@ -403,7 +346,7 @@ textarea::placeholder {
 
 <div class="info-group">
 	<label class="form-label">위치</label>
-	<!-- 지도 api -->
+	<input type="text" class="form-input" id="meeting_address" placeholder="주소" readonly>
 </div>
 
 <div class="info-group">
@@ -411,10 +354,7 @@ textarea::placeholder {
 	<textarea rows="14" name="meeting_content" id="meeting_content" style="width: 566px; height: 340px; padding: 12px 15px;" placeholder="내용을 입력하세요"></textarea>
 </div>
 
-<!-- <div class="info-group">
-	<label class="form-label">주최자 이메일</label>
-	<input type="email" class="form-input" name="email" id="email" placeholder="email@email.com">
-</div>  -->
+<input type="hidden" name="meeting_approved" id="meeting_approved" value="n">
 
 <div class="checklist-area">
 1. ReadWithMe는 누구나 참여할 수 있는 공개 행사입니다.<br>
@@ -422,12 +362,12 @@ textarea::placeholder {
 3. ReadWithMe는 개인이 읽고 싶은 책을 자유롭게 읽는 행사입니다.<br>
 4. ReadWithMe는 최소 3명 이상, 최대 100명 미만 참여 가능합니다.<br>
 5. 참가자 정보는 ReadWithMe 행사에서의 정보 공유 목적으로만 사용되어야 합니다.<br><br>
-<input type="checkbox" name="req"> 개인정보 수집 및 이용에 동의합니다
+<input type="checkbox" name="agree"> 개인정보 수집 및 이용에 동의합니다.
 </div>
 
 <div class="bt">
 <a href="/user/meeting/write"><button class="btn-return" type="button">취소</button></a>
-<button class="btn-register" id="reg_submit" style="background-color: #9f8170">가입</button>
+<button class="btn-register" id="check" style="background-color: #9f8170;" type="button">생성</button>
 </div>
 
 </form> <!-- end form -->
