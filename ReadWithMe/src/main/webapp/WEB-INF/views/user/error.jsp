@@ -20,10 +20,10 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h1 style="color:red;">게시판 에러 페이지</h1>
+<h1 style="color:red;">비관리자 접근 불가</h1>
 <hr>
 
-로그인 후 이용할 수 있습니다<br>
+관리자가 아닌 사람은 접근할 수 없습니다.<br>
 
 <span id="time">3</span>초후 메인화면으로 이동합니다...
 

@@ -19,6 +19,32 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 에러페이지 처리 -->
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>
+	    <location>/WEB-INF/views/error/error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/WEB-INF/views/error/error.jsp</location>
+	</error-page>
+
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/WEB-INF/views/error/404e.jsp</location>
+	</error-page>
+
+	<error-page>
+	    <error-code>405</error-code>
+	    <location>/WEB-INF/views/error/405e.jsp</location>
+	</error-page>
+
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/WEB-INF/views/error/500e.jsp</location>
+	</error-page>
+	
 	<!-- 시큐리티	 -->
 <!-- 	<filter> -->
 <!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
