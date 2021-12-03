@@ -169,25 +169,47 @@ p.addr {
 								<!-- 프로필 사진 물어보기 --> ${user.nick }
 								</div>
 								
+								<div>
+								<jsp:useBean id="now" class="java.util.Date" />
+								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+								<fmt:formatDate value="${meeting.meeting_rcr_end}" pattern="yyyy-MM-dd" var="rcr" />
 								<!-- 로그인상태 -->
 								<c:if test="${login }">
 									<c:choose>
 									<c:when test="${user_no eq meeting.user_no }">
 										<!-- 내가 주최한 모임 -->
-										<a href="/user/meeting/delete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">삭제</button></a>								
+										<a href="/user/meeting/delete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">삭제</button></a>	
 									</c:when>
+									
+									<c:when test="${meeting.meeting_no eq participation.meeting_no}">
+										<!-- 이미 신청한 모임 -->
+										<a href="/user/meeting/applyDelete?meeting_no=${meeting.meeting_no }"><button class="btn-delete">신청 취소</button></a>	
+									</c:when>
+						
+									<c:when test="${today > rcr }">
+										<button class="btn-delete" disabled>신청 마감</button>
+									</c:when>
+									
 									<c:otherwise>
 										<!-- 로그인 상태 -->
-										<button onclick='location.href="/user/meeting/apply?meeting_no=${meeting.meeting_no }";' class="btn-apply">신청하기</button>
+										<button onclick='apply()' class="btn-apply">신청하기</button>
 									</c:otherwise>
 									</c:choose>
 								</c:if>
 								
 								<!-- 비로그인상태 -->
 								<c:if test="${not login }">
-									<button onclick='apply()' class="btn-apply">신청하기</button>
+									<c:choose>
+									<c:when test="${today > rcr }">
+										<button class="btn-delete" disabled>신청 마감</button>
+									</c:when>
+									
+									<c:otherwise>
+										<button onclick='location.href="/login";' class="btn-apply">신청하기</button>
+									</c:otherwise>
+									</c:choose>
 								</c:if>
-								
+								</div>
 								</th>
 							</tr>
 						</tbody>

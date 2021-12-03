@@ -49,14 +49,18 @@ public class MeetingController {
 	
 	// 모임 상세보기
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public String Meetingview(Model model, int no) {
+	public String Meetingview(Model model, int no, HttpSession session) {
 		logger.info("/meeting/view 파라미터 {}", no);
 		
 		Meeting meeting = meetingService.view(no);
 		UserTb user = meetingService.getUser(meeting.getUser_no()); //유저 번호로 유저 정보 조회
 		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		Participation participation = meetingService.getMeeting(user_no);
+		
 		model.addAttribute("meeting", meeting);
 		model.addAttribute("user", user);
+		model.addAttribute("participation", participation);
 		
 		return "user/meeting/view";
 	}
@@ -73,28 +77,9 @@ public class MeetingController {
 		
 		meetingService.apply(participation);
 		
-		return "redirect:/user/meeting/view?no="+participation.getMeeting_no();
+		return "redirect:/mypage/main";
 		
 	}
-	
-	// 모임 신청하기
-//	@RequestMapping(value="/apply", method=RequestMethod.POST)
-//	public String apply(Participation participation, HttpSession session) {
-//		logger.info("{}", participation);
-//		
-//		Meeting meeting = meetingService.getMeeting(participation.getMeeting_no()); //모임 번호로 인원 수 조회
-//		
-//		if (meeting.getMeeting_personnel() > 0) {
-//			participation.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
-//			participation.setMeeting_no(Integer.parseInt((String) session.getAttribute("meeting_no")));
-//			logger.info("{}", participation);
-//			
-//			meetingService.apply(participation); // 모임 신청
-//			meeting.setMeeting_personnel(meeting.getMeeting_personnel() - 1); // 인원 수 - 1
-//		} else {
-//			return "redirect:/user/meeting/list";
-//		}
-//	}
 	
 	// 모임 생성
 	@RequestMapping(value="/write", method=RequestMethod.GET)
@@ -106,7 +91,6 @@ public class MeetingController {
 		logger.info("{}", file);
 		
 		meeting.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
-//		meeting.setEmail((String) session.getAttribute("email"));
 		logger.info("{}", meeting);
 		
 		meetingService.write(meeting, file);

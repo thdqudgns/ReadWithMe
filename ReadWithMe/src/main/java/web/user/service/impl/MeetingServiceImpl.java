@@ -66,4 +66,9 @@ public class MeetingServiceImpl implements MeetingService {
 	public void apply(Participation participation) {
 		meetingDao.insertParticipation(participation);
 	}
+
+	@Override
+	public Participation getMeeting(int user_no) {
+		return userDao.selectParticipationByUserNo(user_no);
+	}
 }
