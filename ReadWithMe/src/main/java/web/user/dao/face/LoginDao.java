@@ -198,6 +198,10 @@ public interface LoginDao {
 	public void deleteBan(int user_no);
 
 
+	public void keepLogin(UserTb user);
+	public UserTb selectUserBySessionKey(UserTb user);
+
+
 
 
 }

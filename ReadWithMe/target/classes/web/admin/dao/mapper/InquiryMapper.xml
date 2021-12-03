@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  	<mapper namespace="web.admin.dao.face.InquiryDao">
+  	
+  		<sql id="selectInquiry">
+  			SELECT
+  				board_no, board_title, board_content
+  				,	board_date, check_reply
+  			FROM inquiry
+  		</sql>
+  		
+  		<sql id="whereTitleSearch">
+  			WHERE board_title LIKE '%' || #{search } || '%'
+  		</sql>
+  	
+  		<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+  			SELECT COUNT(*) FROM (
+  				<include refid="selectInquiry" />
+  				<include refid="whereTitleSearch" />
+  			)
+  		</select>
+  	
+  		<select id="selectAll" resultType="web.user.dto.Inquiry" parameterType="web.util.Paging">
+  			SELECT * FROM (
+  				SELECT rownum rnum, B.* FROM (
+  					<include refid="selectInquiry" />
+  					<include refid="whereTitleSearch" />
+  				ORDER BY board_no DESC
+  				) B
+  			) R
+  			WHERE rnum BETWEEN #{startNo } AND #{endNo }
+  		</select>
+  	
+  		<select id="selectInquiryByBoardno" resultType="web.user.dto.Inquiry" parameterType="web.user.dto.Inquiry">
+  			SELECT * FROM inquiry
+  			WHERE board_no = #{board_no }
+  		</select>
+  		
+  	<insert id="insertComment" parameterType="web.user.dto.AdminInquiry">
+  		INSERT INTO admininquiry (comment_no, board_no, content )
+  		VALUES (admininquiry_seq.nextval, #{board_no }, #{content } )
+  	</insert>
+  	
+  	<update id="check_reply" parameterType="web.user.dto.AdminInquiry">
+  		UPDATE inquiry
+  		SET check_reply = 1
+  		WHERE board_no = #{board_no }
+  	</update>
+  	
+  	<update id="updateComment" parameterType="web.user.dto.AdminInquiry">
+  		UPDATE admininquiry
+  		SET content = #{content }
+  		WHERE comment_no = #{comment_no }
+  	</update>
+  	
+  	<update id="update" parameterType="web.user.dto.Inquiry">
+  		UPDATE inquiry
+  		SET board_title = #{board_title }
+  			,board_content = #{board_content }
+  		WHERE board_no = #{board_no }
+  	</update>
+  	
+  	<delete id="delete" parameterType="web.user.dto.Inquiry">
+  		DELETE inquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	<delete id="deleteCommentByBoardno" parameterType="web.user.dto.Inquiry">
+  		DELETE admininquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	</mapper>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	

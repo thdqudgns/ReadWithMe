@@ -200,7 +200,28 @@ $(document).ready(function() {
 	});
 
 	
+	$(function() {
+		  var selectTarget = $('#locationSelect select');
+
+		  selectTarget.on({
+		    'focus': function() {
+		      $(this).parent().addClass('focus');
+		    },
+		    'blur': function() {
+		      $(this).parent().removeClass('focus');
+		    }
+		  });
+
+		  selectTarget.change(function() {
+		    var select_name = $(this).children('option:selected').text();
+		    $(this).siblings('label').text(select_name);
+		    $(this).parent().removeClass('focus');
+		  });
+		});
+	
 })
+
+
 
 	//관심분야 3개까지 선택
 	function CountChecked(obj) {

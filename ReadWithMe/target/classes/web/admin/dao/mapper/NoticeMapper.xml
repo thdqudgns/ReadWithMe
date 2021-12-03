@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="web.admin.dao.face.NoticeDao">
+ 
+ 	<sql id="selectNotice">
+		SELECT
+			board_no, board_title, board_content
+			, board_date, updated_date, type, register, hit
+		FROM NOTICE
+	</sql>
+
+	<sql id="whereTitleSearch">
+		WHERE board_title LIKE '%' || #{search} || '%'
+	</sql>
+	
+	<sql id="orderByHit">
+		ORDER BY hit DESC
+	</sql>
+	
+	<sql id="orderByDate">
+		ORDER BY board_date DESC
+	</sql>
+ 
+ 
+	<select id="selectAll" resultType="web.user.dto.Notice" parameterType="web.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				<include refid="selectNotice" />
+				<include refid="whereTitleSearch" />
+			ORDER BY board_no DESC
+			) B
+		) R
+		WHERE rnum BETWEEN #{startNo} AND #{endNo }
+		<if test="type != 0">
+		AND type = #{type }
+		</if>
+	</select>
+ 
+ 	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
+ 		SELECT COUNT(*) FROM (
+ 			<include refid="selectNotice" />
+ 			<include refid="whereTitleSearch" />			
+ 		)
+ 	</select>
+ 
+ 	<select id="selectNoticeByBoardno" resultType="web.user.dto.Notice" parameterType="web.user.dto.Notice">
+ 		SELECT * FROM notice
+ 		WHERE board_no = #{board_no }
+ 	</select>
+ 
+ 	<insert id="insertNotice" parameterType="web.user.dto.Notice">
+ 		<selectKey order="BEFORE" resultType="int" keyProperty="board_no">
+ 			SELECT notice_seq.nextval FROM dual
+ 		</selectKey>
+ 	
+ 		INSERT INTO notice (board_no, board_title, board_content, type)
+ 		VALUES (#{board_no}, #{board_title}, #{board_content}, #{type })
+ 	</insert>
+ 
+ 	<update id="update" parameterType="web.user.dto.Notice">
+ 		UPDATE notice
+ 		SET board_title = #{board_title }
+ 			, board_content = #{board_content }
+ 			, updated_date = sysdate
+ 		WHERE board_no = #{board_no }
+ 	</update>
+ 
+ 	<delete id="delete" parameterType="web.user.dto.Notice">
+ 		DELETE notice
+ 		WHERE board_no = #{board_no }
+ 	</delete>
+ 
+ 
+ 	<select id="selectNoticefileByNoticeno" resultType="web.user.dto.Notice_file" parameterType="web.user.dto.Notice">	
+ 		SELECT
+			file_no, board_no, origin_name, stored_name
+		FROM notice_file
+ 		WHERE board_no = #{board_no}
+ 	</select>
+ 	
+ 	<insert id="insertFile" parameterType="web.user.dto.Notice_file">
+ 		INSERT INTO notice_file ( file_no, board_no, origin_name, stored_name )
+ 		VALUES ( notice_file_seq.nextval, #{board_no }, #{origin_name }, #{stored_name } )
+ 	</insert>
+
+ 	
+ 	<select id="selectNoticefileByFileno" resultType="web.user.dto.Notice_file" parameterType="int">
+ 		SELECT
+			file_no, board_no, origin_name, stored_name
+		FROM notice_file
+		WHERE file_no = #{file_no  }
+
+ 	</select>
+ 	
+ 	<delete id="deleteFile" parameterType="web.user.dto.Notice">
+ 		DELETE notice_file
+ 		WHERE board_no = #{board_no }
+ 	</delete>
+ 	
+ 	<delete id="deleteByBoardno" parameterType="String">
+ 		DELETE notice
+ 		WHERE board_no = #{board_no }
+ 	</delete>
+ 	
+ 	<update id="registerByBoardno" parameterType="String">
+ 		UPDATE notice
+ 		SET register = 1
+ 		WHERE board_no = #{board_no }
+ 	</update>
+ 	
+ 	<update id="updateToCancelByBoardno" parameterType="String">
+ 		UPDATE notice
+ 		SET register = 0
+ 		WHERE board_no = #{board_no }
+ 	</update>
+ 	
+
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

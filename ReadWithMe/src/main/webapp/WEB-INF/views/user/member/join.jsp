@@ -64,7 +64,7 @@ Read With Me에서는 누구나 독서모임을 주최하고 참여하실 수 �
 	</a>
 	</div>
 	<div class="joinBtn">
-	<a href="/login/google">
+	<a href="/login/google/wait">
 	<img src="/resources/img/google_join_btn.png" style="border: 1px #000">
 	</a>
 	</div>

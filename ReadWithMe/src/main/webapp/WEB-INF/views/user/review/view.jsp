@@ -238,8 +238,8 @@ tbody.review-board tr:nth-child(2) {border-bottom: 1px solid gray}
 
 /* 댓글 */
 #comment-write {margin:15px auto;text-align: left;width:1000px;}
-#comment-write > input {margin-bottom: 5px;}
-#comment-write > textarea, button {vertical-align: middle;}
+#comment-write > input.commentWriter {margin-bottom: 5px;}
+#comment-write > textarea.comment-content, button.comment-btn {vertical-align: middle;}
 #comment-tb {margin:0 auto; width:1000px;}
 
 .comment  {border-collapse:collapse;border-spacing:0;}
@@ -374,9 +374,9 @@ td:not(.info) {
 			<!-- 로그인상태 -->
 			<c:if test="${login }">
 			<!-- 댓글 입력 -->
-				<input type="text" size="10" class="form-control" id="commentWriter" value="${user_nick }" readonly="readonly" style="border:1px solid black; border-radius:3px; background-color:#ccc;"/>
-				<br><textarea rows="2" cols="130" class="form-control" id="comment-content"></textarea>
-				<button id="btnCommInsert" class="btn-brown" style="width:40px; height:40px;">작성</button>
+				<input type="text" size="10" class="commentWriter" id="commentWriter" value="${user_nick }" readonly="readonly" style="border:1px solid black; border-radius:3px; background-color:#ccc;"/>
+				<br><textarea rows="2" cols="130" class="comment-content" id="comment-content"></textarea>
+				<button id="btnCommInsert" class="comment-btn btn-brown" style="width:40px; height:40px;">작성</button>
 			<!-- 댓글 입력 end -->
 			</c:if>
 	</div>

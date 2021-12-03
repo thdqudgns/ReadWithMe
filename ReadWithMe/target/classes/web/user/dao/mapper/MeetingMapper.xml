@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="web.user.dao.face.MeetingDao">
+	
+	<select id="selectList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
+		<![CDATA[
+		SELECT * FROM (SELECT rownum rnum, M.* FROM (
+			SELECT
+				meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+				meeting_location, meeting_title, meeting_content, meeting_rcr_start,
+				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
+				meeting_address, meeting_board_date, meeting_approved
+			FROM meeting
+			
+		ORDER BY meeting_no DESC) M) R WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		]]>
+	</select>
+	
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM meeting
+	</select>
+	
+	<select id="selectMeetingByMeetingno" parameterType="web.user.dto.Meeting" resultType="web.user.dto.Meeting">
+		SELECT
+				meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+				meeting_location, meeting_title, meeting_content, meeting_rcr_start,
+				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
+				meeting_address, meeting_board_date, meeting_approved
+		FROM meeting
+		WHERE meeting_no = #{no }
+	</select>
+	
+<!-- 	<select id="selectMeeting" parameterType="web.user.dto.SearchMeeting" resultType="web.user.dto.SearchMeeting">
+			SELECT * FROM (
+				SELECT * FROM meeting
+				where meeting_no = #{meeting_no }
+			ORDER BY meeting_no DESC)
+		<where>
+
+			<if test="areaList != null">
+					area_no in <foreach item="area" collection="areaList" open="(" close=")" separator="," >
+						#{area}
+					</foreach>
+			</if>
+			<if test="typeList != null">
+					and meetingtype_no in <foreach item="type" collection="typeList" open="(" close=")" separator="," >
+						#{type}
+					</foreach>
+			</if>
+			<if test="bookList != null">
+					and book_class_no in <foreach item="book" collection="bookList" open="(" close=")" separator="," >
+						#{book}
+					</foreach>
+			</if>
+			
+			<choose>
+				<when test="searchType == 'user_no'">
+					and user_id like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'meeting_title'">
+					and meeting_title like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</select> -->
+	
+	<insert id="insert" parameterType="web.user.dto.Meeting">
+		<selectKey order="BEFORE" resultType="int" keyProperty="meeting_no">
+			SELECT meeting_no_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO meeting (meeting_no, user_no, meetingtype_no, area_no, book_class_no,
+							 meeting_location, meeting_title, meeting_content, meeting_rcr_start,
+							 meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
+							 meeting_address, meeting_board_date, meeting_approved )
+		VALUES ( meeting_seq.nextval, #{user_no}, #{meetingtype_no}, #{area_no}, #{book_class_no},
+				 #{meeting_location}, #{meeting_title}, #{meeting_content}, #{meeting_rcr_start},
+				 #{meeting_rcr_end}, #{meeting_start}, #{meeting_end}, #{meeting_personnel},
+				 #{meeting_address}, #{meeting_board_date}, #{meeting_approved} )
+	</insert>
+	
+	<delete id="delete" parameterType="web.user.dto.Meeting">
+		DELETE meeting
+		WHERE meeting_no = #{meeting_no}
+	</delete>
+	
+	<insert id="insertParticipation" parameterType="web.user.dto.Participation">
+		INSERT INTO participation (meeting_no, user_no)
+		VALUES ( #{meeting_no}, #{user_no} )
+	</insert>
+	
+</mapper>
