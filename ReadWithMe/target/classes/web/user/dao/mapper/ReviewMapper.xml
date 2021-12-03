@@ -115,7 +115,19 @@
 		WHERE review_no = (select max(review_no) from review)
 	</select>
 	
+	<!-- 후기 신고 삽입 -->
+	<insert id="insertReportByReviewNo" parameterType="web.user.dto.Rpt_board">
+		INSERT INTO rpt_board (report_no, user_no, review_no)
+		VALUES ( rpt_board_seq.nextval, #{user_no}, #{review_no} )
+	</insert>
 	
+	<!-- 신고 확인 -->
+	<select id="countReport" resultType="int" parameterType="web.user.dto.Rpt_board">
+		SELECT COUNT(*) 
+		FROM rpt_board
+		WHERE review_no = #{review_no}
+			AND user_no = #{user_no}
+	</select>
 	
 	
 	
