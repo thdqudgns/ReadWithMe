@@ -130,13 +130,13 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 /* 버튼 설정 */
 .btn-white {border-radius: 3px; border:1px solid black; background-color: #FFF; color:black;box-shadow: 1px 1px 1px gray;}
 .btn-white:hover {border-radius: 3px; border:1px solid black; background-color: #FFF; color:tomato;}
-.btn-report {border:none;background-color: #FFF; color:gray;}
+.btn-report {border:none;box-shadow: 1px 1px 1px gray;background-color: #FFF; color:gray;}
 .btn-report:hover {border:none;color:tomato;}
 .btn-gray {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:gray;box-shadow: 1px 1px 1px gray;}
 .btn-gray:hover {border-radius: 3px; border:0px solid gray; background-color: #FFF; color:tomato;}
 .btn-none {border:0px solid gray;background-color: #FFF; color:black;}
 .btn-none:hover {border:0px solid gray;background-color: #FFF; color:tomato;}
-.btn-brown {border-radius: 3px; border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px gray;}
+.btn-brown {border-radius: 3px; border:1px solid #9f8170; background-color: #9f8170; color:#FFF;box-shadow: 1px 1px 1px black;}
 .btn-brown:hover {border-radius: 3px;border:1px solid #9f8170; background-color: #9f8170; color:tomato;}
 .btn-black {border-radius: 3px; border:1px solid black; background-color: black; color:#FFF;box-shadow: 1px 1px 1px gray;}
 .btn-black:active {border-radius: 3px; border:1px solid black; background-color: black; color:tomato;}
@@ -171,6 +171,7 @@ ul.menuList > div.menuProfile > li > ul > li > a:hover {color:tomato;background:
 					style="width: 18px; height: 18px;object-fit: cover;"
 					alt="menu_icon" src="https://i.imgur.com/wG6Siyb.png">
 				<ul>
+					<li><a href="<%=request.getContextPath() %>/book">도서검색</a></li>
 					<li><a href="<%=request.getContextPath() %>">모임</a></li>
 					<li><a href="<%=request.getContextPath() %>/user/review/list">후기</a></li>
 					<li><a href="<%=request.getContextPath() %>/user/famous/list">명언</a></li>
