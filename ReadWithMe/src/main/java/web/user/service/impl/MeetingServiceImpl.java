@@ -69,6 +69,11 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Participation getMeeting(int user_no) {
-		return userDao.selectParticipationByUserNo(user_no);
+		return meetingDao.selectParticipation(user_no);
+	}
+
+	@Override
+	public void delete(Participation participation) {
+		meetingDao.deleteParticipation(participation);
 	}
 }

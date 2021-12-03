@@ -47,10 +47,21 @@ public interface MeetingDao {
 	 */
 	public void delete(Meeting meeting);
 	
+	public Participation selectParticipation(int user_no);	
+	
 	/**
 	 * 
 	 * @param participation
 	 */
 	public void insertParticipation(Participation participation);
+	
+	/**
+	 * 게시글 수정 처리
+	 * 
+	 * @param meeting
+	 */
+	public void deleteParticipation(Participation participation);
+
+
 	
 }
