@@ -52,8 +52,13 @@
 	</select>	
 	
 	<update id="updateMember" parameterType="web.user.dto.UserTb">
+	
+		<selectKey order="BEFORE" resultType="int" keyProperty="file_no">
+			SELECT FILETB_SEQ.nextval FROM dual
+		</selectKey>
+		
 		UPDATE UserTb
-		SET name = #{name }, nick = #{nick }, email = #{email }, birth = #{birth }, location = #{location }, gender = #{gender }
+		SET name = #{name }, nick = #{nick }, email = #{email }, birth = #{birth }, location = #{location }, gender = #{gender }, file_no = #{file_no }
 		WHERE user_no = #{user_no }
 	</update>
 	
@@ -65,7 +70,7 @@
 	
 	<insert id="insertFile" parameterType="web.user.dto.FileTb">
 		INSERT INTO FileTb ( file_no, user_no, url, origin_name, stored_name )
-		VALUES ( FILETB_SEQ.nextval, #{user_no }, #{url }, #{origin_name }, #{stored_name } )
+		VALUES ( #{file_no }, #{user_no }, #{url }, #{origin_name }, #{stored_name } )
 	</insert> 	
 		
 	<insert id="insertToDoList" parameterType="web.user.dto.ToDoList">
@@ -109,16 +114,16 @@
 	
 	<select id="selectMeetingHosted" resultType="web.user.dto.Meeting" parameterType="web.user.dto.UserTb">
 		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
-			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
-			, meeting_board_date, meeting_approved
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_board_date
+			, meeting_approved
 		FROM Meeting
 		WHERE user_no = #{user_no }
 	</select>
 	
 	<select id="selectMeetingAttend" resultType="web.user.dto.Meeting" parameterType="int">
 		SELECT meeting_no, user_no, meetingtype_no, area_no ,book_class_no ,meeting_title ,meeting_content
-			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_kakaotalk
-			, meeting_board_date, meeting_approved
+			, meeting_rcr_start, meeting_rcr_end, meeting_start, meeting_end, meeting_personnel, meeting_board_date
+			, meeting_approved
 		FROM Meeting
 		WHERE meeting_no = #{meeting_no }
 	</select>
@@ -128,5 +133,9 @@
 		WHERE user_no = #{user_no }
 	</select>
 	
+	<select id="selectFilenoByUserno" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT file_no FROM fileTb
+		WHERE user_no = #{user_no }
+	</select>
 	
 </mapper>

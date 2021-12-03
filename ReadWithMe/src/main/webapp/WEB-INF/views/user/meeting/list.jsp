@@ -5,40 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
-
-<script type="text/javascript">
-//function getData() {
-//
-//var formDate = $('form').serializeObject();
-//
-// 지역, 모임방식, 책 분야 하나만 선택할때 스트링으로 들어가는 것을 배열로 변경
-//if (typeof formData.are_no === 'are_no') {
-//	formData.are_no = [formData.are_no];
-//}
-//if (typeof formData.meetingtype_no === 'string') {
-//	formData.meetingtype_no = [formData.meetingtype_no];
-//}
-//if (typeof formData.book_class_no === 'book_class_no') {
-//	formData.book_class_no = [formData.book_class_no];
-//}
-
-//$.ajax({
-//	url: '/searchmeetinginfo',
-//	type: 'post',
-//	contentType: 'application/json; charset=utf8',
-//	data: JSON.stringify(formData),
-//	dataType: 'json',
-//	beforeSend: function () {
-//		$('.wrap-loading').addClass('loader');
-//	},
-//	complete: function () {
-//		$('.wrap-loading').removeClass('loader');
-//		$('.wrap-loading').hide();
-//	}
-//})
-
-//} // function getData end
-</script>
+<script src="/resources/js/meetingList_script.js"></script>
 
 <style type="text/css">
 body {

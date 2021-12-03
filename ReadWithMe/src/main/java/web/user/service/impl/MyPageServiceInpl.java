@@ -180,12 +180,16 @@ public class MyPageServiceInpl implements MyPageService {
 		//--------------------------------------------------------
 		
 		FileTb profileFile = new FileTb();
+		profileFile.setFile_no(user.getFile_no());
 		profileFile.setUser_no(user.getUser_no());
 		profileFile.setOrigin_name(originName);
 		profileFile.setStored_name(stored);
 		profileFile.setUrl(storedPath);
 		
+		
 		myPageDao.insertFile(profileFile);		
+		
+
 		
 	}
 	
