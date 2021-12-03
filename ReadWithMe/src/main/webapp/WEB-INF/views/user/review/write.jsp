@@ -31,51 +31,62 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
+.container {margin: 20px auto;width:1000px;}
+.form-writer {}
+.form-title {}
+.form-content {}
+.form-file {}
+.text-btn {text-align: center;}
+
 </style>
 
 <div class="container">
 
-<h1>글쓰기 페이지</h1>
-<hr>
-
-
-
-
-<form action="/user/review/write" method="post" enctype="multipart/form-data">
-<div class="form-group">
-	<label for="write">작성자</label>
-	<input type="text" id="write" value="${user_nick }" class="form-control" readonly="readonly"/>
-</div>
-<div class="form-group">
-	<label for="review_title">제목</label>
-	<input type="text" id="review_title" name="review_title" class="form-control"/>
-</div>
-<div class="form-group">
-	<label for="review_content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="review_content" name="review_content">
-	</textarea>
-</div>
-
-<div class="form-group">
-	<label for="file">첨부파일</label>
-	<input type="file" id="file" name="file" />
-</div>
-
-<div class="text-center">
-	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
-</div>
-</form>
-
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "review_content",
-	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
-});
-</script>
+	<h1>후기 작성</h1>
+	<br>
+	<hr>
+	
+	<form action="/user/review/write" method="post" enctype="multipart/form-data">
+		<br>
+		
+		<div class="form-writer">
+			<label for="write">작성자</label><br>
+			<input type="text" id="write" value="${user_nick }" class="form-control" readonly="readonly" style="width:1000px; padding: 6px 12px; margin-bottom:5px;border:1px solid black; border-radius:3px; background-color:#ccc;"/>
+		</div>
+		
+		<div class="form-title">
+			<label for="review_title">제목</label><br>
+			<input type="text" id="review_title" name="review_title" class="form-control" style="width:1000px;padding: 6px 12px;" placeholder="제목을 작성해주세요"/>
+		</div>
+		
+		<br>
+		<div class="form-content">
+			<label for="review_content">본문</label>
+			<textarea rows="10" style="width: 100%;" id="review_content" name="review_content"></textarea>
+		</div>
+		
+		<br>
+		<div class="form-file">
+			<label for="file">첨부파일</label>
+			<input type="file" id="file" name="file"/>
+		</div>
+		
+		<br>
+		<div class="text-btn">
+			<button class="btn-brown" id="btnWrite" style="padding: 10px 20px;">작성</button>
+			<input type="reset" id="cancel" class="btn-white" style="padding: 10px 20px;" value="취소"/>
+		</div>
+	</form>
+	
+	<script type="text/javascript">
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "review_content",
+		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+	});
+	</script>
 
 </div><!-- .container -->
 

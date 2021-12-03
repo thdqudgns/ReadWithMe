@@ -239,52 +239,7 @@ public class ReviewController {
 			e.printStackTrace();
 		}
 		
-	}
-
-	//책 검색
-	@RequestMapping(value="/book")
-	public void book() {
-//		return "user/review/book";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 

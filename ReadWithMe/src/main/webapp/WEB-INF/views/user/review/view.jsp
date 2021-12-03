@@ -452,7 +452,7 @@ td:not(.info) {
 <br>
 
 <div class="center">
-	<a href="/user/review/list"><button class="btn-brown" style="width:50px">목록</button></a>
+	<a href="/user/review/list"><button class="btn-brown" style="width:70px;height:30px">목록</button></a>
 </div>
 
 

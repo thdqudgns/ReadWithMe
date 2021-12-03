@@ -34,6 +34,8 @@
         </style>
         
         
+        <h1 style="margin-left: 20px;">도서 검색</h1>
+        
         <div class="search_book">
         <fieldset class="srch">
                 <legend>검색영역</legend>
