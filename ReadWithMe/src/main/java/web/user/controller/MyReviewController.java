@@ -74,7 +74,7 @@ public class MyReviewController {
 			//추천 상태 조회
 			Review_rec recommend = new Review_rec();
 			recommend.setReview_no(viewReview.getReview_no()); //게시글 번호
-			recommend.setUser_no(Integer.parseInt((String)session.getAttribute("user_no"))); //회원 번호
+			recommend.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no")))); //회원 번호
 			
 			//추천 상태 전달
 			boolean isRecommend = myReviewService.isRecommend(recommend);
