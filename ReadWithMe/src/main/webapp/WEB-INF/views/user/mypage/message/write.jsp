@@ -41,7 +41,7 @@
 	textarea[name="msg_content"] {
 	    border-bottom: 1px solid #ccc;
 	    width: 150px;
-	    padding-bottom: 3px;		
+	    padding: 10px;		
 	}
 	</style>
 
@@ -65,7 +65,7 @@
 					</div>
 					
 					<div id="rec_user_input">
-						<input type="text" id="nick" name="nick" placeholder="받는 사람" required />
+						<input type="text" id="nick" name="nick" placeholder="닉네임을 입력하세요" required />
 					</div>
 					
 					<div id="msg_content_textarea">

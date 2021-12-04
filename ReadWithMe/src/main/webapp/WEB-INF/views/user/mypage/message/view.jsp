@@ -12,13 +12,15 @@
 	<script src="${path}/resources/js/message_write_script.js"></script>
 	
 	<script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){
+		
 		$("#btnList").click(function() {
 			history.go(-1);
-		})	
-		$("btnSend").click(function(){
-			location.href = "/user/mypage/message/write";
 		})
+		
+		$("#btnSend").click(function() {
+			location.href="/user/mypage/message/write";
+		})		
 	});
 	
 	</script>
