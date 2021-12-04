@@ -175,9 +175,9 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 			<li class="all">
 				<div style="display: inline-block;">안내관리</div>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>">공지사항</a></li>
-					<li><a href="<%=request.getContextPath() %>">자주 묻는 질문</a></li>
-					<li><a href="<%=request.getContextPath() %>">1:1문의</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/notice/list">공지사항</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/faq/list">자주 묻는 질문</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/inquiry/list">1:1문의</a></li>
 				</ul>
 			</li>
 		</div>
@@ -194,7 +194,7 @@ hr {margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee;}
 		</div>
 
 		
-		<c:if test="${not empty login and login and user_lv eq 3 }">
+		<c:if test="${not empty login and login and user_lv ge 2 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li>

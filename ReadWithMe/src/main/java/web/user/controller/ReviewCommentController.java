@@ -31,7 +31,7 @@ public class ReviewCommentController {
 	@RequestMapping(value="/insert")
 	public String insert(Rv_cmt comment, Model model, HttpSession session) {
 
-		comment.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		comment.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		comment.setNick((String) session.getAttribute("user_nick"));
 		reviewService.insertComment(comment);
 		
@@ -78,7 +78,7 @@ public class ReviewCommentController {
 			logger.info("/review/report");
 			logger.info("review_no : {}", comment);
 			
-			comment.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+			comment.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 			
 			boolean success = reviewService.insertReportCommentByReviewNo(comment);
 			

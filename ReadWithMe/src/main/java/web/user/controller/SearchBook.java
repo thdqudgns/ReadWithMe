@@ -36,7 +36,7 @@ public void book() {}
      }
 
 
-     String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text + "&display=30&start=1&sort=count";    // json 결과
+     String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text + "&display=30&start=1&sort=sim";    // json 결과
      //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
 
