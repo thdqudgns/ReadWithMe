@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.user.dto.Inquiry_file;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 public interface UserInquiryService {
@@ -77,8 +78,9 @@ public interface UserInquiryService {
 	 * 1:1질문 수정
 	 * 
 	 * @param inquiry - 수정된 1:1질문 객체
+	 * @param file - 수정 업로드 파일
 	 */
-	public void update(Inquiry inquiry);
+	public void update(Inquiry inquiry, MultipartFile file);
 
 	/**
 	 * 1:1 질문 삭제
@@ -102,5 +104,13 @@ public interface UserInquiryService {
 	 * @return
 	 */
 	public Inquiry_file getFile(int file_no);
+	
+	/**
+	 * 회원정보 조회
+	 * 
+	 * @param user_no - 회원고유번호
+	 * @return
+	 */
+	public UserTb userInfo(int user_no);
 
 }

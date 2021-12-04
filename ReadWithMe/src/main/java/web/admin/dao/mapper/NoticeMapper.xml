@@ -40,6 +40,17 @@
 		</if>
 	</select>
  
+ 	<select id="getSelected" resultType="web.user.dto.Notice" >
+ 		SELECT * FROM ( 
+ 			SELECT rownum rnum, B.* FROM (
+ 				SELECT * FROM notice
+ 			ORDER BY board_no DESC
+ 			) B
+ 		) R
+ 		WHERE rnum BETWEEN 1 AND 5
+ 		AND register=1 
+ 	</select>
+ 
  	<select id="selectCntAll" resultType="int" parameterType="web.util.Paging">
  		SELECT COUNT(*) FROM (
  			<include refid="selectNotice" />

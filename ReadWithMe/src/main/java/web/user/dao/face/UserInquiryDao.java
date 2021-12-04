@@ -4,6 +4,7 @@ import java.util.List;
 
 import web.user.dto.Inquiry;
 import web.user.dto.Inquiry_file;
+import web.user.dto.UserTb;
 import web.util.Paging;
 
 public interface UserInquiryDao {
@@ -89,5 +90,20 @@ public interface UserInquiryDao {
 	 * @return
 	 */
 	public Inquiry_file selectInquiryfileByFileno(int file_no);
+
+	/**
+	 * 게시글 번호로 첨부파일 삭제
+	 * 
+	 * @param inquiry - 게시글 번호를 가진 객체
+	 */
+	public void deleteFile(Inquiry inquiry);
+
+	/**
+	 * 회원정보 조회
+	 * 
+	 * @param user_no - 회원고유번호
+	 * @return
+	 */
+	public UserTb selectUserInfoByUserNo(int user_no);
 
 }

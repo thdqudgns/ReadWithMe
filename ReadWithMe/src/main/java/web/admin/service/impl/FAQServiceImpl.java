@@ -103,6 +103,11 @@ public class FAQServiceImpl implements FAQService{
 		faqDao.updateToCancelByBoardno(no);
 	}
 	
+	@Override
+	public List<FAQ> getSelected() {
+		return faqDao.getSelected();
+	}
+	
 }
 
 

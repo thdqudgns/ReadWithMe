@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -24,12 +24,96 @@ $(document).ready(function(){
 		$(location).attr("href", "/admin/inquiry/write");
 	});
 	
+	//-----------------
+	
 	//	검색 버튼 
 	$("#btnSearch").click(function(){
-		location.href="/admin/inquiry/list?search=" + $('#search').val();
+		location.href="/admin/inquiry/list?type=${paramData.type}&search=" + $('#search1').val();
 	});
 	
+	//------------------
+	
+	//카테고리 버튼(1) - 전체
+	$('.categories>li:eq(8)').children('a').click(function(){
+		$(location).attr("href", "/admin/inquiry/list");
+	});
+	
+	//카테고리 버튼(2) - 모임
+	$('.categories>li:eq(6)').children('a').click(function(){
+		$(location).attr("href", "/admin/inquiry/list?type=1");
+	});
+	
+	//카테고리 버튼(3) - 계정
+	$('.categories>li:eq(4)').children('a').click(function(){			
+		$(location).attr("href", "/admin/inquiry/list?type=2");
+	});
+	
+	//카테고리 버튼(4) - 서비스
+	$('.categories>li:eq(2)').children('a').click(function(){			
+		$(location).attr("href", "/admin/inquiry/list?type=3");
+	});
+	
+	//카테고리 버튼(5) - 이벤트
+	$('.categories>li:eq(0)').children('a').click(function(){
+		$(location).attr("href", "/admin/inquiry/list?type=4");
+	});
+	
+});// jQuery end
+
+$(function() {
+	var chkObj = document.getElementsByName("RowCheck");
+	var rowCnt = chkObj.length;
+
+	$("input[name='allCheck']").click(function() {
+		var chk_listArr = $("input[name='RowCheck']");
+		for (var i = 0; i < chk_listArr.length; i++) {
+			chk_listArr[i].checked = this.checked;
+		}
+	});
+	$("input[name='RowCheck']").click(function() {
+		if ($("input[name='RowCheck']:checked").length == rowCnt) {
+			$("input[name='allCheck']")[0].checked = true;
+		} else {
+			$("input[name='allCkeck']")[0].checked = false;
+		}
+	});
 });
+
+
+//	선택삭제
+function deleteValue() {
+	var url = "/admin/inquiry/delete"; // Controller로 보내고자 하는 URL
+	var valueArr = new Array();
+	var list = $("input[name='RowCheck']");
+	for (var i = 0; i < list.length; i++) {
+		if (list[i].checked) {
+			valueArr.push(list[i].value);
+		}
+	}
+
+
+	if (valueArr.legnth == 0) {
+		alert("선택된 글이 없습니다.");
+	} else {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		$.ajax({
+			url : url,
+			type : 'POST',
+			traditional : true,
+			data : {
+				valueArr : valueArr
+			},
+			success : function(jdata) {
+				if (jdata = 1) {
+					alert("삭제 완료");
+					location.replace("/admin/inquiry/list");
+				} else {
+					alert("삭제 실패");
+				}
+			}
+		})
+	}
+}
 
 </script>
 
@@ -87,6 +171,7 @@ table, th {
 <div style="height: 10px;"></div>
 
 			<div style="height: 20px;">
+			
 				<ul class="categories">
 					<li><a>이벤트</a></li>
 					<li><a>|</a></li>
@@ -105,7 +190,9 @@ table, th {
 <table class="table table-hover">
 <thead class="table-dark">
 	<tr>
+		<th><input id="allCheck" type="checkbox" name="allCheck" /></th>
 		<th>글 번호</th>
+		<th>분류</th>		
 		<th>제목</th>
 		<th>작성일</th>
 		<th>답변여부</th>
@@ -114,7 +201,24 @@ table, th {
 <tbody>
 <c:forEach items="${inquiry }" var="inquiry">
 	<tr>
+		<td><input type="checkbox" name="RowCheck" value="${inquiry.board_no }" /></td>
 		<td>${inquiry.board_no }</td>
+		<td>
+		<c:choose>
+		<c:when test="${inquiry.type == 1 }">
+		모임
+		</c:when>
+		<c:when test="${inquiry.type == 2 }">
+		계정
+		</c:when>
+		<c:when test="${inquiry.type == 3 }">
+		서비스
+		</c:when>
+		<c:when test="${inquiry.type == 4 }">
+		이벤트
+		</c:when>
+		</c:choose>
+		</td>
 		<td><a href="/admin/inquiry/view?board_no=${inquiry.board_no }">${inquiry.board_title }</a></td>
 		<td><fmt:formatDate value="${inquiry.board_date }" pattern="yyyy.MM.dd HH:mm" /></td>
 		<td>
@@ -131,10 +235,15 @@ table, th {
 
 
 <span class="pull-left">total : ${paging.totalCount }</span>
+
+			<button id="btnDelete" class="btn pull-right"
+				onclick="deleteValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">삭제</button>
+
+
 <div class="clearfix"></div>
 
 <div class="form-inline text-center">
-	<input class="form-control" type="text" id="search" value="${paramData.search }" />
+	<input class="form-control" type="text" id="search1" value="${paramData.search }" />
 	<button id="btnSearch" class="btn" style="border-color: gray; background:white; color:gray;">검색</button>
 </div>
 

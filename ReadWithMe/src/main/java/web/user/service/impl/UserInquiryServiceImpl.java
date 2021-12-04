@@ -17,6 +17,7 @@ import web.user.dao.face.UserInquiryDao;
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.user.dto.Inquiry_file;
+import web.user.dto.UserTb;
 import web.user.service.face.UserInquiryService;
 import web.util.Paging;
 
@@ -65,7 +66,7 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 		}
 		
 		//	파일이 저장될 경로
-		String storedPath = context.getRealPath("upload");
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
 		
 		File storedFolder = new File(storedPath);
 		if(!storedFolder.exists()) {
@@ -125,22 +126,71 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 	//	선택된 1:1질문 삭제
 	@Override
 	public void deleteChecked(String no) {
+		
+		Inquiry inquiry = new Inquiry();
+		inquiry.setBoard_no(Integer.parseInt(no));
+		
 		userInquiryDao.deleteCommentByBoardno(no);
+		userInquiryDao.deleteFile(inquiry);
 		userInquiryDao.deleteByBoardno(no);
 	}
 	
 	//	1:1질문 수정
 	@Override
-	public void update(Inquiry inquiry) {
+	public void update(Inquiry inquiry, MultipartFile file) {
 		if("".equals(inquiry.getBoard_title())) {
 			inquiry.setBoard_title("(제목없음)");
 		}
 		userInquiryDao.update(inquiry);
+		
+		//-----------------------------------
+		
+		if(file.getSize() <= 0 ) {
+			return;
+		}
+		
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
+		
+		//	폴더가 존재하지 않으면 생성하기
+		File stored = new File(storedPath);
+		if (!stored.exists()) {
+			stored.mkdir();
+		}
+		
+		//	원본 파일 이름 알아내기
+		String originName = file.getOriginalFilename();
+		
+		//	원본 파이 이름에 UUID 추가하기 (파일명이 중복되지 않도록 설정)
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//	저장될 파일 정보 객체
+		File dest = new File( stored, storedName);
+		
+		try {
+			//	업로드된 파일을 저장하기
+			file.transferTo(dest);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		Inquiry_file inquiry_file = new Inquiry_file();
+		inquiry_file.setBoard_no(inquiry.getBoard_no());
+		
+		inquiry_file.setOrigin_name(originName);
+		inquiry_file.setStored_name(storedName);
+		
+		userInquiryDao.deleteFile(inquiry);
+		userInquiryDao.insertFile(inquiry_file);
+		
 	}
+	
+	
+	
 	
 	//	1:1질문 삭제
 	@Override
 	public void delete(Inquiry inquiry) {
+		userInquiryDao.deleteFile(inquiry);
 		userInquiryDao.delete(inquiry);
 	}
 	
@@ -152,6 +202,11 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 	@Override
 	public Inquiry_file getFile(int file_no) {
 		return userInquiryDao.selectInquiryfileByFileno(file_no);
+	}
+	
+	@Override
+	public UserTb userInfo(int user_no) {
+		return userInquiryDao.selectUserInfoByUserNo(user_no);
 	}
 	
 }
