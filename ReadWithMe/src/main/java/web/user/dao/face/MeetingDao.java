@@ -20,6 +20,13 @@ public interface MeetingDao {
 	public List<HashMap<String, Object>> selectList(HashMap<String, Object> map);
 
 	/**
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	public List<Meeting> selectEndList(Paging paging);
+	
+	/**
 	 * 전체 게시글 수를 조회한다
 	 * 
 	 * @return 총 게시글 수
@@ -70,6 +77,4 @@ public interface MeetingDao {
 	 */
 	public void deleteParticipation(Participation participation);
 
-
-	
 }
