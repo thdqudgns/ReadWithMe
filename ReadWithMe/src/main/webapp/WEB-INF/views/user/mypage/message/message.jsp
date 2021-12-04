@@ -75,7 +75,7 @@ $(window).load(function() {
 						<c:forEach items="${list }" var="message">
 						<tr>
 							<td rowspan="2" style="border-bottom: 1px solid #444444;"><input type="checkbox" name="check-all" class="check-all" /></td>
-							<td><a href="<%=request.getContextPath() %>/user/mypage/message/view?msg_no=${message.MSG_NO }">${message.MSG_TITLE}</a></td>
+							<td><a style="text-decoration: none;" href="<%=request.getContextPath() %>/user/mypage/message/view?msg_no=${message.MSG_NO }">${message.MSG_TITLE}</a></td>
 							<td rowspan="2"  style="border-bottom: 1px solid #444444; text-align: center;">${message.NICK}</td>
 						</tr>
 						<tr>

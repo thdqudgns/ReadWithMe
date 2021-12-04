@@ -73,7 +73,7 @@ th {
             <c:forEach items="${reviewList }" var="reviewList">
                 <tr>
                     <td id='title'>
-                        <a href="/user/mypage/myReview/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a>
+                        <a style="text-decoration: none;" href="/user/mypage/myReview/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a>
                     </td>
                     <td rowspan="2" style="border-bottom: 1px solid #ccc;">${reviewList.nick}</td>
 					<td rowspan="2" style="border-bottom: 1px solid #ccc;"><fmt:formatDate value="${reviewList.review_date }" pattern="yyyy-MM-dd"/></td>
