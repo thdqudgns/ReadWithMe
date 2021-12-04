@@ -46,10 +46,12 @@ $(document).ready(function() {
 .through {
 	text-decoration: line-through;
 }
+
 #delFile {
 	font-size: 1.5em;
 	font-weight: bold;
 }
+
 #newFile, #originFile {
 	display: none;
 }
@@ -60,7 +62,7 @@ $(document).ready(function() {
 <h1>글수정 페이지</h1>
 <hr>
 
-<form action="/user/review/update" method="post" enctype="multipart/form-data">
+<form action="/user/mypage/myReview/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="review_no" value="${view.review_no }">
 
 	<div class="form-group">
@@ -81,7 +83,7 @@ $(document).ready(function() {
 
 	<div id="fileBox">	
 	<div id="originFile">
-		<a href="/user/review/download?file_no=${reviewfile.file_no }">${reviewfile.origin_name }</a>
+		<a href="/user/mypage/myReview/download?file_no=${reviewfile.file_no }">${reviewfile.origin_name }</a>
 		<span id="delFile">X</span>
 	</div>
 	<br>
@@ -111,6 +113,7 @@ nhn.husky.EZCreator.createInIFrame({
 	sSkinURI: "/resources/se2/SmartEditor2Skin.html", //에디터 스킨
 	fCreator: "createSEditor2"
 })
+
 // <form>태그가 submit되면 스마트에디터에 작성된 내용이 <textarea>에
 //적용되도록 하는 코드
 function submitContents(elClickedObj) {
@@ -125,3 +128,5 @@ function submitContents(elClickedObj) {
 </script>
 
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />
+
+

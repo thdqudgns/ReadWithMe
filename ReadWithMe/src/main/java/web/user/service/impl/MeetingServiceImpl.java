@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import web.admin.service.face.AdminMemberService;
 import web.user.dao.face.MeetingDao;
 import web.user.dao.face.UserDao;
 import web.user.dto.Meeting;
@@ -81,10 +80,10 @@ public class MeetingServiceImpl implements MeetingService {
 		return meetingDao.selectList(map);
 	}
 	
-//	@Override
-//	public List<Meeting> endlist(Paging paging) {
-//		return meetingDao.selectEndList(paging);
-//	}
+	@Override
+	public List<Meeting> endlist(Paging paging) {
+		return meetingDao.selectEndList(paging);
+	}
 
 	@Override
 	public Paging getPaging(Paging paramData) {

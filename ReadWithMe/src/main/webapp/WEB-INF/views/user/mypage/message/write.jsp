@@ -11,6 +11,18 @@
 	<link href="${path}/resources/css/message_write_style.css" rel="stylesheet" />
 	<script src="${path}/resources/js/message_write_script.js"></script>
 	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#btnSend").click(function(){
+			$("form").submit();	
+// 			window.location.href = "/user/mypage/message";
+		});
+		
+	});
+	
+	</script>
+	
 	<style type="text/css">
 	input[name="msg_title"] {
 	    border: none;
@@ -19,7 +31,7 @@
 	    width: 150px;
 	    padding-bottom: 3px;	
 	}
-	input[name="rec_user"] {
+	input[name="nick"] {
 	    border: none;
 	    outline: none;
 	    border-bottom: 1px solid #ccc;
@@ -27,8 +39,6 @@
 	    padding-bottom: 3px;	
 	}
 	textarea[name="msg_content"] {
-	    border: none;
-	    outline: none;
 	    border-bottom: 1px solid #ccc;
 	    width: 150px;
 	    padding-bottom: 3px;		
@@ -55,7 +65,7 @@
 					</div>
 					
 					<div id="rec_user_input">
-						<input type="text" id="rec_user" name="rec_user" placeholder="받는 사람" required />
+						<input type="text" id="nick" name="nick" placeholder="받는 사람" required />
 					</div>
 					
 					<div id="msg_content_textarea">

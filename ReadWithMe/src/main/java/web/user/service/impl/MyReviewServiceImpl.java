@@ -2,7 +2,9 @@ package web.user.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -11,9 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dao.face.MyReviewDao;
+import web.user.dao.face.ReviewCommentDao;
 import web.user.dao.face.Review_recDao;
 import web.user.dto.Review;
 import web.user.dto.Review_file;
@@ -30,15 +34,9 @@ public class MyReviewServiceImpl implements MyReviewService{
 	@Autowired private MyReviewDao myReviewDao;
 	@Autowired private Review_recDao review_recDao; //추천
 	@Autowired private ServletContext context;
+	@Autowired private ReviewCommentDao reviewCommentDao;
 
-	//list
-	
-	@Override
-	public List<Review> getMyReviewList(Paging paging) {
-		
-		return myReviewDao.selectList(paging);
-	}
-
+	//목록 관련 메소드 4개
 	@Override
 	public Paging getPaging(Paging paramData) {
 		logger.info("getPaging()");
@@ -52,20 +50,14 @@ public class MyReviewServiceImpl implements MyReviewService{
 		
 		return paging;
 	}
-	
-	//---------------------------------------------------------
-
-	//view
-	
-	@Override
-	public Review view(Review viewReview) {
-		myReviewDao.hit(viewReview);
-		return myReviewDao.selectReviewByReviewNo(viewReview);
-	}
 
 	@Override
-	public Review_file getAttachFile(Review viewReview) {
-		return myReviewDao.selectReviewfileByReviewNo(viewReview);
+	public List<Review> getReviewList(Paging paging, Integer userNo) {
+		Map<String, Object>params = new HashMap<>();
+		params.put("paging", paging);
+		params.put("userNo", userNo);
+		
+		return myReviewDao.selectList(params);
 	}
 
 	@Override
@@ -76,33 +68,109 @@ public class MyReviewServiceImpl implements MyReviewService{
 			return true;
 		} 
 		else { //추천하지 않았음
-			return false;	
+			return false;
+			
 		}
 	}
 
 	@Override
-	public Object getTotalCntRecommend(Review_rec recommend) {
+	public int getTotalCntRecommend(Review_rec recommend) {
 		return review_recDao.selectTotalCntRecommend(recommend);
+	}
+
+	//======================================================================
+	
+	// 글 상세보기
+	@Override
+	public Review view(Review viewReview) {
+		myReviewDao.hit(viewReview);
+		return myReviewDao.selectReviewByReviewNo(viewReview);
+	}
+
+//	@Override
+//	public Review_file getFileNo(Review viewReview) {
+//		return reviewDao.getFileNo(viewReview);
+//	}
+	
+	@Override
+	public Review_file getAttachFile(Review viewReview) {
+		return myReviewDao.selectReviewfileByReviewNo(viewReview);
 	}
 
 	@Override
 	public List<Rv_cmt> getCommentList(Review viewReview) {
-//		return reviewCommentDao.selectComment(viewReview);
-		return null;
+		return reviewCommentDao.selectComment(viewReview);
+	}
+
+	//======================================================================
+
+	//글 작성
+	@Override
+	@Transactional
+	public void write(Review review, MultipartFile file) {
+		
+		//글 제목, 글 내용, 파일만을 받아온 상황이다.
+		//회원 번호와 닉네임도 controller에서 저장했다.
+		
+		//게시글 정보 처리
+		
+		if( "".equals(review.getReview_title()) ) {
+			review.setReview_title("(제목없음)");
+		}
+		myReviewDao.insertReview(review);
+		review.setReview_no(myReviewDao.lastReviewNo());
+		
+		//--------------------------------------------------------
+		
+		//빈 파일
+		if( file.getSize() <= 0 ) {
+			return;
+		}
+		
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+	
+		File storedFolder = new File(storedPath);
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//저장될 파일의 이름 생성하기
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		//저장할 파일 객체
+		File dest = new File(storedPath, storedName);
+		
+		try {
+			file.transferTo(dest); //업로드 파일 저장
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		//--------------------------------------------------------
+		
+		Review_file reviewfile = new Review_file();
+		logger.info("후기 글 번호 : {}" , review.getReview_no());
+		reviewfile.setReview_no( review.getReview_no() );
+		reviewfile.setOrigin_name(originName);
+		reviewfile.setStored_name(storedName);
+		
+		myReviewDao.insertFile(reviewfile);
+		
 	}
 	
-	//---------------------------------------------------------
+	//======================================================================
 
-	//download
-	
+	//파일 다운로드
 	@Override
 	public Review_file getFile(int file_no) {
 		return myReviewDao.selectReviewfileByFileno(file_no);
 	}
+
+	//======================================================================
 	
-	//---------------------------------------------------------
-
-
+	//글 수정
 	@Override
 	public void update(Review review, MultipartFile file) {
 		if( "".equals(review.getReview_title()) ) {
@@ -153,21 +221,22 @@ public class MyReviewServiceImpl implements MyReviewService{
 		
 		myReviewDao.deleteFile(review);
 		myReviewDao.insertFile(reviewfile);
-		
 	}
+	
+	//======================================================================
 
+	//글 삭제
 	@Override
 	public void delete(Review review) {
 		myReviewDao.deleteFile(review);
-		myReviewDao.delete(review);	
+		myReviewDao.delete(review);
 	}
 	
-	//---------------------------------------------------------
+	//======================================================================
 
-	//recommend
-	
+	//글 추천
 	@Override
-	public boolean review_rec(Review_rec review_rec) {
+	public boolean recommend(Review_rec review_rec) {
 		if( isRecommend(review_rec) ) { //추천한 상태
 			review_recDao.deleteRecommend(review_rec);
 			
@@ -180,9 +249,36 @@ public class MyReviewServiceImpl implements MyReviewService{
 		}
 	}
 
+	//======================================================================
+
+	//댓글 추가 닉네임도 같이 저장해야 한다.
 	@Override
-	public int getTotalCntReview_rec(Review_rec review_rec) {
-		return review_recDao.selectTotalCntRecommend(review_rec);
+	public void insertComment(Rv_cmt comment) {
+		reviewCommentDao.insertComment(comment);
+	}
+
+	//댓글 삭제
+	@Override
+	public boolean deleteComment(Rv_cmt comment) {
+		reviewCommentDao.deleteComment(comment); 
+		
+		if( reviewCommentDao.countComment(comment) > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	//댓글 수정
+	@Override
+	public boolean updateReviewComment(Rv_cmt comment) {
+		int res = reviewCommentDao.updateReviewComment(comment);
+		
+		if( res  > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 

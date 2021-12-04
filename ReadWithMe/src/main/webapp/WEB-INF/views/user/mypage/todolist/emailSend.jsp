@@ -8,7 +8,7 @@
 		
 		alert('이메일을 성공적으로 발송했습니다!');
 
-		self.location = '/todolist';
+		self.location = '/mypage/todolist';
 	</script>
 
 

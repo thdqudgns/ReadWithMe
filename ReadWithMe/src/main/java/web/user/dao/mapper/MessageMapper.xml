@@ -11,34 +11,72 @@
 		FROM message
 	</sql>
 
-	<select id="selectAllToMeList" parameterType="web.util.Paging" resultType="web.user.dto.Message">
-		SELECT * FROM ( SELECT rownum rnum, M.* FROM ( 
-			<include refid="selectMessage"/>
-			WHERE rec_user = #{rec_user}
-		ORDER BY msg_no DESC) M) R
-		WHERE rnum BETWEEN #{startNo} AND #{endNo} 
+	<sql id="whereTitleSearch">
+		WHERE MSG_TITLE LIKE '%' || #{search} || '%'
+	</sql>
+
+	<select id="selectAllToMeList" parameterType="map" resultType="hashmap">
+		SELECT * FROM ( 
+			SELECT rownum rnum, M.* FROM ( 
+				SELECT msg.msg_no, msg.send_user, msg.rec_user, msg.msg_title, msg.msg_content, msg.send_date, msg.msg_read, utb.nick
+                FROM message msg
+                JOiN USERTB utb on msg.send_user = utb.user_no
+				WHERE msg.msg_title LIKE '%' || #{search} || '%'
+				and msg.rec_user = #{rec_user}
+			ORDER BY msg_no DESC
+			) M
+		) R
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo} 
 	</select>
 
+	<select id="selectAllToOtherList" parameterType="map" resultType="hashmap">
+		SELECT * FROM ( 
+			SELECT rownum rnum, M.* FROM ( 
+				SELECT msg.msg_no, msg.send_user, msg.rec_user, msg.msg_title, msg.msg_content, msg.send_date, msg.msg_read, utb.nick
+                FROM message msg
+                JOiN USERTB utb on msg.rec_user = utb.user_no
+				WHERE msg.msg_title LIKE '%' || #{search} || '%'
+				and msg.send_user = #{rec_user}
+			ORDER BY msg_no DESC
+			) M
+		) R
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo} 
+	</select>
 
 	<select id="selectCntAll" parameterType="web.util.Paging" resultType="int">
 		SELECT COUNT(*) FROM ( 
 		<include refid="selectMessage"/>
+		<include refid="whereTitleSearch"/>
 		)
 	</select>
 
-	<select id="selectMessgaeByMsg_no" parameterType="web.user.dto.Message" resultType="web.user.dto.Message">
-		SELECT msg_no, send_user, rec_user, msg_title, msg_content, send_date, msg_read
-		FROM message
-		WHERE msg_no = #{msg_no} 
+	<select id="selectMessgaeByMsg_no" parameterType="web.user.dto.Message" resultType="hashmap">		
+		SELECT msg.msg_no, msg.send_user, msg.rec_user, msg.msg_title, msg.msg_content, msg.send_date, msg.msg_read, utb.nick
+		FROM message msg
+		JOiN USERTB utb on msg.send_user = utb.user_no
+		WHERE msg_no = #{msg_no}
 	</select>
+	
+	<select id="selectMessgaeBySendMsg_no" parameterType="web.user.dto.Message" resultType="hashmap">		
+		SELECT msg.msg_no, msg.send_user, msg.rec_user, msg.msg_title, msg.msg_content, msg.send_date, msg.msg_read, utb.nick
+		FROM message msg
+		JOiN USERTB utb on msg.rec_user = utb.user_no
+		WHERE msg_no = #{msg_no}
+	</select>	
 
-	<!-- <insert id="insertMessage" parameterType="web.user.dto.Message"> -->
-	<!-- <selectKey resultType="int" keyProperty="msg_no" order="BEFORE"> -->
-	<!-- SELECT message_seq.nextval FROM dual -->
-	<!-- </selectKey> -->
-	<!-- INSERT INTO message ( msg_no, send_user, rec_user, msg_title, msg_content ) -->
-	<!-- VALUES ( #{msg_no}, #{send_user}, #{rec_user}, #{msg_title}, #{msg_content} ) -->
-	<!-- </insert> -->
+	<insert id="insertMessage" parameterType="web.user.dto.Message">
+		<selectKey resultType="int" keyProperty="msg_no" order="BEFORE">
+			SELECT message_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO message ( msg_no, send_user, rec_user, msg_title, msg_content )
+		VALUES ( #{msg_no}, #{send_user}, #{rec_user}, #{msg_title}, #{msg_content} )
+	</insert>
+
+	<select id="selectUserByNick" parameterType="String" resultType="int">		
+		SELECT user_no
+		FROM usertb
+		WHERE nick = #{nick} 
+	</select>
 
 	<delete id="delete" parameterType="web.user.dto.Message">
 		DELETE message 

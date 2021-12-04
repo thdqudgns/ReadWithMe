@@ -24,6 +24,13 @@ public interface MeetingService {
 	public List<HashMap<String, Object>> list(Paging paging, HttpServletRequest req);
 
 	/**
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	public List<Meeting> endlist(Paging paging);
+	
+	/**
 	 * 게시글 목록을 위한 페이징 객체를 생성한다
 	 * 
 	 * 	파라미터 객체의 curPage(현재 페이지)
