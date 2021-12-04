@@ -91,7 +91,7 @@ public class FamousController {
 		logger.info("/famous/recommend");
 		
 		//추천 정보 토글
-		recommend.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		recommend.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 
 		//추천 성공/실패 확인
 		boolean success = famousService.recommend(recommend);
@@ -115,7 +115,7 @@ public class FamousController {
 	@RequestMapping(value="/insert")
 	public String insert(Famous famous, Model model, HttpSession session) {
 		logger.info("/famous/insert");
-		famous.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		famous.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		famous.setNick( (String) session.getAttribute("user_nick") );
 //		famous.setId( (String)session.getAttribute("user_id") );
 		logger.info("{}", famous);
@@ -161,7 +161,7 @@ public class FamousController {
 		logger.info("/famous/report");
 		logger.info("famous_no : {}", famous);
 		
-		famous.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+		famous.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		
 		boolean success = famousService.insertReportByFamousNo(famous);
 		
