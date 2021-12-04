@@ -279,7 +279,7 @@ if(n_m == 13) {
 				if(count == 0) {
 					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDate + "'>"+ d + "</td>");
 
-				} else if(count == 3 ) {
+				} else if(count == 1 ) {
 					
 					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
@@ -291,7 +291,7 @@ if(n_m == 13) {
 							+ "</td>");
 					count--;
 					
-				} else if(count == 6 ) {
+				} else if(count == 2 ) {
 					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
 							+ " style='display: none;' value='" + sqlDate + "' />" 
