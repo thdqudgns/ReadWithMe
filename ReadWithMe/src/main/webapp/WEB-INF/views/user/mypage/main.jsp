@@ -155,7 +155,7 @@ if(n_m == 13) {
 				<div id="myReview">
 					<h3>내가 작성한 리뷰</h3>
 					고객님이 작성하신 리뷰를 볼 수 있습니다.<br><br>
-					<a href="<%=request.getContextPath() %>/알아서/하삼"><button id="mypage">자세히 보기</button></a>
+					<a href="<%=request.getContextPath() %>/user/mypage/myReview/list"><button id="mypage">자세히 보기</button></a>
 				</div>
 				
 				<div id="to-do-list">
@@ -279,7 +279,7 @@ if(n_m == 13) {
 				if(count == 0) {
 					out.print("<td style='color: " + color + "'; class='" + d + "' id='" + strDate + "'>"+ d + "</td>");
 
-				} else if(count == 3 ) {
+				} else if(count == 1 ) {
 					
 					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
@@ -291,7 +291,7 @@ if(n_m == 13) {
 							+ "</td>");
 					count--;
 					
-				} else if(count == 6 ) {
+				} else if(count == 2 ) {
 					out.print("<td style='color: " + color + "'; class='schedule' id='" + strDate + "'>" 
 							+ "<input type='checkbox' class='scheduleCheckbox' name='scheduleCheckbox'" 
 							+ " style='display: none;' value='" + sqlDate + "' />" 

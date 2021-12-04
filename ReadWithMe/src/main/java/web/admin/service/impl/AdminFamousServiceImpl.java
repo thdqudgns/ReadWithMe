@@ -42,8 +42,8 @@ public class AdminFamousServiceImpl implements AdminFamousService {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("paging", paging);
 			
-		if( (String)httpSession.getAttribute("user_no") != null) {
-			map.put("user_no", Integer.parseInt((String)httpSession.getAttribute("user_no"))); //나중에 이걸로 바꿔야함
+		if( String.valueOf(httpSession.getAttribute("user_no")) != null) {
+			map.put("user_no", Integer.parseInt(String.valueOf(httpSession.getAttribute("user_no")))); //나중에 이걸로 바꿔야함
 		}
 			
 			

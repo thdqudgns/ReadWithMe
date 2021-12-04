@@ -238,14 +238,14 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 		<c:if test="${not empty login and login and user_lv ge 2 }">
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
-			<li>
-				<img alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
-				<span>${user_nick }님</span>
-				<ul>
-					<li><a href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>
-					<li><a href="<%=request.getContextPath() %>/admin/member">관리자페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a></li>
-					<li><a href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
+			<li class="profile-li">
+				<img class="profile-li-img" alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
+				<span class="profile-li-sp">${user_nick }님</span>
+				<ul class="profile-li-ul">
+					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>
+					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/admin/member">관리자페이지</a></li>
+					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/mypage/main">마이페이지</a></li>
+					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</div>

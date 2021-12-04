@@ -60,7 +60,7 @@ public class AdminFamousController {
 		logger.info("/famous/recommend");
 		
 		//추천 정보 토글
-		recommend.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		recommend.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 
 		//추천 수 조회
 		int cnt = adminFamousService.getTotalCntRecommend(recommend);

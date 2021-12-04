@@ -76,7 +76,7 @@ public class ReviewController {
 			//추천 상태 조회
 			Review_rec recommend = new Review_rec();
 			recommend.setReview_no(viewReview.getReview_no()); //게시글 번호
-			recommend.setUser_no(Integer.parseInt((String)session.getAttribute("user_no"))); //회원 번호
+			recommend.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no")))); //회원 번호
 			
 			//추천 상태 전달
 			boolean isRecommend = reviewService.isRecommend(recommend);
@@ -122,7 +122,7 @@ public class ReviewController {
 		logger.info("{}", review);
 		logger.info("{}", file);
 		
-		review.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		review.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		review.setNick((String) session.getAttribute("user_nick"));
 		logger.info("{}", review);
 		
@@ -180,7 +180,7 @@ public class ReviewController {
 		logger.debug("글수정 : {}", file);
 		
 		//작성자 user_no, NICK 추가 - 세션
-		review.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		review.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		review.setNick((String) session.getAttribute("user_nick"));
 		
 		logger.info("글수정 : {}", review);
@@ -209,7 +209,7 @@ public class ReviewController {
 	public ModelAndView recommend(Review_rec review_rec, ModelAndView mav, HttpSession session) {
 		
 		//추천 정보 토글
-		review_rec.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		review_rec.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		boolean result = reviewService.recommend(review_rec);
 		
 		//추천 수 조회
@@ -229,7 +229,7 @@ public class ReviewController {
 		logger.info("/review/report");
 		logger.info("review_no : {}", review);
 		
-		review.setUser_no(Integer.parseInt((String)session.getAttribute("user_no")));
+		review.setUser_no(Integer.parseInt(String.valueOf(session.getAttribute("user_no"))));
 		
 		boolean success = reviewService.insertReportByReviewNo(review);
 		
