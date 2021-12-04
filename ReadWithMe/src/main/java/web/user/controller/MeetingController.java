@@ -72,9 +72,10 @@ public class MeetingController {
 		// 모임 정보 불러오기
 		Meeting meeting = meetingService.view(no);
 		UserTb user = meetingService.getUser(meeting.getUser_no()); //유저 번호로 유저 정보 조회
-		
+
 		// 모임 신청 목록 조회
-//		if(login) {
+		// 로그인
+		if( session.getAttribute("user_no") != null ) {
 			int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
 			Participation participation = meetingService.getParticipation(user_no, no);
 			logger.info("{}", participation);
@@ -82,7 +83,12 @@ public class MeetingController {
 			model.addAttribute("meeting", meeting);
 			model.addAttribute("user", user);
 			model.addAttribute("participation", participation);
-//		}
+		
+		// 비로그인
+		} else if(session.getAttribute("user_no") == null) {
+			model.addAttribute("meeting", meeting);
+			model.addAttribute("user", user);			
+		}
 		return "user/meeting/view";
 	}
 	
