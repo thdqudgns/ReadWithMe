@@ -171,7 +171,8 @@ p.addr {
 								<th class="host-profile">
 								<br>
 								<div class="host-info">
-								${user.file_no } ${user.nick }
+								<!-- 주최자 프로필 사진 ${user.file_no } -->
+								<span class="property">주최자</span> ${user.nick }
 								<div>
 								</div>
 								<!-- 로그인상태 -->

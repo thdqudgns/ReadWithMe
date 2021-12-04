@@ -75,6 +75,7 @@ $(document).ready(function() {
 			return false;
 		} else {
 			$('form').submit();
+			alert("모임 승인이 필요합니다.")
 		}
 	})
 	

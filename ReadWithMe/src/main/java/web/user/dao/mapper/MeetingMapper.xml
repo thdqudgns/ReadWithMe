@@ -122,11 +122,11 @@
 		INSERT INTO meeting (meeting_no, user_no, meetingtype_no, area_no, book_class_no,
 							 meeting_location, meeting_title, meeting_content, meeting_rcr_start,
 							 meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
-							 meeting_address, meeting_board_date, meeting_approved )
+							 meeting_address, meeting_approved )
 		VALUES ( meeting_seq.nextval, #{user_no}, #{meetingtype_no}, #{area_no}, #{book_class_no},
 				 #{meeting_location}, #{meeting_title}, #{meeting_content}, #{meeting_rcr_start},
 				 #{meeting_rcr_end}, #{meeting_start}, #{meeting_end}, #{meeting_personnel},
-				 #{meeting_address}, #{meeting_board_date}, #{meeting_approved} )
+				 #{meeting_address}, #{meeting_approved} )
 	</insert>
 
 	<delete id="delete" parameterType="web.user.dto.Meeting">
