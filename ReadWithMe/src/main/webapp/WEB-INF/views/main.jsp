@@ -255,15 +255,15 @@
 		margin-left: 25px;
 		width:170px;
 		height:80px;
-		background:#ccc;
-		border: 1px solid #ccc;
+		background:#f2f2f2;
+		border: 1px solid #f2f2f2;
 		border-radius: 10px;
 		padding: 5px;
 		cursor: pointer;
 	}
 	.balloon_03:after {
-		border: 1px solid #ccc;
-		border-top:15px solid #ccc;
+		border: 1px solid #f2f2f2;
+		border-top:15px solid #f2f2f2;
 		border-left: 15px solid transparent;
 		border-right: 0px solid transparent;
 		border-bottom: 0px solid transparent;
@@ -473,9 +473,9 @@
 					<table id="best_review_table">
 					<c:forEach items="${reviewList}" var="review">
 						<tr>
-							<td style="width: 80%; text-align: left;"><a style="text-decoration: none;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
+							<td style="width: 60%; text-overflow: ellipsis; text-align: left;"><a style="text-decoration: none;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
 							
-							<td style="width: 20%; text-align: center;">${review.nick}</td>
+							<td style="width: 40%; text-align: center;">${review.nick}</td>
 						</tr>
 					</c:forEach>
 					</table>
@@ -489,7 +489,7 @@
 					<table id="new_notice_table">
 					<c:forEach items="${noticeList}" var="notice">
 						<tr>
-							<td style="width: 65%; text-align: left; "><a style="text-decoration: none;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
+							<td style="width: 65%; text-overflow: ellipsis; text-align: left; "><a style="text-decoration: none;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
 							<td style="width: 35%; text-align: center;"><fmt:formatDate value="${notice.board_date }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
@@ -549,7 +549,8 @@
 		
 		    // 마커에 표시할 인포윈도우를 생성합니다 
 		    const infowindow = new kakao.maps.InfoWindow({
-		        content: '<div>${meeting.meeting_title}</div>' // 인포윈도우에 표시할 내용
+		        content: '<div style="width:150px;text-align:center;padding:6px 0;">${meeting.meeting_title}<br></div>' +
+		        			'<div style="font-size: 15px; margin-bottom: 10px; text-align: center;">${meeting.meeting_content}</div>'// 인포윈도우에 표시할 내용
 		    });
 		
 		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
@@ -568,7 +569,6 @@
 	});
 	</c:forEach>
 
-	
 	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 	function makeOverListener(map, marker, infowindow) {
 	    return function() {

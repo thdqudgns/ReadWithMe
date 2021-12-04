@@ -22,14 +22,6 @@ $(window).load(function() {
 
 	})
 	
-	 $(document).ready(function() {
-    	$("#btnDelete").click(function() {
-    		if( confirm("쪽지를 삭제하시겠습니까?") ) {
-    			$("#messageList").submit();    			
-//     			$(location).attr("href", "/message/delete?no="+$(this).attr('value'));
-    		}
-    	});
-    	
 	  	//체크 박스
     	$('.check-all').click(function(){
     		$('.check').prop('checked', this.checked);
@@ -51,7 +43,6 @@ $(window).load(function() {
 					
 		<div id="message_otn_btn">
 			<div id="message_buttons">
-				<button onclick='location.href="/user/mypage/message/delete";' id="btnDelete">삭제</button>
 				<button onclick='location.href="/user/mypage/message/write";' id="btnSend">쪽지 보내기</button>
 			</div>
 			
@@ -67,14 +58,12 @@ $(window).load(function() {
 		
 				<table id="message_list_table">
 					<colgroup>
-						<col style="width: 50px">
-						<col style="width: 500px">
-						<col style="width: 150px">
+						<col style="width: 550px;">
+						<col style="width: 170px;">
 					</colgroup>
 
 						<c:forEach items="${list }" var="message">
 						<tr>
-							<td rowspan="2" style="border-bottom: 1px solid #444444;"><input type="checkbox" name="check-all" class="check-all" /></td>
 							<td><a style="text-decoration: none;" href="<%=request.getContextPath() %>/user/mypage/message/view?msg_no=${message.MSG_NO }">${message.MSG_TITLE}</a></td>
 							<td rowspan="2"  style="border-bottom: 1px solid #444444; text-align: center;">${message.NICK}</td>
 						</tr>

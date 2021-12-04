@@ -61,7 +61,7 @@ th {
         <table>
             <thead>
 	            <tr class="division">
-	                <th style="width: 50px;">제목 / 본문</th>
+	                <th style="width: 50px;">제목</th>
 	                <th style="width: 20px;">작성자</th>
 	                <th style="width: 20px;">날짜</th>
 	                <th style="width: 10px;">조회수</th>
@@ -72,24 +72,12 @@ th {
 
             <c:forEach items="${reviewList }" var="reviewList">
                 <tr>
-                    <td id='title'>
+                    <td style="border-bottom: 1px solid #ccc;" id='title'>
                         <a style="text-decoration: none;" href="/user/mypage/myReview/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a>
                     </td>
-                    <td rowspan="2" style="border-bottom: 1px solid #ccc;">${reviewList.nick}</td>
-					<td rowspan="2" style="border-bottom: 1px solid #ccc;"><fmt:formatDate value="${reviewList.review_date }" pattern="yyyy-MM-dd"/></td>
-                    <td rowspan="2" style="border-bottom: 1px solid #ccc;">${reviewList.review_views }</td>					
-                </tr>
-                <tr>
-                    <td id='content' style="border-bottom: 1px solid #ccc;">
-                        <c:choose>
-                            <c:when test="${fn:length(reviewList.review_content) > 14}">
-                                <c:out value="${fn:substring(reviewList.review_content,0,13)}"/>....
-                            </c:when>
-                            <c:otherwise>
-                                <c:out value="${reviewList.review_content }"/>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
+                    <td style="border-bottom: 1px solid #ccc;">${reviewList.nick}</td>
+					<td style="border-bottom: 1px solid #ccc;"><fmt:formatDate value="${reviewList.review_date }" pattern="yyyy-MM-dd"/></td>
+                    <td style="border-bottom: 1px solid #ccc;">${reviewList.review_views }</td>					
                 </tr>
             </c:forEach>
 

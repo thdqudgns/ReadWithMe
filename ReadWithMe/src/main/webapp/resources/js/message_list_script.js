@@ -2,7 +2,7 @@ $(document).ready(function() {
     	
 	//쪽지 쓰기 버튼 누르면 이동
 	$("#btnSend").click(function() {
-		location.href="/mypage/message/write";
+		location.href="user/mypage/message/write";
 	})
     	
 	//안 읽은 쪽지 버튼 누르면 이동 

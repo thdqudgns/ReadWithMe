@@ -108,10 +108,11 @@ public class MessageController {
 	public String writeProc(Message message, HttpSession session, String nick) {
 		logger.info("/message/write [post]");
 		
+		
 		int rec_user = messageService.selectUserByNick(nick);
 		message.setRec_user(rec_user);
 		
-		logger.info( nick);
+		logger.info(nick);
 		
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
 		message.setSend_user(user_no);
