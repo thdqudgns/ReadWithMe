@@ -231,6 +231,8 @@ function updateReply(comment_no) {
 
 		<%-- <a href="/admin/faq/download?file_no=${FAQfile.fileNo }">${FAQfile.originName }</a> --%>
 
+		<c:if test="${inquiry.user_no eq user.user_no }">
+
 		<div class="text-center">
 						<a href="/user/inquiry/list"><button class="btn"
 								style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
@@ -241,6 +243,8 @@ function updateReply(comment_no) {
 						class="btn" style="border-color: #D3D3D3; background: white; color: gray;">삭제</button></a>
 <%-- 			</c:if> --%>
 		</div>
+		
+		</c:if>
 
 		<div style="height: 50px;"></div>
 		

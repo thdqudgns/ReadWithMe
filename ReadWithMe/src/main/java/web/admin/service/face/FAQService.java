@@ -76,5 +76,12 @@ public interface FAQService {
 	 * @param string - 게시글 번호
 	 */
 	public void cancelChecked(String no);
+	
+	/**
+	 * 자주묻는질문 선택 항목 조회
+	 * 
+	 * @return 자주묻는질문 선택 항목
+	 */
+	public List<FAQ> getSelected();
 
 }

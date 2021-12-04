@@ -106,5 +106,12 @@ public interface NoticeDao {
 	 */
 	public void insertFile(Notice_file notice_file);
 
+	/**
+	 * 공지사항 선택한 항목 조회
+	 * 
+	 * @return 공지사항 선택한 항목
+	 */
+	public List<Notice> getSelected();
+
 
 }

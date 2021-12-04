@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
 
 <!-- 스마트 에디터 2 라이브러리 로드 -->
 <script type="text/javascript"
-	src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+	src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript">
 	function submitContents(elClickedObj) {
@@ -80,13 +80,11 @@
 		</form>
 
 		<script type="text/javascript">
-			var oEditors = [];
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef : oEditors,
-				elPlaceHolder : "content",
-				sSkinURI : "/resources/se2/SmartEditor2Skin.html",
-				fCreator : "createSEditor2"
+		$(function(){
+			CKEDITOR.replace('content',{
+				filebrowserUploadUrl: '/admin/notice/fileupload'
 			});
+		});		
 		</script>
 
 	</div>

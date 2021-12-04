@@ -1,8 +1,11 @@
 package web.user.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,12 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
 import web.user.dto.Inquiry_file;
+import web.user.dto.UserTb;
 import web.user.service.face.UserInquiryService;
 import web.util.Paging;
 
@@ -57,12 +60,20 @@ public class UserInquiryController {
 	
 	//1:1질문 상세보기
 	@RequestMapping(value="/user/inquiry/view")
-	public String UserInquiryView(Inquiry inquiry, Model model) {
+	public String UserInquiryView(Inquiry inquiry, Model model, HttpSession session) {
 		
 		//잘못된 게시글 번호로 게시글 조회 차단
 		if( inquiry.getBoard_no() < 1 ) {
 			return "redirect:/user/inquiry/list";
 		}
+		
+		// 로그인한 회원 조회
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		inquiry.setUser_no(user_no);
+		
+		UserTb user = userInquiryService.userInfo(user_no);
+		
+		model.addAttribute("user", user);
 		
 		//상세보기
 		inquiry = userInquiryService.view(inquiry);
@@ -90,8 +101,12 @@ public class UserInquiryController {
 	}
 	
 	@RequestMapping(value="/user/inquiry/write", method=RequestMethod.POST)
-	public String UserInquiryWriteProc(Inquiry inquiry, MultipartFile file) {
+	public String UserInquiryWriteProc(Inquiry inquiry, MultipartFile file, HttpSession session) {
 		logger.info("{}", inquiry);
+		
+		// 로그인을 한 회원의 회원번호조회
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		inquiry.setUser_no(user_no);
 		
 		userInquiryService.write(inquiry, file);
 	
@@ -123,9 +138,9 @@ public class UserInquiryController {
 	}
 	
 	@RequestMapping(value="/user/inquiry/update", method=RequestMethod.POST)
-	public String UserInquiryUpdateProc(Inquiry inquiry) {
+	public String UserInquiryUpdateProc(Inquiry inquiry, MultipartFile file) {
 		
-		userInquiryService.update(inquiry);
+		userInquiryService.update(inquiry, file);
 		
 		return "redirect:/user/inquiry/list?board_no=" + inquiry.getBoard_no();
 	}
@@ -146,20 +161,30 @@ public class UserInquiryController {
 	}
 	
 	//	1:1질문 선택 삭제
-	@ResponseBody
-	@RequestMapping( value = "/user/inquiry/delete")
-	public String UserInquiryDelete(HttpServletRequest req) {
+	@RequestMapping( value = "/user/inquiry/delete", method=RequestMethod.POST)
+	public String UserInquiryDelete(HttpServletRequest req, Model model) {
+//		public String UserInquiryDelete(HttpServletRequest req, String[] valueArr, Model model) {
 		
 		String[] ajaxMsg = req.getParameterValues("valueArr");
 		int size = ajaxMsg.length;
-		
-		logger.info("size : {} " , size);
+
+//		logger.info("** {}", Arrays.toString(valueArr));
 		
 		for(int i=0; i<size; i++) {
 			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
 			userInquiryService.deleteChecked(ajaxMsg[i]);
+			
+//			result = userInquiryService.deleteChecked(ajaxMsg[i]);
+			
 		}	
-		return "redirect:/user/inquiry/list";
+		
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("check", valueArr);
+//		userInquiryService.deleteChecked(map);
+		
+//		model.addAttribute("result", result);
+		model.addAttribute("result", 1);
+		return "jsonView";
 	}
 	
 	@RequestMapping(value="/user/inquiry/download")

@@ -73,4 +73,11 @@ public interface FAQDao {
 	 */
 	public void updateToCancelByBoardno(String no);
 
+	/**
+	 * 자주묻는질문 선택항목 조회
+	 * 
+	 * @return 자주묻는질문 선택항목 조회
+	 */
+	public List<FAQ> getSelected();
+
 }
