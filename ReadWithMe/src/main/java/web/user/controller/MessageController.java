@@ -113,8 +113,8 @@ public class MessageController {
 		
 		logger.info( nick);
 		
-		message.setSend_user(Integer.parseInt((String) session.getAttribute("user_no")));
-		logger.info((String) session.getAttribute("user_no"));
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		message.setSend_user(user_no);
 		
 		logger.info("{}", message);
 		
@@ -134,7 +134,7 @@ public class MessageController {
 	public void messageKeep() {
 		logger.info("/message/keep");
 	}
-	
+
 	@RequestMapping(value="/message/delete", method=RequestMethod.GET)
 	public String messageDelete(Message message) {
 		messageService.delete(message);

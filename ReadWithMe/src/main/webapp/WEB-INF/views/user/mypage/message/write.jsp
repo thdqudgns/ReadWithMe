@@ -39,8 +39,6 @@
 	    padding-bottom: 3px;	
 	}
 	textarea[name="msg_content"] {
-	    border: none;
-	    outline: none;
 	    border-bottom: 1px solid #ccc;
 	    width: 150px;
 	    padding-bottom: 3px;		

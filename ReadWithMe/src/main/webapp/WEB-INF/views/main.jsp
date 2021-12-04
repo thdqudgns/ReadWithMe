@@ -256,11 +256,13 @@
 		width:170px;
 		height:80px;
 		background:#ccc;
+		border: 1px solid #ccc;
 		border-radius: 10px;
 		padding: 5px;
 		cursor: pointer;
 	}
 	.balloon_03:after {
+		border: 1px solid #ccc;
 		border-top:15px solid #ccc;
 		border-left: 15px solid transparent;
 		border-right: 0px solid transparent;
@@ -459,6 +461,10 @@
 	</div>
 </section>
 
+<style>
+
+</style>
+
 
 <div id="line"></div>
 
@@ -472,7 +478,8 @@
 					<table id="best_review_table">
 					<c:forEach items="${reviewList}" var="review">
 						<tr>
-							<td style="width: 80%; text-align: left;">${review.review_title}</td>
+							<td style="width: 80%; text-align: left;"><a href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
+							
 							<td style="width: 20%; text-align: center;">${review.nick}</td>
 						</tr>
 					</c:forEach>
@@ -487,7 +494,7 @@
 					<table id="new_notice_table">
 					<c:forEach items="${noticeList}" var="notice">
 						<tr>
-							<td style="width: 65%; text-align: left;">${notice.board_title}</td>
+							<td style="width: 65%; text-align: left;"><a href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
 							<td style="width: 35%; text-align: center;"><fmt:formatDate value="${notice.board_date }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
@@ -507,7 +514,11 @@
 			
 		<div style="width: 230px; height: 400px; float: right; overflow-y:scroll;">
 		<c:forEach items="${list }" var="meeting">
-			<div class="balloon_03">${meeting.meeting_title }</div>
+			<div class="balloon_03">${meeting.meeting_title }
+				<div style="font-size: 15px;">일시 <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy.MM.dd"/><br>
+				장소 ${meeting.meeting_location }
+				</div>
+			</div>
 		</c:forEach>
 		</div>
 </section>

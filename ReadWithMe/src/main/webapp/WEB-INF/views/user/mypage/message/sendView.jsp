@@ -20,7 +20,7 @@
 		
 		$("#btnSend").click(function() {
 			location.href="/user/mypage/message/write";
-		})
+		})		
 	});
 	
 	</script>
