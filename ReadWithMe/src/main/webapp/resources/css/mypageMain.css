@@ -34,7 +34,7 @@ h1 {
     margin: 25px;
     padding: 20px;
 }
-#mypage, #message, #pwChangeBtn {
+#mypage, #message {
 	font-size: 13px;
 	width: 80px;
 	height: 30px;
@@ -47,6 +47,25 @@ h1 {
 	border: 1px solid #231709;
 }
 
+#pwChangeBtn {
+	font-size: 13px;
+	width: 80px;
+	height: 30px;
+	border: 2px solid #fff;
+	background: #ffffff;
+	color: #231709;
+	border-radius:8px;
+	float: right;
+	margin: 10px;
+	border: 1px solid #231709;
+}
+
+#pwChangeBtn:hover {
+	background: rgba(173, 140, 122, 1);
+	border: 1px solid rgba(173, 140, 122, 1);
+	color: white;
+}
+
 #message {
 	margin-right: 53px;
 }
@@ -55,7 +74,7 @@ h1 {
 	border: 1px solid rgba(173, 140, 122, 1);
 	color: white;
 }
-#mypage:hover, #pwChangeBtn:hover {
+#mypage:hover {
 	background: rgba(173, 140, 122, 1);
 	border: 1px solid rgba(173, 140, 122, 1);
 	color: white;
