@@ -266,7 +266,7 @@ public class NoticeController {
 		byte[] bytes = upload.getBytes();
 		
 		//	이미지 경로 생성
-		String path = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "ckImage/";
+		String path = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources\\" + "ckImage/";
 		String ckUploadPath = path + uid + "_" + fileName;
 		File folder = new File(path);
 		
