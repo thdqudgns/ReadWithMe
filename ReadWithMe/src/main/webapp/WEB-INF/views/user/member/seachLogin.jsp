@@ -95,7 +95,7 @@ $(document).ready(function() {
 </div>
 <div class="radioBtn">
 <input type="radio" name="seachLogin" value="/find/email" id="findEmail" class="radioBtn">
-<label for="findEmail"><span></span>가입할 때 등록한 이메일을 잊어버렸어요</label>
+<label for="findEmail"><span></span>가입할 때 등록한 이메일을 초기화하고 싶어요</label>
 </div>
 
 </div>

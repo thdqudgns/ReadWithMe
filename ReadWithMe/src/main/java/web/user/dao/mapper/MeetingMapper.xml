@@ -43,8 +43,8 @@
 					<if test='searchType!="" and searchWord!="" and searchType.equals("meeting_title")'>
 						AND meeting_title LIKE
 					</if>
-					<if test='searchType!="" and searchWord!="" and searchType.equals("user_no")'>
-						AND user_no LIKE
+					<if test='searchType!="" and searchWord!="" and searchType.equals("nick")'>
+						AND nick LIKE
 					</if>
 				</trim>
 					<if test='searchType!="" and searchWord!=""'>

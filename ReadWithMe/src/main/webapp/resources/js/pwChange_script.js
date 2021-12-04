@@ -71,6 +71,21 @@ $(document).ready(function() {
 			});
 			
 		});
+	
+	$('#reg_submit').click(function(){
+
+
+		if (($('#password').val() == ($('#password2').val()))
+				&& pwJ.test($('#password').val())) {
+			$('form').submit();				
+		} else {
+			console.log("바부");
+			alert('비밀번호가 일치하지 않거나 형식에 맞지 않습니다.');
+			return;
+		}
+		
+
+	});
 		
 		
 });

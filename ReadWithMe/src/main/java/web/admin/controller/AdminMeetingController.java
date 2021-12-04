@@ -41,7 +41,7 @@ public class AdminMeetingController {
 	//----------- 모임 승인 / 취소 -------------------
 	@RequestMapping(value="/admin/meetingApproval")
 	public String MeetingApproval(HttpServletRequest req) {
-		
+		logger.info("/admin/meetingApproval");
 		adminMeetingService.approvalMeeting(req);
 		
 		return "redirect:/admin/meeting";
@@ -49,6 +49,7 @@ public class AdminMeetingController {
 	
 	@RequestMapping(value="/admin/meetingDelete")
 	public String MeetingDelete(HttpServletRequest req) {
+		logger.info("/admin/meetingDelete");
 		
 		adminMeetingService.deleteMeeting(req);
 		

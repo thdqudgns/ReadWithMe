@@ -138,4 +138,9 @@
 		WHERE user_no = #{user_no }
 	</select>
 	
+	<select id="selectSocialTypeByUserNo" resultType="String" parameterType="web.user.dto.UserTb">
+		SELECT type FROM userTb
+		WHERE user_no = #{user_no }
+	</select>
+	
 </mapper>

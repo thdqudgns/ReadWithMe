@@ -6,8 +6,8 @@
 <link href="/resources/css/findUser.css" rel="stylesheet">
 
 <section>
-<h1>이메일 변경</h1>
-가입하셨을 때 등록하셨던 이메일을 입력해주세요
+<h1>이메일 초기화</h1>
+초기화 하고 싶은 이메일을 입력해주세요
 
 <div id="formArea">
 <form action="/find/email" method="post">
