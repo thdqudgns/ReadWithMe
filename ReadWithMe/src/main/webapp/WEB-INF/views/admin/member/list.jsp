@@ -150,6 +150,6 @@ input[type="radio"]:checked + label span {
 </div>
 
 </section>
-<c:import url="/WEB-INF/views/admin/layout/paging.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/memberPaging.jsp" />
 
 <c:import url="/WEB-INF/views/admin/layout/footer.jsp" />

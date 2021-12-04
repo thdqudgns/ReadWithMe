@@ -126,8 +126,28 @@ if(n_m == 13) {
 		
     
     </script>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	
+		$('#pwChangeBtn').click(function(){
+			console.log("클릭");
+			
+			var type = $('#socialType').val();
+			console.log("확인" + type);
+			
+			if("origin"==type) {
+				location.href="/mypage/pwchange";
+			} else {
+				alert('소셜 로그인을 하신 경우에는 비밀번호 변경을 하실 수 없습니다.');
+			}
+		});
+	
+    });
+    </script>
 
 <section id="myPage">
+<input type="hidden" name="type" value="${type }" id="socialType"/>
 	<h1>My Page</h1>
 
 	<div id="myPage-info">
@@ -146,7 +166,7 @@ if(n_m == 13) {
 				<div id="pw-change">
 					<h3>비밀번호 변경</h3>
 					고객님의 비밀번호를 변경하실 수 있습니다.<br><br>
-					<a href="<%=request.getContextPath() %>/mypage/pwchange"><button id="mypage">변&nbsp;&nbsp;경</button></a>
+					<button id="pwChangeBtn">변&nbsp;&nbsp;경</button>
 				</div>
 			</div>
 			<br>

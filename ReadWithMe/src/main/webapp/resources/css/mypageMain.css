@@ -34,7 +34,7 @@ h1 {
     margin: 25px;
     padding: 20px;
 }
-#mypage, #message {
+#mypage, #message, #pwChangeBtn {
 	font-size: 13px;
 	width: 80px;
 	height: 30px;
@@ -55,7 +55,7 @@ h1 {
 	border: 1px solid rgba(173, 140, 122, 1);
 	color: white;
 }
-#mypage:hover {
+#mypage:hover, #pwChangeBtn:hover {
 	background: rgba(173, 140, 122, 1);
 	border: 1px solid rgba(173, 140, 122, 1);
 	color: white;

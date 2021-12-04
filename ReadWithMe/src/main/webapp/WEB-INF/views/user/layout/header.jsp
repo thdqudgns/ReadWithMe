@@ -69,7 +69,7 @@
 .menuMain {display:table-cell;width:180px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar {display:table-cell;vertical-align:middle;width:80px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar span.menu-bar-a-sp {display: table-cell;}
-.menuProfile {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuProfile {display:table-cell;vertical-align:middle;width:150px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 
 /* 가로 메뉴바 전체를 묶는 ul */
 ul.menuList {position:relative;margin:0 auto;list-style-type: none;display:table;align-items:center;height:60px;}
@@ -108,11 +108,11 @@ ul.menuList > div.menuBar > a.menu-bar-a > span.menu-bar-a-sp:hover {color:tomat
 ul.menuList > div.menuProfile {vertical-align: middle;text-decoration:none;}
 ul.menuList > div.menuProfile > li.profile-li {font-size:15px;}
 ul.menuList > div.menuProfile > li.profile-li > img.profile-li-img {vertical-align: middle;}
-ul.menuList > div.menuProfile > li.profile-li > span.profile-li-sp {vertical-align: middle;}
+ul.menuList > div.menuProfile > li.profile-li > span.profile-li-sp {vertical-align: middle;width:150px;}
 ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
-ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li-ul-li {background:#FFF;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
-ul.menuList > div.menuProfile > li.profile-li:hover > ul.profile-li-ul > li.profile-li-ul-li {height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li-ul-li > a.profile-li-ul-li-a {background: #FFF;color:black;text-decoration:none;width:100px;display:inline-block;text-align:center;}
+ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li-ul-li {background:#FFF;height:0;font-size:0;width:150px;}		/* 기본값0: 안보임 -> hover 하면 보임 */
+ul.menuList > div.menuProfile > li.profile-li:hover > ul.profile-li-ul > li.profile-li-ul-li {height:40px;font-size:13px;width:150px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li-ul-li > a.profile-li-ul-li-a {background: #FFF;color:black;text-decoration:none;width:150px;display:inline-block;text-align:center;}
 ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li-ul-li > a.profile-li-ul-li-a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
 
 
@@ -205,7 +205,7 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a class="menu-bar-a" href="<%=request.getContextPath() %>"><span class="menu-bar-a-sp">안내&문의</span></a>
+			<a class="menu-bar-a" href="<%=request.getContextPath() %>/notice"><span class="menu-bar-a-sp">안내&문의</span></a>
 		</div>
 		
 		<c:if test="${empty login or not login }">

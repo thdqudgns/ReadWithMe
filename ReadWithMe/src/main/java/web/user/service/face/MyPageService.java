@@ -107,6 +107,13 @@ public interface MyPageService {
 	 */
 	public List<Meeting> getMeeting(UserTb user);
 
+	/**
+	 * 회원 타입 조회
+	 * @param user
+	 * @return
+	 */
+	public String getSocialType(UserTb user);
+
 
 
 }

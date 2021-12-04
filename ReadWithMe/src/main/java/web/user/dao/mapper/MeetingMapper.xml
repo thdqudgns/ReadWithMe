@@ -19,19 +19,6 @@
 				meeting_address, meeting_board_date, meeting_approved
        			 FROM meeting
        			 <trim prefix="WHERE" prefixOverrides="AND|OR">
-					<choose>
-					<when test='searchType!="" and searchWord!="" and searchType.equals("meeting_title")'>
-						AND meeting_title LIKE
-					</when>
-					<when test='searchType!="" and searchWord!="" and searchType.equals("user_no")'>
-						AND user_no LIKE
-					</when>
-					</choose>
-				</trim>
-					<if test='searchType!="" and searchWord!=""'>
-						'%' || #{searchWord } || '%'
-					</if>
-				<trim prefix="WHERE" prefixOverrides="AND|OR">
 					<if test="area_no!=null">
 					AND area_no in
 						<foreach collection="area_no" item="item" index="index" open="(" close=")" separator=",">
@@ -50,17 +37,25 @@
 							#{item2 }
 						</foreach>
 					</if>
+					<![CDATA[
+					AND meeting_approved = 1 AND meeting_end > TO_CHAR(SYSDATE,'YYYY-MM-DD')
+					]]>
+					<if test='searchType!="" and searchWord!="" and searchType.equals("meeting_title")'>
+						AND meeting_title LIKE
+					</if>
+					<if test='searchType!="" and searchWord!="" and searchType.equals("nick")'>
+						AND nick LIKE
+					</if>
 				</trim>
+					<if test='searchType!="" and searchWord!=""'>
+						'%' || #{searchWord } || '%'
+					</if>
        			 ORDER BY meeting_no DESC
        		 ) L
    		 ) list
 		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
 	
-	<!-- <![CDATA[
-	WHERE meeting_approved = 1 AND meeting_end > TO_CHAR(SYSDATE,'YYYY-MM-DD')
-	]]>  -->
-
 	<select id="selectEndList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
 		SELECT * FROM (SELECT rownum rnum, M.* FROM (
 			SELECT

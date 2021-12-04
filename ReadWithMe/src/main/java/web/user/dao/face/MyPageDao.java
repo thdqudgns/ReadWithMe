@@ -145,6 +145,13 @@ public interface MyPageDao {
 	 */
 	public int selectMeetingNoByUser_no(UserTb user);
 
+	/**
+	 * 소셜타입 확인
+	 * @param user
+	 * @return
+	 */
+	public String selectSocialTypeByUserNo(UserTb user);
+
 
 
 

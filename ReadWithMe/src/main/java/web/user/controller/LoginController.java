@@ -54,9 +54,9 @@ public class LoginController {
 		boolean isLogin = loginService.login(user);
 		
 		logger.info("isLogin : {}", isLogin);
-		int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
 		
 		if( isLogin ) {
+			int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
 			
 			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
 
@@ -573,9 +573,16 @@ public class LoginController {
 	public String findEmailProc(UserTb user, Model model) {
 		logger.info("/find/email [POST]");
 		
-		loginService.findEmail(user);
+		boolean res = loginService.findEmail(user);
+		
+		if(res) {
+			model.addAttribute("res", 0);
+			return "/user/member/findEmailEnd";				
+		} else {
+			model.addAttribute("res", 1);
+			return "/user/member/findEmailEnd";				
+		}
 				
-		return "/user/member/findEmailEnd";	
 	}
 
 

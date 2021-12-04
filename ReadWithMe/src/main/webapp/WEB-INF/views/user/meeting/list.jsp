@@ -72,7 +72,7 @@ ul.meeting-ul, li.meeting-li {
 							<select name="searchType" id="selectBox">
 								<option>선택</option>
 								<option value="meeting_title" selected="selected">제목</option>
-								<option value="user_no">작성자</option>
+								<option value="nick">작성자</option>
 							</select> <input type="text" class="searchbox" id="search" name="searchWord" />
 						</div>
 						
