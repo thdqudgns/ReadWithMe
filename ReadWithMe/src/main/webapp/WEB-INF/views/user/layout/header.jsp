@@ -97,11 +97,23 @@ ul.menuList > div.menuBar > input.menu-bar-search-input {width:180px; height:26p
 ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn {width:26px; height:26px; border:3px solid #9f8170; background-color:#9f8170;}
 ul.menuList > div.menuBar > input.menu-bar-search-input > button.menu-bar-search-input-btn > img.menu-bar-search-input-btn-img {margin-bottom:0px;object-fit:full;}
 
+/* 모임 */
+ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
+ul.menuList > div.menuBar > li.meet-li {font-size:15px;}
+ul.menuList > div.menuBar > li.meet-li > span.meet-li-sp {vertical-align: middle;width:80px;}
+ul.menuList > div.menuBar > li.meet-li > ul.meet-li-ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
+ul.menuList > div.menuBar > li.meet-li > ul.meet-li-ul > li.meet-li-ul-li {background:#FFF;height:0;font-size:0;width:80px;}		/* 기본값0: 안보임 -> hover 하면 보임 */
+ul.menuList > div.menuBar > li.meet-li:hover > ul.meet-li-ul > li.meet-li-ul-li {height:40px;font-size:13px;width:80px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuBar > li.meet-li > ul.meet-li-ul > li.meet-li-ul-li > a.meet-li-ul-li-a {background: #FFF;color:black;text-decoration:none;width:80px;display:inline-block;text-align:center;}
+ul.menuList > div.menuBar > li.meet-li > ul.meet-li-ul > li.meet-li-ul-li > a.meet-li-ul-li-a:hover {color:tomato;background: #FFF;width:100%;vertical-align: middle;text-align:center;}
+
+
 /* 기본 메뉴바 - 검색, 모임, 후기, 명언, 안내&문의 */
 ul.menuList > div.menuBar {vertical-align: middle;text-decoration:none;}
 ul.menuList > div.menuBar > a.menu-bar-a {text-decoration:none;margin-bottom:10px;}
 ul.menuList > div.menuBar > a.menu-bar-a > span.menu-bar-a-sp {color:#000;text-decoration:none;font-size:15px;}
 ul.menuList > div.menuBar > a.menu-bar-a > span.menu-bar-a-sp:hover {color:tomato;text-decoration:none;}
+
 
 
 /* 프로필 */
@@ -190,7 +202,13 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 
 		<!-- 메뉴명 -->
 		<div class="menuBar">
-			<a class="menu-bar-a" href="<%=request.getContextPath() %>/user/meeting/list"><span class="menu-bar-a-sp">모임</span></a>
+			<li class="meet-li">
+				<span class="meet-li-sp">모임</span>
+				<ul class="meet-li-ul">
+					<li class="meet-li-ul-li"><a class="meet-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/list">생성된 모임</a></li>
+					<li class="meet-li-ul-li"><a class="meet-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/endlist">종료된 모임</a></li>
+				</ul>
+			</li>
 		</div>
 
 		<!-- 메뉴명 -->
