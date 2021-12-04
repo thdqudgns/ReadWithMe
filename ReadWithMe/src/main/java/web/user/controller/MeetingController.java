@@ -1,6 +1,5 @@
 package web.user.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,24 +45,24 @@ public class MeetingController {
 		model.addAttribute("list", list);
 	}
 
-//	// 종료된 모임
-//	@RequestMapping(value="/endlist", method = RequestMethod.GET)
-//	public void MeetingEndList(Paging paramData, Model model) {
-//		logger.info("/meeting/endlist");
-//		
-//		//페이징 계산
-//		Paging paging = meetingService.getPaging( paramData );
-//		logger.info("{}", paging);
-//		
-//		//모임 목록 조회
-//		List<Meeting> endlist = meetingService.list(paging);
-//		for(Meeting m : endlist) {
-//			logger.info("{}", m);
-//		}
-//		
-//		model.addAttribute("paging", paging);
-//		model.addAttribute("endlist", endlist);
-//	}	
+	// 종료된 모임
+	@RequestMapping(value="/endlist", method = RequestMethod.GET)
+	public void MeetingEndList(Paging paramData, Model model) {
+		logger.info("/meeting/endlist");
+		
+		//페이징 계산
+		Paging paging = meetingService.getPaging( paramData );
+		logger.info("{}", paging);
+		
+		//모임 목록 조회
+		List<Meeting> endlist = meetingService.endlist(paging);
+		for(Meeting m : endlist) {
+			logger.info("{}", m);
+		}
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("endlist", endlist);
+	}	
 	
 	// 모임 상세보기
 	@RequestMapping(value="/view", method=RequestMethod.GET)

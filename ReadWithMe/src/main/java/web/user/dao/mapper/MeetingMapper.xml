@@ -51,16 +51,17 @@
 						</foreach>
 					</if>
 				</trim>
-				<![CDATA[
-				WHERE meeting_approved = 1 AND meeting_end > TO_CHAR(SYSDATE,'YYYY-MM-DD')
-				]]>				
        			 ORDER BY meeting_no DESC
        		 ) L
    		 ) list
 		WHERE rnum BETWEEN ${paging.startNo } AND #{paging.endNo }
 	</select>
+	
+	<!-- <![CDATA[
+	WHERE meeting_approved = 1 AND meeting_end > TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	]]>  -->
 
-<!-- 	<select id="selectList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
+	<select id="selectEndList" parameterType="web.util.Paging" resultType="web.user.dto.Meeting">
 		SELECT * FROM (SELECT rownum rnum, M.* FROM (
 			SELECT
 				meeting_no, user_no, meetingtype_no, area_no, book_class_no,
@@ -69,10 +70,10 @@
 				meeting_address, meeting_board_date, meeting_approved
 			FROM meeting
 			<![CDATA[
-			WHERE meeting_approved = 1 AND meeting_end =< TO_CHAR(SYSDATE,'YYYY-MM-DD')
+			WHERE meeting_approved = 1 AND meeting_end <= TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			]]>
 		ORDER BY meeting_no DESC) M) R WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select> -->
+	</select>
 	
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM meeting
