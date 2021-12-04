@@ -39,7 +39,7 @@
         <div class="search_book">
         <fieldset class="srch">
                 <legend>검색영역</legend>
-                <input type="text" name="query" id="query" accesskey="s" title="검색어" class="keyword" />
+                <input type="text" name="query" id="query" accesskey="s" title="검색어" class="keyword" placeholder="책 제목을 입력해주세요"/>
                 <input type="button" id="search" name="search" alt="검색" onclick="callAjax( $('#query').val() );" value="검색" />
         </fieldset>
         
