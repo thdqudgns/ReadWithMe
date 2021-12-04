@@ -330,6 +330,11 @@ public class MyPageServiceInpl implements MyPageService {
 		
 		return list;
 	}
+
+	@Override
+	public String getSocialType(UserTb user) {
+		return myPageDao.selectSocialTypeByUserNo(user);
+	}
 	
 	
 }

@@ -150,7 +150,7 @@ public interface LoginService {
 	 * @param user
 	 * @return
 	 */
-	public void findEmail(UserTb user);
+	public boolean findEmail(UserTb user);
 
 	/**
 	 * 유저 제재 상태 확인시켜주기 위함

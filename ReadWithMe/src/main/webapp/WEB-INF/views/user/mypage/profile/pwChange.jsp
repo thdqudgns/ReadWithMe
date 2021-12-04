@@ -31,7 +31,7 @@
 </div>
 
 <div id="checkBtns">
-<button class="checkBtn" id="reg_submit" style="background-color: #9f8170; color: #fff;">확인</button>
+<button class="checkBtn" type="button" id="reg_submit" style="background-color: #9f8170; color: #fff;">확인</button>
 <a href="mypage/main"><button class="checkBtn" type="button">취소</button></a>
 </div>
 </form>

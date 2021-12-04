@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <c:import url="/WEB-INF/views/admin/layout/header.jsp" />
+<script src="/resources/js/adminMember_script.js"></script>
 
 <link href="/resources/css/adminMember.css" rel="stylesheet">
 
@@ -33,8 +34,8 @@ input[type="radio"]:checked + label span {
 <form method="get" id="banForm1">
 
 <div class="banClass">
-<button id="approvalBtn">승인</button>
-<button id="deleteBtn">삭제</button>
+<button id="approvalBtn" type="button">승인</button>
+<button id="deleteBtn" type="button">삭제</button>
 </div>
 
 <table class="table-hover" style="margin: 0 auto; margin-top: 10px;">

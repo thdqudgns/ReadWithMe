@@ -43,9 +43,10 @@ public class MyPageMainController {
 		
 		List<Meeting> meetingList = myPageService.getMeeting(user);
 		
+		String socialType = myPageService.getSocialType(user);
 		
 		model.addAttribute("meetingList", meetingList);
-		
+		model.addAttribute("type", socialType);
 		
 		
 		return "user/mypage/main";

@@ -341,8 +341,15 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public void findEmail(UserTb user) {
-		loginDao.deleteEmail(user);
+	public boolean findEmail(UserTb user) {
+		
+		if(loginDao.deleteEmail(user) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+		
 	}
 	
 	@Override

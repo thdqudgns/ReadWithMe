@@ -169,7 +169,7 @@ public interface LoginDao {
 	 * 고객이 입력한 email 인증테이블에서 삭제
 	 * @param user
 	 */
-	public void deleteEmail(UserTb user);
+	public int deleteEmail(UserTb user);
 
 	/**
 	 * 제재내용 확인
