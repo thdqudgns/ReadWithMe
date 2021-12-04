@@ -73,7 +73,7 @@
 .menuMain {display:table-cell;width:200px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 .menuBar span {display: table-cell;}
-.menuProfile {display:table-cell;vertical-align:middle;width:100px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
+.menuProfile {display:table-cell;vertical-align:middle;width:150px;height:40px;table-layout:fixed;list-style-type:none;text-align:center;}
 
 
 /* 가로 메뉴바 전체를 묶는 ul */
@@ -107,12 +107,12 @@ ul.menuList > div.menuBar > a > div:hover {color:#11ee6f;text-decoration:none;}
 ul.menuList > div.menuProfile {vertical-align: middle;text-decoration:none;}
 ul.menuList > div.menuProfile > li {font-size:15px;}
 ul.menuList > div.menuProfile > li > img {vertical-align: middle;}
-ul.menuList > div.menuProfile > li > span {vertical-align: middle;color:#FFF;}
-ul.menuList > div.menuProfile > li > ul {z-index:9999;position: absolute;list-style-type: none;width:auto;line-height: 0;}
-ul.menuList > div.menuProfile > li > ul > li {background:#754d17;height:0;font-size:0;}		/* 기본값0: 안보임 -> hover 하면 보임 */
+ul.menuList > div.menuProfile > li > span {vertical-align: middle;color:#FFF;width:150px;}
+ul.menuList > div.menuProfile > li > ul {z-index:9999;position: absolute;list-style-type: none;width: 150px;line-height: 0;}
+ul.menuList > div.menuProfile > li > ul > li {background:#754d17;height:0;font-size:0;width: 150px;}		/* 기본값0: 안보임 -> hover 하면 보임 */
 ul.menuList > div.menuProfile > li:hover > span {color:#11ee6f;}
-ul.menuList > div.menuProfile > li:hover > ul > li {width:100px;height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
-ul.menuList > div.menuProfile > li > ul > li > a {background: #754d17;color:#fff;text-decoration:none;width:100px;display:inline-block;text-align:center;}
+ul.menuList > div.menuProfile > li:hover > ul > li {width:150px;height:40px;font-size:13px;line-height:40px;text-align:center;transition: height 500ms;}
+ul.menuList > div.menuProfile > li > ul > li > a {background: #754d17;color:#fff;text-decoration:none;width:150px;display:inline-block;text-align:center;}
 ul.menuList > div.menuProfile > li > ul > li > a:hover {color:#11ee6f;background: #754d17;width:100%;vertical-align: middle;text-align:center;}
 
 
