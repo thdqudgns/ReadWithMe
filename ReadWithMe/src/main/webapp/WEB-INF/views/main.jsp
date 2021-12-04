@@ -417,12 +417,12 @@
 		
 		<div class="meeting-list">
 		<c:forEach begin="0" end="4" var="i">
-			<div class="metting">
+			<div class="meeting">
 				<div class="meeting-thumbnail">
 					<a href=
 					<c:if test="${not empty user_no}">"/user/meeting/view?no=${list.get(i).meeting_no}"</c:if>
 					<c:if test="${empty user_no}">"/login"</c:if>
-					><img src="https://i.imgur.com/qxqjwv4.jpg""></a><br>
+					><img src="https://i.imgur.com/UdgRZGj.jpg"></a><br>
 				</div>
 				<div class="meeting-title">
 					${list.get(i).meeting_title }<br>
@@ -438,12 +438,12 @@
 		</div>
 		<div class="meeting-list">
 		<c:forEach begin="5" end="9" var="i">
-			<div class="metting">
+			<div class="meeting">
 				<div class="meeting-thumbnail">
 					<a href=
 					<c:if test="${not empty user_no}">"/user/meeting/view?no=${list.get(i).meeting_no}"</c:if>
 					<c:if test="${empty user_no}">"/login"</c:if>
-					><img src="https://i.imgur.com/qxqjwv4.jpg""></a><br>
+					><img src="https://i.imgur.com/qxqjwv4.jpg"></a><br>
 				</div>
 				<div class="meeting-title">
 					${list.get(i).meeting_title }<br>
@@ -457,7 +457,6 @@
 			</div>
 		</c:forEach>
 		</div>
-
 	</div>
 </section>
 
@@ -510,7 +509,7 @@
 		<div style="width: 230px; height: 400px; float: right; overflow-y:scroll;">
 		<c:forEach items="${list }" var="meeting">
 			<div class="balloon_03">${meeting.meeting_title }
-				<div style="font-size: 15px;">일시 <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy.MM.dd"/><br>
+				<div style="font-size: 13px;">일시 <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy.MM.dd"/><br>
 				장소 ${meeting.meeting_location }
 				</div>
 			</div>
