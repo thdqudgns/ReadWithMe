@@ -215,7 +215,6 @@ ul.meeting-ul, li.meeting-li {
 							</label>
 						</div>
 
-						<button type="button">초기화</button>
 						<button class="btn">검색</button>						
 					</form>
 				</div>
@@ -260,7 +259,9 @@ ul.meeting-ul, li.meeting-li {
 				</div> <!-- searchresult end -->
 			</div> <!-- end row -->
 
+		<div class="mp" style="margin: 0 auto;">
 		<c:import url="/WEB-INF/views/user/layout/meetingpaging.jsp" />			
+		</div>	
 			
 		</div> <!-- end container -->
 	</div> <!-- end layout content -->
