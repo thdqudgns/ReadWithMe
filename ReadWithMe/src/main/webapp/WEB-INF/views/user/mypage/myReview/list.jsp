@@ -10,7 +10,39 @@
 	<c:import url="/WEB-INF/views/user/layout/header.jsp" />
 	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
-
+	<style type="text/css">
+section {
+	width: 700px;
+	margin: 0 auto;
+}
+h2 {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #333333;
+}
+#line {
+	height: 2px;
+	width: 700px;
+	background-color: #e0e0e0;
+	margin: 0 auto;
+}
+#myReview_title {
+	margin: 20px;
+}
+table {
+	margin: 30px;
+    width: 650px;
+    border-top: 1px solid #ccc;
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    width: 70px;
+  }
+	</style>
 
 </head>
 
@@ -21,38 +53,40 @@
 
 	<div class="container">
 	
-		<h3>내가 작성한 후기</h3>
-		<p>지금까지 작성한 후기를 살펴보세요!</p>
+		<div id="myReview_title">
+			<h3>내가 작성한 후기</h3>
+			<p>지금까지 작성한 후기를 살펴보세요!</p>
+		</div>
 	
         <table>
             <thead>
 	            <tr class="division">
-<!-- 	                <th>썸네일</th> -->
-	                <th>제목/본문</th>
-	                <th>작성자</th>
-	                <th>날짜</th>
-	                <th>조회수</th>
+	                <th style="width: 50px;">제목 / 본문</th>
+	                <th style="width: 20px;">작성자</th>
+	                <th style="width: 20px;">날짜</th>
+	                <th style="width: 10px;">조회수</th>
 	            </tr>
             </thead>
                   
             <tbody>
 
-            <c:forEach items="${list }" var="myReviewList">
+            <c:forEach items="${reviewList }" var="reviewList">
                 <tr>
                     <td id='title'>
-                        <a href="/user/mypage/myReview/view?review_no=${myReviewList.review_no }">${myReviewList.review_title }</a>
+                        <a href="/user/mypage/myReview/view?review_no=${reviewList.review_no }">${reviewList.review_title }</a>
                     </td>
-                    <td rowspan="2">${myReviewList.nick}</td>
-					<td><fmt:formatDate value="${myReviewList.review_date }" pattern="yyyy-MM-dd"/></td>
+                    <td rowspan="2" style="border-bottom: 1px solid #ccc;">${reviewList.nick}</td>
+					<td rowspan="2" style="border-bottom: 1px solid #ccc;"><fmt:formatDate value="${reviewList.review_date }" pattern="yyyy-MM-dd"/></td>
+                    <td rowspan="2" style="border-bottom: 1px solid #ccc;">${reviewList.review_views }</td>					
                 </tr>
                 <tr>
-                    <td id='content'>
+                    <td id='content' style="border-bottom: 1px solid #ccc;">
                         <c:choose>
-                            <c:when test="${fn:length(myReviewList.review_content) > 14}">
-                                <c:out value="${fn:substring(myReviewList.review_content,0,13)}"/>....
+                            <c:when test="${fn:length(reviewList.review_content) > 14}">
+                                <c:out value="${fn:substring(reviewList.review_content,0,13)}"/>....
                             </c:when>
                             <c:otherwise>
-                                <c:out value="${myReviewList.review_content }"/>
+                                <c:out value="${reviewList.review_content }"/>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -63,7 +97,7 @@
 
         </table>	
 
-	<c:import url="/WEB-INF/views/user/layout/reviewPaging.jsp" />
+	<c:import url="/WEB-INF/views/user/layout/myReviewPaging.jsp" />
 	
 	</div><!-- .container -->	
 </section>

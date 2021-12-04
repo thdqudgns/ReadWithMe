@@ -21,21 +21,8 @@ $(window).load(function() {
 	$("#message_option_select").val(url).prop("selected", true);
 
 	})
-	
-	 $(document).ready(function() {
-    	$("#btnDelete").click(function() {
-    		if( confirm("쪽지를 삭제하시겠습니까?") ) {
-    			$("#messageList").submit();    			
-//     			$(location).attr("href", "/message/delete?no="+$(this).attr('value'));
-    		}
-    	});
-    	
-	  	//체크 박스
-    	$('.check-all').click(function(){
-    		$('.check').prop('checked', this.checked);
-    	})	
-	 });	
 </script>
+
 </head>
 
 <section id="message">
@@ -48,7 +35,7 @@ $(window).load(function() {
 		<div id="message_page_title">
 			<h3>쪽지함</h3>
 		</div>
-					
+		
 		<div id="message_otn_btn">
 			<div id="message_buttons">
 				<button onclick='location.href="/user/mypage/message/delete";' id="btnDelete">삭제</button>
@@ -62,24 +49,35 @@ $(window).load(function() {
 				</select>
 			</div>
 		</div>
-		<div id="message_list_form">
-				<form action="<%=request.getContextPath() %>/user/mypage/message/delete" method="get" id="List">
 		
+		<div id="message_list_form">
+			<form action="<%=request.getContextPath() %>/user/mypage/message/delete" method="get" id="list">
 				<table id="message_list_table">
 					<colgroup>
 						<col style="width: 50px">
 						<col style="width: 500px">
 						<col style="width: 150px">
 					</colgroup>
+					   
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<td rowspan="2" style="padding: 10px;"><input type="checkbox" name="check-all" class="check-all" /></td> -->
+<!-- 							<td>제목</td> -->
+<!-- 							<td rowspan="2">보낸사람</td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td>내용</td> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
 
 						<c:forEach items="${list }" var="message">
 						<tr>
-							<td rowspan="2" style="border-bottom: 1px solid #444444;"><input type="checkbox" name="check-all" class="check-all" /></td>
-							<td><a href="<%=request.getContextPath() %>/user/mypage/message/view?msg_no=${message.MSG_NO }">${message.MSG_TITLE}</a></td>
-							<td rowspan="2"  style="border-bottom: 1px solid #444444; text-align: center;">${message.NICK}</td>
+							<td rowspan="2"><input type="checkbox" name="check-all" class="check-all" /></td>
+							<td><a href="<%=request.getContextPath() %>/user/mypage/message/send/view?msg_no=${message.MSG_NO }">${message.MSG_TITLE}</a></td>
+							<td rowspan="2">${message.NICK}</td>
 						</tr>
 						<tr>
-							<td  style="border-bottom: 1px solid #444444;">${message.MSG_CONTENT}</td>
+							<td>${message.MSG_CONTENT}</td>
 						</tr>
 						</c:forEach>	
 				</table>

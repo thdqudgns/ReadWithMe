@@ -1,6 +1,7 @@
 package web.user.dao.face;
 
 import java.util.List;
+import java.util.Map;
 
 import web.user.dto.Message;
 import web.util.Paging;
@@ -15,8 +16,12 @@ public interface MessageDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 쪽지 목록
 	 */
-	public List<Message> selectAllToMeList(Paging paging);
+	public List<Map<String, Object>> selectAllToMeList(Map<String, Object> params);
 
+	
+	public List<Map<String, Object>> selectAllToOtherList(Map<String, Object> params);
+	
+	
 	/**
 	 * 전체 쪽지 수를 조회한다
 	 * 
@@ -30,7 +35,7 @@ public interface MessageDao {
 	 * @param viewMessage - 조회하려는 쪽지의 글 번호 객체
 	 * @return 조회된 쪽지 정보
 	 */
-	public Message selectMessgaeByMsg_no(Message viewMessage);
+	public Map<String, Object> selectMessgaeByMsg_no(Message viewMessage);
 	
 	/**
 	 * 쪽지 정보를 삽입한다
@@ -45,6 +50,17 @@ public interface MessageDao {
 	 * @param message - 삭제할 쪽지의 쪽지 번호 객체
 	 */
 	public void delete(Message message);
+
+	public void insertMessage(Message message);
+
+
+	public int selectUserByNick(String nick);
+
+
+	public Map<String, Object> selectMessgaeBySendMsg_no(Message viewMessage);
+
+
+
 
 
 

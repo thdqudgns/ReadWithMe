@@ -1,36 +1,233 @@
-/* 이미지 슬라이더 박스 */
-#sliderbox {
-	width: 900px;
-	height: 500px;
-	border: 1px solid #ccc;
-	
-	/* 외부 여백 */
-	margin: 0 auto;
-	
-	/* div영역을 벗어난 부분을 안보이게 처리 */
-/* 	overflow: visible; */
- 	overflow: hidden;
-}
+/* 메인 슬라이더 부분 */
 
-#slider {
-	/* ul태그의 기본 스타일 제거 */
-	padding: 0;
+* {
 	margin: 0;
-	list-style-type: none;
-	
-	/* 자식요소 absolute박스의 기준점으로 설정하기 */
+	padding: 0;
+	box-sizing:border-box;
+}
+
+/* Slideshow container */
+.slideshow-container {
+	max-width: 960px;
+	max-height: 450px;
 	position: relative;
+	margin: auto;
+}
+.slideshow-container .mySlides img {
+	height: 450px;
 }
 
-#slider li {
+/* Hide the images by default */
+.mySlides {
+	display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+	cursor: pointer;
 	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
 }
 
-#slider li img {
-	width: 900px;
-	height: 500px;
+/* Position the "next button" to the right */
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
 }
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+
+/* 	color: rgba(0,0,0,0.8); */
+}
+
+/* Caption text */
+.text {
+	color: #f2f2f2;
+	font-size: 20px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+	color: #f2f2f2;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+	cursor: pointer;
+	height: 8px;
+	width: 8px;
+	margin: 0 auto;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+	background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+@keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+/* 메인 슬라이더 부분 ------------------------------------- */
+
+
+/* 최근 생성된 모임 */
+
+#meeting_top {
+	width: 920px;
+	margin: 0 auto;
+}
+#new_meeting_title {
+	float: left;
+}
+#all_meeting_button {
+	float: right;
+}
+
+/* 최근 생성된 모임 ------------------------------------- */
+
+
+#line {
+	height: 1px;
+	width: 925px; 
+	clear: both; 
+	background-color: #e0e0e0;
+	margin: 0 auto; 
+}
+
+
+/* best review / 공지사항 */
+
+#main_posts {
+	margin: 0 auto;
+	width: 975px;
+	height: 240px;
+	clear: both;
+}
+#best_review {
+	border: 1px solid #9f8170;
+	width: 415px;
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 50px;
+	border-radius: 5px;
+}
+#new_notice {
+	border: 1px solid #9f8170;
+	width: 415px;
+	height: 200px;
+	float: right;
+	margin: 20px;
+	margin-bottom: 20px;
+	margin-right: 50px;
+	border-radius: 5px;
+}
+.left__title {
+	text-align: center;
+	margin: 10px;
+}
+.notice__title {
+	text-align: center;
+	margin: 10px;
+}
+.review_line {
+	width: 350px;
+	border: 1px solid #ccc;
+	background-color: #ccc;
+	margin: 0 auto;
+}
+.notice_line {
+	width: 350px;
+	border: 1px solid #ccc;
+	background-color: #ccc;
+	margin: 0 auto;	
+}
+#best_review_div {
+	margin: 0 auto;
+	width: 350px;
+}
+table {
+	width: 350px;
+	padding: 5px;
+	margin-top: 5px;
+}
+td {
+	height: 40px;
+}
+#new_notice_div {
+	margin: 0 auto;
+	width: 350px;		
+}
+
+/* 최근 생성된 모임 ------------------------------------- */
+
+
+/* 지도 : 모임 표시 */
+	
 map {
 	margin: 0 auto;
-	
 }
+.balloon_03 {
+	position:relative;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	margin-left: 25px;
+	width:170px;
+	height:80px;
+	background:#ccc;
+	border-radius: 10px;
+	padding: 5px;
+}
+.balloon_03:after {
+	border-top:15px solid #ccc;
+	border-left: 15px solid transparent;
+	border-right: 0px solid transparent;
+	border-bottom: 0px solid transparent;
+	content:"";
+	position:absolute;
+	top:10px;
+	left:-15px;
+}
+
+
+
+
+
