@@ -6,7 +6,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
-
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 window.onload = function(){
@@ -18,10 +17,10 @@ window.onload = function(){
 			}
 		}).open();
 	});
-}
+};
 </script>
 
-<script>
+<script type="text/javascript">
 $(document).ready(function() {
 	$('#check').click(function(){
 		console.log("클릭되나");
@@ -78,19 +77,14 @@ $(document).ready(function() {
 			$('form').submit();
 		}
 	})
-
-})
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
+	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
 		elPlaceHolder: "meeting_content",
 		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 		fCreator: "createSEditor2"
-	});
+	})
 });
 </script>
 
@@ -238,6 +232,7 @@ textarea::placeholder {
 
 </style>
 
+<body>
 <div class="container">
 <div class="box">
 <p class="page-title">모임 등록</p>
@@ -350,7 +345,7 @@ textarea::placeholder {
 
 <div class="info-group">
 	<label class="form-label">위치</label>
-	<input type="text" class="form-input" id="meeting_address" placeholder="주소" readonly>
+	<input type="text" class="form-input" name="meeting_address" id="meeting_address">
 </div>
 
 <div class="info-group">
@@ -358,7 +353,7 @@ textarea::placeholder {
 	<textarea rows="14" name="meeting_content" id="meeting_content" style="width: 566px; height: 340px; padding: 12px 15px;" placeholder="내용을 입력하세요"></textarea>
 </div>
 
-<input type="hidden" name="meeting_approved" id="meeting_approved" value="n">
+<input type="hidden" name="meeting_approved" id="meeting_approved" value="0">
 
 <div class="checklist-area">
 1. ReadWithMe는 누구나 참여할 수 있는 공개 행사입니다.<br>
@@ -378,4 +373,5 @@ textarea::placeholder {
 </div> <!-- end box -->
 </div> <!-- end container -->
 
+</body>
 <c:import url="/WEB-INF/views/user/layout/footer.jsp" />

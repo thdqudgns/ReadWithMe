@@ -124,7 +124,9 @@ public class MeetingController {
 		logger.info("{}", meeting);
 		logger.info("{}", file);
 		
-		meeting.setUser_no(Integer.parseInt((String) session.getAttribute("user_no")));
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		meeting.setUser_no(user_no);
+		
 		logger.info("{}", meeting);
 		
 		meetingService.write(meeting, file);
