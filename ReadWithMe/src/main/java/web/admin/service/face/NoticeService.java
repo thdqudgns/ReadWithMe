@@ -98,6 +98,13 @@ public interface NoticeService {
 	 */
 	public void cancelChecked(String no);
 
+	/**
+	 * 공지사항 선택한 항목 조회
+	 * 
+	 * @return 공지사항 선택한 항목
+	 */
+	public List<Notice> getSelected();
+
 
 
 

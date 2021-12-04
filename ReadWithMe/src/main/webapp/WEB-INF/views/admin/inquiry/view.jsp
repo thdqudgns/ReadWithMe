@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -54,13 +54,19 @@ $(document).ready(function(){
 				data_for_board_no : "${inquiry.board_no}"
 			},
 			method : 'post',
-			success : function() {
-				alert("답변 완료");
-			},
-			error : function() {
-				alert("실패");
+			dataType : "json",
+			success : function(jdata) {
+				if(jdata.result = 1) {
+					alert("답변 완료");
+				} else {
+					alert("실패");
+				}
 			}
-		})
+		})	
+	});
+	
+	$("#btnMail").click(function(){	
+				location.href = "/admin/inquiry/sendMail?user_no=" + ${inquiry.user_no};
 	});
 	
 });
@@ -222,6 +228,8 @@ function updateReply(comment_no) {
 			</tr>
 		</table>
 
+		<a href="/admin/inquiry/download?file_no=${inquiry_file.file_no }">${inquiry_file.origin_name }</a>
+
 		<%-- <a href="/admin/faq/download?file_no=${FAQfile.fileNo }">${FAQfile.originName }</a> --%>
 
 		<div class="text-center">
@@ -229,11 +237,12 @@ function updateReply(comment_no) {
 					class="btn"
 					style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
 <%-- 			<c:if test="${id eq viewBoard.writerId }"> --%>
-						<a href="/admin/inquiry/update?board_no=${inquiry.board_no }"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">수정</button></a>
 						<a href="/admin/inquiry/delete?board_no=${inquiry.board_no }"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">삭제</button></a>
 <%-- 			</c:if> --%>
 			<button id="check_reply" class="btn"
 				style="border-color: #D3D3D3; background: white; color: gray;">답변 완료</button>
+			<button id="btnMail" class="btn"
+				style="border-color: #D3D3D3; background: white; color: gray;">url 링크 메일 보내기</button>
 		</div>
 
 			<div style="height: 50px;"></div>

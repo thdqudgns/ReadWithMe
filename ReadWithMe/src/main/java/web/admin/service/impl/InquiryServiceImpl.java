@@ -11,6 +11,7 @@ import web.admin.dao.face.InquiryDao;
 import web.admin.service.face.InquiryService;
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
+import web.user.dto.Inquiry_file;
 import web.util.Paging;
 
 @Service
@@ -69,17 +70,37 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 	
 	@Override
-	public void update(Inquiry inquiry) {
-			if("".equals(inquiry.getBoard_title())) {
-				inquiry.setBoard_title("(제목없음)");
-			}
-			inquiryDao.update(inquiry);
-	}
-	
-	@Override
 	public void delete(Inquiry inquiry) {
 		inquiryDao.deleteCommentByBoardno(inquiry);
 		inquiryDao.delete(inquiry);
+	}
+	
+	@Override
+	public Inquiry_file getAttachFile(Inquiry inquiry) {
+		return inquiryDao.selectInquiryfileByBoardno(inquiry);
+	}
+	
+	@Override
+	public Inquiry_file getFile(int file_no) {
+		return inquiryDao.selectInquiryfileByFileno(file_no);
+	}
+	
+	@Override
+	public void deleteChecked(String no) {
+		
+		Inquiry inquiry = new Inquiry();
+		inquiry.setBoard_no(Integer.parseInt(no));
+		
+		
+		inquiryDao.deleteCommentByBoardno(inquiry);
+		inquiryDao.deleteFile(inquiry);
+		inquiryDao.deleteByBoardno(no);
+		
+	}
+	
+	@Override
+	public List<Inquiry> getHisInquiries(int user_no) {
+		return inquiryDao.selectInquiriesByUserNo(user_no);
 	}
 	
 }

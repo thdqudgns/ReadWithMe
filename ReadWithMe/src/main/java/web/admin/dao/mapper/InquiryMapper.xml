@@ -9,7 +9,7 @@
   		<sql id="selectInquiry">
   			SELECT
   				board_no, board_title, board_content
-  				,	board_date, check_reply
+  				,	board_date, check_reply, type, user_no
   			FROM inquiry
   		</sql>
   		
@@ -33,8 +33,22 @@
   				) B
   			) R
   			WHERE rnum BETWEEN #{startNo } AND #{endNo }
+  			<if test="type != 0">
+  			AND type = #{type}
+  			</if>
   		</select>
-  	
+  		
+  		<select id="selectInquiriesByUserNo" resultType="web.user.dto.Inquiry" parameterType="int">
+ 			SELECT * FROM ( 
+ 				SELECT rownum rnum, B.* FROM (
+ 					SELECT * FROM inquiry
+ 				ORDER BY board_no DESC
+ 				) B
+ 			) R
+ 			WHERE rnum BETWEEN 1 AND 5
+ 			AND user_no = #{user_no } 
+  		</select>
+  		
   		<select id="selectInquiryByBoardno" resultType="web.user.dto.Inquiry" parameterType="web.user.dto.Inquiry">
   			SELECT * FROM inquiry
   			WHERE board_no = #{board_no }
@@ -57,13 +71,6 @@
   		WHERE comment_no = #{comment_no }
   	</update>
   	
-  	<update id="update" parameterType="web.user.dto.Inquiry">
-  		UPDATE inquiry
-  		SET board_title = #{board_title }
-  			,board_content = #{board_content }
-  		WHERE board_no = #{board_no }
-  	</update>
-  	
   	<delete id="delete" parameterType="web.user.dto.Inquiry">
   		DELETE inquiry
   		WHERE board_no = #{board_no }
@@ -71,6 +78,30 @@
   	
   	<delete id="deleteCommentByBoardno" parameterType="web.user.dto.Inquiry">
   		DELETE admininquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	<select id="selectInquiryfileByBoardno"  resultType="web.user.dto.Inquiry_file" parameterType="web.user.dto.Inquiry">
+  		SELECT
+  			file_no, board_no, origin_name, stored_name
+  		FROM inquiry_file
+  		WHERE board_no = #{board_no }
+  	</select>
+  	
+  	<select id="selectInquiryfileByFileno" resultType="web.user.dto.Inquiry_file" parameterType="web.user.dto.Inquiry">
+  		SELECT
+  			file_no, board_no, origin_name, stored_name
+  		FROM inquiry_file
+  		WHERE file_no = #{file_no }
+  	</select>
+  	
+  	<delete id="deleteByBoardno" parameterType="String">
+  		DELETE inquiry
+  		WHERE board_no = #{board_no }
+  	</delete>
+  	
+  	<delete id="deleteFile" parameterType="web.user.dto.Inquiry">
+  		DELETE inquiry_file
   		WHERE board_no = #{board_no }
   	</delete>
   	

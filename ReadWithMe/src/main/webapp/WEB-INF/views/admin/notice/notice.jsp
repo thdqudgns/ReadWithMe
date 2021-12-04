@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:import url="/WEB-INF/views/user/layout/header.jsp" />
+<c:import url="/WEB-INF/views/admin/layout/header.jsp" />
 
 <!-- 부트스트랩 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -310,12 +310,7 @@ table, th {
 			</table>
 			</div>
 			
-			<span class="glyphicon glyphicon-repeat pull-left"
-				style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px; color: gray; cursor: pointer;" 
-				onclick="window.location.reload(); "></span>
-			
 			<span style="margin-left: 10px;">total : ${paging.totalCount }</span>
-			
 			
 			<button id="btnCancel" class="btn pull-right"
 				onclick="cancelValue();" style="margin-right: 2px; border-color: gray; background:white; color:gray;">취소</button>

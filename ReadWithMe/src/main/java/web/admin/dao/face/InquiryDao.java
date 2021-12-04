@@ -4,6 +4,7 @@ import java.util.List;
 
 import web.user.dto.AdminInquiry;
 import web.user.dto.Inquiry;
+import web.user.dto.Inquiry_file;
 import web.util.Paging;
 
 public interface InquiryDao {
@@ -54,13 +55,6 @@ public interface InquiryDao {
 	public void updateComment(AdminInquiry adminInquiry);
 
 	/**
-	 * 1:1질문 수정
-	 * 
-	 * @param inquiry
-	 */
-	public void update(Inquiry inquiry);
-
-	/**
 	 * 1:1 질문 삭제
 	 * 
 	 * @param inquiry - 삭제될 1:1질문 
@@ -74,5 +68,44 @@ public interface InquiryDao {
 	 */
 	public void deleteCommentByBoardno(Inquiry inquiry);
 
+	/**
+	 * 1:1 질문 첨부파일 조회
+	 * 
+	 * @param inquiry - 게시글 번호를 가진 객체
+	 * @return
+	 */
+	public Inquiry_file selectInquiryfileByBoardno(Inquiry inquiry);
+
+	/**
+	 * 파일번호로 1:1질문 첨부파일 조회
+	 * 
+	 * @param file_no - 파일 번호
+	 * @return
+	 */
+	public Inquiry_file selectInquiryfileByFileno(int file_no);
+	
+	/**
+	 * 게시글 번호로 1:1질문 삭제
+	 * 
+	 * @param no - 게시글 번호
+	 */
+	public void deleteByBoardno(String no);
+
+	/**
+	 * 게시글 번호로 첨부파일 삭제
+	 * 
+	 * @param inquiry - 게시글 번호를 가진 객체
+	 */
+	public void deleteFile(Inquiry inquiry);
+
+	/**
+	 * 회원 고유 번호로 1:1 질문 조회
+	 * 
+	 * @param user_no - 회원 고유 번호
+	 * @return
+	 */
+	public List<Inquiry> selectInquiriesByUserNo(int user_no);
+	
+	
 	
 }

@@ -69,7 +69,9 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		
 		// 파일이 저장될 경로
-		String storedPath = context.getRealPath("upload");
+//		String storedPath = context.getRealPath("upload");
+		
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "noticeImage/";
 		
 		File storedFolder = new File(storedPath);
 		if( !storedFolder.exists()) {
@@ -119,7 +121,7 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		
 		//	파일이 저장될 경로(real path)
-		String storedPath = context.getRealPath("upload");
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "noticeImage/";
 		
 		//	폴더가 존재하지 않으면 생성하기
 		File stored = new File(storedPath);
@@ -179,6 +181,11 @@ public class NoticeServiceImpl implements NoticeService {
 	// 선택된 게시글 삭제
 	@Override
 	public void deleteChecked(String no) {
+		
+		Notice notice = new Notice();
+		notice.setBoard_no(Integer.parseInt(no));
+		
+		noticeDao.deleteFile(notice);
 		noticeDao.deleteByBoardno(no);
 	}
 	
@@ -194,6 +201,11 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDao.updateToCancelByBoardno(no);
 	}
 
+	@Override
+	public List<Notice> getSelected() {
+		return noticeDao.getSelected();
+	}
+	
 }
 
 

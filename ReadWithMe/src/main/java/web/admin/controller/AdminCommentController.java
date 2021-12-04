@@ -46,13 +46,14 @@ public class AdminCommentController {
 	}
 	
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
-	public void update(AdminInquiry adminInquiry, Model model) {
+	public String update(AdminInquiry adminInquiry, Model model) {
 		
 		System.out.println( " adminInquiry : " + adminInquiry);
 		
 		inquiryService.updateComment(adminInquiry);
 		
-//		inquiryService.updateComment(adminInquiry);
+		model.addAttribute("result", 1);
+		return "jsonView";
 		
 	}
 	
