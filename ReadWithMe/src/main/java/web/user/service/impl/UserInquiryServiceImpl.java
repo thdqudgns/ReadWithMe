@@ -66,7 +66,7 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 		}
 		
 		//	파일이 저장될 경로
-		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "inquiryImage/";
+		String storedPath = context.getRealPath("upload");
 		
 		File storedFolder = new File(storedPath);
 		if(!storedFolder.exists()) {
@@ -149,7 +149,7 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 			return;
 		}
 		
-		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "inquiryImage/";
+		String storedPath =context.getRealPath("upload");
 		
 		//	폴더가 존재하지 않으면 생성하기
 		File stored = new File(storedPath);

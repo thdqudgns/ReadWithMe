@@ -34,10 +34,8 @@ public class InquiryDownloadView extends AbstractView {
 		Inquiry_file inquiry_file = (Inquiry_file) model.get("inquiryFile");
 		logger.info("{}", inquiry_file);
 		
-		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "inquiryImage/";
-		
 		//업로드된 파일 객체
-		File src = new File(storedPath, inquiry_file.getStored_name());
+		File src = new File(context.getRealPath("upload"), inquiry_file.getStored_name());
 		
 		//파일 입력 스트림
 		FileInputStream fis = new FileInputStream(src);
