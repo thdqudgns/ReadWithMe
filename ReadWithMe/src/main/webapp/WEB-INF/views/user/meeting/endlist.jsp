@@ -11,6 +11,10 @@
 body {
 	font-size: 14px;
 }
+.page-title {
+	margin-bottom: 24px;
+	font-size: 24px;
+}
 .container {
 	display: flex;
 	flex-direction: column;
@@ -66,6 +70,7 @@ ul.meeting-ul, li.meeting-li {
 	<div class="content">
 		<div class="container">
 			<div class="row">
+			<div class="page-title">종료된 모임</div>
 				<div class="searchresult" id="searchresult">
 					<ul class="meeting-ul">
 					<c:forEach items="${endlist }" var="meeting">
@@ -106,7 +111,9 @@ ul.meeting-ul, li.meeting-li {
 				</div> <!-- searchresult end -->
 			</div> <!-- end row -->
 
+		<div class="mp" style="margin: 0 auto;">
 		<c:import url="/WEB-INF/views/user/layout/meetingpaging.jsp" />			
+		</div>	
 			
 		</div> <!-- end container -->
 	</div> <!-- end layout content -->
