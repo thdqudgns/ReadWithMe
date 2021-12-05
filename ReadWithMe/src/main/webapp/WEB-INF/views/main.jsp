@@ -419,7 +419,7 @@
 		<c:forEach begin="0" end="4" var="i">
 			<div class="meeting">
 				<div class="meeting-thumbnail">
-					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://i.imgur.com/UdgRZGj.jpg"></a><br>
+					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://i.imgur.com/qxqjwv4.jpg"></a><br>
 				</div>
 				<div class="meeting-title">
 					${list.get(i).meeting_title }<br>
@@ -437,7 +437,7 @@
 		<c:forEach begin="5" end="9" var="i">
 			<div class="meeting">
 				<div class="meeting-thumbnail">
-					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://imgur.com/dgNbIAt.jpg"></a><br>
+					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://i.imgur.com/qxqjwv4.jpg"></a><br>
 				</div>
 				<div class="meeting-title">
 					${list.get(i).meeting_title }<br>
