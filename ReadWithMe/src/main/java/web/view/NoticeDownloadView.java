@@ -36,7 +36,7 @@ public class NoticeDownloadView extends AbstractView {
 		Notice_file notice_file = (Notice_file) model.get("noticeFile");
 		logger.info("{}", notice_file);
 		
-		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWiteMe\\ReadWithMe\\src\\main\\webapp\\resources" + "noticeImage/";
+		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "noticeImage/";
 		
 		//업로드된 파일 객체
 		File src = new File(storedPath, notice_file.getStored_name());
