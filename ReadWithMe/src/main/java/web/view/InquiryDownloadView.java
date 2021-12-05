@@ -34,7 +34,7 @@ public class InquiryDownloadView extends AbstractView {
 		Inquiry_file inquiry_file = (Inquiry_file) model.get("inquiryFile");
 		logger.info("{}", inquiry_file);
 		
-		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWiteMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
+		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "inquiryImage/";
 		
 		//업로드된 파일 객체
 		File src = new File(storedPath, inquiry_file.getStored_name());
