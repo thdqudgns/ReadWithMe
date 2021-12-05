@@ -314,11 +314,6 @@ textarea::placeholder {
 </div>
 
 <div class="form-group">
-	<label class="form-label">이미지 등록</label>
-	<!-- 이미지 등록 -->
-</div>
-
-<div class="form-group">
 	<label class="form-label">책 분야</label>
 	<select class="custom-select" name="book_class_no" id="book_class_no" style="width: 284px;">
 		<option value="0">선택</option>
