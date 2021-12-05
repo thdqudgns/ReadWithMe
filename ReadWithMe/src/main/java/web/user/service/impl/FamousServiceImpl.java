@@ -53,9 +53,9 @@ public class FamousServiceImpl implements FamousService {
 	HashMap<String, Object> map = new HashMap<>();
 	map.put("paging", paging);
 		
-	if( String.valueOf(httpSession.getAttribute("user_no")) != null) {
+	if( httpSession.getAttribute("user_no") != null) {
 		map.put("user_no", Integer.parseInt(String.valueOf(httpSession.getAttribute("user_no")))); //나중에 이걸로 바꿔야함
-	}
+	} 
 //	map.put("user_id", httpSession.getAttribute("user_id") );
 		
 		

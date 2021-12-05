@@ -45,20 +45,14 @@ $(document).ready(function() {
 	//	업로드 파일 삭제 버튼
 	
 	if(${isNoticefile}) {
-	$('#delFile').click(function() {
-		
+	$('#delFile').click(function() {	
 		$("#originFile").hide();
 		$("#newFile").show();
-	
-	});
-	
-	} else {
-		
+	});	
+	} else {		
 		$('#delFile').hide();
-		$("#newFile").show();
-		
+		$("#newFile").show();	
 	}
-	
 })	
 </script>
 
@@ -124,7 +118,7 @@ $(document).ready(function() {
 		<script type="text/javascript">
 		$(function(){
 			CKEDITOR.replace('content',{
-				filebrowserUploadUrl: '/admin/notice/fileupload'
+				filebrowserUploadUrl: '/fileupload'
 			});
 		});		
 		</script>

@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" style="height: 1000px;">
 
 <h1>공지사항 상세보기</h1>
 
@@ -47,7 +47,7 @@
 <a href="/admin/notice/download?file_no=${notice_file.file_no }">${notice_file.origin_name }</a>
 
 <div class="text-center">
-	<a href="/admin/notice" style="color:black;"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
+	<a href="/admin/notice/list" style="color:black;"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
 	<c:if test="${id eq viewBoard.writerId }">
 		<a href="/admin/notice/update?board_no=${viewNotice.board_no }" style="color: black;"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">수정</button></a>
 		<a href="/admin/notice/delete?board_no=${viewNotice.board_no }" style="color: black;"><button class="btn" style="border-color: #D3D3D3; background: white; color: gray;">삭제</button></a>

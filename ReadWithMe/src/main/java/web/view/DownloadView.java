@@ -53,6 +53,8 @@ public class DownloadView extends AbstractView {
 //		
 //		//클라이언트로 파일 전송
 //		FileCopyUtils.copy(fis, out);
+		
+		// 
 	}
 	
 }

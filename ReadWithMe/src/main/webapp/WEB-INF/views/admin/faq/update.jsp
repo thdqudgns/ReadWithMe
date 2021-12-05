@@ -25,18 +25,20 @@ function submitContents(elClickedObj) {
 	}
 }
 
-$(document).ready(function(){
-	$("#btnUpdate").click(function(){
-		submitContents($("#btnUpdate"));
-		
-		$("form").submit();
-	})
+$(document).ready(function() {
 	
-	$("#cancel").click(function(){
-		history.go(-1);
-	})
+	//	업로드 파일 삭제 버튼
 	
-})
+	if(${isNoticefile}) {
+	$('#delFile').click(function() {	
+		$("#originFile").hide();
+		$("#newFile").show();
+	});	
+	} else {		
+		$('#delFile').hide();
+		$("#newFile").show();	
+	}
+});	
 </script>
 
 </head>
@@ -77,7 +79,7 @@ $(document).ready(function(){
 		<script type="text/javascript">
 		$(function(){
 			CKEDITOR.replace('content',{
-				filebrowserUploadUrl: '/admin/notice/fileupload'
+				filebrowserUploadUrl: '/fileupload'
 			});
 		});		
 		</script>
