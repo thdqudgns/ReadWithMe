@@ -89,7 +89,7 @@ $(document).ready(function() {
 		
 	<div id="newFile">
 		<label for="file">새로운 첨부파일</label>
-		<input type="file" name="file" id="file" /><br>
+		<input type="file" name="file" id="file" accept=".png, .jpg, .pdf, .hwp, .txt, .docs"/><br>
 		<small>** 새로운 파일을 첨부하면 기존파일이 삭제됩니다</small>
 	</div>
 	</div>
