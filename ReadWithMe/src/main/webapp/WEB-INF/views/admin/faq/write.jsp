@@ -82,7 +82,7 @@
 		<script type="text/javascript">
 		$(function(){
 			CKEDITOR.replace('content',{
-				filebrowserUploadUrl: '/admin/notice/fileupload'
+				filebrowserUploadUrl: '/fileupload'
 			});
 		});		
 		</script>

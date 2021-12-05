@@ -88,7 +88,7 @@ public class UserNoticeController {
 		
 		model.addAttribute("downFile", notice_file);
 		
-		return "down";
+		return "noticeDown";
 	}
 	
 }

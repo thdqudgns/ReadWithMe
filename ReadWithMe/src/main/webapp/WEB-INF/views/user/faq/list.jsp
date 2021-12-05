@@ -75,7 +75,7 @@ table, th {
 }
 
 .banner {
-	height: 180px;
+	height: 300px;
 	background-image: url('/resources/img/book(1).jpg');
 	color: white;
 }
@@ -113,8 +113,8 @@ table, th {
 
 			<div style="height: 50px;"></div>
 			<div class="banner">
-			<div style="height: 50px;"></div>
-			<h1>자주묻는질문</h1>
+			<div style="height: 100px;"></div>
+			<p style="font-size: 50px; width: 300px; margin-left: 10px;">자주묻는질문</p>
 			</div>
 			<div style="height: 20px;"></div>
 

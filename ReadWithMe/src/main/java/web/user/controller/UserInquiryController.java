@@ -33,7 +33,7 @@ public class UserInquiryController {
 	
 	//1:1 질문 게시판 조회
 	@RequestMapping(value="/user/inquiry/list")
-	public String UserInquiryList(Inquiry inquiry, Paging paramData, Model model) {
+	public String UserInquiryList(Inquiry inquiry, Paging paramData, Model model, HttpSession session) {
 		
 		String search = paramData.getSearch();
 		
@@ -47,6 +47,15 @@ public class UserInquiryController {
 		int type_no = inquiry.getType();
 		paging.setType(type_no);
 		paging.setSearch(search);
+		
+		//	사용자 번호
+		
+		if (session.getAttribute("user_no") == null ) {
+			return "redirect:/";
+		}
+		
+		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
+		paging.setUser_no(user_no);
 		
 		//1:1질문 게시판
 		List<Inquiry> list = userInquiryService.list(paging);
@@ -108,6 +117,8 @@ public class UserInquiryController {
 		int user_no = Integer.parseInt(String.valueOf(session.getAttribute("user_no")));
 		inquiry.setUser_no(user_no);
 		
+		logger.info("{}", file);
+		
 		userInquiryService.write(inquiry, file);
 	
 		return "redirect:/user/inquiry/list";
@@ -132,7 +143,23 @@ public class UserInquiryController {
 		
 		//	첨부파일 전달
 		Inquiry_file inquiry_file = userInquiryService.getAttachFile(inquiry);
+		
+		if(inquiry_file == null) {
+			
+			boolean isInquiryfile = false;
+			
+			model.addAttribute("isInquiryfile", isInquiryfile);
+			
+		} else {
+			
+			boolean isInquiryfile = true;
+			
+			model.addAttribute("isInquiryfile", isInquiryfile);
+		}
+		
 		model.addAttribute("inquiryfile", inquiry_file);
+		
+		
 		
 		return "user/inquiry/update";
 	}
@@ -168,9 +195,9 @@ public class UserInquiryController {
 		String[] ajaxMsg = req.getParameterValues("valueArr");
 		int size = ajaxMsg.length;
 
-//		logger.info("** {}", Arrays.toString(valueArr));
+		logger.info("** {}", Arrays.toString(ajaxMsg));
 		
-		for(int i=0; i<size; i++) {
+		for(int i=0; i<ajaxMsg.length; i++) {
 			logger.info("ajaxMsg[i]: {}", ajaxMsg[i]);
 			userInquiryService.deleteChecked(ajaxMsg[i]);
 			
@@ -194,9 +221,9 @@ public class UserInquiryController {
 		
 		Inquiry_file inquiry_file = userInquiryService.getFile(file_no);
 		
-		model.addAttribute("downFile2", inquiry_file);
+		model.addAttribute("inquiryFile", inquiry_file);
 		
-		return "down";
+		return "inquiryDown";
 	}
 	
 }

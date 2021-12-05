@@ -66,7 +66,7 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 		}
 		
 		//	파일이 저장될 경로
-		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWiteMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
 		
 		File storedFolder = new File(storedPath);
 		if(!storedFolder.exists()) {
@@ -149,7 +149,7 @@ public class UserInquiryServiceImpl implements UserInquiryService{
 			return;
 		}
 		
-		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
+		String storedPath = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWiteMe\\ReadWithMe\\src\\main\\webapp\\resources" + "inquiryImage/";
 		
 		//	폴더가 존재하지 않으면 생성하기
 		File stored = new File(storedPath);

@@ -18,24 +18,6 @@ $(document).ready(function(){
 	// 댓글 입력
 	$("#btnCommInsert").click(function() {
 		
-// 		$form = $("<form>").attr({
-// 			action: "/comment/insert",
-// 			method: "post"
-// 		}).append(
-// 			$("<input>").attr({
-// 				type:"hidden",
-// 				name:"board_no",
-// 				value:"${inquiry.board_no }"
-// 			})
-// 		).append(
-// 			$("<textarea>")
-// 				.attr("name", "content")
-// 				.css("display", "none")
-// 				.text($("#commentContent").val())
-// 		);
-// 		$(document.body).append($form);
-// 		$form.submit();
-		
 		var board_no = "${inquiry.board_no}";
 		var content = $("#commentContent").val();
 		
@@ -127,7 +109,6 @@ function updateReply(comment_no) {
 			content : content
 		},
 		success : function() {
-			alert("성공");
 		},
 		error : function() {
 			alert("에러");
@@ -190,7 +171,7 @@ function updateReply(comment_no) {
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" style="height: 1000px;">
 
 		<div style="height: 50px;"></div>
 
@@ -205,8 +186,14 @@ function updateReply(comment_no) {
 			<tr>
 				<td>글번호</td>
 				<td>${inquiry.board_no }</td>
-				<td>추천수</td>
-				<td id="recommend">${cntRecommend }</td>
+				<td>답변여부</td>
+				<td id="recommend">
+				<c:if test="${inquiry.check_reply == 1 }">
+				<span class="glyphicon glyphicon-envelope"></span>
+				</c:if>
+				<c:if test="${inquiry.check_reply == 0 }">
+				</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td>아이디</td>
@@ -236,12 +223,12 @@ function updateReply(comment_no) {
 		<div class="text-center">
 						<a href="/user/inquiry/list"><button class="btn"
 								style="border-color: #D3D3D3; background: white; color: gray;">목록</button></a>
-<%-- 			<c:if test="${id eq inquiry.user_no }"> --%>
+			<c:if test="${user_no eq inquiry.user_no }">
 				<a href="/user/inquiry/update?board_no=${inquiry.board_no }"><button
 						class="btn" style="border-color: #D3D3D3; background: white; color: gray;">수정</button></a>
 				<a href="/user/inquiry/delete?board_no=${inquiry.board_no }"><button
 						class="btn" style="border-color: #D3D3D3; background: white; color: gray;">삭제</button></a>
-<%-- 			</c:if> --%>
+			</c:if>
 		</div>
 		
 		</c:if>
