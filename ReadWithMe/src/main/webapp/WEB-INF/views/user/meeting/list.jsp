@@ -11,6 +11,10 @@
 body {
 	font-size: 14px;
 }
+.page-title {
+	margin-bottom: 24px;
+	font-size: 24px;
+}
 .container {
 	display: flex;
 	flex-direction: column;
@@ -66,6 +70,7 @@ ul.meeting-ul, li.meeting-li {
 	<div class="content">
 		<div class="container">
 			<div class="row">
+			<div class="page-title">진행 중 모임</div>
 				<div class="search_area">
 					<form action="/user/meeting/list" method="get" id="searchForm">
 						<div class="search_box" style="margin-top:20px">
@@ -261,7 +266,7 @@ ul.meeting-ul, li.meeting-li {
 
 		<div class="mp" style="margin: 0 auto;">
 		<c:import url="/WEB-INF/views/user/layout/meetingpaging.jsp" />			
-		</div>	
+		</div>
 			
 		</div> <!-- end container -->
 	</div> <!-- end layout content -->
