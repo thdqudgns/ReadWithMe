@@ -20,35 +20,33 @@
 		
 		//	검색 버튼 클릭
 		$("#btnSearch").click(function() {
-
-			console.log(search);
 			
-			$(location).attr("href", "/admin/notice?type=${notice.type}&search=" + $("#search1").val());
+			$(location).attr("href", "/admin/notice/list?type=${notice.type}&search=" + $("#search1").val());
 	});
 		
 		//카테고리 버튼(1) - 전체
 		$('.categories>li:eq(8)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice");
+			$(location).attr("href", "/admin/notice/list");
 		});
 		
 		//카테고리 버튼(2) - 모임
 		$('.categories>li:eq(6)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice?type=1");
+			$(location).attr("href", "/admin/notice/list?type=1");
 		});
 		
 		//카테고리 버튼(3) - 계정
 		$('.categories>li:eq(4)').children('a').click(function(){			
-			$(location).attr("href", "/admin/notice?type=2");
+			$(location).attr("href", "/admin/notice/list?type=2");
 		});
 		
 		//카테고리 버튼(4) - 서비스
 		$('.categories>li:eq(2)').children('a').click(function(){			
-			$(location).attr("href", "/admin/notice?type=3");
+			$(location).attr("href", "/admin/notice/list?type=3");
 		});
 		
 		//카테고리 버튼(5) - 이벤트
 		$('.categories>li:eq(0)').children('a').click(function(){
-			$(location).attr("href", "/admin/notice?type=4");
+			$(location).attr("href", "/admin/notice/list?type=4");
 		});
 	});
 
@@ -99,7 +97,7 @@
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("삭제 완료");
-						location.replace("/admin/notice");
+						location.replace("/admin/notice/list");
 					} else {
 						alert("삭제 실패");
 					}
@@ -133,7 +131,7 @@
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("등록 완료");
-						location.replace("/admin/notice");
+						location.replace("/admin/notice/list");
 					} else {
 						alert("등록 실패");
 					}
@@ -167,7 +165,7 @@
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("취소 완료");
-						location.replace("/admin/notice");
+						location.replace("/admin/notice/list");
 					} else {
 						alert("취소 실패");
 					}
@@ -344,14 +342,14 @@ table, th {
 						<%-- 첫 페이지로 이동 --%>
 						<c:if test="${paging.curPage ne 1 }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=1${searchParam }">처음</a></li>
+								href="/admin/notice/list?curPage=1${searchParam }">처음</a></li>
 						</c:if>
 
 						<%-- 이전 페이징 리스트로 이동 --%>
 						<c:choose>
 							<c:when test="${paging.startPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
+									href="/admin/notice/list?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
 							</c:when>
 							<c:when test="${paging.startPage eq 1 }">
 								<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
@@ -361,7 +359,7 @@ table, th {
 						<%-- 이전 페이지로 가기 --%>
 						<c:if test="${paging.curPage > 1 }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
+								href="/admin/notice/list?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
 						</c:if>
 
 
@@ -372,11 +370,11 @@ table, th {
 							var="i">
 							<c:if test="${paging.curPage eq i }">
 								<li class="page-item active"><a class="page-link"
-									href="/admin/notice?curPage=${i }${searchParam }">${i }</a></li>
+									href="/admin/notice/list?curPage=${i }${searchParam }">${i }</a></li>
 							</c:if>
 							<c:if test="${paging.curPage ne i }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${i }${searchParam }">${i }</a></li>
+									href="/admin/notice/list?curPage=${i }${searchParam }">${i }</a></li>
 							</c:if>
 						</c:forEach>
 
@@ -386,14 +384,14 @@ table, th {
 						<%-- 다음 페이지로 가기 --%>
 						<c:if test="${paging.curPage < paging.totalPage }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
+								href="/admin/notice/list?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
 						</c:if>
 
 						<%-- 다음 페이징 리스트로 이동 --%>
 						<c:choose>
 							<c:when test="${paging.endPage ne paging.totalPage }">
 								<li class="page-item"><a class="page-link"
-									href="/admin/notice?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
+									href="/admin/notice/list?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
 							</c:when>
 							<c:when test="${paging.endPage eq paging.totalPage }">
 								<li class="page-item disabled"><a class="page-link">&raquo;</a></li>
@@ -403,7 +401,7 @@ table, th {
 						<%-- 끝 페이지로 이동 --%>
 						<c:if test="${paging.curPage ne paging.totalPage }">
 							<li class="page-item"><a class="page-link"
-								href="/admin/notice?curPage=${paging.totalPage }${searchParam }">끝</a></li>
+								href="/admin/notice/list?curPage=${paging.totalPage }${searchParam }">끝</a></li>
 						</c:if>
 
 					</ul>

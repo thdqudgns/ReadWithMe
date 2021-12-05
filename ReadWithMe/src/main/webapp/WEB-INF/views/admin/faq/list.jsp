@@ -126,8 +126,9 @@
 				data : {
 					valueArr2 : valueArr2
 				},
+				dataType: 'json',
 				success : function(jdata) {
-					if (jdata = 1) {
+					if (jdata.result = 1) {
 						alert("등록 완료");
 						location.replace("/admin/faq/list");
 					} else {
@@ -160,6 +161,7 @@
 				data : {
 					valueArr3 : valueArr3
 				},
+				dataType : 'json',
 				success : function(jdata) {
 					if (jdata = 1) {
 						alert("취소 완료");
@@ -323,80 +325,7 @@ table, th {
 				<c:set var="searchParam" value="&search=${paramData.search }" />
 			</c:if>
 
-
-			<!-- 페이징 -->
-			<div class="text-center">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination pagination-sm justify-content-center">
-
-						<%-- 첫 페이지로 이동 --%>
-						<c:if test="${paging.curPage ne 1 }">
-							<li class="page-item"><a class="page-link"
-								href="/admin/faq/list?curPage=1${searchParam }">처음</a></li>
-						</c:if>
-
-						<%-- 이전 페이징 리스트로 이동 --%>
-						<c:choose>
-							<c:when test="${paging.startPage ne 1 }">
-								<li class="page-item"><a class="page-link"
-									href="/admin/faq/list?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
-							</c:when>
-							<c:when test="${paging.startPage eq 1 }">
-								<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
-							</c:when>
-						</c:choose>
-
-						<%-- 이전 페이지로 가기 --%>
-						<c:if test="${paging.curPage > 1 }">
-							<li class="page-item"><a class="page-link"
-								href="/admin/faq/list?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
-						</c:if>
-
-
-
-
-						<%-- 페이징 리스트 --%>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-							var="i">
-							<c:if test="${paging.curPage eq i }">
-								<li class="page-item active"><a class="page-link"
-									href="/admin/faq/list?curPage=${i }${searchParam }">${i }</a></li>
-							</c:if>
-							<c:if test="${paging.curPage ne i }">
-								<li class="page-item"><a class="page-link"
-									href="/admin/faq/list?curPage=${i }${searchParam }">${i }</a></li>
-							</c:if>
-						</c:forEach>
-
-
-
-
-						<%-- 다음 페이지로 가기 --%>
-						<c:if test="${paging.curPage < paging.totalPage }">
-							<li class="page-item"><a class="page-link"
-								href="/admin/faq/list?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
-						</c:if>
-
-						<%-- 다음 페이징 리스트로 이동 --%>
-						<c:choose>
-							<c:when test="${paging.endPage ne paging.totalPage }">
-								<li class="page-item"><a class="page-link"
-									href="/admin/faq/list?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
-							</c:when>
-							<c:when test="${paging.endPage eq paging.totalPage }">
-								<li class="page-item disabled"><a class="page-link">&raquo;</a></li>
-							</c:when>
-						</c:choose>
-
-						<%-- 끝 페이지로 이동 --%>
-						<c:if test="${paging.curPage ne paging.totalPage }">
-							<li class="page-item"><a class="page-link"
-								href="/admin/faq/list?curPage=${paging.totalPage }${searchParam }">끝</a></li>
-						</c:if>
-
-					</ul>
-				</nav>
-			</div>
+			<c:import url="/WEB-INF/views/admin/layout/faqPaging.jsp" />
 
 		</div>
 		<!-- .container end -->

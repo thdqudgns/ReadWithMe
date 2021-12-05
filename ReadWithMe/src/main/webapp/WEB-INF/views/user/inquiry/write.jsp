@@ -12,7 +12,7 @@
 
 <!-- 스마트 에디터 2 라이브러리 로드 -->
 <script type="text/javascript"
-	src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+	src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript">
 	function submitContents(elClickedObj) {
@@ -90,7 +90,7 @@
 
 			<div class="form-group">
 				<label for="file">첨부파일</label> <input type="file" id="file"
-					name="file" />
+					name="file"  accept=".png, .jpg, .pdf, .hwp, .txt, .docs"/>
 			</div>			
 
 			<div class="text-center">
@@ -100,13 +100,11 @@
 		</form>
 
 		<script type="text/javascript">
-			var oEditors = [];
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef : oEditors,
-				elPlaceHolder : "content",
-				sSkinURI : "/resources/se2/SmartEditor2Skin.html",
-				fCreator : "createSEditor2"
+		$(function(){
+			CKEDITOR.replace('content',{
+				filebrowserUploadUrl: '/fileupload'
 			});
+		});		
 		</script>
 
 	</div>

@@ -24,7 +24,7 @@
 		)
 	</select>
 	
-	<select id="selectAll" resultType="web.user.dto.Inquiry" parameterType="web.user.dto.Inquiry">
+	<select id="selectAll" resultType="web.user.dto.Inquiry" parameterType="web.util.Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, B.* FROM (
 				<include refid="selectInquiry" />
@@ -33,6 +33,7 @@
 			) B
 		) R
 		WHERE rnum BETWEEN #{startNo } AND #{endNo}
+		AND user_no = #{user_no }
 		<if test="type != 0">
 		AND type = #{type }
 		</if>
