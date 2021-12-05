@@ -400,4 +400,20 @@ public class LoginServiceImpl implements LoginService {
 		return false;
 	}
 
+	@Override
+	public int getFileNo(UserTb user) {
+		int file_no = 0;
+		if( loginDao.selectCntFileByUserno(user) > 0 ) {
+			file_no = loginDao.selectFilenoByUserno(user);
+			logger.info("일로 오나용 {}", file_no);
+		} 
+		logger.info("아니면 일로 오나용{}", file_no);
+		return file_no;
+	}
+	
+	@Override
+	public String getProfile(int file_no) {
+		return loginDao.selectStoredNameByFileNo(file_no);
+	}
+
 }

@@ -399,117 +399,117 @@
     </div>
 </section>
 
-<!-- 모임 불러오기 -->
-<section id="new_meeting_slider">
-	<div class="pre-btn slider-btn" onclick="prevMeetingList()">&#10094;</div>
-	<div class="next-btn slider-btn" onclick="nextMeetingList()">&#10095;</div>
+<!-- <!-- 모임 불러오기 --> -->
+<!-- <section id="new_meeting_slider"> -->
+<!-- 	<div class="pre-btn slider-btn" onclick="prevMeetingList()">&#10094;</div> -->
+<!-- 	<div class="next-btn slider-btn" onclick="nextMeetingList()">&#10095;</div> -->
 
-	<div id="meeting_top">
-		<div id="new_meeting_title">
-			<h3>최근 생성된 모임</h3>
-		</div>
-		<div id="all_meeting_button">
-			<a href="<%=request.getContextPath() %>/user/meeting/list"><button style="border: none; background-color: white;"><h5>모임 전체 보기</h5></button></a>
-		</div>
-	</div>
+<!-- 	<div id="meeting_top"> -->
+<!-- 		<div id="new_meeting_title"> -->
+<!-- 			<h3>최근 생성된 모임</h3> -->
+<!-- 		</div> -->
+<!-- 		<div id="all_meeting_button"> -->
+<%-- 			<a href="<%=request.getContextPath() %>/user/meeting/list"><button style="border: none; background-color: white;"><h5>모임 전체 보기</h5></button></a> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
-	<div class="meeting-wrap">
+<!-- 	<div class="meeting-wrap"> -->
 		
-		<div class="meeting-list">
-		<c:forEach begin="0" end="4" var="i">
-			<div class="meeting">
-				<div class="meeting-thumbnail">
-					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://i.imgur.com/UdgRZGj.jpg"></a><br>
-				</div>
-				<div class="meeting-title">
-					${list.get(i).meeting_title }<br>
-				</div>
-				<div class="meeting-info">	
-					일시 <fmt:formatDate value="${list.get(i).meeting_start }" pattern="yyyy.MM.dd"/><br>
-					장소 ${list.get(i).meeting_location }<br> <!-- 장소 이름으로 수정 -->
-					인원 ${list.get(i).meeting_personnel }명<br>
-					모집 <fmt:formatDate value="${list.get(i).meeting_rcr_end }" pattern="yyyy.MM.dd"/>까지
-				</div>						 
-			</div>
-		</c:forEach>
-		</div>
-		<div class="meeting-list">
-		<c:forEach begin="5" end="9" var="i">
-			<div class="meeting">
-				<div class="meeting-thumbnail">
-					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://imgur.com/dgNbIAt.jpg"></a><br>
-				</div>
-				<div class="meeting-title">
-					${list.get(i).meeting_title }<br>
-				</div>
-				<div class="meeting-info">	
-					일시 <fmt:formatDate value="${list.get(i).meeting_start }" pattern="yyyy.MM.dd"/><br>
-					장소 ${list.get(i).meeting_location }<br> <!-- 장소 이름으로 수정 -->
-					인원 ${list.get(i).meeting_personnel }명<br>
-					모집 <fmt:formatDate value="${list.get(i).meeting_rcr_end }" pattern="yyyy.MM.dd"/>까지
-				</div>						 
-			</div>
-		</c:forEach>
-		</div>
-	</div>
-</section>
+<!-- 		<div class="meeting-list"> -->
+<%-- 		<c:forEach begin="0" end="4" var="i"> --%>
+<!-- 			<div class="meeting"> -->
+<!-- 				<div class="meeting-thumbnail"> -->
+<%-- 					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://i.imgur.com/UdgRZGj.jpg"></a><br> --%>
+<!-- 				</div> -->
+<!-- 				<div class="meeting-title"> -->
+<%-- 					${list.get(i).meeting_title }<br> --%>
+<!-- 				</div> -->
+<!-- 				<div class="meeting-info">	 -->
+<%-- 					일시 <fmt:formatDate value="${list.get(i).meeting_start }" pattern="yyyy.MM.dd"/><br> --%>
+<%-- 					장소 ${list.get(i).meeting_location }<br> <!-- 장소 이름으로 수정 --> --%>
+<%-- 					인원 ${list.get(i).meeting_personnel }명<br> --%>
+<%-- 					모집 <fmt:formatDate value="${list.get(i).meeting_rcr_end }" pattern="yyyy.MM.dd"/>까지 --%>
+<!-- 				</div>						  -->
+<!-- 			</div> -->
+<%-- 		</c:forEach> --%>
+<!-- 		</div> -->
+<!-- 		<div class="meeting-list"> -->
+<%-- 		<c:forEach begin="5" end="9" var="i"> --%>
+<!-- 			<div class="meeting"> -->
+<!-- 				<div class="meeting-thumbnail"> -->
+<%-- 					<a href="/user/meeting/view?no=${list.get(i).meeting_no}"><img src="https://imgur.com/dgNbIAt.jpg"></a><br> --%>
+<!-- 				</div> -->
+<!-- 				<div class="meeting-title"> -->
+<%-- 					${list.get(i).meeting_title }<br> --%>
+<!-- 				</div> -->
+<!-- 				<div class="meeting-info">	 -->
+<%-- 					일시 <fmt:formatDate value="${list.get(i).meeting_start }" pattern="yyyy.MM.dd"/><br> --%>
+<%-- 					장소 ${list.get(i).meeting_location }<br> <!-- 장소 이름으로 수정 --> --%>
+<%-- 					인원 ${list.get(i).meeting_personnel }명<br> --%>
+<%-- 					모집 <fmt:formatDate value="${list.get(i).meeting_rcr_end }" pattern="yyyy.MM.dd"/>까지 --%>
+<!-- 				</div>						  -->
+<!-- 			</div> -->
+<%-- 		</c:forEach> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </section> -->
 
-<div id="line"></div>
+<!-- <div id="line"></div> -->
 
-<!-- 베스트 리뷰 및 공지사항 -->
-<section id="main_posts">
+<!-- <!-- 베스트 리뷰 및 공지사항 --> -->
+<!-- <section id="main_posts"> -->
 
-    <div id="best_review">
-        <h3 class="left__title">Best Review</h3>
-        	<div class="review_line"></div>
-				<div id="best_review_div">
-					<table id="best_review_table">
-					<c:forEach items="${reviewList}" var="review">
-						<tr>
-							<td style="width: 60%; text-overflow: ellipsis; text-align: left;"><a style="text-decoration: none;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
+<!--     <div id="best_review"> -->
+<!--         <h3 class="left__title">Best Review</h3> -->
+<!--         	<div class="review_line"></div> -->
+<!-- 				<div id="best_review_div"> -->
+<!-- 					<table id="best_review_table"> -->
+<%-- 					<c:forEach items="${reviewList}" var="review"> --%>
+<!-- 						<tr> -->
+<%-- 							<td style="width: 60%; text-overflow: ellipsis; text-align: left;"><a style="text-decoration: none;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td> --%>
 							
-							<td style="width: 40%; text-align: center;">${review.nick}</td>
-						</tr>
-					</c:forEach>
-					</table>
-				</div>		
-    </div>
+<%-- 							<td style="width: 40%; text-align: center;">${review.nick}</td> --%>
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
+<!-- 					</table> -->
+<!-- 				</div>		 -->
+<!--     </div> -->
     
-    <div id="new_notice">
-            <h3 class="notice__title">공지사항</h3>
-				<div class="notice_line"></div>
-            		<div id="new_notice_div">
-					<table id="new_notice_table">
-					<c:forEach items="${noticeList}" var="notice">
-						<tr>
-							<td style="width: 65%; text-overflow: ellipsis; text-align: left; "><a style="text-decoration: none;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
-							<td style="width: 35%; text-align: center;"><fmt:formatDate value="${notice.board_date }" pattern="yyyy-MM-dd"/></td>
-						</tr>
-					</c:forEach>
-					</table>
-				</div>	      
-	</div>
-</section>
+<!--     <div id="new_notice"> -->
+<!--             <h3 class="notice__title">공지사항</h3> -->
+<!-- 				<div class="notice_line"></div> -->
+<!--             		<div id="new_notice_div"> -->
+<!-- 					<table id="new_notice_table"> -->
+<%-- 					<c:forEach items="${noticeList}" var="notice"> --%>
+<!-- 						<tr> -->
+<%-- 							<td style="width: 65%; text-overflow: ellipsis; text-align: left; "><a style="text-decoration: none;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td> --%>
+<%-- 							<td style="width: 35%; text-align: center;"><fmt:formatDate value="${notice.board_date }" pattern="yyyy-MM-dd"/></td> --%>
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
+<!-- 					</table> -->
+<!-- 				</div>	       -->
+<!-- 	</div> -->
+<!-- </section> -->
 
-<div id="line"></div>
+<!-- <div id="line"></div> -->
 
-<br>
+<!-- <br> -->
 	
-<!-- 모임 위치 표시된 지도 -->	
-<section id="meeting_map" style="width: 925px; height: 400px; clear: both; margin: 0 auto;">
+<!-- <!-- 모임 위치 표시된 지도 -->	 -->
+<!-- <section id="meeting_map" style="width: 925px; height: 400px; clear: both; margin: 0 auto;"> -->
 	
-	<div id="map" style="width:680px; height:400px; float: left;"></div>
+<!-- 	<div id="map" style="width:680px; height:400px; float: left;"></div> -->
 			
-		<div style="width: 230px; height: 400px; float: right; overflow-y:scroll;">
-		<c:forEach items="${list }" var="meeting">
-			<div class="balloon_03">${meeting.meeting_title }
-				<div style="font-size: 13px;">일시 <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy.MM.dd"/><br>
-				장소 ${meeting.meeting_location }
-				</div>
-			</div>
-		</c:forEach>
-		</div>
-</section>
+<!-- 		<div style="width: 230px; height: 400px; float: right; overflow-y:scroll;"> -->
+<%-- 		<c:forEach items="${list }" var="meeting"> --%>
+<%-- 			<div class="balloon_03">${meeting.meeting_title } --%>
+<%-- 				<div style="font-size: 13px;">일시 <fmt:formatDate value="${meeting.meeting_start }" pattern="yyyy.MM.dd"/><br> --%>
+<%-- 				장소 ${meeting.meeting_location } --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 		</c:forEach> --%>
+<!-- 		</div> -->
+<!-- </section> -->
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a505904fc93655560fe82083bfde5b6&libraries=services"></script>
 <script>

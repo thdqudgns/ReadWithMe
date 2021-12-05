@@ -201,6 +201,13 @@ public interface LoginDao {
 	public void keepLogin(UserTb user);
 	public UserTb selectUserBySessionKey(UserTb user);
 
+	public int selectFilenoByUserno(UserTb user);
+
+	public int selectCntFileByUserno(UserTb user);
+
+	public String selectStoredNameByFileNo(int file_no);
+
+
 
 
 

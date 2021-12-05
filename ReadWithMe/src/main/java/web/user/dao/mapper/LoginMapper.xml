@@ -178,4 +178,19 @@
 	 	WHERE session_key = #{session_key } and session_limit > sysdate
 	</select>
 	
+	<select id="selectFilenoByUserno" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT file_no FROM userTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectCntFileByUserno" resultType="int" parameterType="web.user.dto.UserTb">
+		SELECT count(*) FROM FileTb
+		WHERE user_no = #{user_no }
+	</select>
+	
+	<select id="selectStoredNameByFileNo" resultType="String" parameterType="int">
+		SELECT stored_name FROM FileTb
+		WHERE file_no = #{file_no }
+	</select>
+	
 </mapper>

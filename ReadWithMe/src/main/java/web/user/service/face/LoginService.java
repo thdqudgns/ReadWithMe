@@ -177,6 +177,20 @@ public interface LoginService {
 	 */
 	public boolean getGoogleId(UserTb user);
 
+	/**
+	 * 파일넘버 구하기
+	 * @param user
+	 * @return
+	 */
+	public int getFileNo(UserTb user);
+
+	/**
+	 * 프로필 사진 구하기
+	 * @param file_no
+	 * @return
+	 */
+	public String getProfile(int file_no);
+
 
 
 

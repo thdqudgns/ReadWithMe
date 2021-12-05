@@ -2,7 +2,9 @@ package web.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +28,12 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import web.user.dto.Ban;
 import web.user.dto.EmailAuth;
+import web.user.dto.FileTb;
 import web.user.dto.PhoneAuth;
 import web.user.dto.UserSessionTb;
 import web.user.dto.UserTb;
 import web.user.service.face.LoginService;
+import web.user.service.face.MyPageService;
 import web.util.JsonParser;
 import web.util.KakaoLogin;
 import web.util.MessageService;
@@ -40,7 +44,6 @@ public class LoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired LoginService loginService;
-	
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
@@ -57,6 +60,12 @@ public class LoginController {
 		
 		if( isLogin ) {
 			int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
+			user.setUser_no(user_no);
+			int file_no = 0;
+			
+			file_no = loginService.getFileNo(user);
+			
+			logger.info("확인{}",file_no);
 			
 			if( Integer.parseInt(loginService.getUserLv(user.getId())) == 0 ) {
 
@@ -80,6 +89,10 @@ public class LoginController {
 					session.setAttribute("user_no", user_no);
 					session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 					session.setAttribute("user_nick", loginService.getNick(user.getId()));
+					if(file_no != 0) {
+						session.setAttribute("user_profile", loginService.getProfile(file_no));
+						logger.info("과연{}",loginService.getProfile(file_no));
+					}
 					
 					logger.info(user.getRemember() + "???");
 					if(user.getRemember() == 1) {
@@ -108,6 +121,10 @@ public class LoginController {
 				session.setAttribute("user_no", user_no);
 				session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 				session.setAttribute("user_nick", loginService.getNick(user.getId()));
+				if(file_no != 0) {
+					session.setAttribute("user_profile", loginService.getProfile(file_no));
+					logger.info("과연{}",loginService.getProfile(file_no));
+				}
 				
 				logger.info("왜죠? {}", user.getRemember()==1);
 				if(user.getRemember() == 1) {
@@ -155,10 +172,22 @@ public class LoginController {
 		logger.info("user : {}", user);
 		
 		if( isKakaoLogin ) {
+			int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
+			user.setUser_no(user_no);
+			int file_no = 0;
+			
+			file_no = loginService.getFileNo(user);
+			
+			logger.info("확인{}",file_no);
+			
 			session.setAttribute("login", isKakaoLogin);
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			if(file_no != 0) {
+				session.setAttribute("user_profile", loginService.getProfile(file_no));
+				logger.info("과연{}",loginService.getProfile(file_no));
+			}
 						
 			return "redirect:/";
 		} else {
@@ -220,11 +249,23 @@ public class LoginController {
 
 		boolean isNaverLogin = loginService.getNaverId(user);
 		if ( isNaverLogin ) {
+			int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
+			user.setUser_no(user_no);
+			int file_no = 0;
+			
+			file_no = loginService.getFileNo(user);
+			
+			logger.info("확인{}",file_no);
+			
 			session.setAttribute("login", isNaverLogin);
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
-			Cookie loginCookie = new Cookie("loginCookie", session.getId());
+			if(file_no != 0) {
+				session.setAttribute("user_profile", loginService.getProfile(file_no));
+				logger.info("과연{}",loginService.getProfile(file_no));
+			}
+			
 			
 			return "redirect:/";
 		} else {
@@ -272,10 +313,21 @@ public class LoginController {
 		logger.info("user : {}", user);
 		
 		if( isGoogleLogin ) {
+			int user_no = Integer.parseInt(String.valueOf(loginService.getUserNo(user.getId())));
+			user.setUser_no(user_no);
+			int file_no = 0;
+			
+			file_no = loginService.getFileNo(user);
+			
+			logger.info("확인{}",file_no);
 			session.setAttribute("login", isGoogleLogin);
 			session.setAttribute("user_no", loginService.getUserNo(user.getId()));
 			session.setAttribute("user_lv", loginService.getUserLv(user.getId()));
 			session.setAttribute("user_nick", loginService.getNick(user.getId()));
+			if(file_no != 0) {
+				session.setAttribute("user_profile", loginService.getProfile(file_no));
+				logger.info("과연{}",loginService.getProfile(file_no));
+			}
 						
 			return "redirect:/";
 		} else {
