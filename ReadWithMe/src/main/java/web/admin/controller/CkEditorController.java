@@ -9,11 +9,13 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class CkEditorController {
 
+	@Autowired private ServletContext context;
+	
 	// 이미지업로드
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
 	public void fileUpload(HttpServletRequest req, HttpServletResponse resp, 
@@ -47,7 +51,7 @@ public class CkEditorController {
 		byte[] bytes = upload.getBytes();
 		
 		//	이미지 경로 생성
-		String path = "C:\\Users\\ant19\\Desktop" + "ckImage/";
+		String path = context.getRealPath("upload") + "ckImage/";
 		String ckUploadPath = path + uid + "_" + fileName;
 		File folder = new File(path);
 		
@@ -91,7 +95,7 @@ public class CkEditorController {
 	throws ServletException, IOException {
 		
 		//	서버에 저장된 이미지 경로
-		String path = "C:\\Users\\ant19\\Desktop" + "ckImage/";
+		String path = context.getRealPath("upload") + "ckImage/";
 		
 		String sDirPath = path + uid + "_" + fileName;
 		

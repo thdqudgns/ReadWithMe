@@ -71,7 +71,7 @@ public class NoticeServiceImpl implements NoticeService {
 		// 파일이 저장될 경로
 //		String storedPath = context.getRealPath("upload");
 		
-		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "noticeImage/";
+		String storedPath = context.getRealPath("upload");
 		
 		File storedFolder = new File(storedPath);
 		if( !storedFolder.exists()) {
@@ -121,7 +121,7 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		
 		//	파일이 저장될 경로(real path)
-		String storedPath = "C:\\Users\\ant19\\Desktop\\" + "noticeImage/";
+		String storedPath = context.getRealPath("upload");
 		
 		//	폴더가 존재하지 않으면 생성하기
 		File stored = new File(storedPath);
