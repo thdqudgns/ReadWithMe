@@ -194,7 +194,7 @@ function updateReply(comment_no) {
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" style="height: 1000px;">
 
 		<div style="height: 30px;"></div>
 
@@ -206,8 +206,14 @@ function updateReply(comment_no) {
 			<tr>
 				<td>글 번호</td>
 				<td>${inquiry.board_no }</td>
-				<td>추천수</td>
-				<td id="recommend">${cntRecommend }</td>
+				<td>답변여부</td>
+				<td id="recommend">
+				<c:if test="${inquiry.check_reply == 1 }">
+				<span class="glyphicon glyphicon-envelope"></span>
+				</c:if>
+				<c:if test="${inquiry.check_reply == 0 }">
+				</c:if>				
+				</td>
 			</tr>
 			<tr>
 				<td>아이디</td>

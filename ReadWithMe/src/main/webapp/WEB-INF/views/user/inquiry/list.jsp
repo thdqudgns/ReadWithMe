@@ -22,7 +22,7 @@
 		
 		//글삭제 버튼
 		$("#btnDelete").click(function(){
-			$(location).attr("href", "/user/inquiry/delete")
+			//$(location).attr("href", "/user/inquiry/delete");
 		});
  
 		//	검색 버튼 클릭
@@ -70,15 +70,19 @@
 			if ($("input[name='RowCheck']:checked").length == rowCnt) {
 				$("input[name='allCheck']")[0].checked = true;
 			} else {
-				$("input[name='allCkeck']")[0].checked = false;
+				$("input[name='allCheck']")[0].checked = false;
 			}
 		});
 	});	
 	
 	//	선택삭제
 	function deleteValue() {
-		var url = "/user/inquiry/delete"; // Controller로 보내고자 하는 URL
 		var valueArr = new Array();
+		
+		//체크된 상태의 checkbox input 셀렉터
+// 		var list = $("input[name='RowCheck']:checked");
+// 		console.log(list)
+		
 		var list = $("input[name='RowCheck']");
 		for (var i = 0; i < list.length; i++) {
 			if (list[i].checked) {
@@ -90,23 +94,25 @@
 			alert("선택된 글이 없습니다.");
 		} else {
 			var chk = confirm("정말 삭제하시겠습니까?");
-			$.ajax({
-				url : url,
-				type : 'POST',
-				traditional : true,
-				data : {
-					valueArr : valueArr
-				},
-				success : function(jdata) {
-					if (jdata=1) {
-						alert("삭제 완료");
-						location.replace("/user/inquiry/list");
-					} else {
-						alert("삭제 실패");
-						location.replace("/user/inquiry/list");
+			
+			if( chk ) {
+				$.ajax({
+					url : "/user/inquiry/delete", 
+					type : 'POST',
+					traditional : true,
+					data : {	valueArr : valueArr},
+					dataType : "json",
+					success : function(jdata) {
+						if (jdata.result = 1) {
+							alert("삭제 완료");
+							location.reload();
+						} else {
+							alert("삭제 실패");
+	// 						location.replace("/user/inquiry/list");
+						}
 					}
-				}
-			})
+				})
+			}
 		}
 	}	
 
@@ -129,7 +135,7 @@ table, th {
 }
 
 .banner {
-	height: 180px;
+	height: 300px;
 	background-image: url('/resources/img/book(1).jpg');
 	color: white;
 }
@@ -171,8 +177,8 @@ table, th {
 			<div style="height: 50px;"></div>
 
 			<div class="banner">
-			<div style="height: 50px;"></div>
-			<h1>1:1 질문</h1>
+			<div style="height: 100px;"></div>
+			<p style="font-size: 50px; width: 300px; margin-left: 10px;">1:1 질문</p>
 			</div>
 			
 			<div style="height: 20px;"></div>
@@ -193,6 +199,8 @@ table, th {
 			
 			<div style="height: 8px;"></div>
 			
+			
+			<c:if test="${login }">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -248,9 +256,8 @@ table, th {
 
 			
 			<div style="height: 10px;"></div>
-
-			<button id="btnDelete" class="btn pull-right" style="margin-right: 2px; border-color: #D3D3D3; background: white; color: gray;"
-				onclick="deleteValue()">삭제</button>
+			
+			<button id="btnDelete" class="btn pull-right" style="margin-right: 2px; border-color: #D3D3D3; background: white; color: gray;" onclick="deleteValue()">삭제</button>
 			<button id="btnWrite" class="btn pull-right" style="margin-right: 2px; border-color: #D3D3D3; background: white; color: gray;">글쓰기</button>
 
 			<div class="clearfix"></div>
@@ -265,79 +272,10 @@ table, th {
 			<c:if test="${not empty paramData.search }">
 				<c:set var="searchParam" value="&search=${paramData.search }" />
 			</c:if>
-
-			<div class="text-center">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination pagination-sm justify-content-center">
-
-						<%-- 첫 페이지로 이동 --%>
-						<c:if test="${paging.curPage ne 1 }">
-							<li class="page-item"><a class="page-link"
-								href="/user/inquiry?curPage=1${searchParam }">처음</a></li>
-						</c:if>
-
-						<%-- 이전 페이징 리스트로 이동 --%>
-						<c:choose>
-							<c:when test="${paging.startPage ne 1 }">
-								<li class="page-item"><a class="page-link"
-									href="/user/inquiry?curPage=${paging.startPage - paging.pageCount }${searchParam }">&laquo;</a></li>
-							</c:when>
-							<c:when test="${paging.startPage eq 1 }">
-								<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
-							</c:when>
-						</c:choose>
-
-						<%-- 이전 페이지로 가기 --%>
-						<c:if test="${paging.curPage > 1 }">
-							<li class="page-item"><a class="page-link"
-								href="/user/inquiry?curPage=${paging.curPage - 1 }${searchParam }">&lt;</a></li>
-						</c:if>
-
-
-
-
-						<%-- 페이징 리스트 --%>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-							var="i">
-							<c:if test="${paging.curPage eq i }">
-								<li class="page-item active"><a class="page-link"
-									href="/user/inquiry?curPage=${i }${searchParam }">${i }</a></li>
-							</c:if>
-							<c:if test="${paging.curPage ne i }">
-								<li class="page-item"><a class="page-link"
-									href="/user/inquiry?curPage=${i }${searchParam }">${i }</a></li>
-							</c:if>
-						</c:forEach>
-
-
-
-
-						<%-- 다음 페이지로 가기 --%>
-						<c:if test="${paging.curPage < paging.totalPage }">
-							<li class="page-item"><a class="page-link"
-								href="/user/inquiry?curPage=${paging.curPage + 1 }${searchParam }">&gt;</a></li>
-						</c:if>
-
-						<%-- 다음 페이징 리스트로 이동 --%>
-						<c:choose>
-							<c:when test="${paging.endPage ne paging.totalPage }">
-								<li class="page-item"><a class="page-link"
-									href="/user/inquiry?curPage=${paging.startPage + paging.pageCount }${searchParam }">&raquo;</a></li>
-							</c:when>
-							<c:when test="${paging.endPage eq paging.totalPage }">
-								<li class="page-item disabled"><a class="page-link">&raquo;</a></li>
-							</c:when>
-						</c:choose>
-
-						<%-- 끝 페이지로 이동 --%>
-						<c:if test="${paging.curPage ne paging.totalPage }">
-							<li class="page-item"><a class="page-link"
-								href="/user/inquiry?curPage=${paging.totalPage }${searchParam }">끝</a></li>
-						</c:if>
-
-					</ul>
-				</nav>
-			</div>
+		
+		</c:if>
+		
+		<c:import url="/WEB-INF/views/user/layout/inquiryPaging.jsp" />
 
 		</div>
 		<!-- .container -->

@@ -68,7 +68,7 @@ $(document).ready(function() {
 		<br>
 		<div class="form-file">
 			<label for="file">첨부파일</label>
-			<input type="file" id="file" name="file"/>
+			<input type="file" id="file" name="file" accept=".png, .jpg, .pdf, .hwp, .txt, .docs"/>
 		</div>
 		
 		<br>

@@ -148,7 +148,7 @@ public class FAQController {
 	
 	//자주묻는질문 선택항목 등록
 	@RequestMapping(value = "/admin/faq/register")
-	public String ajaxRegister(HttpServletRequest req) {
+	public String ajaxRegister(HttpServletRequest req, Model model) {
 		
 		String[] ajaxMsg = req.getParameterValues("valueArr2");
 
@@ -158,12 +158,14 @@ public class FAQController {
 			faqService.registerChecked(ajaxMsg[i]);
 		}
 		
-		return "redirect:/admin/notice";
+		model.addAttribute("result", 1);
+		
+		return "jsonView";
 	}
 	
 	//자주묻는질문 선택항목 등록취소
 	@RequestMapping(value = "/admin/faq/cancel")
-	public String ajaxCancel(HttpServletRequest req) {
+	public String ajaxCancel(HttpServletRequest req, Model model) {
 		
 		String[] ajaxMsg = req.getParameterValues("valueArr3");
 
@@ -173,7 +175,9 @@ public class FAQController {
 			faqService.cancelChecked(ajaxMsg[i]);
 		}
 		
-		return "redirect:/admin/notice";
+		model.addAttribute("result", 1);
+		
+		return "jsonView";
 	}
 	
 	

@@ -16,6 +16,7 @@ public class Paging {
 	
 	private String search; //검색어
 	private int type;	//타입
+	private int user_no;	// 회원번호
 	
 	
 	
@@ -93,7 +94,8 @@ public class Paging {
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", type=" + type + "]";
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", type=" + type + ", user_no="
+				+ user_no + "]";
 	}
 
 	public int getCurPage() {
@@ -183,6 +185,16 @@ public class Paging {
 	public void setType(int type) {
 		this.type = type;
 	}
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+
+	
 	
 	
 }

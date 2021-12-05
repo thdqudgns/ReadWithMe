@@ -115,7 +115,7 @@ public class NoticeController {
 
 		noticeService.write(notice, file);
 
-		return "redirect:/admin/notice";
+		return "redirect:/admin/notice/list";
 	}
 
 	@RequestMapping(value = "/admin/notice/download")
@@ -125,9 +125,9 @@ public class NoticeController {
 
 		Notice_file notice_file = noticeService.getFile(file_no);
 
-		model.addAttribute("downFile", notice_file);
+		model.addAttribute("noticeFile", notice_file);
 
-		return "down";
+		return "noticeDown";
 	}
 
 
@@ -140,7 +140,7 @@ public class NoticeController {
 
 		// 게시글 번호가 1보다 작으면 목록을 보내기
 		if (notice.getBoard_no() < 1) {
-			return "redirect:/admin/notice";
+			return "redirect:/admin/notice/list";
 		}
 
 		// 게시글 상세 정보 전달
@@ -179,7 +179,7 @@ public class NoticeController {
 
 		noticeService.update(notice, file);
 
-		return "redirect:/admin/notice?board_no=" + notice.getBoard_no();
+		return "redirect:/admin/notice/list?board_no=" + notice.getBoard_no();
 
 	}
 
@@ -188,7 +188,7 @@ public class NoticeController {
 	public String NoticeDelete(Notice notice, HttpServletRequest req) {
 
 		if (notice.getBoard_no() < 1) {
-			return "redirect: /admin/notice";
+			return "redirect: /admin/notice/list";
 		}
 		
 		String file_no = req.getParameter("file_no");
@@ -196,7 +196,7 @@ public class NoticeController {
 
 		noticeService.delete(notice);
 
-		return "redirect:/admin/notice";
+		return "redirect:/admin/notice/list";
 	}
 
 	// 공지사항 선택삭제
@@ -210,7 +210,7 @@ public class NoticeController {
 			noticeService.deleteChecked(ajaxMsg[i]);
 		}
 
-		return "redirect:/admin/notice";
+		return "redirect:/admin/notice/list";
 	}
 
 	// 공지사항 선택등록
@@ -225,7 +225,7 @@ public class NoticeController {
 			noticeService.registerChecked(ajaxMsg[i]);
 		}
 
-		return "redirect:/admin/notice";
+		return "redirect:/admin/notice/list";
 	}
 
 	// 공지사항 선택취소
@@ -240,116 +240,9 @@ public class NoticeController {
 			noticeService.cancelChecked(ajaxMsg[i]);
 		}
 
-		return "redirect:/admin/notice";
+		return "redirect:/admin/notice/list";
 	}
 
-	// 이미지업로드
-	@RequestMapping(value = "/admin/notice/fileupload", method = RequestMethod.POST)
-	public void fileUpload(HttpServletRequest req, HttpServletResponse resp, 
-			MultipartHttpServletRequest multiFile,
-			@RequestParam MultipartFile upload) throws Exception {
-
-		//	랜덤 문자 생성
-		UUID uid = UUID.randomUUID();
-		
-		OutputStream out = null;
-		PrintWriter printWriter = null;
-		
-		//	인코딩
-		resp.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html;charset=utf-8");
-		
-		try {
-		
-		//	파일 이름 가져오기
-		String fileName = upload.getOriginalFilename();
-		byte[] bytes = upload.getBytes();
-		
-		//	이미지 경로 생성
-		String path = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources\\" + "ckImage/";
-		String ckUploadPath = path + uid + "_" + fileName;
-		File folder = new File(path);
-		
-		//	해당 디렉토리 확인
-		if(!folder.exists()) {
-			try {
-			folder.mkdirs();	//	폴더 생성
-			} catch(Exception e) {
-				e.getStackTrace();
-			}
-		}
-		
-		out = new FileOutputStream(new File(ckUploadPath));
-		out.write(bytes);
-		out.flush();	//	outputStream에 저장된 데이터를 전송하고 초기화
-		
-		String callback = req.getParameter("CKEditorFuncNum");
-		printWriter = resp.getWriter();
-		String fileUrl = "/admin/notice/filesubmit?uid=" + uid + "&fileName=" + fileName;
-		
-		//	업로드시 메시지 출력
-		printWriter.println( "{\"filename\" : \"" + fileName + "\",\"uploaded\" : 1, \"url\":\"" +  fileUrl + "\"}");
-		printWriter.flush();
-		
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if( out != null ) { out.close(); }
-				if( printWriter != null ) {printWriter.close(); }
-			} catch(IOException e ) { e.printStackTrace(); }
-		}
-		return;
-		
-	}
-	
-	@RequestMapping( value = "/admin/notice/filesubmit")
-	public void ckSubmit(@RequestParam(value = "uid") String uid,
-			@RequestParam(value = "fileName") String fileName,
-			HttpServletRequest req, HttpServletResponse resp) 
-	throws ServletException, IOException {
-		
-		//	서버에 저장된 이미지 경로
-		String path = "C:\\Users\\ant19\\git\\ReadWithMe\\ReadWithMe\\src\\main\\webapp\\resources" + "ckImage/";
-		
-		String sDirPath = path + uid + "_" + fileName;
-		
-		File imgFile = new File(sDirPath);
-		
-		//	사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
-		if(imgFile.isFile()) {
-			byte[] buf = new byte[1024];
-			int readByte = 0;
-			int length = 0;
-			byte[] imgBuf = null;
-			
-			FileInputStream fileInputStream = null;
-			ByteArrayOutputStream outputStream = null;
-			ServletOutputStream out = null;
-			
-			try {
-				fileInputStream = new FileInputStream(imgFile);
-				outputStream = new ByteArrayOutputStream();
-				out = resp.getOutputStream();
-				
-				while((readByte = fileInputStream.read(buf)) != -1) {
-					outputStream.write(buf, 0, readByte);
-				}
-				
-				imgBuf = outputStream.toByteArray();
-				length = imgBuf.length;
-				out.write(imgBuf, 0, length);
-				out.flush();
-			
-			} catch(IOException e) {
-				e.printStackTrace();
-			} finally {
-				outputStream.close();
-				fileInputStream.close();
-				out.close();
-			}
-		}	
-	}
 }
 
 
