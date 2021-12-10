@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div class="container" style="height: 1000px;">
+<div class="container" style="height:100%;">
 
 <h1>공지사항 상세보기</h1>
 

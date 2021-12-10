@@ -64,12 +64,8 @@
  	</select>
  
  	<insert id="insertNotice" parameterType="web.user.dto.Notice">
- 		<selectKey order="BEFORE" resultType="int" keyProperty="board_no">
- 			SELECT notice_seq.nextval FROM dual
- 		</selectKey>
- 	
  		INSERT INTO notice (board_no, board_title, board_content, type)
- 		VALUES (#{board_no}, #{board_title}, #{board_content}, #{type })
+ 		VALUES (notice_seq.nextval, #{board_title}, #{board_content}, #{type })
  	</insert>
  
  	<update id="update" parameterType="web.user.dto.Notice">

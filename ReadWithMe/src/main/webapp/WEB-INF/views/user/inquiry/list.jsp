@@ -178,7 +178,7 @@ table, th {
 
 			<div class="banner">
 			<div style="height: 100px;"></div>
-			<p style="font-size: 50px; width: 300px; margin-left: 10px;">1:1 질문</p>
+			<p style="font-size: 50px; width: 300px; margin-left: 10px;">1:1 문의</p>
 			</div>
 			
 			<div style="height: 20px;"></div>

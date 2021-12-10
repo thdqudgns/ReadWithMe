@@ -54,7 +54,7 @@
 
 			<div class="banner">
 			<div style="height: 50px;"></div>
-			<h1>1:1 질문</h1>
+			<h1>1:1 문의</h1>
 			</div>
 
 		<div style="height: 20px;"></div>

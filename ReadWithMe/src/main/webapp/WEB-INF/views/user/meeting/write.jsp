@@ -7,6 +7,7 @@
 
 <c:import url="/WEB-INF/views/user/layout/header.jsp" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script> -->
 <script>
 window.onload = function(){
 	document.getElementById("meeting_address").addEventListener("click", function(){ //주소입력칸을 클릭하면
