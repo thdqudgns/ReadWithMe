@@ -205,7 +205,7 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 			<li class="meet-li">
 				<span class="meet-li-sp">모임</span>
 				<ul class="meet-li-ul">
-					<li class="meet-li-ul-li"><a class="meet-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/list">생성된 모임</a></li>
+					<li class="meet-li-ul-li"><a class="meet-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/list">진행 중 모임</a></li>
 					<li class="meet-li-ul-li"><a class="meet-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/endlist">종료된 모임</a></li>
 				</ul>
 			</li>
@@ -242,7 +242,7 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 		<!-- 프로필, 닉네임, 마이페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li class="profile-li">
-				<img class="profile-li-img" alt="profile" src="https://i.imgur.com/G5gV56A.png" width="20px" height="20px">
+<!-- 				<img class="profile-li-img" alt="profile" src="https://i.imgur.com/G5gV56A.png" width="20px" height="20px"> -->
 				<span class="profile-li-sp">${user_nick }님</span>
 				<ul class="profile-li-ul">
 					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>
@@ -257,7 +257,7 @@ ul.menuList > div.menuProfile > li.profile-li > ul.profile-li-ul > li.profile-li
 		<!-- 프로필, 닉네임, 관리자페이지, 로그아웃 -->
 		<div class="menuProfile">
 			<li class="profile-li">
-				<img class="profile-li-img" alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px">
+<!-- 				<img class="profile-li-img" alt="profile" src="https://i.imgur.com/t4UvTix.png" width="20px" height="20px"> -->
 				<span class="profile-li-sp">${user_nick }님</span>
 				<ul class="profile-li-ul">
 					<li class="profile-li-ul-li"><a class="profile-li-ul-li-a" href="<%=request.getContextPath() %>/user/meeting/write">모임 생성하기</a></li>

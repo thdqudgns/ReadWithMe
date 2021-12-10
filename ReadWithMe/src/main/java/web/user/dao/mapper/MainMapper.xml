@@ -13,6 +13,7 @@
 				meeting_rcr_end, meeting_start, meeting_end, meeting_personnel,
 				meeting_address, meeting_board_date, meeting_approved
 			FROM meeting
+			WHERE meeting_approved = '1'
 			ORDER BY meeting_no DESC) M 
 			WHERE ROWNUM BETWEEN 1 AND 10
 	</select>

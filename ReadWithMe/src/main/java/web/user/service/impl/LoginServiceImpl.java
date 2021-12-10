@@ -320,7 +320,7 @@ public class LoginServiceImpl implements LoginService {
 
 		loginDao.updatePw(user);
 		
-//		MessageService.sendPwMessage(user.getPhone(), random);		
+		MessageService.sendPwMessage(user.getPhone(), random);		
 	}
 	
 	

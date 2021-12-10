@@ -24,7 +24,7 @@
 </head>
 <body>
 
-	<div class="container" style="height: 1000px;">
+	<div class="container" style="height: 100%;">
 
 		<div style="height: 50px;"></div>
 

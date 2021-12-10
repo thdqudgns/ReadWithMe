@@ -466,7 +466,7 @@
 					<table id="best_review_table">
 					<c:forEach items="${reviewList}" var="review">
 						<tr>
-							<td style="width: 60%; text-overflow: ellipsis; text-align: left;"><a style="text-decoration: none;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
+							<td style="width: 60%; text-overflow: ellipsis; text-align: left;"><a style="text-decoration: none;color:blue;" href="/user/review/view?review_no=${review.review_no }">${review.review_title}</a></td>
 							
 							<td style="width: 40%; text-align: center;">${review.nick}</td>
 						</tr>
@@ -482,7 +482,7 @@
 					<table id="new_notice_table">
 					<c:forEach items="${noticeList}" var="notice">
 						<tr>
-							<td style="width: 65%; text-overflow: ellipsis; text-align: left; "><a style="text-decoration: none;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
+							<td style="width: 65%; text-overflow: ellipsis; text-align: left; "><a style="text-decoration: none;color:blue;" href="/user/notice/view?board_no=${notice.board_no }">${notice.board_title}</a></td>
 							<td style="width: 35%; text-align: center;"><fmt:formatDate value="${notice.board_date }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>

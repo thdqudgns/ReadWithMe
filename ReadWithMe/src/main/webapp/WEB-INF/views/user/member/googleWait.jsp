@@ -29,7 +29,7 @@ function checkLoginStatus(){
       gapi.load('auth2', function() {
         console.log('auth2');
         window.gauth = gapi.auth2.init({
-          client_id:'774991898243-c2nk6p61rgts1tkjmcmr44svkslfqtdc.apps.googleusercontent.com'
+          client_id:'589171260139-fvnvmdpt9mk2afsdk48bghb9vpcj4e8o.apps.googleusercontent.com'
         })
         gauth.then(function(){
           console.log('googleAuth success');

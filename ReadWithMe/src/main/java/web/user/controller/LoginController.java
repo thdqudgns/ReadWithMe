@@ -474,7 +474,7 @@ public class LoginController {
 		String random = MessageService.makeRandom(6,1);
 		logger.info(random);
 		loginService.savePhoneRegister(user, random);
-//		MessageService.sendMessage(user.getPhone(), random);
+		MessageService.sendMessage(user.getPhone(), random);
 		model.addAttribute("user", user);
 		return "user/member/phoneWait";	
 	}
