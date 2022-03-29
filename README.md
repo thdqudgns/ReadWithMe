@@ -2,7 +2,7 @@
 
 ### 본인 담당 코드
 <details markdown="1">
-<summary>자료의 형태에 따른 분류</summary>
+<summary>명언게시판</summary>
 - [명언게시판 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/FamousController.java)
 - [명언게시판 Service]
 - [명언게시판 DAO]
@@ -13,6 +13,9 @@
 - [명언게시판 관리 DAO]
 - [명언게시판 관리 DTO]
 - [명언게시판 관리 view]
+</details>
+<details markdown="1">
+<summary>후기게시판</summary>
 - [후기게시판 Controller]
 - [후기게시판 Service]
 - [후기게시판 DAO]
@@ -23,6 +26,9 @@
 - [후기게시판 관리 DAO]
 - [후기게시판 관리 DTO]
 - [후기게시판 관리 view]
+</details>
+<details markdown="1">
+<summary>신고, 도서검색, 에러페이지, 필터링</summary>
 - [신고 관리]
 - [도서검색]
 - [에러페이지]
