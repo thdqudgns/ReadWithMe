@@ -1,5 +1,14 @@
 # :pushpin: 2. Read With Me
 
+### 본인 담당 코드
+- [명언게시판 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/FamousController.java)
+- [후기게시판 및 관리]
+- [신고 관리]
+- [도서검색]
+- [에러페이지]
+- [필터링]
+
+
 ### :bulb: 개요  
 책을 읽다보면 동일한 내용을 읽은 다른 사람의 생각이 궁금할 때가 있다. 다른 사람에게 자신이 알게된 부분을 나누고 싶을 때가 있다. 책을 읽고 나누며 많은 것을 배울 수 있고 깊은 대화를 나눌 수 있다. 독서모임을 하도록 사람을 모으고, 각자의 이야기를 나누는 서비스를 제공하는 사이트를 만들고자 한다. 
 
