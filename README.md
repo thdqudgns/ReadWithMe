@@ -5,41 +5,47 @@
 <summary>명언게시판</summary>
 
 * [명언게시판 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/FamousController.java)
-* [명언게시판 Service]
-* [명언게시판 DAO]
-* [명언게시판 DTO]
-* [명언게시판 view]
-* [명언게시판 관리 Controller]
-* [명언게시판 관리 Service]
-* [명언게시판 관리 DAO]
-* [명언게시판 관리 DTO]
-* [명언게시판 관리 view]
+* [명언게시판 Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/service/impl/FamousServiceImpl.java)
+* [명언게시판 DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dao/mapper/FamousMapper.xml)
+* [명언게시판(추천) DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dao/mapper/Famous_recMapper.xml)
+* [명언게시판 DTO](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dto/Famous.java)
+* [명언게시판(추천) DTO](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dto/Famous_rec.java)
+* [명언게시판 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/user/famous)
+* [명언게시판 관리 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/controller/AdminFamousController.java)
+* [명언게시판 관리 Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/service/impl/AdminFamousServiceImpl.java)
+* [명언게시판 관리 DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/dao/mapper/AdminFamousMapper.xml)
+* [명언게시판 관리 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/admin/famous)
 
 </details>
 
 <details markdown="1">
 <summary>후기게시판</summary>
 
-* [후기게시판 Controller]
-* [후기게시판 Service]
-* [후기게시판 DAO]
-* [후기게시판 DTO]
-* [후기게시판 view]
-* [후기게시판 관리 Controller]
-* [후기게시판 관리 Service]
-* [후기게시판 관리 DAO]
-* [후기게시판 관리 DTO]
-* [후기게시판 관리 view]
+* [후기게시판 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/ReviewController.java)
+* [후기게시판(댓글) Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/ReviewCommentController.java)
+* [후기게시판 Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/service/impl/ReviewServiceImpl.java)
+* [후기게시판 DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dao/mapper/ReviewMapper.xml)
+* [후기게시판(댓글) DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dao/mapper/ReviewCommentMapper.xml)
+* [후기게시판 DTO](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dto/Review.java)
+* [후기게시판(파일) DTO](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dto/Review_file.java)
+* [후기게시판(추천) DTO](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/dto/Review_rec.java)
+* [후기게시판 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/user/review)
+* [후기게시판 관리 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/controller/AdminReviewController.java)
+* [후기게시판 관리 Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/service/impl/AdminReviewServiceImpl.java)
+* [후기게시판 관리 DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/dao/mapper/AdminReviewMapper.xml)
+* [후기게시판 관리 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/admin/review)
 
 </details>
 
 <details markdown="1">
-<summary>신고, 도서검색, 에러페이지, 필터링</summary>
+<summary>신고, 도서검색, 에러페이지</summary>
 
-* [신고 관리]
-* [도서검색]
-* [에러페이지]
-* [필터링]
+* [신고 관리 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/admin/report)
+* [도서검색 API 코드](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/SearchBook.java)
+* [도서검색 view](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/webapp/WEB-INF/views/book.jsp)
+* [에러페이지](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/error)
+* [UI - 일반](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/user/layout)
+* [UI - 관리자](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/admin/layout)
 
 </details>
 
@@ -78,7 +84,7 @@
 - 팀원 1 (팀장)
 	- 이름 : 송병훈
 	- 역할 : **조장, Github&소스트리 사용법 전달, 명언게시판 및 관리, 후기게시판 및 관리, 신고관리,   
-	도서검색 서비스, 에러페이지 및 필터링 처리, 동작 오류 점검**
+	도서검색 서비스, 에러페이지 처리, 동작 오류 점검**
 - 팀원 2
 	- 이름 : 민정은
 	- 역할 : 로그인과 회원가입과 마이페이지를 비롯한 회원서비스, 회원관리, 모임관리 구현
