@@ -40,6 +40,11 @@
 <details markdown="1">
 <summary>신고, 도서검색, 에러페이지</summary>
 
+* [신고 Controller](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/controller/AdminReportController.java)
+* [신고 Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/service/impl/AdminReportServiceImpl.java)
+* [신고(댓글) Service](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/service/impl/AdminReportCommentServiceImpl.java)
+* [신고 DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/dao/mapper/AdminReportMapper.xml)
+* [신고(댓글) DAO - Mapper](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/admin/dao/mapper/AdminReportCommentMapper.xml)
 * [신고 관리 view](https://github.com/thdqudgns/ReadWithMe/tree/main/ReadWithMe/src/main/webapp/WEB-INF/views/admin/report)
 * [도서검색 API 코드](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/java/web/user/controller/SearchBook.java)
 * [도서검색 view](https://github.com/thdqudgns/ReadWithMe/blob/main/ReadWithMe/src/main/webapp/WEB-INF/views/book.jsp)
