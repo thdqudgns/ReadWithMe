@@ -1,4 +1,5 @@
 # :pushpin: 2. Read With Me
+Servlet/JSP에 Spring을 더해 개발했습니다.
 
 ### 본인 담당 코드
 <details markdown="1">
